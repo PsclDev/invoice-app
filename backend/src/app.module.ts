@@ -11,6 +11,7 @@ import { HttpModule } from '@nestjs/axios';
     HttpModule,
     TerminusModule,
     TypeOrmModule.forRoot(),    
+    ClientModule
   ],
   controllers: [AppController, HealthController],
 })
