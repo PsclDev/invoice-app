@@ -1,3 +1,4 @@
+import { generateId, updateEntity } from '@helper';
 import {
   HttpException,
   HttpStatus,
@@ -14,7 +15,6 @@ import {
   UpdateOfferDto,
 } from './document.dto';
 import { Document, Invoice, Offer } from './document.entity';
-import { customAlphabet } from 'nanoid';
 
 @Injectable()
 export class DocumentService {
@@ -49,7 +49,7 @@ export class DocumentService {
     }
 
     const invoice: Invoice = {
-      id: this.generateId(),
+      id: generateId<Document>(this.documentRepository),
       invoiceNr: invoiceDto.invoiceNr,
       subTotal: invoiceDto.subTotal,
       tax: invoiceDto.tax,
@@ -65,20 +65,15 @@ export class DocumentService {
   }
 
   async updateInvoice(id: string, invoiceDto: UpdateInvoiceDto) {
-    const result = await this.invoiceRepository.update({ id }, invoiceDto);
-
-    if (result.affected <= 0) {
-      throw new NotFoundException();
-    }
+    await updateEntity<Invoice>(this.invoiceRepository, id, invoiceDto);
   }
 
   async createOffer(offerDto: CreateOfferDto): Promise<Document> {
-    const total = Number(offerDto.subTotal + offerDto.tax);
     const offer: Offer = {
-      id: this.generateId(),
+      id: generateId<Document>(this.documentRepository),
       subTotal: offerDto.subTotal,
       tax: offerDto.tax,
-      total: total,
+      total: offerDto.total,
       client: offerDto.client,
       dateOfIssue: offerDto.dateOfIssue,
       description: offerDto.description,
@@ -88,11 +83,7 @@ export class DocumentService {
   }
 
   async updateOffer(id: string, offerDto: UpdateOfferDto) {
-    const result = await this.offerRepository.update({ id }, offerDto);
-
-    if (result.affected <= 0) {
-      throw new NotFoundException();
-    }
+    await updateEntity<Offer>(this.offerRepository, id, offerDto);
   }
 
   async delete(id: string) {
@@ -100,18 +91,5 @@ export class DocumentService {
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
-  }
-
-  private generateId(): string {
-    const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';
-    let id = '';
-    let exists = false;
-    do {
-      id = customAlphabet(alphabet, 8)();
-      const doc = this.documentRepository.find({ id });
-      doc ? (exists = true) : (exists = false);
-    } while (!exists);
-
-    return id;
   }
 }
