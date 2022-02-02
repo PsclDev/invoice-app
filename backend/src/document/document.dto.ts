@@ -1,71 +1,94 @@
-import { IsArray, IsDate, IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export interface DocumentBaseDto {
-    id: string;
-    client: string;
-    dateOfIssue: Date,
-    description: string[];
-    createdAt?: Date;
-    updatedAt?: Date;
+  id: string;
+  client: string;
+  dateOfIssue: Date;
+  description: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-export interface OfferDto extends DocumentBaseDto{
-    subTotal: number;
-    tax: number;
-    total: number;
+export interface OfferDto extends DocumentBaseDto {
+  subTotal: number;
+  tax: number;
+  total: number;
 }
 
-export interface InvoiceDto extends DocumentBaseDto{
-    invoiceId: number;
-    subTotal: number;
-    tax: number;
-    alreadyPaid: number;
-    total: number;
-    dueDate: Date;
+export interface InvoiceDto extends DocumentBaseDto {
+  invoiceNr: number;
+  subTotal: number;
+  tax: number;
+  alreadyPaid: number;
+  total: number;
+  dueDate: Date;
 }
 
 export type DocumentDto = OfferDto | InvoiceDto;
 
-export class CreateOfferDto implements Omit<OfferDto, 'id' | 'total' | 'createdAt' | 'updatedAt'> {
-    @IsDateString()
-    dateOfIssue: Date;
-    
-    @IsString()    
-    client: string;
+export class CreateOfferDto
+  implements Omit<OfferDto, 'id' | 'createdAt' | 'updatedAt'>
+{
+  @IsDateString()
+  dateOfIssue: Date;
 
-    @IsString({each:true})
-    description: string[];
+  @IsString()
+  @IsNotEmpty()
+  client: string;
 
-    @IsNumber()
-    subTotal: number;
+  @IsString({ each: true })
+  @IsNotEmpty()
+  description: string[];
 
-    @IsNumber()
-    tax: number;
+  @IsNumber()
+  subTotal: number;
+
+  @IsNumber()
+  tax: number;
+
+  @IsNumber()
+  total: number;
 }
 
-export class CreateInvoiceDto implements Omit<InvoiceDto, 'id' | 'total' | 'createdAt' | 'updatedAt'> {
-    invoiceId: number;
-    
-    @IsDateString()
-    dateOfIssue: Date;
-    
-    @IsString()
-    @IsOptional()
-    client: string;
+export class UpdateOfferDto implements Partial<CreateOfferDto> {}
 
-    @IsString({each:true})
-    description: string[];
+export class CreateInvoiceDto
+  implements Omit<InvoiceDto, 'id' | 'createdAt' | 'updatedAt'>
+{
+  @IsNumber()
+  invoiceNr: number;
 
-    @IsNumber()
-    subTotal: number;
+  @IsDateString()
+  dateOfIssue: Date;
 
-    @IsNumber()
-    tax: number;
+  @IsString()
+  @IsOptional()
+  client: string;
 
-    @IsNumber()
-    @IsOptional()
-    alreadyPaid: number;
+  @IsString({ each: true })
+  description: string[];
 
-    @IsDateString()
-    dueDate: Date;
+  @IsNumber()
+  subTotal: number;
+
+  @IsNumber()
+  tax: number;
+
+  @IsNumber()
+  @IsOptional()
+  alreadyPaid: number;
+
+  @IsNumber()
+  total: number;
+
+  @IsDateString()
+  dueDate: Date;
 }
+
+export class UpdateInvoiceDto implements Partial<CreateInvoiceDto> {}

@@ -1,8 +1,16 @@
-import { ChildEntity, Column, CreateDateColumn, Entity, PrimaryColumn, TableInheritance, UpdateDateColumn } from 'typeorm';
+import {
+  ChildEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  TableInheritance,
+  UpdateDateColumn,
+} from 'typeorm';
 import { DocumentBaseDto, InvoiceDto, OfferDto } from './document.dto';
 
 @Entity()
-@TableInheritance({ column: { type: "varchar", name: "type" } })
+@TableInheritance({ column: { type: 'varchar', name: 'type' } })
 export class Document implements DocumentBaseDto {
   @PrimaryColumn()
   id: string;
@@ -13,8 +21,8 @@ export class Document implements DocumentBaseDto {
   @Column()
   dateOfIssue: Date;
 
-  @Column("text", {array: true})
-  description: string[];  
+  @Column('text', { array: true })
+  description: string[];
 
   @CreateDateColumn()
   createdAt?: Date;
@@ -24,7 +32,7 @@ export class Document implements DocumentBaseDto {
 }
 
 @ChildEntity()
-export class Offer extends Document implements OfferDto{  
+export class Offer extends Document implements OfferDto {
   @Column('numeric')
   subTotal: number;
 
@@ -32,21 +40,21 @@ export class Offer extends Document implements OfferDto{
   tax: number;
 
   @Column('numeric')
-  total: number; 
+  total: number;
 }
 
 @ChildEntity()
 export class Invoice extends Document implements InvoiceDto {
-  @Column()
-  invoiceId: number;
+  @Column({ unique: true })
+  invoiceNr: number;
 
   @Column('numeric')
   subTotal: number;
-  
+
   @Column('numeric')
   tax: number;
 
-  @Column('numeric', { nullable: true })  
+  @Column('numeric', { nullable: true })
   alreadyPaid: number;
 
   @Column('numeric')

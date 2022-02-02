@@ -7,6 +7,6 @@ import { DocumentService } from './document.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Document, Offer, Invoice])],
   controllers: [DocumentController],
-  providers: [DocumentService]
+  providers: [DocumentService],
 })
 export class DocumentModule {}

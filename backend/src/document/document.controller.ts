@@ -1,52 +1,67 @@
-import { Body, Controller, Delete, Get, Logger, Param, Patch, Post } from '@nestjs/common';
-import { CreateInvoiceDto, CreateOfferDto, InvoiceDto, OfferDto } from './document.dto';
-import { Document, Invoice } from './document.entity';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import {
+  CreateInvoiceDto,
+  CreateOfferDto,
+  UpdateInvoiceDto,
+  UpdateOfferDto,
+} from './document.dto';
+import { Document } from './document.entity';
 import { DocumentService } from './document.service';
 
 @Controller('document')
 export class DocumentController {
-  private readonly logger = new Logger(DocumentController.name)
+  private readonly logger = new Logger(DocumentController.name);
 
-  constructor(
-    private readonly docService: DocumentService,
-  ) { }
-    
+  constructor(private readonly docService: DocumentService) {}
+
   @Get()
-  async findAll(): Promise<{}> {
+  async findAll(): Promise<Document[]> {
+    this.logger.log('Get all documents');
     return this.docService.findAll();
   }
-  
+
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<{}> {
+  async findById(@Param('id') id: string): Promise<Document> {
+    this.logger.log(`Get document by id: ${id}`);
     return this.docService.findById(id);
   }
 
   @Post('/invoice')
   async createInvoice(@Body() body: CreateInvoiceDto): Promise<Document> {
-    this.logger.log('Create Invoice', body)
+    this.logger.log('Post Invoice', body);
     return await this.docService.createInvoice(body);
   }
 
-  @Patch('/offer')
-  async updateInvoice(@Body() body: InvoiceDto) {
-    this.logger.log('Update Invoice', body)
-    return await this.docService.updateInvoice(body);
+  @Patch('/invoice/:id')
+  async updateInvoice(@Param('id') id: string, @Body() body: UpdateInvoiceDto) {
+    this.logger.log(`Patch Invoice with id: ${id}`, body);
+    return await this.docService.updateInvoice(id, body);
   }
-  
+
   @Post('/offer')
   async createOffer(@Body() body: CreateOfferDto): Promise<Document> {
-    this.logger.log('Create Offer', body)
+    this.logger.log('Post Offer', body);
     return await this.docService.createOffer(body);
   }
 
-  @Patch('/offer')
-  async updateOffer(@Body() body: OfferDto) {
-    this.logger.log('Update Offer', body)
-    return await this.docService.updateOffer(body);
+  @Patch('/offer/:id')
+  async updateOffer(@Param('id') id: string, @Body() body: UpdateOfferDto) {
+    this.logger.log(`Patch Offer with id: ${id}`, body);
+    return await this.docService.updateOffer(id, body);
   }
 
   @Delete(':id')
   async deleteDocument(@Param('id') id: string) {
+    this.logger.log(`Delete document with id: ${id}`);
     return await this.docService.delete(id);
   }
 }
