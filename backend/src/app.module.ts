@@ -10,10 +10,10 @@ import { HttpModule } from '@nestjs/axios';
   imports: [
     HttpModule,
     TerminusModule,
-    TypeOrmModule.forRoot(),    
+    TypeOrmModule.forRoot(),
     ClientModule,
     DocumentModule,
   ],
   controllers: [AppController, HealthController],
 })
-export class AppModule { }
+export class AppModule {}
