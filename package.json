@@ -15,7 +15,11 @@
     "i:lib": "yarn",
     "i:frontend": "cd frontend/ && yarn",
     "i:backend": "cd backend/ && yarn",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:frontend": "cd frontend && yarn jest",
+    "test:backend": "cd backend && yarn jest",
+    "test:backend-watch": "cd backend && yarn jest --watch",
+    "test:backend-cov": "cd backend && yarn jest --coverage"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
