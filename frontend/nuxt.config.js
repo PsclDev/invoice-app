@@ -25,6 +25,8 @@ export default {
 
   styleResources: {
     scss: [
+      '../node_modules/bootstrap/scss/_functions.scss',
+      '../node_modules/bootstrap/scss/_variables.scss',
       '~assets/scss/mixins.scss',
       '~assets/scss/variables.scss'
     ]
@@ -41,12 +43,19 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/fontawesome'
   ],
 
   googleFonts: {
     families: {
       Barlow: true
+    }
+  },
+
+  fontawesome: {
+    icons: {
+      solid: true
     }
   },
 
@@ -64,6 +73,7 @@ export default {
   },
 
   i18n: {
+    strategy: 'no_prefix',
     locales: [
       {
         code: 'en',

@@ -1,0 +1,24 @@
+html {
+  font-size: 10px;
+  @media (min-width: 768px) {
+    font-size: 12px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 14px;
+  }
+  @media (min-width: 1200px) {
+    font-size: 16px;
+  }
+  @media (min-width: 1400px) {
+    font-size: 18px;
+  }
+
+}
+
+body {  
+  background-color: $darkblue;
+  margin: 0;
+  font-family: 'Barlow', 'Open Sans';
+  font-size: 1rem;
+  color: $white;
+}
