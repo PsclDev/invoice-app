@@ -8,7 +8,7 @@ import {
 
 export interface DocumentBaseDto {
   id: string;
-  client: string;
+  clientId: string;
   dateOfIssue: Date;
   description: string[];
   createdAt?: Date;
@@ -40,7 +40,7 @@ export class CreateOfferDto
 
   @IsString()
   @IsNotEmpty()
-  client: string;
+  clientId: string;
 
   @IsString({ each: true })
   @IsNotEmpty()
@@ -69,7 +69,7 @@ export class CreateInvoiceDto
 
   @IsString()
   @IsOptional()
-  client: string;
+  clientId: string;
 
   @IsString({ each: true })
   description: string[];

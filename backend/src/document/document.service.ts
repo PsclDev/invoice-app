@@ -48,20 +48,10 @@ export class DocumentService {
       throw new HttpException('Invoice already exists', HttpStatus.CONFLICT);
     }
 
-    const invoice: Invoice = {
+    return await this.invoiceRepository.save({
       id: generateId<Document>(this.documentRepository),
-      invoiceNr: invoiceDto.invoiceNr,
-      subTotal: invoiceDto.subTotal,
-      tax: invoiceDto.tax,
-      alreadyPaid: invoiceDto.alreadyPaid,
-      total: invoiceDto.total,
-      dueDate: invoiceDto.dueDate,
-      client: invoiceDto.client,
-      dateOfIssue: invoiceDto.dateOfIssue,
-      description: invoiceDto.description,
-    };
-
-    return await this.invoiceRepository.save(invoice);
+      ...invoiceDto,
+    });
   }
 
   async updateInvoice(id: string, invoiceDto: UpdateInvoiceDto) {
@@ -69,27 +59,21 @@ export class DocumentService {
   }
 
   async createOffer(offerDto: CreateOfferDto): Promise<Document> {
-    const offer: Offer = {
+    return await this.offerRepository.save({
       id: generateId<Document>(this.documentRepository),
-      subTotal: offerDto.subTotal,
-      tax: offerDto.tax,
-      total: offerDto.total,
-      client: offerDto.client,
-      dateOfIssue: offerDto.dateOfIssue,
-      description: offerDto.description,
-    };
-
-    return await this.offerRepository.save(offer);
+      ...offerDto,
+    });
   }
 
   async updateOffer(id: string, offerDto: UpdateOfferDto) {
     await updateEntity<Offer>(this.offerRepository, id, offerDto);
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<boolean> {
     const result = await this.documentRepository.delete({ id });
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
+    return true;
   }
 }

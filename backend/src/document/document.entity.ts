@@ -1,8 +1,12 @@
+import { Exclude } from 'class-transformer';
+import { Client } from '../client/client.entity';
 import {
   ChildEntity,
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
   TableInheritance,
   UpdateDateColumn,
@@ -15,8 +19,13 @@ export class Document implements DocumentBaseDto {
   @PrimaryColumn()
   id: string;
 
-  @Column()
-  client: string;
+  @Column({ name: 'client_id' })
+  clientId: string;
+
+  @ManyToOne(() => Client, (client) => client.documents, { nullable: true })
+  @JoinColumn({ name: 'client_id' })
+  @Exclude()
+  client!: Client | null;
 
   @Column()
   dateOfIssue: Date;
