@@ -8,5 +8,12 @@
   "entities": [
     "dist/**/*.entity.js"
   ],
-  "synchronize": false
+  "synchronize": false,
+  "migrationsRun": true,
+  "migrations": [
+    "dist/migrations/*.js"
+  ],
+  "cli": {
+    "migrationsDir": "src/migrations"
+  }
 }
