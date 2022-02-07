@@ -36,19 +36,19 @@ export class ClientController {
   }
 
   @Post()
-  async createInvoice(@Body() body: CreateClientDto): Promise<Client> {
+  async createClient(@Body() body: CreateClientDto): Promise<Client> {
     this.logger.log('Post Client', body);
     return await this.clientService.createClient(body);
   }
 
   @Patch(':id')
-  async updateInvoice(@Param('id') id: string, @Body() body: UpdateClientDto) {
+  async updateClient(@Param('id') id: string, @Body() body: UpdateClientDto) {
     this.logger.log(`Patch Client with id: ${id}`, body);
     return await this.clientService.updateClient(id, body);
   }
 
   @Post('/company')
-  async createOffer(
+  async createCompany(
     @Body() body: CreateCompanyClientDto,
   ): Promise<CompanyClient> {
     this.logger.log('Post Company Client', body);
@@ -56,7 +56,7 @@ export class ClientController {
   }
 
   @Patch('/company/:id')
-  async updateOffer(
+  async updateCompany(
     @Param('id') id: string,
     @Body() body: UpdateCompanyClientDto,
   ) {
@@ -65,7 +65,7 @@ export class ClientController {
   }
 
   @Delete(':id')
-  async deleteDocument(@Param('id') id: string) {
+  async deleteClient(@Param('id') id: string) {
     this.logger.log(`Delete client with id: ${id}`);
     return await this.clientService.delete(id);
   }

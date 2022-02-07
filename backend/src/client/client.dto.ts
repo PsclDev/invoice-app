@@ -1,12 +1,11 @@
+import { Document } from 'document/document.entity';
 import {
   IsEmail,
   IsIn,
   IsNotEmpty,
   IsNumber,
   IsOptional,
-  IsPostalCode,
   IsString,
-  MaxLength,
 } from 'class-validator';
 
 export enum Gender {
@@ -24,6 +23,7 @@ export interface ClientBaseDto {
   street: string;
   postalCode: number;
   city: string;
+  documents?: Document[];
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -36,7 +36,8 @@ export interface CompanyClientDto extends ClientBaseDto {
 export type ClientDto = ClientBaseDto | CompanyClientDto;
 
 export class CreateClientDto
-  implements Omit<ClientBaseDto, 'id' | 'createdAt' | 'updatedAt'>
+  implements
+    Omit<ClientBaseDto, 'id' | 'documents' | 'createdAt' | 'updatedAt'>
 {
   @IsIn([Gender.MALE, Gender.FEMALE, Gender.DIVERS])
   gender: Gender;
@@ -68,7 +69,8 @@ export class CreateClientDto
 export class UpdateClientDto implements Partial<CreateClientDto> {}
 
 export class CreateCompanyClientDto
-  implements Omit<CompanyClientDto, 'id' | 'createdAt' | 'updatedAt'>
+  implements
+    Omit<CompanyClientDto, 'id' | 'documents' | 'createdAt' | 'updatedAt'>
 {
   @IsString()
   @IsNotEmpty()

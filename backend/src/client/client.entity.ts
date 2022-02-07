@@ -1,8 +1,11 @@
+import { Exclude } from 'class-transformer';
+import { Document } from '../document/document.entity';
 import {
   ChildEntity,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   TableInheritance,
   UpdateDateColumn,
@@ -35,6 +38,10 @@ export class Client implements ClientBaseDto {
 
   @Column()
   city: string;
+
+  @OneToMany(() => Document, (document) => document.client)
+  @Exclude()
+  documents?: Document[];
 
   @CreateDateColumn()
   createdAt?: Date;
@@ -74,6 +81,10 @@ export class CompanyClient extends Client implements CompanyClientDto {
 
   @Column()
   city: string;
+
+  @OneToMany(() => Document, (document) => document.client)
+  @Exclude()
+  documents?: Document[];
 
   @CreateDateColumn()
   createdAt?: Date;

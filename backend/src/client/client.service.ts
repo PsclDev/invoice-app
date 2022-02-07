@@ -44,7 +44,7 @@ export class ClientService {
       this.logger.warn(
         `Client with the name: ${clientDto.firstname} ${clientDto.lastname} already exists`,
       );
-      throw new HttpException('Invoice already exists', HttpStatus.CONFLICT);
+      throw new HttpException('Client already exists', HttpStatus.CONFLICT);
     }
 
     const client: Client = {
@@ -75,7 +75,7 @@ export class ClientService {
       this.logger.warn(
         `Client with the name: ${clientDto.firstname} ${clientDto.lastname} already exists`,
       );
-      throw new HttpException('Invoice already exists', HttpStatus.CONFLICT);
+      throw new HttpException('Client already exists', HttpStatus.CONFLICT);
     }
 
     const client: CompanyClient = {
@@ -102,10 +102,11 @@ export class ClientService {
     );
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<boolean> {
     const result = await this.clientRepository.delete({ id });
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
+    return true;
   }
 }
