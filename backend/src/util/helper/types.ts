@@ -1,4 +1,4 @@
-import { Client } from 'src/client/client.entity';
-import { Document } from 'src/document/document.entity';
+import { Client } from '../../client/client.entity';
+import { Document } from '../../document/document.entity';
 
 export type AppTypes = Client | Document;
