@@ -5,14 +5,10 @@
   "username": "",
   "password": "",
   "database": "",
-  "entities": [
-    "dist/**/*.entity.js"
-  ],
+  "entities": ["dist/**/*.entity.js"],
   "synchronize": false,
   "migrationsRun": true,
-  "migrations": [
-    "dist/migrations/*.js"
-  ],
+  "migrations": ["dist/migrations/*.js"],
   "cli": {
     "migrationsDir": "src/migrations"
   }

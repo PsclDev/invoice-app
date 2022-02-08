@@ -17,7 +17,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {      
+    "paths": {
       "@helper": ["util/helper/"],
       "@helper/*": ["util/helper/*"],
       "@testing": ["util/testing/"],
