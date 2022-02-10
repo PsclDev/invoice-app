@@ -12,13 +12,30 @@ html {
   @media (min-width: 1400px) {
     font-size: 18px;
   }
-
 }
 
-body {  
+body {
   background-color: $darkblue;
   margin: 0;
   font-family: 'Barlow', 'Open Sans';
   font-size: 1rem;
   color: $white;
+  --body-text: #{$white};
+  --secondary-background: #{$lightblue};
+
+  &.light {
+    background-color: $white;
+    color: $darkblue;
+    --body-text: #{$darkblue};
+    --secondary-background: #{$lightwhite};
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
