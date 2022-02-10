@@ -1,10 +1,10 @@
-import en from './assets/locales/en.json'
-import de from './assets/locales/de.json'
+import en from './assets/locales/en.json';
+import de from './assets/locales/de.json';
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   server: {
-    host: '0'
+    host: '0',
   },
   head: {
     title: 'frontend',
@@ -21,15 +21,15 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~assets/scss/main.scss"],
+  css: ['~assets/scss/index.scss'],
 
   styleResources: {
     scss: [
       '../node_modules/bootstrap/scss/_functions.scss',
       '../node_modules/bootstrap/scss/_variables.scss',
       '~assets/scss/mixins.scss',
-      '~assets/scss/variables.scss'
-    ]
+      '~assets/scss/variables.scss',
+    ],
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -44,26 +44,26 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
-    '@nuxtjs/fontawesome'
+    '@nuxtjs/fontawesome',
   ],
 
   googleFonts: {
     families: {
-      Barlow: true
-    }
+      Barlow: true,
+    },
   },
 
   fontawesome: {
     icons: {
-      solid: true
-    }
+      solid: true,
+    },
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -77,21 +77,19 @@ export default {
     locales: [
       {
         code: 'en',
-        name: 'English'
+        name: 'English',
       },
       {
         code: 'de',
-        name: 'German'
-      }
+        name: 'German',
+      },
     ],
     defaultLocale: 'en',
     vueI18n: {
-      messages: { en, de }
-    }
+      messages: { en, de },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-
-  },
-}
+  build: {},
+};
