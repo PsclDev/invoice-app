@@ -25,7 +25,7 @@
 
       <span class="icon" @click="switchTheme">
         <font-awesome-icon
-          :icon="lightMode ? ['fas', 'moon'] : ['fas', 'sun']"
+          :icon="darkMode ? ['fas', 'sun'] : ['fas', 'moon']"
         />
       </span>
     </div>
@@ -39,10 +39,24 @@ export default Vue.extend({
   name: 'TheHeader',
   data() {
     return {
-      lightMode: false,
+      THEME_LS_KEY: 'APP_THEME',
+      isDarkMode: true,
     };
   },
+  computed: {
+    darkMode(): boolean {
+      return this.isDarkMode;
+    },
+  },
   mounted() {
+    const theme = localStorage.getItem(this.THEME_LS_KEY);
+    if (theme) {
+      this.isDarkMode = theme === 'dark';
+      document.querySelector('body')!.classList.toggle('light');
+    } else {
+      localStorage.setItem(this.THEME_LS_KEY, 'dark');
+    }
+
     const locale = this.$i18n.getLocaleCookie() === 'en' ? 'de' : 'en';
     this.$i18n.setLocale(locale);
   },
@@ -52,7 +66,9 @@ export default Vue.extend({
       this.$i18n.setLocale(locale);
     },
     switchTheme(): void {
-      this.lightMode = !this.lightMode;
+      this.isDarkMode = !this.isDarkMode;
+      const theme = this.isDarkMode ? 'dark' : 'light';
+      localStorage.setItem(this.THEME_LS_KEY, theme);
       document.querySelector('body')!.classList.toggle('light');
     },
   },
