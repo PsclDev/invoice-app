@@ -52,7 +52,8 @@ export default Vue.extend({
     const theme = localStorage.getItem(this.THEME_LS_KEY);
     if (theme) {
       this.isDarkMode = theme === 'dark';
-      document.querySelector('body')!.classList.toggle('light');
+      if (!this.isDarkMode)
+        document.querySelector('body')!.classList.toggle('light');
     } else {
       localStorage.setItem(this.THEME_LS_KEY, 'dark');
     }
