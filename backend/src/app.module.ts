@@ -6,8 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
 import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
+import configuration from 'config/configuration';
 @Module({
   imports: [
+    ConfigModule.forRoot({ load: [configuration] }),
     HttpModule,
     TerminusModule,
     TypeOrmModule.forRoot(),
