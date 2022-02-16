@@ -13,4 +13,7 @@ COPY . .
 RUN yarn prebuild
 RUN yarn build
 
+EXPOSE $PORT
+ENV PORT=$PORT
+
 CMD [ "yarn", "start:prod" ]

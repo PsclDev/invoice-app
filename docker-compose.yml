@@ -3,10 +3,12 @@ services:
   invoice-app-frontend:
     image: invoice-app-frontend:latest
     environment:
-      PORT: 3000      
+      PORT: 3000 
     ports:
       - 3000:3000
   invoice-app-backend:
     image: invoice-app-backend:latest
+    environment:
+      PORT: 3010
     ports:
       - 3010:3010
