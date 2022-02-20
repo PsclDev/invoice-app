@@ -1,5 +1,5 @@
 <template>
-  <div class="no-select">
+  <div class="no-select d-flex justify-content-center">
     <div class="navbar w-50">
       <NuxtLink to="/" exact class="nav-item">
         <font-awesome-icon class="link-icon" :icon="['fas', 'chart-pie']" />
@@ -16,16 +16,12 @@
       </NuxtLink>
     </div>
 
-    <div class="actionbar d-flex flex-column flex-md-row">
-      <div class="icon mr-3" @click="switchLanguage">
-        <font-awesome-icon :icon="['fas', 'language']" />
-      </div>
+    <div class="actionbar-lt" @click="switchLanguage">
+      <font-awesome-icon :icon="['fas', 'language']" />
+    </div>
 
-      <div class="icon" @click="switchTheme">
-        <font-awesome-icon
-          :icon="darkMode ? ['fas', 'sun'] : ['fas', 'moon']"
-        />
-      </div>
+    <div class="actionbar-rt" @click="switchTheme">
+      <font-awesome-icon :icon="darkMode ? ['fas', 'sun'] : ['fas', 'moon']" />
     </div>
   </div>
 </template>
@@ -88,26 +84,38 @@ export default Vue.extend({
 
 a.nuxt-link-active {
   font-weight: bold;
-  @include gradientText;
+  @include gradientPrimaryText;
 }
 
-.actionbar {
+.link-icon {
+  display: none;
+}
+
+.actionbar-lt {
+  position: absolute;
+  left: 20px;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.actionbar-rt {
   position: absolute;
   right: 20px;
   font-size: 1.6rem;
-
-  .icon {
-    cursor: pointer;
-  }
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
   }
 
   span {
     display: none;
+  }
+
+  .link-icon {
+    display: unset;
   }
 
   a.nuxt-link-active {
