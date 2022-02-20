@@ -1,16 +1,13 @@
 html {
-  font-size: 10px;
+  font-size: 16px;
   @media (min-width: 768px) {
-    font-size: 12px;
+    font-size: 17px;
   }
   @media (min-width: 1024px) {
-    font-size: 14px;
+    font-size: 18px;
   }
   @media (min-width: 1200px) {
-    font-size: 16px;
-  }
-  @media (min-width: 1400px) {
-    font-size: 18px;
+    font-size: 19px;
   }
 }
 
@@ -38,4 +35,22 @@ body {
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.btn-primary {
+  @include gradientPrimaryBackground;
+  color: $darkblue;
+  border: unset;
+}
+
+.btn-danger {
+  @include gradientDangerBackground;
+  color: $darkblue;
+  border: unset;
+}
+
+.btn-warning {
+  @include gradientWarningBackground;
+  color: $darkblue;
+  border: unset;
 }
