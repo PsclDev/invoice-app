@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100">
+  <div>
     <div class="collapse d-flex flex-column">
       <div
         class="ml-2 mr-4 collapse-header d-flex align-items-center justify-content-between"
@@ -12,8 +12,10 @@
           />
         </div>
       </div>
-      <div class="ml-2 collapse-body" :class="isOpen ? '' : 'hide'">
-        <slot name="body"></slot>
+      <div class="my-3 collapse-body" :class="isOpen ? '' : 'hide'">
+        <div class="d-flex justify-content-center">
+          <slot name="body"></slot>
+        </div>
       </div>
     </div>
   </div>

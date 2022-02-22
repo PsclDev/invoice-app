@@ -39,18 +39,20 @@ body {
 
 .btn-primary {
   @include gradientPrimaryBackground;
-  color: $darkblue;
+  color: $darkblue;  
   border: unset;
 }
 
 .btn-danger {
   @include gradientDangerBackground;
   color: $darkblue;
+  font-weight: bolder;
   border: unset;
 }
 
 .btn-warning {
   @include gradientWarningBackground;
   color: $darkblue;
+  font-weight: bolder;
   border: unset;
 }

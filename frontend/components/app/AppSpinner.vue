@@ -17,8 +17,8 @@ export default Vue.extend({
 .spinner {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
 }
 .spinner div {
   position: absolute;
