@@ -1,5 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { Client } from '~/types/client';
+import { Client } from '~/models/client';
 import { $axios } from '~/utils/axios';
 
 @Module({
