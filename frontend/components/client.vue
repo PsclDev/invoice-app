@@ -8,9 +8,18 @@
         </div>
       </template>
       <template #body>
+        <div class="row">
+          <App-Input :mode="mode"></App-Input>
+        </div>
         <div class="row w-75 d-flex justify-content-center">
           <div class="col-6">
-            <button class="btn btn-warning w-100">Edit</button>
+            <button
+              class="btn w-100"
+              :class="mode === 'view' ? 'btn-warning' : 'btn-primary'"
+              @click="toggleMode"
+            >
+              {{ mode === 'view' ? 'Edit' : 'Save' }}
+            </button>
           </div>
           <div class="col-6">
             <button class="btn btn-danger w-100">Delete</button>
@@ -31,6 +40,24 @@ export default Vue.extend({
     client: {
       type: Client,
       required: true,
+    },
+  },
+  data() {
+    return {
+      mode: 'view',
+    };
+  },
+  computed: {
+    fullname(): string {
+      return `${this.client.firstname} ${this.client.lastname}`;
+    },
+    fullcity(): string {
+      return `${this.client.postalCode} ${this.client.city}`;
+    },
+  },
+  methods: {
+    toggleMode() {
+      this.mode = this.mode === 'view' ? 'edit' : 'view';
     },
   },
 });
