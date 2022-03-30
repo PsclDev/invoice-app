@@ -39,7 +39,7 @@ body {
 
 .btn-primary {
   @include gradientPrimaryBackground;
-  color: $darkblue;  
+  color: $darkblue;
   border: unset;
 }
 

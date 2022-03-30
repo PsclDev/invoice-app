@@ -13,10 +13,12 @@ export default Vue.extend({
       type: String,
       required: true,
     },
-    value: {},
+    // eslint-disable-next-line vue/require-prop-types
+    value: {
+      required: true,
+    },
   },
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

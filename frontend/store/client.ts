@@ -1,11 +1,11 @@
-import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
+import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { Client } from '~/models/client';
 import { $axios } from '~/utils/axios';
 
 @Module({
-  name: "client",  
+  name: 'client',
   stateFactory: true,
-  namespaced: false
+  namespaced: false,
 })
 export default class ClientModule extends VuexModule {
   clients: Array<Client> = [];
@@ -16,11 +16,11 @@ export default class ClientModule extends VuexModule {
 
   @Mutation
   setClients(clients: Client[]) {
-    this.clients = clients;    
+    this.clients = clients;
   }
 
-  @Action({commit: 'setClients', rawError: true})
+  @Action({ commit: 'setClients', rawError: true })
   async getClients(): Promise<Client[]> {
-    return await $axios.$get('/client')    
+    return await $axios.$get('/client');
   }
 }

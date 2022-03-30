@@ -33,15 +33,13 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '@/plugins/axios-accessor.ts' }
-  ],
+  plugins: [{ src: '@/plugins/axios-accessor.ts' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     // Equivalent to { path: '~/components' }
     '~/components',
-    { path: '~/components/app', extensions: ['vue'] }
+    { path: '~/components/app', extensions: ['vue'] },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -74,7 +72,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://dev.home:3010'
+    baseURL: 'http://dev.home:3010',
   },
 
   i18n: {
