@@ -9,6 +9,8 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
 
+  app.setGlobalPrefix('v1', { exclude: ['', 'health'] });
+
   const port = configuration().port;
   await app.listen(port);
   logger.log(`listening on port: ${port}`);
