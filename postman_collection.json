@@ -1,0 +1,432 @@
+{
+	"info": {
+		"_postman_id": "c9eb062b-cd2a-469a-8d30-a3f73937f6e0",
+		"name": "Invoice-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Document",
+			"item": [
+				{
+					"name": "Offer",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"clientId\": \"9mhbgsty\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"total\": 1190\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/document/offer",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"document",
+										"offer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"client\": \"Max Mustermann\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/document/offer/diipmzg9",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"document",
+										"offer",
+										"diipmzg9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invoice",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"invoiceNr\": 1,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"0srpbz50\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 200,\r\n    \"tax\": 38,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 228\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/document/invoice",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"document",
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"alreadyPaid\": 90,\r\n    \"total\": 1100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/document/invoice/8rsbh6yd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"document",
+								"invoice",
+								"8rsbh6yd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/document",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/document/l6k15cgj",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"document",
+								"l6k15cgj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/document/l6k15cgj",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"document",
+								"l6k15cgj"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Private",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"gender\": \"FEMALE\",\r\n    \"firstname\": \"Erika\",\r\n    \"lastname\": \"Musermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterweg 2\",\r\n    \"postalCode\": 98765,\r\n    \"city\": \"Musterhausen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/client",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"street\": \"Musterweg 22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/client/gcrdbtae",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"client",
+										"gcrdbtae"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Company",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"company\": \"Muster GmbH\",\r\n    \"vat\": 123456789,\r\n    \"gender\": \"MALE\",\r\n    \"firstname\": \"Max\",\r\n    \"lastname\": \"Musermann\",\r\n    \"email\": \"max@mustermann.de\",\r\n    \"street\": \"Musterweg 5\",\r\n    \"postalCode\": 98765,\r\n    \"city\": \"Musterhausen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/client/company",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"client",
+										"company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"vat\": 987654321\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/client/company/ce36c1le",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"client",
+										"company",
+										"ce36c1le"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client/gcrdbtae",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client",
+								"gcrdbtae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/client/k0a3xqi5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"client",
+								"k0a3xqi5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://dev.home:3010"
+		}
+	]
+}

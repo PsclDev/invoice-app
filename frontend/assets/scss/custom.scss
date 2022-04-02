@@ -1,0 +1,58 @@
+html {
+  font-size: 16px;
+  @media (min-width: 768px) {
+    font-size: 17px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 18px;
+  }
+  @media (min-width: 1200px) {
+    font-size: 19px;
+  }
+}
+
+body {
+  background-color: $darkblue;
+  margin: 0;
+  font-family: 'Barlow', 'Open Sans';
+  font-size: 1rem;
+  color: $white;
+  --body-text: #{$white};
+  --secondary-background: #{$lightblue};
+
+  &.light {
+    background-color: $white;
+    color: $darkblue;
+    --body-text: #{$darkblue};
+    --secondary-background: #{$lightwhite};
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.btn-primary {
+  @include gradientPrimaryBackground;
+  color: $darkblue;
+  border: unset;
+}
+
+.btn-danger {
+  @include gradientDangerBackground;
+  color: $darkblue;
+  font-weight: bolder;
+  border: unset;
+}
+
+.btn-warning {
+  @include gradientWarningBackground;
+  color: $darkblue;
+  font-weight: bolder;
+  border: unset;
+}

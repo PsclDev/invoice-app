@@ -1,5 +1,16 @@
 # Invoice-App
 This is a small app to create offers and invoices save as pdf and send them by mail. It is written in NuxtJS for frontend and NestJS for backend. Everything in typescript. 
 
-### Dependabot Integration
+## Table of Contents
+
+  - [Table of Contents](#table-of-contents)
+  - [Dependabot](#dependabot-integration)
+  - [Getting Started](#getting-started)
+
+## Dependabot Integration
 The App will be updated daily by the dependabot if needed
+
+## Getting Started
+- `yarn`
+- `yarn ia`
+- `yarn dev`

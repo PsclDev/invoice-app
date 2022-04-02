@@ -8,11 +8,29 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prepare": "husky install"
+    "dev": "concurrently -n frontend,backend \"yarn dev:frontend\" \"yarn:dev:backend\"",
+    "dev:frontend": "cd frontend && yarn dev",
+    "dev:backend": "cd backend && yarn start:dev",
+    "ia": "npx npm-run-all -l -p -c --aggregate-output 'i:*'",
+    "i:frontend": "cd frontend/ && yarn",
+    "i:backend": "cd backend/ && yarn",
+    "lint": "concurrently -n frontend,backend \"yarn lint:frontend\" \"yarn lint:backend\"",
+    "lint:frontend": "cd frontend && yarn lint",
+    "lint:backend": "cd backend && yarn lint",
+    "lint:hook": "concurrently -n frontend,backend \"yarn hook:frontend\" \"yarn hook:backend\"",
+    "hook:frontend": "cd frontend && yarn lintfix && yarn lint",
+    "hook:backend": "cd backend && yarn lintfix && yarn lint",
+    "prepare": "husky install",
+    "test:frontend": "cd frontend && yarn jest",
+    "test:backend": "cd backend && yarn jest",
+    "test:backend-watch": "cd backend && yarn jest --watch",
+    "test:backend-cov": "cd backend && yarn jest --coverage"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
-    "husky": "^7.0.4"
+    "concurrently": "^7.0.0",
+    "husky": "^7.0.4",
+    "npm-run-all": "^4.1.5"
   }
 }

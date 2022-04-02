@@ -16,3 +16,53 @@ updates:
       prefix: fix
       prefix-development: chore
       include: scope
+
+  # FRONTEND
+  # Fetch and update latest `npm` packages
+  - package-ecosystem: npm
+    directory: '/frontend'
+    schedule:
+      interval: daily
+      time: '00:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - pscldev
+    assignees:
+      - pscldev
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+
+  # BACKEND
+  # Fetch and update latest `npm` packages
+  - package-ecosystem: npm
+    directory: '/backend'
+    schedule:
+      interval: daily
+      time: '00:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - pscldev
+    assignees:
+      - pscldev
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+
+  # Fetch and update latest `github-actions` pkgs
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '00:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - pscldev
+    assignees:
+      - pscldev
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope

@@ -1,0 +1,29 @@
+@mixin gradientPrimaryText {
+  background: linear-gradient(315deg, $green 0%, $turquoise 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientPrimaryBackground {
+  background-image: linear-gradient(315deg, $green 0%, $turquoise 74%);
+}
+
+@mixin gradientDangerText {
+  background: linear-gradient(147deg, #f71735 0%, #db3445 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientDangerBackground {
+  background-image: linear-gradient(147deg, #f71735 0%, #db3445 74%);
+}
+
+@mixin gradientWarningText {
+  background: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientWarningBackground {
+  background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+}
