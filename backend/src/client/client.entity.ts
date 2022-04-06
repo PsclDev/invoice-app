@@ -39,7 +39,7 @@ export class Client implements ClientBaseDto {
   @Column()
   city: string;
 
-  @OneToMany(() => Document, (document) => document.client)
+  @OneToMany(() => Document, (document) => document.client, { eager: true })
   @Exclude()
   documents?: Document[];
 
