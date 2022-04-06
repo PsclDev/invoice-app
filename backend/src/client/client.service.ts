@@ -32,7 +32,11 @@ export class ClientService {
   }
 
   async findById(id: string): Promise<Client> {
-    return await this.clientRepository.findOne({ id });
+    const client = await this.clientRepository.findOne({ id });
+
+    if (!client) throw new NotFoundException();
+
+    return client;
   }
 
   async createClient(clientDto: CreateClientDto): Promise<Client> {

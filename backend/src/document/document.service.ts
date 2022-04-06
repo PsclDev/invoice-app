@@ -34,7 +34,11 @@ export class DocumentService {
   }
 
   async findById(id: string): Promise<Document> {
-    return await this.documentRepository.findOne({ id });
+    const document = await this.documentRepository.findOne({ id });
+
+    if (!document) throw new NotFoundException();
+
+    return document;
   }
 
   async createInvoice(invoiceDto: CreateInvoiceDto): Promise<Document> {
