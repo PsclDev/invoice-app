@@ -7,9 +7,9 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'PrintPage',
-  // async asyncData({ params }) {
-  //   const id = await params.id
-  //   return { id }
-  // },
+  async asyncData({ params }) {
+    const id = await params.id;
+    return { id };
+  },
 });
 </script>
