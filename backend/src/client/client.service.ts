@@ -28,7 +28,11 @@ export class ClientService {
   ) {}
 
   async findAll(): Promise<Client[]> {
-    return await this.clientRepository.find();
+    return await this.clientRepository.find({
+      order: {
+        lastname: 'ASC',
+      },
+    });
   }
 
   async findById(id: string): Promise<Client> {
@@ -106,11 +110,11 @@ export class ClientService {
     );
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(id: string): Promise<string> {
     const result = await this.clientRepository.delete({ id });
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
-    return true;
+    return id;
   }
 }

@@ -30,7 +30,11 @@ export class DocumentService {
   ) {}
 
   async findAll(): Promise<Document[]> {
-    return await this.documentRepository.find();
+    return await this.documentRepository.find({
+      order: {
+        dateOfIssue: 'ASC',
+      },
+    });
   }
 
   async findById(id: string): Promise<Document> {
