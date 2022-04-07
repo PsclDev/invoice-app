@@ -1,14 +1,31 @@
 <template>
-  <div v-if="mode === 'edit'">edit</div>
-  <div v-else>view</div>
+  <div>
+    <label :for="title" class="form-label">
+      {{ title }}
+    </label>
+    <div v-if="mode === 'edit'">
+      <input
+        :id="title"
+        class="form-control"
+        type="text"
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+      />
+    </div>
+    <div v-else>{{ value }}</div>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'ClientComponent',
+  name: 'AppInput',
   props: {
+    title: {
+      type: String,
+      required: true,
+    },
     mode: {
       type: String,
       required: true,
