@@ -1,6 +1,6 @@
 <template>
   <div class="no-select d-flex justify-content-center">
-    <div class="navbar w-50">
+    <div class="navbar px-3 w-50">
       <NuxtLink to="/" exact class="nav-item">
         <font-awesome-icon class="link-icon" :icon="['fas', 'chart-pie']" />
         <span>{{ $t('home') }}</span>

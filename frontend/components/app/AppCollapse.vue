@@ -2,7 +2,7 @@
   <div>
     <div class="collapse d-flex flex-column">
       <div
-        class="ml-2 mr-4 collapse-header d-flex align-items-center justify-content-between"
+        class="ms-2 me-4 collapse-header d-flex align-items-center justify-content-between"
         @click="toggleOpen"
       >
         <slot name="header"></slot>
@@ -25,7 +25,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'ClientList',
+  name: 'AppCollapse',
   data() {
     return {
       isOpen: false,
