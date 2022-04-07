@@ -1,3 +1,4 @@
+import { DocumentInterface } from './document';
 export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
@@ -11,11 +12,11 @@ export interface ClientInterface {
   lastname: string;
   email: string;
   street: string;
-  postalCode: number;
+  postalCode: string;
   city: string;
-  documents?: Document[];
+  documents: DocumentInterface[];
   createdAt?: Date;
   updatedAt?: Date;
   company: string;
-  vat: number;
+  vat: string;
 }

@@ -1,3 +1,4 @@
+import { Document } from './document';
 import { ClientInterface, Gender } from '~/types/client';
 
 export class Client implements ClientInterface {
@@ -7,11 +8,11 @@ export class Client implements ClientInterface {
   lastname!: string;
   email!: string;
   street!: string;
-  postalCode!: number;
+  postalCode!: string;
   city!: string;
-  documents?: Document[] | undefined;
+  documents!: Document[];
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
   company!: string;
-  vat!: number;
+  vat!: string;
 }
