@@ -1,5 +1,34 @@
 {
   "home": "Dashboard",
   "client": "Client | Clients",
-  "document": "Document | Documents"
+  "document": "Document | Documents",
+  "button": {
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "gender": {
+    "title": "Gender",
+    "choose": "Choose your gender",
+    "male": "Male",
+    "female": "Female",
+    "divers": "Divers"
+  },
+  "clients": {
+    "create": "Create new client",
+    "company": "Company",
+    "vat": "VAT.",
+    "gender": "Gender",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "email": "E-Mail",
+    "street": "Street",
+    "postalCode": "Postal Code",
+    "city": "City"
+  },
+  "documents": {
+    "offer": "Offer",
+    "invoice": "Invoice"
+  }
 }

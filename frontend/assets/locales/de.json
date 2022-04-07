@@ -1,5 +1,34 @@
 {
   "home": "Übersicht",
   "client": "Kunde | Kunden",
-  "document": "Dokument | Dokumente"
+  "document": "Dokument | Dokumente",
+  "button": {
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen"
+  },
+  "gender": {
+    "title": "Geschlecht",
+    "choose": "Wählen Sie Ihr geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "divers": "Divers"
+  },
+  "clients": {
+    "create": "Neuen Kunden anlegen",
+    "company": "Firma",
+    "vat": "VAT.",
+    "gender": "Geschlecht",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "email": "E-Mail",
+    "street": "Straße",
+    "postalCode": "Postleitzahl",
+    "city": "Ort"
+  },
+  "documents": {
+    "offer": "Angebot",
+    "invoice": "Rechnung"
+  }
 }
