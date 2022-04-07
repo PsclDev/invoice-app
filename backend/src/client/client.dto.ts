@@ -21,7 +21,7 @@ export interface ClientBaseDto {
   lastname: string;
   email: string;
   street: string;
-  postalCode: number;
+  postalCode: string;
   city: string;
   documents?: Document[];
   createdAt?: Date;
@@ -30,7 +30,7 @@ export interface ClientBaseDto {
 
 export interface CompanyClientDto extends ClientBaseDto {
   company: string;
-  vat: number;
+  vat: string;
 }
 
 export type ClientDto = ClientBaseDto | CompanyClientDto;
@@ -58,8 +58,8 @@ export class CreateClientDto
   @IsNotEmpty()
   street: string;
 
-  @IsNumber()
-  postalCode: number;
+  @IsString()
+  postalCode: string;
 
   @IsString()
   @IsNotEmpty()
@@ -76,9 +76,9 @@ export class CreateCompanyClientDto
   @IsNotEmpty()
   company: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  vat: number;
+  vat: string;
 
   @IsIn([Gender.MALE, Gender.FEMALE, Gender.DIVERS])
   gender: Gender;
@@ -99,8 +99,8 @@ export class CreateCompanyClientDto
   @IsNotEmpty()
   street: string;
 
-  @IsNumber()
-  postalCode: number;
+  @IsString()
+  postalCode: string;
 
   @IsString()
   @IsNotEmpty()

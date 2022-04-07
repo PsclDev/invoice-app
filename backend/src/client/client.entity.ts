@@ -34,7 +34,7 @@ export class Client implements ClientBaseDto {
   street: string;
 
   @Column()
-  postalCode: number;
+  postalCode: string;
 
   @Column()
   city: string;
@@ -56,7 +56,7 @@ export class CompanyClient extends Client implements CompanyClientDto {
   company: string;
 
   @Column({ nullable: true })
-  vat: number;
+  vat: string;
 
   @PrimaryColumn()
   id: string;
@@ -77,7 +77,7 @@ export class CompanyClient extends Client implements CompanyClientDto {
   street: string;
 
   @Column()
-  postalCode: number;
+  postalCode: string;
 
   @Column()
   city: string;
