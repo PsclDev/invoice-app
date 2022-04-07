@@ -16,20 +16,20 @@ const insertClients = async (entityManager: EntityManager) => {
     gender: Gender.FEMALE,
     email: 'erika@mustermann.de',
     street: 'Musterweg 2',
-    postalCode: 98765,
+    postalCode: '98765',
     city: 'Musterhausen',
   });
 
   entityManager.insert<CompanyClient>(CompanyClient, {
     id: companyClientId,
     company: 'Muster GmbH',
-    vat: 123456789,
+    vat: 'DE999999999',
     firstname: 'Max',
     lastname: 'Musermann',
     gender: Gender.MALE,
     email: 'max@mustermann.de',
     street: 'Musterweg 9',
-    postalCode: 98765,
+    postalCode: '98765',
     city: 'Musterhausen',
   });
 };

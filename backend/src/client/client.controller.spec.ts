@@ -33,7 +33,7 @@ describe('ClientController', () => {
       gender: Gender.MALE,
       email: 'john@doe.com',
       street: 'Musterweg 1',
-      postalCode: 98765,
+      postalCode: '98765',
       city: 'Musterhausen',
     });
 
@@ -44,13 +44,13 @@ describe('ClientController', () => {
   it('should create a company client', async () => {
     const client = await clientController.createCompany({
       company: 'Doe Ltd.',
-      vat: 123456789,
+      vat: '123456789',
       firstname: 'Jane',
       lastname: 'Doe',
       gender: Gender.FEMALE,
       email: 'janex@doe.com',
       street: 'Musterweg 4',
-      postalCode: 98765,
+      postalCode: '98765',
       city: 'Musterhausen',
     });
 
@@ -65,7 +65,7 @@ describe('ClientController', () => {
         gender: Gender.MALE,
         email: 'john@doe.com',
         street: 'Musterweg 1',
-        postalCode: 98765,
+        postalCode: '98765',
         city: 'Musterhausen',
       });
     };
@@ -78,13 +78,13 @@ describe('ClientController', () => {
     const create = async () => {
       await clientController.createCompany({
         company: 'Doe Ltd.',
-        vat: 123456789,
+        vat: '123456789',
         firstname: 'Jane',
         lastname: 'Doe',
         gender: Gender.FEMALE,
         email: 'janex@doe.com',
         street: 'Musterweg 4',
-        postalCode: 98765,
+        postalCode: '98765',
         city: 'Musterhausen',
       });
     };
