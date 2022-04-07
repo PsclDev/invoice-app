@@ -92,7 +92,7 @@ export class CreateCompanyClientDto
   lastname: string;
 
   @IsEmail()
-  @IsNotEmpty()
+  @IsOptional()
   email: string;
 
   @IsString()
