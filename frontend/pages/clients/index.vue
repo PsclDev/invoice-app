@@ -1,8 +1,11 @@
 <template>
   <div class="row">
     <div class="col text-center">
-      <button class="btn btn-primary px-5 font-weight-bold">
-        Create new client
+      <button
+        class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"
+        @click="create"
+      >
+        {{ $t('clients.create') }}
       </button>
     </div>
     <div class="mt-5 col-12">
@@ -45,6 +48,9 @@ export default Vue.extend({
       this.isLoading = true;
       await this.store.getClients();
       this.isLoading = false;
+    },
+    create() {
+      this.store.createClient();
     },
   },
 });
