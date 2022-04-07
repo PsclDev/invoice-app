@@ -110,7 +110,7 @@ describe('ClientController', () => {
   });
 
   it('should update a company client', async () => {
-    const newVat = 987654321;
+    const newVat = '987654321';
     await clientController.updateCompany(companyClientId, {
       vat: newVat,
     });
@@ -124,7 +124,7 @@ describe('ClientController', () => {
 
   it('should delete a client by id', async () => {
     const deleted = await clientController.deleteClient(createdclientId);
-    expect(deleted).toBe(true);
+    expect(deleted).toBe(createdclientId);
   });
 
   it('should fail to delete a client', async () => {
