@@ -14,3 +14,8 @@ The App will be updated daily by the dependabot if needed
 - `yarn`
 - `yarn ia`
 - `yarn dev`
+
+## Important note for OSX Silicon
+`https://github.com/mapbox/node-sqlite3/issues/1538#issuecomment-1037839683`
+
+To install sqlite3 you have to run the commands of this comment and use npm

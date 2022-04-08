@@ -41,8 +41,5 @@ jobs:
       - name: Run linter 👀
         run: yarn lint:backend
 
-      - name: Prepare Tests 💉
-        run: yarn add sqlite3
-
       - name: Run tests 🧪
         run: yarn test:backend
