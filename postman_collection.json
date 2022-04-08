@@ -13,12 +13,24 @@
 					"item": [
 						{
 							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"offer\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"clientId\": \"9mhbgsty\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"total\": 1190\r\n}",
+									"raw": "{\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"clientId\": \"{{private_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"total\": 1190\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -26,9 +38,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/document/offer",
+									"raw": "{{base_url}}{{v1}}/document/offer",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"document",
@@ -53,14 +65,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/document/offer/diipmzg9",
+									"raw": "{{base_url}}{{v1}}/document/offer/{{offer}}",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"document",
 										"offer",
-										"diipmzg9"
+										"{{offer}}"
 									]
 								}
 							},
@@ -73,12 +85,24 @@
 					"item": [
 						{
 							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"invoice\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"invoiceNr\": 1,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"0srpbz50\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 200,\r\n    \"tax\": 38,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 228\r\n}",
+									"raw": "{\r\n    \"invoiceNr\": 2,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 200,\r\n    \"tax\": 38,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 228\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -86,9 +110,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/document/invoice",
+									"raw": "{{base_url}}{{v1}}/document/invoice",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"document",
@@ -97,36 +121,36 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"alreadyPaid\": 90,\r\n    \"total\": 1100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}{{v1}}/document/invoice/{{invoice}}",
+									"host": [
+										"{{base_url}}{{v1}}"
+									],
+									"path": [
+										"document",
+										"invoice",
+										"{{invoice}}"
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"alreadyPaid\": 90,\r\n    \"total\": 1100\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/document/invoice/8rsbh6yd",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"document",
-								"invoice",
-								"8rsbh6yd"
-							]
-						}
-					},
-					"response": []
 				},
 				{
 					"name": "All",
@@ -134,9 +158,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/document",
+							"raw": "{{base_url}}{{v1}}/document",
 							"host": [
-								"{{base_url}}"
+								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"document"
@@ -158,13 +182,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/document/l6k15cgj",
+							"raw": "{{base_url}}{{v1}}/document/{{invoice}}",
 							"host": [
-								"{{base_url}}"
+								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"document",
-								"l6k15cgj"
+								"{{invoice}}"
 							]
 						}
 					},
@@ -176,13 +200,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/document/l6k15cgj",
+							"raw": "{{base_url}}{{v1}}/document/{{offer}}",
 							"host": [
-								"{{base_url}}"
+								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"document",
-								"l6k15cgj"
+								"{{offer}}"
 							]
 						}
 					},
@@ -198,12 +222,24 @@
 					"item": [
 						{
 							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"private_client\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"gender\": \"FEMALE\",\r\n    \"firstname\": \"Erika\",\r\n    \"lastname\": \"Musermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterweg 2\",\r\n    \"postalCode\": 98765,\r\n    \"city\": \"Musterhausen\"\r\n}",
+									"raw": "{\r\n    \"gender\": \"MALE\",\r\n    \"firstname\": \"Maxi\",\r\n    \"lastname\": \"Mustermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterweg 2\",\r\n    \"postalCode\": \"98765\",\r\n    \"city\": \"Musterhausen\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -211,9 +247,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/client",
+									"raw": "{{base_url}}{{v1}}/client",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"client"
@@ -237,13 +273,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/client/gcrdbtae",
+									"raw": "{{base_url}}{{v1}}/client/{{private_client}}",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"client",
-										"gcrdbtae"
+										"{{private_client}}"
 									]
 								}
 							},
@@ -256,12 +292,24 @@
 					"item": [
 						{
 							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"company_client\", jsonData.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"company\": \"Muster GmbH\",\r\n    \"vat\": 123456789,\r\n    \"gender\": \"MALE\",\r\n    \"firstname\": \"Max\",\r\n    \"lastname\": \"Musermann\",\r\n    \"email\": \"max@mustermann.de\",\r\n    \"street\": \"Musterweg 5\",\r\n    \"postalCode\": 98765,\r\n    \"city\": \"Musterhausen\"\r\n}",
+									"raw": "{\r\n    \"company\": \"Muster GmbH\",\r\n    \"vat\": \"123456789\",\r\n    \"gender\": \"FEMALE\",\r\n    \"firstname\": \"Erika\",\r\n    \"lastname\": \"Mustermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterweg 5\",\r\n    \"postalCode\": \"98765\",\r\n    \"city\": \"Musterhausen\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -269,9 +317,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/client/company",
+									"raw": "{{base_url}}{{v1}}/client/company",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"client",
@@ -288,7 +336,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"vat\": 987654321\r\n}",
+									"raw": "{\r\n    \"vat\": \"987654321\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -296,14 +344,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/client/company/ce36c1le",
+									"raw": "{{base_url}}{{v1}}/client/company/{{company_client}}",
 									"host": [
-										"{{base_url}}"
+										"{{base_url}}{{v1}}"
 									],
 									"path": [
 										"client",
 										"company",
-										"ce36c1le"
+										"{{company_client}}"
 									]
 								}
 							},
@@ -317,9 +365,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/client",
+							"raw": "{{base_url}}{{v1}}/client",
 							"host": [
-								"{{base_url}}"
+								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"client"
@@ -334,13 +382,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/client/gcrdbtae",
+							"raw": "{{base_url}}{{v1}}/client/{{private_client}}",
 							"host": [
-								"{{base_url}}"
+								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"client",
-								"gcrdbtae"
+								"{{private_client}}"
 							]
 						}
 					},
@@ -352,13 +400,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/client/k0a3xqi5",
+							"raw": "{{base_url}}{{v1}}/client/{{company_client}}",
 							"host": [
-								"{{base_url}}"
+								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"client",
-								"k0a3xqi5"
+								"{{company_client}}"
 							]
 						}
 					},
@@ -401,6 +449,46 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Google Maps Location Abfrage",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://maps.googleapis.com/maps/api/geocode/json?address=74177&sensor=false&key=AIzaSyCwvwv3QFI941xpwFTaYTb6_XYaoKcovms\n",
+					"protocol": "https",
+					"host": [
+						"maps",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"geocode",
+						"json"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "74177"
+						},
+						{
+							"key": "sensor",
+							"value": "false"
+						},
+						{
+							"key": "key",
+							"value": "AIzaSyCwvwv3QFI941xpwFTaYTb6_XYaoKcovms\n"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -427,6 +515,28 @@
 		{
 			"key": "base_url",
 			"value": "http://dev.home:3010"
+		},
+		{
+			"key": "v1",
+			"value": "/v1",
+			"type": "string"
+		},
+		{
+			"key": "private_client",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "company_client",
+			"value": ""
+		},
+		{
+			"key": "offer",
+			"value": ""
+		},
+		{
+			"key": "invoice",
+			"value": ""
 		}
 	]
 }
