@@ -18,12 +18,14 @@ body {
   font-size: 1rem;
   color: $white;
   --body-text: #{$white};
+  --primary-background: #{$darkblue};
   --secondary-background: #{$lightblue};
 
   &.light {
     background-color: $white;
     color: $darkblue;
     --body-text: #{$darkblue};
+    --primary-background: #{$white};
     --secondary-background: #{$lightwhite};
   }
 }
@@ -55,4 +57,20 @@ body {
   color: $darkblue;
   font-weight: bolder;
   border: unset;
+}
+
+.btn-info {
+  @include gradientInfoBackground;
+  color: $darkblue;
+  font-weight: bolder;
+  border: unset;
+}
+
+.form-control,
+.form-control:focus,
+.form-select,
+.form-select:focus {
+  color: $body-text;
+  border-color: $secondary-background;
+  background-color: $primary-background;
 }

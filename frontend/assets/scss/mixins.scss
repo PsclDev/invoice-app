@@ -27,3 +27,13 @@
 @mixin gradientWarningBackground {
   background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
 }
+
+@mixin gradientInfoText {
+  background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientInfoBackground {
+  background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+}

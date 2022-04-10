@@ -11,7 +11,8 @@ $lightwhite: #f4f4f4;
 
 //Own Variables
 $body-text: var(--body-text);
+$primary-background: var(--primary-background);
 $secondary-background: var(--secondary-background);
 
 //Bootstrap override
-$primary: $lime;
+$primary: $body-text;
