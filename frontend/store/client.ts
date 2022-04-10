@@ -32,7 +32,7 @@ export default class ClientModule extends VuexModule {
 
   @Mutation
   newClient(client: Client) {
-    this.clients.push(client);
+    this.clients.unshift(client);
   }
 
   @Mutation

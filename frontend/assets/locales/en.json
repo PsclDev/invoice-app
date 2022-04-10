@@ -6,7 +6,8 @@
     "edit": "Edit",
     "save": "Save",
     "cancel": "Cancel",
-    "delete": "Delete"
+    "delete": "Delete",
+    "delete_confirm": "Confirm delete"
   },
   "gender": {
     "title": "Gender",

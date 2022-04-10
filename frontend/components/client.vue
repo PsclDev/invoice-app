@@ -123,11 +123,11 @@
               </AppCollapse>
             </div>
           </div>
-          <div class="row">
+          <div v-if="!confirmDelete" class="row">
             <div class="col-4 offset-2">
               <button
                 v-if="mode === 'view'"
-                class="btn btn-warning w-100"
+                class="btn btn-info w-100"
                 @click="edit"
               >
                 {{ $t('button.edit') }}
@@ -140,11 +140,25 @@
               <button
                 v-if="mode === 'view'"
                 class="btn btn-danger w-100"
+                :disabled="documentsLength > 0"
                 @click="deleteClient"
               >
                 {{ $t('button.delete') }}
               </button>
               <button v-else class="btn btn-warning w-100" @click="cancel">
+                {{ $t('button.cancel') }}
+              </button>
+            </div>
+          </div>
+
+          <div v-else class="row">
+            <div class="col-4 offset-2">
+              <button class="btn btn-danger w-100" @click="deleteConfirm">
+                {{ $t('button.delete_confirm') }}
+              </button>
+            </div>
+            <div class="col-4">
+              <button class="btn btn-warning w-100" @click="cancel">
                 {{ $t('button.cancel') }}
               </button>
             </div>
@@ -174,6 +188,7 @@ export default Vue.extend({
     return {
       store: getModule(ClientModule, this.$store),
       mode: 'view',
+      confirmDelete: false,
       mutableClient: {} as Client,
     };
   },
@@ -232,10 +247,14 @@ export default Vue.extend({
       this.mode = 'view';
     },
     cancel() {
+      this.confirmDelete = false;
       this.setClient();
       this.mode = 'view';
     },
     deleteClient() {
+      this.confirmDelete = true;
+    },
+    deleteConfirm() {
       this.store.deleteClient(this.mutableClient);
     },
   },

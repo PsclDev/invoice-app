@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div class="col-8 col-md-6 mb-2">
+      <AppSearch :clients="store.Clients" @filtered="onFilterChanged" />
+    </div>
     <div class="col text-center">
       <button
         class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"
@@ -32,12 +35,13 @@ export default Vue.extend({
   data() {
     return {
       store: getModule(ClientModule, this.$store),
+      filteredList: [] as Client[],
       isLoading: false,
     };
   },
   computed: {
     clients(): Client[] {
-      return this.store.Clients;
+      return this.filteredList;
     },
   },
   mounted() {
@@ -51,6 +55,9 @@ export default Vue.extend({
     },
     create() {
       this.store.createClient();
+    },
+    onFilterChanged(filteredList: Client[]) {
+      this.filteredList = filteredList;
     },
   },
 });

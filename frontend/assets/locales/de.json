@@ -6,7 +6,8 @@
     "edit": "Bearbeiten",
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "delete_confirm": "Löschen bestätigen"
   },
   "gender": {
     "title": "Geschlecht",
