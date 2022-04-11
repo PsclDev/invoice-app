@@ -2,7 +2,7 @@
   <div>
     <label for="gender" class="form-label">{{ $t('gender.title') }}</label>
     <select
-      v-if="mode === 'edit'"
+      v-if="viewMode === ViewMode.EDIT"
       id="gender"
       v-model="localValue"
       class="form-select"
@@ -20,18 +20,24 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import ViewMode from '~/types/viewMode';
 
 export default Vue.extend({
   name: 'AppGenderSelect',
   props: {
-    mode: {
-      type: String,
+    viewMode: {
+      type: String as () => ViewMode,
       required: true,
     },
     value: {
       type: String,
       required: true,
     },
+  },
+  data() {
+    return {
+      ViewMode,
+    };
   },
   computed: {
     localValue: {

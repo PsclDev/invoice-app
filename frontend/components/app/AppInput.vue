@@ -3,7 +3,7 @@
     <label :for="title" class="form-label">
       {{ title }}
     </label>
-    <div v-if="mode === 'edit'">
+    <div v-if="viewMode === ViewMode.EDIT">
       <input
         :id="title"
         class="form-control"
@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import ViewMode from '~/types/viewMode';
 
 export default Vue.extend({
   name: 'AppInput',
@@ -26,14 +27,19 @@ export default Vue.extend({
       type: String,
       required: true,
     },
-    mode: {
-      type: String,
+    viewMode: {
+      type: String as () => ViewMode,
       required: true,
     },
     // eslint-disable-next-line vue/require-prop-types
     value: {
       required: true,
     },
+  },
+  data() {
+    return {
+      ViewMode,
+    };
   },
 });
 </script>
