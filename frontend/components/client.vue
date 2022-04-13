@@ -25,6 +25,16 @@
     </template>
     <template #body>
       <div class="container">
+        <div v-if="client.createdAt && client.updatedAt" class="row mb-2">
+          <div class="col-sm-6 id text-center">
+            {{ $t('common.createdAt') }}
+            {{ getDate(client.createdAt, true) }}
+          </div>
+          <div class="col-sm-6 id text-center">
+            {{ $t('common.updatedAt') }}
+            {{ getDate(client.updatedAt, true) }}
+          </div>
+        </div>
         <template v-if="isCompany() || viewMode === ViewMode.EDIT">
           <div class="row mb-4">
             <App-Input
@@ -191,11 +201,13 @@ export default Vue.extend({
         return `${this.$t('documents.invoice')} #${String(
           doc.invoiceNr
         ).padStart(4, '0')}`;
-      } else {
-        return `${this.$t('documents.offer')} ${this.$moment(
-          doc.dateOfIssue
-        ).format('DD.MM.YYYY')}`;
       }
+      return `${this.$t('documents.offer')} ${this.getDate(doc.dateOfIssue)}`;
+    },
+    getDate(date: Date, withTime: boolean = false) {
+      return this.$moment(date).format(
+        withTime ? 'DD.MM.YYYY HH:MM:SS' : 'DD.MM.YYYY'
+      );
     },
     edit(viewMode: ViewMode) {
       this.viewMode = viewMode;
