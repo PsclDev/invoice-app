@@ -16,9 +16,4 @@ The App will be updated daily by the dependabot if needed
 - `yarn dev`
 
 ## Postman
-If you are importing the postman collection you just need to edit the Folder Varible `base_url`. Everything else will be working without Issues. The empty variables are used to help you out while working with the requests 
-
-## Important note for OSX Silicon
-`https://github.com/mapbox/node-sqlite3/issues/1538#issuecomment-1037839683`
-
-To install sqlite3 you have to run the commands of this comment and use npm
+If you are importing the postman collection you just need to edit the Folder Varible `base_url`. Everything else will be working without Issues. The empty variables are used to help you out while working with the requests
