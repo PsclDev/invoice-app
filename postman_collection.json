@@ -30,7 +30,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"clientId\": \"{{private_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"total\": 1190\r\n}",
+									"raw": "{\r\n    \"dateOfIssue\": \"2022.01.02\",\r\n    \"clientId\": \"{{private_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"total\": 1190\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -102,7 +102,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"invoiceNr\": 2,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 200,\r\n    \"tax\": 38,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 228\r\n}",
+									"raw": "{\r\n    \"invoiceNr\": 1,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 200,\r\n    \"tax\": 38,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 228\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -239,7 +239,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"gender\": \"MALE\",\r\n    \"firstname\": \"Maxi\",\r\n    \"lastname\": \"Mustermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterweg 2\",\r\n    \"postalCode\": \"98765\",\r\n    \"city\": \"Musterhausen\"\r\n}",
+									"raw": "{\r\n    \"gender\": \"MALE\",\r\n    \"firstname\": \"John\",\r\n    \"lastname\": \"Doe\",\r\n    \"email\": \"john@doe.de\",\r\n    \"street\": \"Any Street 1\",\r\n    \"postalCode\": \"12345\",\r\n    \"city\": \"Any City\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -309,7 +309,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"company\": \"Muster GmbH\",\r\n    \"vat\": \"123456789\",\r\n    \"gender\": \"FEMALE\",\r\n    \"firstname\": \"Erika\",\r\n    \"lastname\": \"Mustermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterweg 5\",\r\n    \"postalCode\": \"98765\",\r\n    \"city\": \"Musterhausen\"\r\n}",
+									"raw": "{\r\n    \"company\": \"Muster GmbH\",\r\n    \"vat\": \"123456789\",\r\n    \"gender\": \"FEMALE\",\r\n    \"firstname\": \"Erika\",\r\n    \"lastname\": \"Mustermann\",\r\n    \"email\": \"erika@mustermann.de\",\r\n    \"street\": \"Musterstr. 2\",\r\n    \"postalCode\": \"98765\",\r\n    \"city\": \"Musterhausen\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -419,6 +419,17 @@
 			"item": [
 				{
 					"name": "Ping",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -443,6 +454,28 @@
 							],
 							"path": [
 								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{v1}}/statistic",
+							"host": [
+								"{{base_url}}{{v1}}"
+							],
+							"path": [
+								"statistic"
 							]
 						}
 					},
