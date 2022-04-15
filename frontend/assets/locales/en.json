@@ -9,6 +9,10 @@
     "delete": "Delete",
     "delete_confirm": "Confirm delete"
   },
+  "common": {
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
+  },
   "gender": {
     "title": "Gender",
     "choose": "Choose your gender",
@@ -29,7 +33,17 @@
     "city": "City"
   },
   "documents": {
+    "create": "Create new document",
     "offer": "Offer",
-    "invoice": "Invoice"
+    "invoice": "Invoice",
+    "clientId": "Client Id",
+    "invoiceNr": "Invoice Nr.",
+    "dateOfIssue": "Date of Issue",
+    "description": "Description",
+    "subTotal": "Subtotal",
+    "tax": "Tax",
+    "alreadyPaid": "Already Paid",
+    "total": "Total",
+    "dueDate": "Due Date"
   }
 }

@@ -9,6 +9,10 @@
     "delete": "Löschen",
     "delete_confirm": "Löschen bestätigen"
   },
+  "common": {
+    "createdAt": "Erstellt Am",
+    "updatedAt": "Updated Am"
+  },
   "gender": {
     "title": "Geschlecht",
     "choose": "Wählen Sie Ihr geschlecht",
@@ -29,7 +33,17 @@
     "city": "Ort"
   },
   "documents": {
+    "create": "Neues Dokument erstellen",
     "offer": "Angebot",
-    "invoice": "Rechnung"
+    "invoice": "Rechnung",
+    "clientId": "Kunden Id",
+    "invoiceNr": "Rechnungs Nr.",
+    "dateOfIssue": "Ausstellungsdatum",
+    "description": "Beschreibung",
+    "subTotal": "Zwischensumme",
+    "tax": "Steuern",
+    "alreadyPaid": "Bereits Bezahlt",
+    "total": "Gesamtbetrag",
+    "dueDate": "Fälligkeitsdatum"
   }
 }
