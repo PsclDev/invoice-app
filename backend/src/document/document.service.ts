@@ -32,7 +32,7 @@ export class DocumentService {
   async findAll(): Promise<Document[]> {
     return await this.documentRepository.find({
       order: {
-        dateOfIssue: 'ASC',
+        dateOfIssue: 'DESC',
       },
     });
   }
