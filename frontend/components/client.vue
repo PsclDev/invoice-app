@@ -39,7 +39,7 @@
           <div class="row mb-4">
             <App-Input
               v-model="mutableClient.company"
-              class="col-sm-4"
+              class="col-sm-4 mb-3 mb-sm-0"
               :title="$t('clients.company')"
               :view-mode="viewMode"
             ></App-Input>
@@ -55,13 +55,13 @@
           <App-Gender-Select
             v-if="mutableClient.gender"
             v-model="mutableClient.gender"
-            class="col-sm-4"
+            class="col-sm-4 mb-3 mb-sm-0"
             :title="$t('clients.gender')"
             :view-mode="viewMode"
           ></App-Gender-Select>
           <App-Input
             v-model="mutableClient.firstname"
-            class="col-sm-4"
+            class="col-sm-4 mb-3 mb-sm-0"
             :title="$t('clients.firstname')"
             :view-mode="viewMode"
           ></App-Input>
@@ -75,13 +75,13 @@
         <div class="row mb-4">
           <App-Input
             v-model="mutableClient.street"
-            class="col-sm-4"
+            class="col-sm-4 mb-3 mb-sm-0"
             :title="$t('clients.street')"
             :view-mode="viewMode"
           ></App-Input>
           <App-Input
             v-model="mutableClient.postalCode"
-            class="col-sm-4"
+            class="col-sm-4 mb-3 mb-sm-0"
             :title="$t('clients.postalCode')"
             :view-mode="viewMode"
           ></App-Input>
@@ -102,7 +102,7 @@
           ></App-Input>
         </div>
         <div class="row mb-4">
-          <div class="col-3">
+          <div class="col-8 col-sm-4">
             <div v-if="documentsLength === 0" class="d-flex align-items-center">
               <font-awesome-icon class="me-2" :icon="['fa', 'file-pdf']" />
               <div>
