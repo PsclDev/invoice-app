@@ -60,7 +60,7 @@ export class DocumentController {
   }
 
   @Delete(':id')
-  async deleteDocument(@Param('id') id: string) {
+  async deleteDocument(@Param('id') id: string): Promise<string> {
     this.logger.log(`Delete document with id: ${id}`);
     return await this.docService.delete(id);
   }

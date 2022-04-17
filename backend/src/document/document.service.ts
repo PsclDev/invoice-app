@@ -77,11 +77,11 @@ export class DocumentService {
     await updateEntity<Offer>(this.offerRepository, id, offerDto);
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(id: string): Promise<string> {
     const result = await this.documentRepository.delete({ id });
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
-    return true;
+    return id;
   }
 }
