@@ -27,3 +27,9 @@ export interface DocumentBasePeriodStatsDto {
 export interface DocumentYearStatsDto extends DocumentBasePeriodStatsDto {
   year: number;
 }
+
+export interface Cashflow {
+  revenues: number;
+  taxes: number;
+  totalRevenues: number;
+}

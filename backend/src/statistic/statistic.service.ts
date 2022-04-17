@@ -8,6 +8,7 @@ import {
   StatisticsDto,
   ClientStatsDto,
   DocumentStatsDto,
+  Cashflow,
 } from './statistic.dto';
 import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
@@ -113,7 +114,17 @@ export class StatisticService {
         curYear,
         invoices,
       );
-      const yearlyRevenues = this.calculateRevenues(yearlyInvoices);
+
+      let yearlyRevenues: Cashflow;
+      if (yearlyInvoices.length > 0)
+        yearlyRevenues = this.calculateRevenues(yearlyInvoices);
+      else {
+        yearlyRevenues = {
+          revenues: 0,
+          taxes: 0,
+          totalRevenues: 0,
+        };
+      }
 
       const year: DocumentYearStatsDto = {
         year: curYear,
@@ -139,11 +150,7 @@ export class StatisticService {
     });
   }
 
-  private calculateRevenues(invoices: Invoice[]): {
-    revenues: number;
-    taxes: number;
-    totalRevenues: number;
-  } {
+  private calculateRevenues(invoices: Invoice[]): Cashflow {
     const revenues = this.sum(invoices, 'subTotal');
     const taxes = this.sum(invoices, 'tax');
 
