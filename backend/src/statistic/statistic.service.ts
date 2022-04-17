@@ -12,7 +12,9 @@ import {
 } from './statistic.dto';
 import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
+import * as isBetween from 'dayjs/plugin/isBetween';
+dayjs.extend(isBetween);
 
 @Injectable()
 export class StatisticService {
@@ -105,8 +107,8 @@ export class StatisticService {
     invoices: Invoice[],
   ): DocumentYearStatsDto[] {
     const years: DocumentYearStatsDto[] = [];
-    const firstYear = moment(invoices[0].dateOfIssue).year();
-    const lastYear = moment(invoices[invoices.length - 1].dateOfIssue).year();
+    const firstYear = dayjs(invoices[0].dateOfIssue).year();
+    const lastYear = dayjs(invoices[invoices.length - 1].dateOfIssue).year();
 
     for (let curYear = firstYear; curYear <= lastYear; curYear++) {
       const yearlyOffers = this.getDocumentsBetweenYear<Offer>(curYear, offers);
@@ -143,7 +145,7 @@ export class StatisticService {
 
   private getDocumentsBetweenYear<T>(year: number, arr: T[]): T[] {
     return arr.filter((i) => {
-      return moment(i['dateOfIssue']).isBetween(
+      return dayjs(i['dateOfIssue']).isBetween(
         `${year}-01-01`,
         `${year}-12-31`,
       );
