@@ -49,7 +49,6 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
     '@nuxtjs/fontawesome',
-    '@nuxtjs/moment',
   ],
 
   googleFonts: {
@@ -69,6 +68,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
+    '@nuxtjs/dayjs',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

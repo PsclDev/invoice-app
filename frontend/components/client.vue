@@ -205,8 +205,8 @@ export default Vue.extend({
       return `${this.$t('documents.offer')} ${this.getDate(doc.dateOfIssue)}`;
     },
     getDate(date: Date, withTime: boolean = false) {
-      return this.$moment(date).format(
-        withTime ? 'DD.MM.YYYY HH:MM:SS' : 'DD.MM.YYYY'
+      return this.$dayjs(date).format(
+        withTime ? 'DD.MM.YYYY HH:MM:ss' : 'DD.MM.YYYY'
       );
     },
     edit(viewMode: ViewMode) {
