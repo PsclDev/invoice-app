@@ -211,6 +211,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Generate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{v1}}/document/generate/123",
+							"host": [
+								"{{base_url}}{{v1}}"
+							],
+							"path": [
+								"document",
+								"generate",
+								"123"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

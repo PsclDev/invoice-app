@@ -84,4 +84,8 @@ export class DocumentService {
     }
     return id;
   }
+
+  async generate(id: string): Promise<string> {
+    return `TODO: generate document with id ${id}`;
+  }
 }

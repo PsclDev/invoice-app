@@ -66,4 +66,10 @@ export class DocumentController {
     this.logger.log(`Delete document with id: ${id}`);
     return await this.docService.delete(id);
   }
+
+  @Post('/generate/:id')
+  async generateDocument(@Param('id') id: string): Promise<string> {
+    this.logger.log(`Generate document with id: ${id}`);
+    return await this.docService.generate(id);
+  }
 }
