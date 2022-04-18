@@ -113,7 +113,7 @@ describe('DocumentController', () => {
 
   it('should delete a document by id', async () => {
     const deleted = await documentController.deleteDocument(createdDocumentId);
-    expect(deleted).toBe(true);
+    expect(deleted).toBe(createdDocumentId);
   });
 
   it('should fail to delete a document', async () => {
