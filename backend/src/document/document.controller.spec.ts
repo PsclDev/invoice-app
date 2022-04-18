@@ -33,6 +33,7 @@ describe('DocumentController', () => {
       description: ['a', 'b', 'c'],
       subTotal: 1000,
       tax: 190,
+      taxRate: 19,
       total: 1190,
     });
 
@@ -48,6 +49,7 @@ describe('DocumentController', () => {
       description: ['a', 'b', 'c'],
       subTotal: 200,
       tax: 38,
+      taxRate: 19,
       alreadyPaid: 10,
       total: 228,
     });
@@ -66,6 +68,7 @@ describe('DocumentController', () => {
         description: ['a', 'b', 'c'],
         subTotal: 200,
         tax: 38,
+        taxRate: 19,
         alreadyPaid: 10,
         total: 228,
       });

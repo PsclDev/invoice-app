@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  Min,
 } from 'class-validator';
 
 export interface DocumentBaseDto {
@@ -18,6 +19,7 @@ export interface DocumentBaseDto {
 export interface OfferDto extends DocumentBaseDto {
   subTotal: number;
   tax: number;
+  taxRate: number;
   total: number;
 }
 
@@ -25,6 +27,7 @@ export interface InvoiceDto extends DocumentBaseDto {
   invoiceNr: number;
   subTotal: number;
   tax: number;
+  taxRate: number;
   alreadyPaid: number;
   total: number;
   dueDate: Date;
@@ -53,6 +56,9 @@ export class CreateOfferDto
   tax: number;
 
   @IsNumber()
+  taxRate: number;
+
+  @IsNumber()
   total: number;
 }
 
@@ -75,16 +81,24 @@ export class CreateInvoiceDto
   description: string[];
 
   @IsNumber()
+  @Min(0)
   subTotal: number;
 
   @IsNumber()
+  @Min(0)
   tax: number;
 
   @IsNumber()
+  @Min(0)
+  taxRate: number;
+
+  @IsNumber()
+  @Min(0)
   @IsOptional()
   alreadyPaid: number;
 
   @IsNumber()
+  @Min(0)
   total: number;
 
   @IsDateString()

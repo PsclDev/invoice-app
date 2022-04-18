@@ -102,7 +102,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"invoiceNr\": 1,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 200,\r\n    \"tax\": 38,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 228\r\n}",
+									"raw": "{\r\n    \"invoiceNr\": 1,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"taxRate\": 19,\r\n    \"alreadyPaid\": 0,\r\n    \"total\": 1190\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

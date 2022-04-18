@@ -49,6 +49,9 @@ export class Offer extends Document implements OfferDto {
   tax: number;
 
   @Column('numeric')
+  taxRate: number;
+
+  @Column('numeric')
   total: number;
 }
 
@@ -62,6 +65,9 @@ export class Invoice extends Document implements InvoiceDto {
 
   @Column('numeric')
   tax: number;
+
+  @Column('numeric')
+  taxRate: number;
 
   @Column('numeric', { nullable: true })
   alreadyPaid: number;

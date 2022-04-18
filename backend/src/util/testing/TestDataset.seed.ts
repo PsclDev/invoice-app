@@ -42,6 +42,7 @@ const insertDocuments = async (entityManager: EntityManager) => {
     description: ['a', 'b', 'c'],
     subTotal: 100,
     tax: 19,
+    taxRate: 19,
     total: 119,
   });
 
@@ -54,6 +55,7 @@ const insertDocuments = async (entityManager: EntityManager) => {
     description: ['a', 'b', 'c'],
     subTotal: 1000,
     tax: 190,
+    taxRate: 19,
     alreadyPaid: 400,
     total: 790,
   });
