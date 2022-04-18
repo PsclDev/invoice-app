@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {
   HealthCheck,
   HealthCheckService,
@@ -8,6 +9,7 @@ import {
 import { InjectConnection } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 
+@ApiTags('Health')
 @Controller('health')
 export class HealthController {
   constructor(

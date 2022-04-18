@@ -1,7 +1,9 @@
 import { Controller, Get, Logger } from '@nestjs/common';
 import { StatisticService } from './statistic.service';
 import { StatisticsDto } from './statistic.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Statistics')
 @Controller('statistic')
 export class StatisticController {
   private readonly logger = new Logger(StatisticController.name);

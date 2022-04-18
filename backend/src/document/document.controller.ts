@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import {
   CreateInvoiceDto,
   CreateOfferDto,
@@ -17,6 +18,7 @@ import {
 import { Document } from './document.entity';
 import { DocumentService } from './document.service';
 
+@ApiTags('Document')
 @Controller('document')
 export class DocumentController {
   private readonly logger = new Logger(DocumentController.name);

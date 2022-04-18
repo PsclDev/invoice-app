@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export enum Gender {
   MALE = 'MALE',
@@ -38,28 +39,35 @@ export class CreateClientDto
   implements
     Omit<ClientBaseDto, 'id' | 'documents' | 'createdAt' | 'updatedAt'>
 {
+  @ApiProperty({ enum: ['MALE', 'FEMALE', 'DIVERS'] })
   @IsIn([Gender.MALE, Gender.FEMALE, Gender.DIVERS])
   gender: Gender;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   firstname: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   lastname: string;
 
+  @ApiProperty()
   @IsEmail()
   @IsOptional()
   email: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   street: string;
 
+  @ApiProperty()
   @IsString()
   postalCode: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   city: string;
@@ -71,36 +79,45 @@ export class CreateCompanyClientDto
   implements
     Omit<CompanyClientDto, 'id' | 'documents' | 'createdAt' | 'updatedAt'>
 {
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   company: string;
 
+  @ApiProperty()
   @IsString()
   @IsOptional()
   vat: string;
 
+  @ApiProperty({ enum: ['MALE', 'FEMALE', 'DIVERS'] })
   @IsIn([Gender.MALE, Gender.FEMALE, Gender.DIVERS])
   gender: Gender;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   firstname: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   lastname: string;
 
+  @ApiProperty()
   @IsEmail()
   @IsOptional()
   email: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   street: string;
 
+  @ApiProperty()
   @IsString()
   postalCode: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   city: string;
