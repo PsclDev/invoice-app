@@ -15,7 +15,7 @@ import {
   UpdateOfferDto,
 } from './document.dto';
 import { Document, Invoice, Offer } from './document.entity';
-
+import * as dayjs from 'dayjs';
 @Injectable()
 export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);
@@ -43,6 +43,30 @@ export class DocumentService {
     if (!document) throw new NotFoundException();
 
     return document;
+  }
+
+  async getNewOfferNr(): Promise<number> {
+    const latestNr: number = await this.getMaxValue<Offer>(
+      this.offerRepository,
+      'offerNr',
+    );
+
+    return latestNr + 1;
+  }
+
+  async getNewInvoiceNr(): Promise<number> {
+    const latestNr: number = await this.getMaxValue<Invoice>(
+      this.invoiceRepository,
+      'invoiceNr',
+    );
+
+    return latestNr + 1;
+  }
+
+  async getMaxValue<T>(repo: Repository<T>, field: string) {
+    const query = repo.createQueryBuilder('documentation');
+    query.select(`MAX("${field}")`, 'max');
+    return (await query.getRawOne()).max;
   }
 
   async createInvoice(invoiceDto: CreateInvoiceDto): Promise<Document> {
@@ -75,6 +99,31 @@ export class DocumentService {
 
   async updateOffer(id: string, offerDto: UpdateOfferDto) {
     await updateEntity<Offer>(this.offerRepository, id, offerDto);
+  }
+
+  async convertOffer(id: string): Promise<Invoice> {
+    const offer = await this.offerRepository.findOne({ id });
+    const createInvoice: CreateInvoiceDto = {
+      invoiceNr: await this.getNewInvoiceNr(),
+      subTotal: offer.subTotal,
+      tax: offer.tax,
+      taxRate: offer.taxRate,
+      alreadyPaid: 0,
+      total: offer.total,
+      dueDate: dayjs().add(14, 'day').toDate(),
+      clientId: offer.clientId,
+      dateOfIssue: new Date(),
+      description: offer.description,
+    };
+
+    const invoice = await this.invoiceRepository.save({
+      id: generateId<Document>(this.documentRepository),
+      ...createInvoice,
+    });
+
+    offer.invoiceId = invoice.id;
+    this.offerRepository.save(offer);
+    return invoice;
   }
 
   async delete(id: string): Promise<string> {

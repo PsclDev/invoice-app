@@ -37,6 +37,12 @@ export class DocumentController {
     return this.docService.findById(id);
   }
 
+  @Get('/invoice/nr')
+  async getNewInvoiceNr(): Promise<number> {
+    this.logger.log(`Get new invoice nr`);
+    return this.docService.getNewInvoiceNr();
+  }
+
   @Post('/invoice')
   async createInvoice(@Body() body: CreateInvoiceDto): Promise<Document> {
     this.logger.log('Post Invoice', body);
@@ -49,6 +55,12 @@ export class DocumentController {
     return await this.docService.updateInvoice(id, body);
   }
 
+  @Get('/offer/nr')
+  async getNewOffereNr(): Promise<number> {
+    this.logger.log(`Get new offer nr`);
+    return this.docService.getNewOfferNr();
+  }
+
   @Post('/offer')
   async createOffer(@Body() body: CreateOfferDto): Promise<Document> {
     this.logger.log('Post Offer', body);
@@ -59,6 +71,12 @@ export class DocumentController {
   async updateOffer(@Param('id') id: string, @Body() body: UpdateOfferDto) {
     this.logger.log(`Patch Offer with id: ${id}`, body);
     return await this.docService.updateOffer(id, body);
+  }
+
+  @Post('/offer/:id/convert')
+  async convertOffer(@Param('id') id: string) {
+    this.logger.log(`Post Offer to convert with id: ${id}`);
+    return await this.docService.convertOffer(id);
   }
 
   @Delete(':id')
