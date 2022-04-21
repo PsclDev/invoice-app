@@ -23,6 +23,20 @@
 										],
 										"type": "text/javascript"
 									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.sendRequest({",
+											"    url: `${pm.collectionVariables.get(\"base_url\")}${pm.collectionVariables.get(\"v1\")}/document/offer/nr`,",
+											"    method: 'GET',",
+											"}, function (err, res) {",
+											"    pm.collectionVariables.set(\"new_offer_nr\", res.text());",
+											"});"
+										],
+										"type": "text/javascript"
+									}
 								}
 							],
 							"request": {
@@ -30,7 +44,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"dateOfIssue\": \"2022.01.02\",\r\n    \"clientId\": \"{{private_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"total\": 1190\r\n}",
+									"raw": "{\r\n    \"offerNr\": {{new_offer_nr}},\r\n    \"dateOfIssue\": \"2022-01-31\",\r\n    \"clientId\": \"{{private_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"taxRate\": 19,\r\n    \"total\": 1190\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -77,6 +91,45 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Convert Offer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{v1}}/document/offer/{{offer}}/convert",
+									"host": [
+										"{{base_url}}{{v1}}"
+									],
+									"path": [
+										"document",
+										"offer",
+										"{{offer}}",
+										"convert"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get new offer nr",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{v1}}/document/offer/nr",
+									"host": [
+										"{{base_url}}{{v1}}"
+									],
+									"path": [
+										"document",
+										"offer",
+										"nr"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -95,6 +148,20 @@
 										],
 										"type": "text/javascript"
 									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.sendRequest({",
+											"    url: `${pm.collectionVariables.get(\"base_url\")}${pm.collectionVariables.get(\"v1\")}/document/invoice/nr`,",
+											"    method: 'GET',",
+											"}, function (err, res) {",
+											"    pm.collectionVariables.set(\"new_invoice_nr\", res.text());",
+											"});"
+										],
+										"type": "text/javascript"
+									}
 								}
 							],
 							"request": {
@@ -102,7 +169,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"invoiceNr\": 1,\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"taxRate\": 19,\r\n    \"alreadyPaid\": 0,\r\n    \"total\": 1190\r\n}",
+									"raw": "{\r\n    \"invoiceNr\": {{new_invoice_nr}},\r\n    \"dateOfIssue\": \"2022-01-01\",\r\n    \"dueDate\": \"2022-01-15\",\r\n    \"clientId\": \"{{company_client}}\",\r\n    \"description\": [\r\n        \"a\",\r\n        \"b\",\r\n        \"c\"\r\n    ],\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"taxRate\": 19,\r\n    \"alreadyPaid\": 0,\r\n    \"total\": 1190\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -145,6 +212,25 @@
 										"document",
 										"invoice",
 										"{{invoice}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get new invoice nr",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}{{v1}}/document/invoice/nr",
+									"host": [
+										"{{base_url}}{{v1}}"
+									],
+									"path": [
+										"document",
+										"invoice",
+										"nr"
 									]
 								}
 							},
@@ -583,8 +669,18 @@
 			"value": ""
 		},
 		{
+			"key": "new_offer_nr",
+			"value": "",
+			"type": "string"
+		},
+		{
 			"key": "offer",
 			"value": ""
+		},
+		{
+			"key": "new_invoice_nr",
+			"value": "",
+			"type": "string"
 		},
 		{
 			"key": "invoice",
