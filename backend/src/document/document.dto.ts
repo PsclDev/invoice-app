@@ -18,6 +18,8 @@ export interface DocumentBaseDto {
 }
 
 export interface OfferDto extends DocumentBaseDto {
+  offerNr: number;
+  invoiceId: string;
   subTotal: number;
   tax: number;
   taxRate: number;
@@ -25,6 +27,7 @@ export interface OfferDto extends DocumentBaseDto {
 }
 
 export interface InvoiceDto extends DocumentBaseDto {
+  offerId: string;
   invoiceNr: number;
   subTotal: number;
   tax: number;
@@ -37,7 +40,7 @@ export interface InvoiceDto extends DocumentBaseDto {
 export type DocumentDto = OfferDto | InvoiceDto;
 
 export class CreateOfferDto
-  implements Omit<OfferDto, 'id' | 'createdAt' | 'updatedAt'>
+  implements Omit<OfferDto, 'id' | 'invoiceId' | 'createdAt' | 'updatedAt'>
 {
   @ApiProperty()
   @IsDateString()
@@ -47,6 +50,11 @@ export class CreateOfferDto
   @IsString()
   @IsNotEmpty()
   clientId: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @Min(1)
+  offerNr: number;
 
   @ApiProperty({ type: 'string[]' })
   @IsString({ each: true })
@@ -73,10 +81,11 @@ export class CreateOfferDto
 export class UpdateOfferDto implements Partial<CreateOfferDto> {}
 
 export class CreateInvoiceDto
-  implements Omit<InvoiceDto, 'id' | 'createdAt' | 'updatedAt'>
+  implements Omit<InvoiceDto, 'id' | 'offerId' | 'createdAt' | 'updatedAt'>
 {
   @ApiProperty()
   @IsNumber()
+  @Min(1)
   invoiceNr: number;
 
   @ApiProperty()

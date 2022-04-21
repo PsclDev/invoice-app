@@ -7,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryColumn,
   TableInheritance,
   UpdateDateColumn,
@@ -18,6 +19,9 @@ import { DocumentBaseDto, InvoiceDto, OfferDto } from './document.dto';
 export class Document implements DocumentBaseDto {
   @PrimaryColumn()
   id: string;
+
+  @Column()
+  invoiceNr: number;
 
   @Column({ name: 'client_id' })
   clientId: string;
@@ -42,6 +46,13 @@ export class Document implements DocumentBaseDto {
 
 @ChildEntity()
 export class Offer extends Document implements OfferDto {
+  @Column({ unique: true })
+  offerNr: number;
+
+  @OneToOne(() => Invoice, (invoice) => invoice.offerId, { nullable: true })
+  @JoinColumn({ name: 'invoice_id' })
+  invoiceId: string;
+
   @Column('numeric')
   subTotal: number;
 
@@ -57,6 +68,10 @@ export class Offer extends Document implements OfferDto {
 
 @ChildEntity()
 export class Invoice extends Document implements InvoiceDto {
+  @OneToOne(() => Offer, (offer) => offer.invoiceId, { nullable: true })
+  @Exclude()
+  offerId: string;
+
   @Column({ unique: true })
   invoiceNr: number;
 
