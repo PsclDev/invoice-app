@@ -16,6 +16,8 @@ import {
 } from './document.dto';
 import { Document, Invoice, Offer } from './document.entity';
 import * as dayjs from 'dayjs';
+import { ClientService } from 'client/client.service';
+import { MailService } from 'mail/mail.service';
 @Injectable()
 export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);
@@ -27,6 +29,8 @@ export class DocumentService {
     private invoiceRepository: Repository<Invoice>,
     @InjectRepository(Offer)
     private offerRepository: Repository<Offer>,
+    private readonly clientService: ClientService,
+    private readonly mailService: MailService,
   ) {}
 
   async findAll(): Promise<Document[]> {
@@ -136,5 +140,15 @@ export class DocumentService {
 
   async generate(id: string): Promise<string> {
     return `TODO: generate document with id ${id}`;
+  }
+
+  async print(id: string): Promise<string> {
+    return `TODO: print document with id ${id}`;
+  }
+
+  async send(id: string) {
+    const document = await this.documentRepository.findOne({ id });
+    const client = await this.clientService.findById(document.clientId);
+    await this.mailService.sendTest(client, document);
   }
 }
