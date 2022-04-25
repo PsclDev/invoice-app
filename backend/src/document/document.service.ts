@@ -18,6 +18,10 @@ import { Document, Invoice, Offer } from './document.entity';
 import * as dayjs from 'dayjs';
 import { ClientService } from 'client/client.service';
 import { MailService } from 'mail/mail.service';
+import * as puppeteer from 'puppeteer';
+import { writeFileSync } from 'fs';
+import configuration from 'config/configuration';
+import { Client } from 'client/client.entity';
 @Injectable()
 export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);
@@ -143,12 +147,49 @@ export class DocumentService {
   }
 
   async print(id: string): Promise<string> {
+    const infos = await this.getDocumentWithClient(id);
+    if (!infos) throw new NotFoundException();
+    const { doc, client } = infos;
+
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    page.setViewport({ width: 1920, height: 1080 });
+
+    await page.goto(`${configuration().frontendUrl}/pdf/${id}`, {
+      waitUntil: 'networkidle2',
+    });
+
+    const pdfFile = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    const isInvoice = !!doc.invoiceNr;
+    const filePrefix = isInvoice ? 'I' : 'O';
+    const fileNr = String(
+      isInvoice ? doc.invoiceNr : (doc as Offer).offerNr,
+    ).padStart(4, '0');
+    const fileName = `${client.firstname}_${client.lastname}`;
+
+    writeFileSync(
+      `${configuration().pdfExport}/${filePrefix}_${fileNr}_${fileName}.pdf`,
+      pdfFile,
+    );
     return `TODO: print document with id ${id}`;
   }
 
   async send(id: string) {
-    const document = await this.documentRepository.findOne({ id });
-    const client = await this.clientService.findById(document.clientId);
-    await this.mailService.sendTest(client, document);
+    const infos = await this.getDocumentWithClient(id);
+    await this.mailService.sendTest(infos.client, infos.doc);
+  }
+
+  async getDocumentWithClient(
+    id: string,
+  ): Promise<{ doc: Document; client: Client }> {
+    const doc = await this.documentRepository.findOne({ id });
+    const client = await this.clientService.findById(doc.clientId);
+    return { doc, client };
   }
 }

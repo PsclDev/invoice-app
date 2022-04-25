@@ -1,5 +1,7 @@
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 3010,
+  frontendUrl: process.env.FRONTEND_URL,
+  pdfExport: process.env.PDF_EXPORT,
   mail: {
     transport: process.env.MAIL_TRANSPORT,
     host: process.env.MAIL_HOST,
