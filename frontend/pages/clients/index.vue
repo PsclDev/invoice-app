@@ -16,9 +16,12 @@
         <AppSpinner />
       </div>
       <div v-else>
-        <div v-for="client of clients" :key="client.id" class="mb-2">
-          <Client :client="client" />
-        </div>
+        <Client
+          v-for="client of clients"
+          :key="client.id"
+          :client="client"
+          class="mb-2"
+        />
       </div>
     </div>
   </div>
@@ -42,6 +45,11 @@ export default Vue.extend({
   computed: {
     clients(): Client[] {
       return this.filteredList;
+    },
+  },
+  watch: {
+    'store.Clients'() {
+      this.filteredList = this.store.Clients;
     },
   },
   mounted() {
