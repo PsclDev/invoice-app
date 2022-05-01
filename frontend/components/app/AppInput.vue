@@ -7,12 +7,14 @@
       <input
         :id="title"
         class="form-control"
-        type="text"
+        :type="type"
         :value="value"
+        :disabled="disabled"
         @input="$emit('input', $event.target.value)"
+        @change="$emit('valueChanged', $event.target.value)"
       />
     </div>
-    <div v-else>{{ value }}</div>
+    <div v-else>{{ value + postfix }}</div>
   </div>
 </template>
 
@@ -35,6 +37,18 @@ export default Vue.extend({
     value: {
       required: true,
     },
+    postfix: {
+      type: String,
+      default: '',
+    },
+    type: {
+      type: String,
+      default: 'text',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -43,5 +57,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style lang="scss" scoped></style>
