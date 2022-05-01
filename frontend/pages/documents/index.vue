@@ -16,9 +16,12 @@
         <AppSpinner />
       </div>
       <div v-else>
-        <div v-for="doc of documents" :key="doc.id" class="mb-2">
-          <Document :document="doc" />
-        </div>
+        <Document
+          v-for="doc of documents"
+          :key="doc.id"
+          :document="doc"
+          class="mb-2"
+        />
       </div>
     </div>
   </div>
@@ -40,8 +43,18 @@ export default Vue.extend({
     };
   },
   computed: {
-    documents(): Document[] {
-      return this.filteredList;
+    documents: {
+      get(): Document[] {
+        return this.filteredList;
+      },
+      set(): Document[] {
+        return this.filteredList;
+      },
+    },
+  },
+  watch: {
+    'store.Documents'() {
+      this.filteredList = this.store.Documents;
     },
   },
   mounted() {
@@ -50,12 +63,11 @@ export default Vue.extend({
   methods: {
     async getDocuments() {
       this.isLoading = true;
-      await this.store.getDocuments();
+      this.documents = await this.store.getDocuments();
       this.isLoading = false;
     },
     create() {
       // TODO
-      // this.store.createClient();
     },
     onFilterChanged(filteredList: Document[]) {
       this.filteredList = filteredList;

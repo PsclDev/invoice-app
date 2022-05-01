@@ -95,6 +95,10 @@ export default {
     },
   },
 
+  dayjs: {
+    plugins: ['customParseFormat'],
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };

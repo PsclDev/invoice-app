@@ -1,4 +1,5 @@
 //Colors
+$lighterblue: #292934;
 $lightblue: #202028;
 $darkblue: #181820;
 $black: #141115;
@@ -7,12 +8,14 @@ $green: #3ee577;
 $turquoise: #42fcdb;
 $red: #ed1c24;
 $white: #f9f9f9;
+$lighterwhite: #f1f1f1;
 $lightwhite: #f4f4f4;
 
 //Own Variables
 $body-text: var(--body-text);
 $primary-background: var(--primary-background);
 $secondary-background: var(--secondary-background);
+$tertiary-background: var(--tertiary-background);
 
 //Bootstrap override
 $primary: $body-text;

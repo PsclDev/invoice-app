@@ -20,7 +20,8 @@
       "@nuxtjs/axios",
       "@types/node",
       "@nuxtjs/i18n",
-      "@nuxtjs/dayjs"
+      "@nuxtjs/dayjs",
+      "dayjs/plugin/customParseFormat"
     ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
