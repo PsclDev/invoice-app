@@ -4,6 +4,9 @@
       <template #header>
         <slot name="header"></slot>
       </template>
+      <template #action>
+        <slot name="action"></slot>
+      </template>
       <template #body>
         <div class="container">
           <slot name="body"></slot>

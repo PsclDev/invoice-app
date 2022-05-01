@@ -3,13 +3,17 @@
     <div class="collapse d-flex flex-column">
       <div
         class="ms-2 me-4 collapse-header d-flex align-items-center justify-content-between"
-        @click="toggleOpen"
       >
-        <slot name="header"></slot>
-        <div class="icon">
-          <font-awesome-icon
-            :icon="isOpen ? ['fas', 'chevron-up'] : ['fas', 'chevron-down']"
-          />
+        <div @click="toggleOpen">
+          <slot name="header"></slot>
+        </div>
+        <div class="icons">
+          <slot name="action"></slot>
+          <button class="btn btn-link icon" @click="toggleOpen">
+            <font-awesome-icon
+              :icon="isOpen ? ['fas', 'chevron-up'] : ['fas', 'chevron-down']"
+            />
+          </button>
         </div>
       </div>
       <div class="my-3 collapse-body" :class="isOpen ? '' : 'hide'">
@@ -54,7 +58,7 @@ export default Vue.extend({
 }
 
 .icon {
-  cursor: pointer;
+  color: $body-text;
 }
 
 .hide {
