@@ -86,9 +86,8 @@ export class DocumentController {
   }
 
   @Post('/generate/:id')
-  async generateDocument(@Param('id') id: string): Promise<string> {
+  async generateDocument(@Param('id') id: string): Promise<void> {
     this.logger.log(`Generate document with id: ${id}`);
-    return await this.docService.generate(id);
   }
 
   @Post('/print/:id')

@@ -142,11 +142,7 @@ export class DocumentService {
     return id;
   }
 
-  async generate(id: string): Promise<string> {
-    return `TODO: generate document with id ${id}`;
-  }
-
-  async print(id: string): Promise<string> {
+  async generate(id: string): Promise<void> {
     const infos = await this.getDocumentWithClient(id);
     if (!infos) throw new NotFoundException();
     const { doc, client } = infos;
@@ -177,6 +173,9 @@ export class DocumentService {
       `${configuration().pdfExport}/${filePrefix}_${fileNr}_${fileName}.pdf`,
       pdfFile,
     );
+  }
+
+  async print(id: string): Promise<string> {
     return `TODO: print document with id ${id}`;
   }
 
