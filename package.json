@@ -27,7 +27,7 @@
     "test:backend-cov": "cd backend && yarn jest --coverage"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
+    "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.0.0",
     "concurrently": "^7.0.0",
     "husky": "^7.0.4",
