@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Res,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
@@ -92,17 +93,19 @@ export class DocumentController {
   @Post('/generate/:id')
   async generateDocument(@Param('id') id: string): Promise<void> {
     this.logger.log(`Generate document with id: ${id}`);
+    return await this.docService.generate(id);
   }
 
-  @Post('/print/:id')
-  async printDocument(@Param('id') id: string): Promise<string> {
+  @Get('/print/:id')
+  async printDocument(@Param('id') id: string, @Res() res): Promise<string> {
     this.logger.log(`Print document with id: ${id}`);
-    return await this.docService.print(id);
+    const link = await this.docService.print(id);
+    return res.redirect('/', link);
   }
 
   @Post('/send/:id')
-  async sendDocument(@Param('id') id: string) {
+  async sendDocument(@Param('id') id: string): Promise<boolean> {
     this.logger.log(`Send document with id: ${id}`);
-    await this.docService.send(id);
+    return await this.docService.send(id);
   }
 }

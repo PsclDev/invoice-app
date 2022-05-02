@@ -52,7 +52,6 @@ export class DocumentService {
 
   async generate(id: string): Promise<void> {
     const infos = await this.getDocumentWithClient(id);
-    if (!infos) throw new NotFoundException();
 
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
@@ -68,23 +67,34 @@ export class DocumentService {
     await browser.close();
 
     const { client, doc } = infos;
-    this.fileService.saveDocument(client, doc, pdfFile);
+    await this.fileService.saveDocument(client, doc, pdfFile);
   }
 
   async print(id: string): Promise<string> {
-    return `TODO: print document with id ${id}`;
+    const infos = await this.getDocumentWithClient(id);
+    const { client, doc } = infos;
+
+    const filepath = await this.fileService.getDocument(client, doc);
+    return filepath.replace('files/', '');
   }
 
-  async send(id: string) {
+  async send(id: string): Promise<boolean> {
     const infos = await this.getDocumentWithClient(id);
-    await this.mailService.sendTest(infos.client, infos.doc);
+    const { client, doc } = infos;
+    const filename = await this.fileService.getDocument(client, doc);
+
+    return await this.mailService.send(client, doc, filename);
   }
 
   async getDocumentWithClient(
     id: string,
   ): Promise<{ doc: Document; client: Client }> {
     const doc = await this.documentRepository.findOne({ id });
+    if (!doc) throw new NotFoundException('Document not found');
+
     const client = await this.clientService.findById(doc.clientId);
+    if (!client) throw new NotFoundException('Client not found');
+
     return { doc, client };
   }
 }
