@@ -9,7 +9,7 @@ import {
 } from '../util/testing';
 import { DocumentController } from './document.controller';
 import { Invoice, Offer } from './document.entity';
-import { DocumentService } from './document.service';
+import { DocumentService } from './services/document.service';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;
@@ -35,6 +35,7 @@ describe('DocumentController', () => {
       tax: 190,
       taxRate: 19,
       total: 1190,
+      offerNr: 1,
     });
 
     expect(offer).toBeDefined();

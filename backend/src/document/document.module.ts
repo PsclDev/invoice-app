@@ -4,7 +4,12 @@ import { ClientModule } from 'client/client.module';
 import { MailModule } from 'mail/mail.module';
 import { DocumentController } from './document.controller';
 import { Document, Invoice, Offer } from './document.entity';
-import { DocumentService } from './document.service';
+import {
+  DocumentService,
+  OfferService,
+  InvoiceService,
+  FileService,
+} from './services';
 
 @Module({
   imports: [
@@ -13,6 +18,6 @@ import { DocumentService } from './document.service';
     MailModule,
   ],
   controllers: [DocumentController],
-  providers: [DocumentService],
+  providers: [DocumentService, OfferService, InvoiceService, FileService],
 })
 export class DocumentModule {}

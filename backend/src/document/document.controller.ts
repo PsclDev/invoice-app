@@ -16,14 +16,18 @@ import {
   UpdateOfferDto,
 } from './document.dto';
 import { Document } from './document.entity';
-import { DocumentService } from './document.service';
+import { DocumentService, OfferService, InvoiceService } from './services';
 
 @ApiTags('Document')
 @Controller('document')
 export class DocumentController {
   private readonly logger = new Logger(DocumentController.name);
 
-  constructor(private readonly docService: DocumentService) {}
+  constructor(
+    private readonly docService: DocumentService,
+    private readonly offerService: OfferService,
+    private readonly invoiceService: InvoiceService,
+  ) {}
 
   @Get()
   async findAll(): Promise<Document[]> {
@@ -40,43 +44,43 @@ export class DocumentController {
   @Get('/invoice/nr')
   async getNewInvoiceNr(): Promise<number> {
     this.logger.log(`Get new invoice nr`);
-    return this.docService.getNewInvoiceNr();
+    return this.invoiceService.getNewInvoiceNr();
   }
 
   @Post('/invoice')
   async createInvoice(@Body() body: CreateInvoiceDto): Promise<Document> {
     this.logger.log('Post Invoice', body);
-    return await this.docService.createInvoice(body);
+    return await this.invoiceService.createInvoice(body);
   }
 
   @Patch('/invoice/:id')
   async updateInvoice(@Param('id') id: string, @Body() body: UpdateInvoiceDto) {
     this.logger.log(`Patch Invoice with id: ${id}`, body);
-    return await this.docService.updateInvoice(id, body);
+    return await this.invoiceService.updateInvoice(id, body);
   }
 
   @Get('/offer/nr')
   async getNewOffereNr(): Promise<number> {
     this.logger.log(`Get new offer nr`);
-    return this.docService.getNewOfferNr();
+    return this.offerService.getNewOfferNr();
   }
 
   @Post('/offer')
   async createOffer(@Body() body: CreateOfferDto): Promise<Document> {
     this.logger.log('Post Offer', body);
-    return await this.docService.createOffer(body);
+    return await this.offerService.createOffer(body);
   }
 
   @Patch('/offer/:id')
   async updateOffer(@Param('id') id: string, @Body() body: UpdateOfferDto) {
     this.logger.log(`Patch Offer with id: ${id}`, body);
-    return await this.docService.updateOffer(id, body);
+    return await this.offerService.updateOffer(id, body);
   }
 
   @Post('/offer/:id/convert')
   async convertOffer(@Param('id') id: string) {
     this.logger.log(`Post Offer to convert with id: ${id}`);
-    return await this.docService.convertOffer(id);
+    return await this.offerService.convertOffer(id);
   }
 
   @Delete(':id')
