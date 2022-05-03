@@ -44,6 +44,12 @@
     "tax": "Tax",
     "alreadyPaid": "Already Paid",
     "total": "Total",
-    "dueDate": "Due Date"
+    "dueDate": "Due Date",
+    "send_modal": {
+      "title": "Send Document",
+      "body": "How should the document be sent?",
+      "print": "Print",
+      "mail": "Mail"
+    }
   }
 }

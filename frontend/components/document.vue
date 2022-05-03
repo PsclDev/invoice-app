@@ -1,136 +1,172 @@
 <template>
-  <AppCard @edit="edit" @cancel="cancel" @save="save" @delete="deleteClient">
-    <template #header>
-      <div class="d-flex align-items-center">
-        <font-awesome-icon
-          class="me-2"
-          :icon="['fa', isInvoice ? 'file-invoice-dollar' : 'file-invoice']"
-        />
-        <div class="d-flex">
-          <div>
-            {{ title }}
-          </div>
-        </div>
-        <div class="ms-2 id">#{{ document.id }}</div>
-      </div>
-    </template>
-    <template #action>
-      <button class="btn btn-link" @click="sendDocument">
-        <font-awesome-icon :icon="['fas', 'paper-plane']" />
-      </button>
-    </template>
-    <template #body>
-      <div class="container">
-        <div v-if="document.createdAt && document.updatedAt" class="row mb-2">
-          <div class="col-sm-6 id text-center">
-            {{ $t('common.createdAt') }}
-            {{ getDate(document.createdAt, true) }}
-          </div>
-          <div class="col-sm-6 id text-center">
-            {{ $t('common.updatedAt') }}
-            {{ getDate(document.updatedAt, true) }}
-          </div>
-        </div>
-        <div class="row mb-4">
-          <App-Input
-            v-model="mutableDoc.clientId"
-            class="col-sm-4"
-            :title="$t('documents.clientId')"
-            :view-mode="viewMode"
-          ></App-Input>
-        </div>
-        <div class="row mb-4">
-          <App-Input
-            :value="getDate(mutableDoc.dateOfIssue)"
-            class="col-sm-4"
-            :title="$t('documents.dateOfIssue')"
-            :view-mode="viewMode"
-            @valueChanged="(value) => dateChanged('dateOfIssue', value)"
-          ></App-Input>
-        </div>
-        <div class="row mb-4">
-          <div class="col-sm-8">
+  <div>
+    <AppCard @edit="edit" @cancel="cancel" @save="save" @delete="deleteClient">
+      <template #header>
+        <div class="d-flex align-items-center">
+          <font-awesome-icon
+            class="me-2"
+            :icon="['fa', isInvoice ? 'file-invoice-dollar' : 'file-invoice']"
+          />
+          <div class="d-flex">
             <div>
-              <label class="form-label">
-                {{ $t('documents.description') }}
-              </label>
-              <div v-if="viewMode === ViewMode.EDIT">
-                <textarea
-                  v-model="description"
-                  class="form-control"
-                  rows="8"
-                  @change="descriptionChanged"
-                ></textarea>
-              </div>
-              <div v-else v-html="descriptionToView"></div>
+              {{ title }}
             </div>
           </div>
+          <div class="ms-2 id">#{{ document.id }}</div>
         </div>
-        <div class="row mb-4">
-          <App-Input
-            v-model="mutableDoc.subTotal"
-            type="number"
-            class="col-sm-4 mb-3 mb-sm-0"
-            :title="$t('documents.subTotal')"
-            postfix="€"
-            :view-mode="viewMode"
-            @valueChanged="cashChanged"
-          ></App-Input>
-          <div class="col-sm-4 mb-3 mb-sm-0">
-            <div>
-              <label class="form-label">
-                {{ $t('documents.tax') }}
-              </label>
-              <div v-if="viewMode === ViewMode.EDIT">
-                <div class="input-group">
-                  <span id="taxRate" class="input-group-text"
-                    >{{ mutableDoc.tax }}€</span
-                  >
-                  <input
-                    v-model="mutableDoc.taxRate"
-                    type="number"
+      </template>
+      <template #action>
+        <button
+          class="btn btn-link"
+          data-bs-toggle="modal"
+          data-bs-target="#sendDocument"
+        >
+          <font-awesome-icon :icon="['fas', 'paper-plane']" />
+        </button>
+      </template>
+      <template #body>
+        <div class="container">
+          <div v-if="document.createdAt && document.updatedAt" class="row mb-2">
+            <div class="col-sm-6 id text-center">
+              {{ $t('common.createdAt') }}
+              {{ getDate(document.createdAt, true) }}
+            </div>
+            <div class="col-sm-6 id text-center">
+              {{ $t('common.updatedAt') }}
+              {{ getDate(document.updatedAt, true) }}
+            </div>
+          </div>
+          <div class="row mb-4">
+            <App-Input
+              v-model="mutableDoc.clientId"
+              class="col-sm-4"
+              :title="$t('documents.clientId')"
+              :view-mode="viewMode"
+            ></App-Input>
+          </div>
+          <div class="row mb-4">
+            <App-Input
+              :value="getDate(mutableDoc.dateOfIssue)"
+              class="col-sm-4"
+              :title="$t('documents.dateOfIssue')"
+              :view-mode="viewMode"
+              @valueChanged="(value) => dateChanged('dateOfIssue', value)"
+            ></App-Input>
+          </div>
+          <div class="row mb-4">
+            <div class="col-sm-8">
+              <div>
+                <label class="form-label">
+                  {{ $t('documents.description') }}
+                </label>
+                <div v-if="viewMode === ViewMode.EDIT">
+                  <textarea
+                    v-model="description"
                     class="form-control"
-                    aria-describedby="taxRate"
-                    @change="cashChanged"
-                  />
-                  <span id="taxRate" class="input-group-text">%</span>
+                    rows="8"
+                    @change="descriptionChanged"
+                  ></textarea>
                 </div>
+                <div v-else v-html="descriptionToView"></div>
               </div>
-              <div v-else>{{ mutableDoc.tax + '€' }}</div>
             </div>
           </div>
-          <App-Input
-            v-if="isInvoice"
-            v-model="mutableDoc.alreadyPaid"
-            type="number"
-            class="col-sm-4"
-            :title="$t('documents.alreadyPaid')"
-            postfix="€"
-            :view-mode="viewMode"
-            @valueChanged="cashChanged"
-          ></App-Input>
+          <div class="row mb-4">
+            <App-Input
+              v-model="mutableDoc.subTotal"
+              type="number"
+              class="col-sm-4 mb-3 mb-sm-0"
+              :title="$t('documents.subTotal')"
+              postfix="€"
+              :view-mode="viewMode"
+              @valueChanged="cashChanged"
+            ></App-Input>
+            <div class="col-sm-4 mb-3 mb-sm-0">
+              <div>
+                <label class="form-label">
+                  {{ $t('documents.tax') }}
+                </label>
+                <div v-if="viewMode === ViewMode.EDIT">
+                  <div class="input-group">
+                    <span id="taxRate" class="input-group-text"
+                      >{{ mutableDoc.tax }}€</span
+                    >
+                    <input
+                      v-model="mutableDoc.taxRate"
+                      type="number"
+                      class="form-control"
+                      aria-describedby="taxRate"
+                      @change="cashChanged"
+                    />
+                    <span id="taxRate" class="input-group-text">%</span>
+                  </div>
+                </div>
+                <div v-else>{{ mutableDoc.tax + '€' }}</div>
+              </div>
+            </div>
+            <App-Input
+              v-if="isInvoice"
+              v-model="mutableDoc.alreadyPaid"
+              type="number"
+              class="col-sm-4"
+              :title="$t('documents.alreadyPaid')"
+              postfix="€"
+              :view-mode="viewMode"
+              @valueChanged="cashChanged"
+            ></App-Input>
+          </div>
+          <div class="row mb-4">
+            <App-Input
+              v-model="mutableDoc.total"
+              type="number"
+              class="col-sm-4 mb-3 mb-sm-0"
+              :title="$t('documents.total')"
+              postfix="€"
+              :view-mode="viewMode"
+            ></App-Input>
+            <App-Input
+              v-if="isInvoice && mutableDoc.dueDate"
+              :value="getDate(mutableDoc.dueDate)"
+              class="col-sm-4"
+              :title="$t('documents.dueDate')"
+              :view-mode="viewMode"
+              @valueChanged="(value) => dateChanged('dueDate', value)"
+            ></App-Input>
+          </div>
         </div>
-        <div class="row mb-4">
-          <App-Input
-            v-model="mutableDoc.total"
-            type="number"
-            class="col-sm-4 mb-3 mb-sm-0"
-            :title="$t('documents.total')"
-            postfix="€"
-            :view-mode="viewMode"
-          ></App-Input>
-          <App-Input
-            v-if="isInvoice && mutableDoc.dueDate"
-            :value="getDate(mutableDoc.dueDate)"
-            class="col-sm-4"
-            :title="$t('documents.dueDate')"
-            :view-mode="viewMode"
-            @valueChanged="(value) => dateChanged('dueDate', value)"
-          ></App-Input>
+      </template>
+    </AppCard>
+
+    <div
+      id="sendDocument"
+      class="modal fade"
+      data-bs-backdrop="static"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ $t('documents.send_modal.title') }}</h5>
+            <button class="btn btn-close-modal" data-bs-dismiss="modal">
+              <font-awesome-icon :icon="['fas', 'times']" />
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">{{ $t('documents.send_modal.body') }}</div>
+            <div class="d-flex justify-content-center gap-3">
+              <button class="btn btn-warning w-50">
+                {{ $t('documents.send_modal.print') }}
+              </button>
+              <button class="btn btn-info w-50">
+                {{ $t('documents.send_modal.mail') }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </template>
-  </AppCard>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -235,8 +271,11 @@ export default Vue.extend({
         +this.mutableDoc.tax -
         +(this.mutableDoc.alreadyPaid ? this.mutableDoc.alreadyPaid : 0);
     },
-    sendDocument() {
-      this.store.sendDocument(this.mutableDoc);
+    printDocument() {
+      this.store.printDocument(this.mutableDoc);
+    },
+    mailDocument() {
+      this.store.mailDocument(this.mutableDoc);
     },
     edit(viewMode: ViewMode) {
       this.viewMode = viewMode;
@@ -282,5 +321,9 @@ textarea {
   &:first-of-type {
     flex: 1 1 auto;
   }
+}
+
+.btn-close-modal {
+  color: $body-text;
 }
 </style>

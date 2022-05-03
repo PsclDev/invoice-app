@@ -44,6 +44,12 @@
     "tax": "Steuern",
     "alreadyPaid": "Bereits Bezahlt",
     "total": "Gesamtbetrag",
-    "dueDate": "Fälligkeitsdatum"
+    "dueDate": "Fälligkeitsdatum",
+    "send_modal": {
+      "title": "Dokument versenden",
+      "body": "Wie soll das Dokument versendet werden?",
+      "print": "Drucken",
+      "mail": "E-Mail"
+    }
   }
 }

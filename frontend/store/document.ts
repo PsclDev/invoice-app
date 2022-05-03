@@ -58,7 +58,12 @@ export default class DocumentModule extends VuexModule {
   }
 
   @Action({ rawError: true })
-  async sendDocument(doc: Document): Promise<void> {
-    await $axios.$post(`${this.PREFIX}/generate/${doc.id}`);
+  async printDocument(doc: Document): Promise<void> {
+    await $axios.$post(`${this.PREFIX}/print/${doc.id}`);
+  }
+
+  @Action({ rawError: true })
+  async mailDocument(doc: Document): Promise<void> {
+    await $axios.$post(`${this.PREFIX}/mail/${doc.id}`);
   }
 }
