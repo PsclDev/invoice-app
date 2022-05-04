@@ -20,6 +20,9 @@ export class Document implements DocumentBaseDto {
   @PrimaryColumn()
   id: string;
 
+  @Column({ nullable: true })
+  filepath: string;
+
   @Column()
   invoiceNr: number;
 

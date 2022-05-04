@@ -10,6 +10,7 @@ import {
 
 export interface DocumentBaseDto {
   id: string;
+  filepath: string;
   clientId: string;
   dateOfIssue: Date;
   description: string[];
@@ -40,7 +41,8 @@ export interface InvoiceDto extends DocumentBaseDto {
 export type DocumentDto = OfferDto | InvoiceDto;
 
 export class CreateOfferDto
-  implements Omit<OfferDto, 'id' | 'invoiceId' | 'createdAt' | 'updatedAt'>
+  implements
+    Omit<OfferDto, 'id' | 'filepath' | 'invoiceId' | 'createdAt' | 'updatedAt'>
 {
   @ApiProperty()
   @IsDateString()
@@ -81,7 +83,8 @@ export class CreateOfferDto
 export class UpdateOfferDto implements Partial<CreateOfferDto> {}
 
 export class CreateInvoiceDto
-  implements Omit<InvoiceDto, 'id' | 'offerId' | 'createdAt' | 'updatedAt'>
+  implements
+    Omit<InvoiceDto, 'id' | 'filepath' | 'offerId' | 'createdAt' | 'updatedAt'>
 {
   @ApiProperty()
   @IsNumber()

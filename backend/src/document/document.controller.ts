@@ -90,22 +90,16 @@ export class DocumentController {
     return await this.docService.delete(id);
   }
 
-  @Post('/generate/:id')
-  async generateDocument(@Param('id') id: string): Promise<void> {
-    this.logger.log(`Generate document with id: ${id}`);
-    return await this.docService.generate(id);
-  }
-
   @Get('/print/:id')
   async printDocument(@Param('id') id: string, @Res() res): Promise<string> {
     this.logger.log(`Print document with id: ${id}`);
     const link = await this.docService.print(id);
-    return res.redirect('/', link);
+    return res.redirect(301, link);
   }
 
-  @Post('/send/:id')
+  @Post('/mail/:id')
   async sendDocument(@Param('id') id: string): Promise<boolean> {
-    this.logger.log(`Send document with id: ${id}`);
-    return await this.docService.send(id);
+    this.logger.log(`Mail document with id: ${id}`);
+    return await this.docService.mail(id);
   }
 }

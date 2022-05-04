@@ -11,15 +11,18 @@ import { Document, Offer } from '../document.entity';
 export class FileService {
   private readonly logger = new Logger(FileService.name);
 
-  async saveDocument(client: Client, document: Document, pdf: Buffer) {
+  async saveDocument(
+    client: Client,
+    document: Document,
+    pdf: Buffer,
+  ): Promise<string> {
     //save to serve
-    writeFileSync(await this.buildFilename(client, document), pdf);
+    const filepath = await this.buildFilepath(client, document);
+    writeFileSync(filepath, pdf);
     //save to another location like a NAS or something
-    writeFileSync(await this.buildFilename(client, document, true), pdf);
-  }
+    writeFileSync(await this.buildFilepath(client, document, true), pdf);
 
-  async getDocument(client: Client, document: Document): Promise<string> {
-    return await this.buildFilename(client, document);
+    return filepath;
   }
 
   async getPathToFile(dateOfIssue: Date, withBase = true): Promise<string> {
@@ -31,7 +34,7 @@ export class FileService {
     return join(year, month);
   }
 
-  async buildFilename(
+  async buildFilepath(
     client: Client,
     document: Document,
     exportPath = false,
