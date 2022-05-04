@@ -299,19 +299,38 @@
 					"response": []
 				},
 				{
-					"name": "Generate",
+					"name": "Print",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/document/generate/123",
+							"raw": "{{base_url}}{{v1}}/document/print/{{invoice}}",
 							"host": [
 								"{{base_url}}{{v1}}"
 							],
 							"path": [
 								"document",
-								"generate",
-								"123"
+								"print",
+								"{{invoice}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{v1}}/document/mail/{{invoice}}",
+							"host": [
+								"{{base_url}}{{v1}}"
+							],
+							"path": [
+								"document",
+								"mail",
+								"{{invoice}}"
 							]
 						}
 					},
