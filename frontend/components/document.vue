@@ -19,7 +19,7 @@
         <button
           class="btn btn-link"
           data-bs-toggle="modal"
-          data-bs-target="#sendDocument"
+          :data-bs-target="`#${document.id}`"
         >
           <font-awesome-icon :icon="['fas', 'paper-plane']" />
         </button>
@@ -138,7 +138,7 @@
     </AppCard>
 
     <div
-      id="sendDocument"
+      :id="document.id"
       class="modal fade"
       data-bs-backdrop="static"
       tabindex="-1"
@@ -153,12 +153,24 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="mb-3">{{ $t('documents.send_modal.body') }}</div>
+            <div class="mb-3">
+              {{ $t('documents.send_modal.body') }}
+            </div>
             <div class="d-flex justify-content-center gap-3">
-              <button class="btn btn-warning w-50">
+              <a
+                class="btn btn-warning w-50"
+                data-bs-dismiss="modal"
+                target="_blank"
+                rel="noopener noreferrer"
+                :href="printUrl"
+              >
                 {{ $t('documents.send_modal.print') }}
-              </button>
-              <button class="btn btn-info w-50">
+              </a>
+              <button
+                class="btn btn-info w-50"
+                data-bs-dismiss="modal"
+                @click="mailDocument"
+              >
                 {{ $t('documents.send_modal.mail') }}
               </button>
             </div>
@@ -213,6 +225,13 @@ export default Vue.extend({
         this.mutableDoc.description.forEach((i) => (text += i + '<br>'));
 
       return text;
+    },
+    printUrl() {
+      const baseUrl = this.$config.apiBaseUrl;
+      const store = getModule(DocumentModule, this.$store);
+      const prefix = store.Prefix;
+
+      return `${baseUrl}${prefix}/print/${this.document.id}`;
     },
   },
   mounted() {
@@ -271,11 +290,8 @@ export default Vue.extend({
         +this.mutableDoc.tax -
         +(this.mutableDoc.alreadyPaid ? this.mutableDoc.alreadyPaid : 0);
     },
-    printDocument() {
-      this.store.printDocument(this.mutableDoc);
-    },
-    mailDocument() {
-      this.store.mailDocument(this.mutableDoc);
+    async mailDocument() {
+      await this.store.mailDocument(this.document.id);
     },
     edit(viewMode: ViewMode) {
       this.viewMode = viewMode;

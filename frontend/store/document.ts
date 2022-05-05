@@ -14,6 +14,10 @@ export default class DocumentModule extends VuexModule {
 
   documents: Array<Document> = [];
 
+  get Prefix() {
+    return this.PREFIX;
+  }
+
   get Documents() {
     return this.documents;
   }
@@ -58,12 +62,7 @@ export default class DocumentModule extends VuexModule {
   }
 
   @Action({ rawError: true })
-  async printDocument(doc: Document): Promise<void> {
-    await $axios.$post(`${this.PREFIX}/print/${doc.id}`);
-  }
-
-  @Action({ rawError: true })
-  async mailDocument(doc: Document): Promise<void> {
-    await $axios.$post(`${this.PREFIX}/mail/${doc.id}`);
+  async mailDocument(id: string): Promise<void> {
+    await $axios.$post(`${this.PREFIX}/mail/${id}`);
   }
 }
