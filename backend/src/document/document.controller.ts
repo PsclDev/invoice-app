@@ -10,6 +10,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 import {
   CreateInvoiceDto,
   CreateOfferDto,
@@ -91,10 +92,17 @@ export class DocumentController {
   }
 
   @Get('/print/:id')
-  async printDocument(@Param('id') id: string, @Res() res): Promise<string> {
+  async printDocument(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<void> {
     this.logger.log(`Print document with id: ${id}`);
     const link = await this.docService.print(id);
-    return res.redirect(301, link);
+    res.header(
+      'Cache-Control',
+      'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0',
+    );
+    res.redirect(301, link);
   }
 
   @Post('/mail/:id')

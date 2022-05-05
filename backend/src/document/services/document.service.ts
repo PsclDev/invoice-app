@@ -76,14 +76,14 @@ export class DocumentService {
   }
 
   async print(id: string): Promise<string> {
-    const path = await this.getFilepath(id);
+    const path = await this.generate(id);
     return path.replace('files', '');
   }
 
   async mail(id: string): Promise<boolean> {
     const infos = await this.getDocument(id, true);
     const { client, doc } = infos;
-    const filepath = await this.getFilepath(id);
+    const filepath = await this.generate(id);
 
     return await this.mailService.send(client, doc, filepath);
   }
@@ -102,14 +102,5 @@ export class DocumentService {
     }
 
     return { doc };
-  }
-
-  async getFilepath(id: string) {
-    const { doc } = await this.getDocument(id);
-    if (!doc.filepath) {
-      return this.generate(id);
-    }
-
-    return doc.filepath;
   }
 }

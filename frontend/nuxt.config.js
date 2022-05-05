@@ -79,6 +79,10 @@ export default {
     baseURL: process.env.BASE_URL,
   },
 
+  publicRuntimeConfig: {
+    apiBaseUrl: process.env.BASE_URL,
+  },
+
   i18n: {
     vuex: false,
     strategy: 'no_prefix',
