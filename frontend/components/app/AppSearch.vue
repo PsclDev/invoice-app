@@ -58,7 +58,10 @@ export default Vue.extend({
     checkForValue(obj: Client | Document, term: string): boolean {
       for (const key in obj) {
         const val = (obj as any)[key];
-        if (typeof val === 'string' && val.toLowerCase().includes(term)) {
+        if (
+          typeof val === 'string' &&
+          val.toLowerCase().includes(term.toLowerCase())
+        ) {
           return true;
         }
       }
