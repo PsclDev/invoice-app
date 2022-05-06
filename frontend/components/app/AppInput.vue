@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import ViewMode from '~/types/viewMode';
+import { ViewMode } from '~/types/viewMode';
 
 export default Vue.extend({
   name: 'AppInput',
