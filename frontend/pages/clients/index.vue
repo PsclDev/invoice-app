@@ -16,7 +16,7 @@
         <AppSpinner />
       </div>
       <div v-else>
-        <Client
+        <ClientItem
           v-for="client of clients"
           :key="client.id"
           :client="client"
@@ -35,6 +35,11 @@ import { Client } from '~/models/client';
 
 export default Vue.extend({
   name: 'ClientsPage',
+  beforeRouteLeave(__, ___, next) {
+    if (this.store.clients.find((c) => c.id === '1'))
+      this.store.deleteLocalClient('1');
+    next();
+  },
   data() {
     return {
       store: getModule(ClientModule, this.$store),
@@ -62,7 +67,10 @@ export default Vue.extend({
       this.isLoading = false;
     },
     create() {
-      this.store.createClient();
+      const name = `${this.$t('clients.new_firstname')} ${this.$t(
+        'clients.new_lastname'
+      )}`;
+      this.store.createClient(name);
     },
     onFilterChanged(filteredList: Client[]) {
       this.filteredList = filteredList;

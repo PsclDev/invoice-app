@@ -1,0 +1,175 @@
+<template>
+  <div>
+    <template
+      v-if="
+        getClientType(value) === ClientType.COMPANY ||
+        viewMode === ViewMode.EDIT
+      "
+    >
+      <div class="row mb-4">
+        <App-Input
+          v-model="mutableClient.company"
+          class="col-sm-4 mb-3 mb-sm-0"
+          :title="$t('clients.company')"
+          :view-mode="viewMode"
+        ></App-Input>
+        <App-Input
+          v-model="mutableClient.vat"
+          class="col-sm-4"
+          :title="$t('clients.vat')"
+          :view-mode="viewMode"
+        ></App-Input>
+      </div>
+    </template>
+    <div class="row mb-4">
+      <App-Gender-Select
+        v-if="mutableClient.gender"
+        v-model="mutableClient.gender"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('clients.gender')"
+        :view-mode="viewMode"
+      ></App-Gender-Select>
+      <App-Input
+        v-model="mutableClient.firstname"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('clients.firstname')"
+        :view-mode="viewMode"
+      ></App-Input>
+      <App-Input
+        v-model="mutableClient.lastname"
+        class="col-sm-4"
+        :title="$t('clients.lastname')"
+        :view-mode="viewMode"
+      ></App-Input>
+    </div>
+    <div class="row mb-4">
+      <App-Input
+        v-model="mutableClient.street"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('clients.street')"
+        :view-mode="viewMode"
+      ></App-Input>
+      <App-Input
+        v-model="mutableClient.postalCode"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('clients.postalCode')"
+        :view-mode="viewMode"
+      ></App-Input>
+      <App-Input
+        v-model="mutableClient.city"
+        class="col-sm-4"
+        :title="$t('clients.city')"
+        :view-mode="viewMode"
+      ></App-Input>
+    </div>
+    <div class="row mb-4">
+      <App-Input
+        v-model="mutableClient.email"
+        class="col-sm-4"
+        :view-mode="viewMode"
+        :title="$t('clients.email')"
+        type="email"
+      ></App-Input>
+    </div>
+    <div class="row mb-4">
+      <div class="col-8 col-sm-4">
+        <div v-if="documentsLength === 0" class="d-flex align-items-center">
+          <font-awesome-icon class="me-2" :icon="['fa', 'file-pdf']" />
+          <div>
+            {{ documentsLength }}
+            {{ $tc('document', 2) }}
+          </div>
+        </div>
+        <AppCollapse v-else>
+          <template #header>
+            <div class="d-flex align-items-center">
+              <font-awesome-icon class="me-2" :icon="['fa', 'file-pdf']" />
+              <div>
+                {{ documentsLength }}
+                {{ $tc('document', documentsLength === 1 ? 1 : 2) }}
+              </div>
+            </div>
+          </template>
+          <template #body>
+            <ul>
+              <li v-for="doc of documents" :key="doc.id">
+                <NuxtLink :to="'/pdf/' + doc.id">
+                  {{ getDocumentTitle(doc) }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </template>
+        </AppCollapse>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import { Client } from '~/models/client';
+import { ViewMode } from '~/types/viewMode';
+import { Document } from '~/models/document';
+import { ClientType } from '~/types/client';
+import { getDate, getMutableClient, getClientType } from '~/utils/helper';
+
+export default Vue.extend({
+  name: 'ClientFormComponent',
+  props: {
+    value: {
+      type: Object as () => Client,
+      required: true,
+    },
+    viewMode: {
+      type: String as () => ViewMode,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      ClientType,
+      ViewMode,
+      getClientType,
+      shadowClient: {} as Client,
+      mutableClient: {} as Client,
+    };
+  },
+  computed: {
+    documents(): Document[] {
+      return this.value.documents;
+    },
+    documentsLength(): number {
+      return this.value.documents ? this.value.documents.length : 0;
+    },
+  },
+  watch: {
+    value() {
+      this.setClient();
+    },
+    mutableClient: {
+      handler() {
+        const equal =
+          JSON.stringify(this.mutableClient) ===
+          JSON.stringify(this.shadowClient);
+
+        if (!equal) this.$emit('input', this.mutableClient);
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    setClient() {
+      this.mutableClient = getMutableClient(this.value);
+      this.shadowClient = getMutableClient(this.value);
+    },
+    getDocumentTitle(doc: Document) {
+      if (doc.invoiceNr) {
+        return `${this.$t('documents.invoice')} #${String(
+          doc.invoiceNr
+        ).padStart(4, '0')}`;
+      }
+      return `${this.$t('documents.offer')} ${getDate(doc.dateOfIssue)}`;
+    },
+  },
+});
+</script>

@@ -1,4 +1,9 @@
 import { DocumentInterface } from './document';
+export enum ClientType {
+  PRIVATE = 'private',
+  COMPANY = 'company',
+}
+
 export enum Gender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
