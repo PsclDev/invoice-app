@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="collapse d-flex flex-column">
+  <AppCard class="d-flex flex-column">
+    <template #default>
       <div
-        class="ms-2 me-4 collapse-header d-flex align-items-center justify-content-between"
+        class="me-1 collapse-header d-flex align-items-center justify-content-between"
       >
         <div @click="toggleOpen">
           <slot name="header"></slot>
@@ -21,8 +21,8 @@
           <slot name="body"></slot>
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </AppCard>
 </template>
 
 <script lang="ts">
@@ -44,11 +44,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.collapse {
-  background: $secondary-background;
-  border-radius: 10px;
-}
-
 .collapse-header {
   height: 3rem;
 }

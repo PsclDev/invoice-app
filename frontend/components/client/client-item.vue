@@ -1,5 +1,5 @@
 <template>
-  <AppCard
+  <AppItem
     :delete-disbaled="client.documents.length > 0"
     @edit="edit"
     @cancel="cancel"
@@ -48,7 +48,7 @@
         ></ClientForm>
       </div>
     </template>
-  </AppCard>
+  </AppItem>
 </template>
 
 <script lang="ts">

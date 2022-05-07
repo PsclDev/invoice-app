@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppCard @edit="edit" @cancel="cancel" @save="save" @delete="deleteClient">
+    <AppItem @edit="edit" @cancel="cancel" @save="save" @delete="deleteClient">
       <template #header>
         <div class="d-flex align-items-center">
           <font-awesome-icon
@@ -48,7 +48,7 @@
           ></DocumentForm>
         </div>
       </template>
-    </AppCard>
+    </AppItem>
 
     <div
       :id="document.id"
