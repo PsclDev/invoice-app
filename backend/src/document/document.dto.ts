@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsDateString,
   IsNotEmpty,
@@ -80,7 +80,7 @@ export class CreateOfferDto
   total: number;
 }
 
-export class UpdateOfferDto implements Partial<CreateOfferDto> {}
+export class UpdateOfferDto extends PartialType(CreateOfferDto) {}
 
 export class CreateInvoiceDto
   implements
@@ -135,4 +135,4 @@ export class CreateInvoiceDto
   dueDate: Date;
 }
 
-export class UpdateInvoiceDto implements Partial<CreateInvoiceDto> {}
+export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}

@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 export enum Gender {
   MALE = 'MALE',
@@ -73,7 +73,7 @@ export class CreateClientDto
   city: string;
 }
 
-export class UpdateClientDto implements Partial<CreateClientDto> {}
+export class UpdateClientDto extends PartialType(CreateClientDto) {}
 
 export class CreateCompanyClientDto
   implements
@@ -123,5 +123,6 @@ export class CreateCompanyClientDto
   city: string;
 }
 
-export class UpdateCompanyClientDto
-  implements Partial<CreateCompanyClientDto> {}
+export class UpdateCompanyClientDto extends PartialType(
+  CreateCompanyClientDto,
+) {}
