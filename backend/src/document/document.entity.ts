@@ -9,6 +9,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryColumn,
+  RelationId,
   TableInheritance,
   UpdateDateColumn,
 } from 'typeorm';
@@ -53,8 +54,13 @@ export class Offer extends Document implements OfferDto {
   @Column({ unique: true })
   offerNr: number;
 
-  @OneToOne(() => Invoice, (invoice) => invoice.offerId, { nullable: true })
+  @OneToOne(() => Invoice, (invoice) => invoice.offerId, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'invoice_id' })
+  invoice: InvoiceDto;
+
+  @RelationId((offer: Offer) => offer.invoice)
   invoiceId: string;
 
   @Column('numeric', { transformer: new ColumnNumericTransformer() })

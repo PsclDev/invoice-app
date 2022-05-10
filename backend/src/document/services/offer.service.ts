@@ -1,8 +1,8 @@
 import { generateId } from '@helper/generateId';
 import { updateEntity } from '@helper/updateEntity';
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import {
   CreateInvoiceDto,
   CreateOfferDto,
@@ -50,6 +50,9 @@ export class OfferService {
 
   async convertOffer(id: string): Promise<Invoice> {
     const offer = await this.offerRepository.findOne({ id });
+    if (offer.invoiceId)
+      throw new BadRequestException('Invoice for this Offer already exists');
+
     const createInvoice: CreateInvoiceDto = {
       invoiceNr: await this.invoiceService.getNewInvoiceNr(),
       subTotal: offer.subTotal,
