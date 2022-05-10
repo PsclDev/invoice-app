@@ -10,7 +10,7 @@
         <font-awesome-icon class="link-icon" :icon="['fas', 'users']" />
         <span>{{ $tc('client', 2) }}</span>
       </NuxtLink>
-      <NuxtLink to="/documents" exact class="nav-item">
+      <NuxtLink to="/documents" class="nav-item">
         <font-awesome-icon class="link-icon" :icon="['fas', 'file-invoice']" />
         <span>{{ $tc('document', 2) }}</span>
       </NuxtLink>

@@ -5,7 +5,7 @@ export class Document implements DocumentInterface {
   clientId!: string;
   offerNr?: number;
   invoiceNr?: number;
-  invoiceId?: number;
+  invoiceId?: string;
   dateOfIssue!: Date;
   description!: string[];
   subTotal!: number;

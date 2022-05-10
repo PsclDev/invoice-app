@@ -7,7 +7,7 @@ export interface DocumentInterface {
   clientId: string;
   offerNr?: number;
   invoiceNr?: number;
-  invoiceId?: number;
+  invoiceId?: string;
   dateOfIssue: Date;
   description: string[];
   subTotal: number;

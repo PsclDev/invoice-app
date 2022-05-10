@@ -90,9 +90,12 @@
           <template #body>
             <ul>
               <li v-for="doc of documents" :key="doc.id">
-                <NuxtLink :to="'/pdf/' + doc.id">
-                  {{ getDocumentTitle(doc) }}
-                </NuxtLink>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :href="printUrl(doc.id)"
+                  >{{ getDocumentTitle(doc) }}
+                </a>
               </li>
             </ul>
           </template>
@@ -104,6 +107,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { getModule } from 'vuex-module-decorators';
+import DocumentModule from '~/store/document';
 import { Client } from '~/models/client';
 import { ViewMode } from '~/types/viewMode';
 import { Document } from '~/models/document';
@@ -169,6 +174,13 @@ export default Vue.extend({
         ).padStart(4, '0')}`;
       }
       return `${this.$t('documents.offer')} ${getDate(doc.dateOfIssue)}`;
+    },
+    printUrl(id: string): string {
+      const baseUrl = this.$config.apiBaseUrl;
+      const docStore = getModule(DocumentModule, this.$store);
+      const prefix = docStore.Prefix;
+
+      return `${baseUrl}${prefix}/print/${id}`;
     },
   },
 });

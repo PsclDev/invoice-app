@@ -5,7 +5,7 @@
         v-model="mutableDocument.clientId"
         class="col-sm-4"
         :title="$t('documents.clientId')"
-        :view-mode="viewMode"
+        :view-mode="ViewMode.SHOW"
       ></App-Input>
     </div>
     <div class="row mb-4">
@@ -37,7 +37,7 @@
     </div>
     <div class="row mb-4">
       <App-Input
-        v-model="mutableDocument.subTotal"
+        v-model.number="mutableDocument.subTotal"
         type="number"
         class="col-sm-4 mb-3 mb-sm-0"
         :title="$t('documents.subTotal')"
@@ -56,7 +56,7 @@
                 >{{ mutableDocument.tax }}€</span
               >
               <input
-                v-model="mutableDocument.taxRate"
+                v-model.number="mutableDocument.taxRate"
                 type="number"
                 class="form-control"
                 aria-describedby="taxRate"
@@ -69,8 +69,8 @@
         </div>
       </div>
       <App-Input
-        v-if="getDocumentType(mutableDocument) === DocumentType.INVOICE"
-        v-model="mutableDocument.alreadyPaid"
+        v-if="documentType === DocumentType.INVOICE"
+        v-model.number="mutableDocument.alreadyPaid"
         type="number"
         class="col-sm-4"
         :title="$t('documents.alreadyPaid')"
@@ -81,7 +81,7 @@
     </div>
     <div class="row mb-4">
       <App-Input
-        v-model="mutableDocument.total"
+        v-model.number="mutableDocument.total"
         type="number"
         class="col-sm-4 mb-3 mb-sm-0"
         :title="$t('documents.total')"
@@ -89,10 +89,7 @@
         :view-mode="viewMode"
       ></App-Input>
       <App-Input
-        v-if="
-          getDocumentType(mutableDocument) === DocumentType.INVOICE &&
-          mutableDocument.dueDate
-        "
+        v-if="documentType === DocumentType.INVOICE"
         :value="getDate(mutableDocument.dueDate)"
         class="col-sm-4"
         :title="$t('documents.dueDate')"
@@ -108,13 +105,17 @@ import Vue from 'vue';
 import { Document } from '~/models/document';
 import { ViewMode } from '~/types';
 import { DocumentType } from '~/types/document';
-import { getDate, getDocumentType, getMutableDocument } from '~/utils/helper';
+import { getDate, getMutableDocument } from '~/utils/helper';
 
 export default Vue.extend({
   name: 'DocumentFormComponent',
   props: {
     value: {
       type: Object as () => Document,
+      required: true,
+    },
+    documentType: {
+      type: String as () => DocumentType,
       required: true,
     },
     viewMode: {
@@ -127,7 +128,6 @@ export default Vue.extend({
       DocumentType,
       ViewMode,
       getDate,
-      getDocumentType,
       shadowDocument: {} as Document,
       mutableDocument: {} as Document,
       description: '',
@@ -146,7 +146,7 @@ export default Vue.extend({
     value() {
       this.setDocument();
     },
-    mutableClient: {
+    mutableDocument: {
       handler() {
         const equal =
           JSON.stringify(this.mutableDocument) ===
@@ -160,6 +160,9 @@ export default Vue.extend({
   methods: {
     setDocument() {
       this.mutableDocument = getMutableDocument(this.value);
+      this.shadowDocument = getMutableDocument(this.value);
+
+      this.description = '';
       this.mutableDocument.description.forEach(
         (i) => (this.description += i + '\n')
       );
@@ -188,12 +191,12 @@ export default Vue.extend({
     },
     cashChanged() {
       this.mutableDocument.tax =
-        (this.mutableDocument.subTotal * this.mutableDocument.taxRate) / 100;
+        (+this.mutableDocument.subTotal * +this.mutableDocument.taxRate) / 100;
       this.mutableDocument.total =
         +this.mutableDocument.subTotal +
         +this.mutableDocument.tax -
         +(this.mutableDocument.alreadyPaid
-          ? this.mutableDocument.alreadyPaid
+          ? +this.mutableDocument.alreadyPaid
           : 0);
     },
   },

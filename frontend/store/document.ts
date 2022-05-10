@@ -35,6 +35,14 @@ export default class DocumentModule extends VuexModule {
   }
 
   @Mutation
+  convertOffer(docs: { offer: Document; invoice: Document }) {
+    const filtered = this.documents.filter((d) => d.id !== docs.offer.id);
+    docs.offer.invoiceId = docs.invoice.id;
+    filtered.push(docs.offer, docs.invoice);
+    this.documents = filtered;
+  }
+
+  @Mutation
   delDocument(docId: string) {
     const docs = this.documents.filter((d) => d.id !== docId);
     this.documents = docs;
@@ -48,12 +56,10 @@ export default class DocumentModule extends VuexModule {
   @Action({ commit: 'setDocument', rawError: true })
   async updateDocument(doc: Document): Promise<Document> {
     if (doc.invoiceNr)
-      return await $axios.$patch(
-        `${this.PREFIX}${this.INVOICE}/${doc.id}`,
-        doc
-      );
-    else
-      return await $axios.$patch(`${this.PREFIX}${this.OFFER}/${doc.id}`, doc);
+      await $axios.$patch(`${this.PREFIX}${this.INVOICE}/${doc.id}`, doc);
+    else await $axios.$patch(`${this.PREFIX}${this.OFFER}/${doc.id}`, doc);
+
+    return doc;
   }
 
   @Action({ commit: 'delDocument', rawError: true })
@@ -64,5 +70,18 @@ export default class DocumentModule extends VuexModule {
   @Action({ rawError: true })
   async mailDocument(id: string): Promise<void> {
     await $axios.$post(`${this.PREFIX}/mail/${id}`);
+  }
+
+  @Action({ commit: 'convertOffer', rawError: true })
+  async convertToInvoice(
+    offer: Document
+  ): Promise<{ offer: Document; invoice: Document }> {
+    const invoice = await $axios.$post(
+      `${this.PREFIX}${this.OFFER}/${offer.id}/convert`
+    );
+    return {
+      offer,
+      invoice,
+    };
   }
 }

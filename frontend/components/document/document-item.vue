@@ -5,12 +5,7 @@
         <div class="d-flex align-items-center">
           <font-awesome-icon
             class="me-2"
-            :icon="[
-              'fa',
-              getDocumentType(document) === DocumentType.INVOICE
-                ? 'file-invoice-dollar'
-                : 'file-invoice',
-            ]"
+            :icon="['fa', isInvoice ? 'file-invoice-dollar' : 'file-invoice']"
           />
           <div class="d-flex">
             <div>
@@ -21,6 +16,13 @@
         </div>
       </template>
       <template #action>
+        <button
+          v-show="!isInvoice && !document.invoiceId"
+          class="btn btn-link"
+          @click="convertToInvoice"
+        >
+          <font-awesome-icon :icon="['fas', 'file-invoice']" />
+        </button>
         <button
           class="btn btn-link"
           data-bs-toggle="modal"
@@ -43,6 +45,7 @@
           </div>
           <DocumentForm
             :value="mutableDoc"
+            :document-type="getDocumentType(mutableDoc)"
             :view-mode="viewMode"
             @input="(e) => (mutableDoc = e)"
           ></DocumentForm>
@@ -140,6 +143,9 @@ export default Vue.extend({
 
       return `${baseUrl}${prefix}/print/${this.document.id}`;
     },
+    isInvoice() {
+      return getDocumentType(this.document) === DocumentType.INVOICE;
+    },
   },
   mounted() {
     this.setDocument();
@@ -147,6 +153,9 @@ export default Vue.extend({
   methods: {
     setDocument() {
       this.mutableDoc = getMutableDocument(this.document);
+    },
+    async convertToInvoice() {
+      await this.store.convertToInvoice(this.document);
     },
     async mailDocument() {
       await this.store.mailDocument(this.document.id);
