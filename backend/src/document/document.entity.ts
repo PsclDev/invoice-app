@@ -13,6 +13,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { DocumentBaseDto, InvoiceDto, OfferDto } from './document.dto';
+import { ColumnNumericTransformer } from '@helper/columnNumericTransformer';
 
 @Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'type' } })
@@ -56,16 +57,16 @@ export class Offer extends Document implements OfferDto {
   @JoinColumn({ name: 'invoice_id' })
   invoiceId: string;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   subTotal: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   tax: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   taxRate: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   total: number;
 }
 
@@ -78,19 +79,22 @@ export class Invoice extends Document implements InvoiceDto {
   @Column({ unique: true })
   invoiceNr: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   subTotal: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   tax: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   taxRate: number;
 
-  @Column('numeric', { nullable: true })
+  @Column('numeric', {
+    nullable: true,
+    transformer: new ColumnNumericTransformer(),
+  })
   alreadyPaid: number;
 
-  @Column('numeric')
+  @Column('numeric', { transformer: new ColumnNumericTransformer() })
   total: number;
 
   @Column()
