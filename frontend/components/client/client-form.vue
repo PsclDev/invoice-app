@@ -1,10 +1,7 @@
 <template>
   <div>
     <template
-      v-if="
-        getClientType(value) === ClientType.COMPANY ||
-        viewMode === ViewMode.EDIT
-      "
+      v-if="clientType === ClientType.COMPANY || viewMode === ViewMode.EDIT"
     >
       <div class="row mb-4">
         <App-Input
@@ -111,13 +108,17 @@ import { Client } from '~/models/client';
 import { ViewMode } from '~/types/viewMode';
 import { Document } from '~/models/document';
 import { ClientType } from '~/types/client';
-import { getDate, getMutableClient, getClientType } from '~/utils/helper';
+import { getDate, getMutableClient, getDocumentsLength } from '~/utils/helper';
 
 export default Vue.extend({
   name: 'ClientFormComponent',
   props: {
     value: {
       type: Object as () => Client,
+      required: true,
+    },
+    clientType: {
+      type: String as () => ClientType,
       required: true,
     },
     viewMode: {
@@ -129,17 +130,16 @@ export default Vue.extend({
     return {
       ClientType,
       ViewMode,
-      getClientType,
       shadowClient: {} as Client,
       mutableClient: {} as Client,
     };
   },
   computed: {
     documents(): Document[] {
-      return this.value.documents;
+      return this.value.documents ? this.value.documents : [];
     },
     documentsLength(): number {
-      return this.value.documents ? this.value.documents.length : 0;
+      return getDocumentsLength(this.value);
     },
   },
   watch: {

@@ -1,5 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { Client } from '~/models/client';
+import { Document } from '~/models/document';
 import { $axios } from '~/utils/axios';
 
 @Module({
@@ -47,11 +48,13 @@ export default class ClientModule extends VuexModule {
   }
 
   @Action({ commit: 'newClient', rawError: true })
-  createClient(): Client {
+  createClient(name: string): Client {
     return {
-      firstname: '',
-      lastname: '',
+      id: '1',
+      firstname: name.split(' ')[0],
+      lastname: name.split(' ')[1],
       gender: 'MALE',
+      documents: [] as Document[],
     } as Client;
   }
 
@@ -65,15 +68,19 @@ export default class ClientModule extends VuexModule {
   @Action({ commit: 'setClient', rawError: true })
   async updateClient(client: Client): Promise<Client> {
     if (client.company)
-      return await $axios.$patch(
-        `${this.PREFIX}${this.COMPANY}/${client.id}`,
-        client
-      );
-    else return await $axios.$patch(`${this.PREFIX}/${client.id}`, client);
+      await $axios.$patch(`${this.PREFIX}${this.COMPANY}/${client.id}`, client);
+    else await $axios.$patch(`${this.PREFIX}/${client.id}`, client);
+
+    return client;
   }
 
   @Action({ commit: 'delClient', rawError: true })
-  async deleteClient(client: Client): Promise<Client> {
+  async deleteClient(client: Client): Promise<string> {
     return await $axios.$delete(`${this.PREFIX}/${client.id}`);
+  }
+
+  @Action({ commit: 'delClient', rawError: true })
+  deleteLocalClient(id: string): string {
+    return id;
   }
 }

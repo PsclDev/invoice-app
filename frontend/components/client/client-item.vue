@@ -1,6 +1,6 @@
 <template>
   <AppItem
-    :delete-disbaled="client.documents.length > 0"
+    :delete-disbaled="getDocumentsLength(client) > 0"
     @edit="edit"
     @cancel="cancel"
     @save="save"
@@ -29,6 +29,14 @@
         <div class="ms-2 id">#{{ client.id }}</div>
       </div>
     </template>
+    <template #action>
+      <NuxtLink
+        :to="'/documents/create?client=' + client.id"
+        class="btn btn-link"
+      >
+        <font-awesome-icon :icon="['fas', 'file-signature']" />
+      </NuxtLink>
+    </template>
     <template #body>
       <div class="container">
         <div v-if="client.createdAt && client.updatedAt" class="row mb-2">
@@ -43,6 +51,7 @@
         </div>
         <ClientForm
           :value="mutableClient"
+          :client-type="getClientType(mutableClient)"
           :view-mode="viewMode"
           @input="(e) => (mutableClient = e)"
         ></ClientForm>
@@ -58,7 +67,12 @@ import ClientModule from '~/store/client';
 import { Client } from '~/models/client';
 import { ViewMode } from '~/types/viewMode';
 import { ClientType } from '~/types/client';
-import { getDate, getClientType, getMutableClient } from '~/utils/helper';
+import {
+  getDate,
+  getClientType,
+  getMutableClient,
+  getDocumentsLength,
+} from '~/utils/helper';
 
 export default Vue.extend({
   name: 'ClientItemComponent',
@@ -73,6 +87,7 @@ export default Vue.extend({
       ClientType,
       getDate,
       getClientType,
+      getDocumentsLength,
       viewMode: ViewMode.SHOW,
       store: getModule(ClientModule, this.$store),
       mutableClient: {} as Client,
@@ -99,8 +114,9 @@ export default Vue.extend({
     save(viewMode: ViewMode) {
       this.viewMode = viewMode;
 
-      if (this.mutableClient.id) this.store.updateClient(this.mutableClient);
-      else this.store.saveNewClient(this.mutableClient);
+      if (this.mutableClient.id === '1')
+        this.store.saveNewClient(this.mutableClient);
+      else this.store.updateClient(this.mutableClient);
     },
     cancel(viewMode: ViewMode) {
       this.viewMode = viewMode;
