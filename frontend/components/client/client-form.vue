@@ -20,7 +20,6 @@
     </template>
     <div class="row mb-4">
       <App-Gender-Select
-        v-if="mutableClient.gender"
         v-model="mutableClient.gender"
         class="col-sm-4 mb-3 mb-sm-0"
         :title="$t('clients.gender')"
@@ -68,7 +67,7 @@
         type="email"
       ></App-Input>
     </div>
-    <div class="row mb-4">
+    <div v-show="!hideDocuments" class="row mb-4">
       <div class="col-8 col-sm-4">
         <div v-if="documentsLength === 0" class="d-flex align-items-center">
           <font-awesome-icon class="me-2" :icon="['fa', 'file-pdf']" />
@@ -129,6 +128,10 @@ export default Vue.extend({
     viewMode: {
       type: String as () => ViewMode,
       required: true,
+    },
+    hideDocuments: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
