@@ -115,7 +115,7 @@ export default Vue.extend({
       this.viewMode = viewMode;
 
       if (this.mutableClient.id === '1')
-        this.store.saveNewClient(this.mutableClient);
+        this.store.createClient(this.mutableClient);
       else this.store.updateClient(this.mutableClient);
     },
     cancel(viewMode: ViewMode) {

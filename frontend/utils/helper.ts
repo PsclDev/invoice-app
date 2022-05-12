@@ -3,9 +3,13 @@ import { Client } from '~/models/client';
 import { Document } from '~/models/document';
 import { ClientType, DocumentType } from '~/types';
 
-export function getDate(date?: Date, withTime: boolean = false): string {
-  if (!date) return '';
-  return dayjs(date).format(withTime ? 'DD.MM.YYYY HH:MM:ss' : 'DD.MM.YYYY');
+export function getDate(
+  date?: Date | string,
+  withTime: boolean = false
+): string {
+  const format = withTime ? 'DD.MM.YYYY HH:MM:ss' : 'DD.MM.YYYY';
+  if (!date) return dayjs().format(format);
+  return dayjs(date).format(format);
 }
 
 export function getClientType(client: Client): ClientType {

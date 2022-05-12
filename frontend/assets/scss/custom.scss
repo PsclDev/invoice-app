@@ -93,3 +93,8 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.form-check-input:checked {
+  background-color: $green;
+  border-color: $green;
+}

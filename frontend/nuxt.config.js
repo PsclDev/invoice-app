@@ -27,6 +27,7 @@ export default {
     scss: [
       '../node_modules/bootstrap/scss/_functions.scss',
       '../node_modules/bootstrap/scss/_variables.scss',
+      'vue-multiselect/dist/vue-multiselect.min.css',
       '~assets/scss/mixins.scss',
       '~assets/scss/variables.scss',
     ],

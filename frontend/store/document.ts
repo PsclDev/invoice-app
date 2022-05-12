@@ -53,6 +53,23 @@ export default class DocumentModule extends VuexModule {
     return await $axios.$get(this.PREFIX);
   }
 
+  @Action({ rawError: true })
+  async getOfferNr(): Promise<number> {
+    return await $axios.$get(`${this.PREFIX}${this.OFFER}/nr`);
+  }
+
+  @Action({ rawError: true })
+  async getInvoiceNr(): Promise<number> {
+    return await $axios.$get(`${this.PREFIX}${this.INVOICE}/nr`);
+  }
+
+  @Action({ commit: 'setDocument', rawError: true })
+  async createDocument(doc: Document): Promise<Document> {
+    if (doc.invoiceNr)
+      return await $axios.$post(`${this.PREFIX}${this.INVOICE}`, doc);
+    else return await $axios.$post(`${this.PREFIX}${this.OFFER}`, doc);
+  }
+
   @Action({ commit: 'setDocument', rawError: true })
   async updateDocument(doc: Document): Promise<Document> {
     if (doc.invoiceNr)

@@ -48,7 +48,7 @@ export default class ClientModule extends VuexModule {
   }
 
   @Action({ commit: 'newClient', rawError: true })
-  createClient(name: string): Client {
+  createLocalClient(name: string): Client {
     return {
       id: '1',
       firstname: name.split(' ')[0],
@@ -59,7 +59,7 @@ export default class ClientModule extends VuexModule {
   }
 
   @Action({ commit: 'setClient', rawError: true })
-  async saveNewClient(client: Client): Promise<Client> {
+  async createClient(client: Client): Promise<Client> {
     if (client.company)
       return await $axios.$post(`${this.PREFIX}${this.COMPANY}`, client);
     else return await $axios.$post(`${this.PREFIX}`, client);

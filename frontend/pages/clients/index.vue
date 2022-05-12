@@ -70,7 +70,7 @@ export default Vue.extend({
       const name = `${this.$t('clients.new_firstname')} ${this.$t(
         'clients.new_lastname'
       )}`;
-      this.store.createClient(name);
+      this.store.createLocalClient(name);
     },
     onFilterChanged(filteredList: Client[]) {
       this.filteredList = filteredList;

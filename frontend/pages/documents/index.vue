@@ -4,19 +4,19 @@
       <AppSearch :documents="store.Documents" @filtered="onFilterChanged" />
     </div>
     <div class="col text-center">
-      <button
+      <NuxtLink
+        to="/documents/create"
         class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"
-        @click="create"
       >
         {{ $t('documents.create') }}
-      </button>
+      </NuxtLink>
     </div>
     <div class="mt-5 col-12">
       <div v-if="isLoading" class="text-center">
         <AppSpinner />
       </div>
       <div v-else>
-        <Document
+        <DocumentItem
           v-for="doc of documents"
           :key="doc.id"
           :document="doc"
@@ -65,9 +65,6 @@ export default Vue.extend({
       this.isLoading = true;
       this.documents = await this.store.getDocuments();
       this.isLoading = false;
-    },
-    create() {
-      // TODO
     },
     onFilterChanged(filteredList: Document[]) {
       this.filteredList = filteredList;

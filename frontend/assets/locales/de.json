@@ -22,6 +22,8 @@
   },
   "clients": {
     "create": "Neuen Kunden anlegen",
+    "new_firstname": "Neuer",
+    "new_lastname": "Kunde",
     "company": "Firma",
     "vat": "VAT.",
     "gender": "Geschlecht",

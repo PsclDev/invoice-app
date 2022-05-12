@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row mb-4">
+    <div v-if="!hideClient" class="row mb-4">
       <App-Input
         v-model="mutableDocument.clientId"
         class="col-sm-4"
@@ -11,7 +11,7 @@
     <div class="row mb-4">
       <App-Input
         :value="getDate(mutableDocument.dateOfIssue)"
-        class="col-sm-4"
+        class="col-10 col-sm-4"
         :title="$t('documents.dateOfIssue')"
         :view-mode="viewMode"
         @valueChanged="(value) => dateChanged('dateOfIssue', value)"
@@ -121,6 +121,10 @@ export default Vue.extend({
     viewMode: {
       type: String as () => ViewMode,
       required: true,
+    },
+    hideClient: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

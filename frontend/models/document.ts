@@ -6,14 +6,14 @@ export class Document implements DocumentInterface {
   offerNr?: number;
   invoiceNr?: number;
   invoiceId?: string;
-  dateOfIssue!: Date;
+  dateOfIssue!: Date | string;
   description!: string[];
   subTotal!: number;
   tax!: number;
   taxRate!: number;
   alreadyPaid?: number;
   total!: number;
-  dueDate?: Date;
+  dueDate?: Date | string;
   createdAt?: Date;
   updatedAt?: Date;
 }
