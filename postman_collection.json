@@ -71,7 +71,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"client\": \"Max Mustermann\"\r\n}",
+									"raw": "{\r\n    \"description\": [\r\n        \"c\",\r\n        \"b\",\r\n        \"a\"\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -196,7 +196,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"subTotal\": 1000,\r\n    \"tax\": 190,\r\n    \"alreadyPaid\": 90,\r\n    \"total\": 1100\r\n}",
+									"raw": "{\r\n    \"subTotal\": 100,\r\n    \"tax\": 19,\r\n    \"alreadyPaid\": 10,\r\n    \"total\": 109\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -606,46 +606,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Google Maps Location Abfrage",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://maps.googleapis.com/maps/api/geocode/json?address=74177&sensor=false&key=AIzaSyCwvwv3QFI941xpwFTaYTb6_XYaoKcovms\n",
-					"protocol": "https",
-					"host": [
-						"maps",
-						"googleapis",
-						"com"
-					],
-					"path": [
-						"maps",
-						"api",
-						"geocode",
-						"json"
-					],
-					"query": [
-						{
-							"key": "address",
-							"value": "74177"
-						},
-						{
-							"key": "sensor",
-							"value": "false"
-						},
-						{
-							"key": "key",
-							"value": "AIzaSyCwvwv3QFI941xpwFTaYTb6_XYaoKcovms\n"
-						}
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"event": [
