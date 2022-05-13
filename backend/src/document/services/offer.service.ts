@@ -71,7 +71,7 @@ export class OfferService {
       ...createInvoice,
     });
 
-    offer.invoiceId = invoice.id;
+    offer.invoice = invoice;
     this.offerRepository.save(offer);
     return invoice;
   }
