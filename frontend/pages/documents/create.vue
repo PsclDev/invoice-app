@@ -69,7 +69,7 @@
             class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"
             @click="create"
           >
-            {{ $t('clients.create') }}
+            {{ $t('documents.create') }}
           </button>
         </div>
       </div>
@@ -136,6 +136,19 @@ export default Vue.extend({
 
       if (idx !== -1) this.selectedClient = this.clients[idx];
       else this.selectedClient = this.clients[0];
+
+      this.newDocument = {
+        id: '0',
+        clientId: '0',
+        dateOfIssue: this.$dayjs().toDate(),
+        description: [],
+        subTotal: 0,
+        taxRate: 19,
+        tax: 0,
+        alreadyPaid: 0,
+        dueDate: this.$dayjs().add(8, 'day').toDate(),
+        total: 0,
+      };
     },
     getFullname(client: Client) {
       if (client.company)
@@ -156,6 +169,7 @@ export default Vue.extend({
         ),
       };
 
+      console.log('New Document', this.newDocument);
       if (this.newDocumentType === DocumentType.OFFER) {
         document.offerNr = await this.documentStore.getOfferNr();
       } else {
@@ -165,8 +179,7 @@ export default Vue.extend({
         document.invoiceNr = await this.documentStore.getInvoiceNr();
       }
 
-      const createdDocument = await this.documentStore.createDocument(document);
-      console.log('New Document', createdDocument);
+      await this.documentStore.createDocument(document);
     },
   },
 });
