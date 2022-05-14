@@ -112,7 +112,7 @@ import { Client } from '~/models/client';
 import { ViewMode } from '~/types/viewMode';
 import { Document } from '~/models/document';
 import { ClientType } from '~/types/client';
-import { getDate, getMutableClient, getDocumentsLength } from '~/utils/helper';
+import { getMutableClient, getDocumentsLength } from '~/utils/helper';
 
 export default Vue.extend({
   name: 'ClientFormComponent',
@@ -171,12 +171,10 @@ export default Vue.extend({
       this.shadowClient = getMutableClient(this.value);
     },
     getDocumentTitle(doc: Document) {
-      if (doc.invoiceNr) {
-        return `${this.$t('documents.invoice')} #${String(
-          doc.invoiceNr
-        ).padStart(4, '0')}`;
-      }
-      return `${this.$t('documents.offer')} ${getDate(doc.dateOfIssue)}`;
+      const text = doc.invoiceNr ? 'invoice' : 'offer';
+      const nr = doc.invoiceNr ? doc.invoiceNr : doc.offerNr;
+
+      return `${this.$t(`documents.${text}`)} #${String(nr).padStart(4, '0')}`;
     },
     printUrl(id: string): string {
       const baseUrl = this.$config.apiBaseUrl;
