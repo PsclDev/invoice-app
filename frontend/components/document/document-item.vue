@@ -26,7 +26,7 @@
         <button
           class="btn btn-link"
           data-bs-toggle="modal"
-          :data-bs-target="`#${document.id}`"
+          :data-bs-target="`#d${document.id}`"
         >
           <font-awesome-icon :icon="['fas', 'paper-plane']" />
         </button>
@@ -54,7 +54,7 @@
     </AppItem>
 
     <div
-      :id="document.id"
+      :id="`d${document.id}`"
       class="modal fade"
       data-bs-backdrop="static"
       tabindex="-1"
