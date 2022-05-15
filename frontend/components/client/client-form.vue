@@ -68,7 +68,7 @@
       ></App-Input>
     </div>
     <div v-show="!hideDocuments" class="row mb-4">
-      <div class="col-8 col-sm-4">
+      <div class="col-sm-4">
         <div v-if="documentsLength === 0" class="d-flex align-items-center">
           <font-awesome-icon class="me-2" :icon="['fa', 'file-pdf']" />
           <div>
