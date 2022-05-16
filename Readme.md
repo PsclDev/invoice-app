@@ -24,7 +24,7 @@ You get simple statistics monthly and yearly based on.
 - Get statistics about your business
 - Light and dark mode
 - Currently supports german and english
-- Dockerized for easy deployment (TODO)
+- Dockerized for easy deployment
 
 ## Responsiveness
 It is optimised for desktop and mobile but should work also on the tablet without issues.
@@ -38,12 +38,10 @@ The app is checked on a daily bases by the dependabot.
 ## Getting Started
 If you are using `npm` just replace the `yarn` keyword with `npm run`
 
-- **`yarn`** *to install the project dependencies*
+- **`yarn` or `npm i`** *to install the project dependencies*
 - **`yarn ia`** *to install the frontend and backend depenencies*
 - **`yarn dev`** *run the front and backend*
-- Create a `.env` file inside the frontend folder based on the `.env-example`
-- Create a `.env` file inside the backend folder based on the `.env-example`
-- Create a `ormconfig.json` file inside the backend folder based on the `ormconfig-example.json`
+- Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
 
 Access the app with `http://localhost:3000`
 
@@ -67,7 +65,7 @@ Check out `https://github.com/conventional-changelog/commitlint` for more inform
 ## CI
 It will always run some github actions for both the frontend and backend. It will check the linting and run some unit-tests.
 
-(TODO) if you `merge` or `push` to `master` branch it will create a new docker image
+if you `merge` or `push` to `master` branch it will create a new docker image
 
 ## Known bugs
 - There is currently a issue that linted files will not be restaged inside the pre-commit hook from husky.
