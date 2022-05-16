@@ -6,22 +6,39 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
 import { HttpModule } from '@nestjs/axios';
-import { ConfigModule } from '@nestjs/config';
 import { StatisticModule } from './statistic/statistic.module';
 import { MailModule } from './mail/mail.module';
-import configuration from 'config/configuration';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ConfigModule } from './config/config.module';
+import { ConfigService } from 'config/config.service';
 @Module({
   imports: [
-    ConfigModule.forRoot({ load: [configuration] }),
+    ConfigModule,
     HttpModule,
     TerminusModule,
-    TypeOrmModule.forRoot(),
     ClientModule,
     DocumentModule,
     StatisticModule,
     MailModule,
+    TypeOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.database.host,
+        port: config.database.port,
+        username: config.database.user,
+        password: config.database.pass,
+        database: config.database.name,
+        entities: [config.database.entitiesPath],
+        synchronize: config.database.synchronize,
+        migrationsRun: config.database.migrationsRun,
+        migrations: [config.database.migrationsPath],
+        cli: {
+          migrationsDir: 'src/migrations',
+        },
+      }),
+      inject: [ConfigService],
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'files'),
       exclude: ['/v1*'],

@@ -1,12 +1,14 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import configuration from 'config/configuration';
+import { ConfigService } from 'config/config.service';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule);
+  const config = app.get(ConfigService);
+
   app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
@@ -18,14 +20,14 @@ async function bootstrap() {
 
   app.setGlobalPrefix('v1', { exclude: ['', 'health'] });
 
-  const config = new DocumentBuilder()
+  const documentBuilder = new DocumentBuilder()
     .setTitle('Invoice-App')
     .setVersion('1.0')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, documentBuilder);
   SwaggerModule.setup('api', app, document);
 
-  const port = configuration().port;
+  const port = config.httpPort;
   await app.listen(port);
   logger.log(`listening on port: ${port}`);
 }

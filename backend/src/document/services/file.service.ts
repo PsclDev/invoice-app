@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Client } from 'client/client.entity';
-import configuration from 'config/configuration';
+import { ConfigService } from 'config/config.service';
 import * as dayjs from 'dayjs';
 import { existsSync, writeFileSync } from 'fs';
 import { mkdir } from 'fs/promises';
@@ -10,6 +10,8 @@ import { Document, Offer } from '../document.entity';
 @Injectable()
 export class FileService {
   private readonly logger = new Logger(FileService.name);
+
+  constructor(private readonly configService: ConfigService) {}
 
   async saveDocument(
     client: Client,
@@ -41,7 +43,7 @@ export class FileService {
   ): Promise<string> {
     let filePath = '';
     if (exportPath) {
-      filePath = `${configuration().pdfExport}/`;
+      filePath = `${this.configService.pdfBackupExport}/`;
       filePath += await this.getPathToFile(document.dateOfIssue, false);
     } else filePath = await this.getPathToFile(document.dateOfIssue);
     await this.checkPathOrCreate(filePath);
