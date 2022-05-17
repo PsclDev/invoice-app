@@ -52,13 +52,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/offer",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_offer}}",
 									"host": [
-										"{{base_url}}{{v1}}"
-									],
-									"path": [
-										"document",
-										"offer"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_offer}}"
 									]
 								}
 							},
@@ -79,14 +75,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/offer/{{offer}}",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_offer}}/{{offer_id}}",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_offer}}"
 									],
 									"path": [
-										"document",
-										"offer",
-										"{{offer}}"
+										"{{offer_id}}"
 									]
 								}
 							},
@@ -98,14 +92,12 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/offer/{{offer}}/convert",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_offer}}/{{offer_id}}/convert",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_offer}}"
 									],
 									"path": [
-										"document",
-										"offer",
-										"{{offer}}",
+										"{{offer_id}}",
 										"convert"
 									]
 								}
@@ -118,13 +110,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/offer/nr",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_offer}}/nr",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_offer}}"
 									],
 									"path": [
-										"document",
-										"offer",
 										"nr"
 									]
 								}
@@ -177,13 +167,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/invoice",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_invoice}}",
 									"host": [
-										"{{base_url}}{{v1}}"
-									],
-									"path": [
-										"document",
-										"invoice"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_invoice}}"
 									]
 								}
 							},
@@ -204,14 +190,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/invoice/{{invoice}}",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_invoice}}/{{invoice_id}}",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_invoice}}"
 									],
 									"path": [
-										"document",
-										"invoice",
-										"{{invoice}}"
+										"{{invoice_id}}"
 									]
 								}
 							},
@@ -223,13 +207,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}{{v1}}/document/invoice/nr",
+									"raw": "{{base_url}}{{version}}{{route_document}}{{route_document_invoice}}/nr",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_document}}{{route_document_invoice}}"
 									],
 									"path": [
-										"document",
-										"invoice",
 										"nr"
 									]
 								}
@@ -244,12 +226,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/document",
+							"raw": "{{base_url}}{{version}}{{route_document}}",
 							"host": [
-								"{{base_url}}{{v1}}"
-							],
-							"path": [
-								"document"
+								"{{base_url}}{{version}}{{route_document}}"
 							]
 						}
 					},
@@ -268,13 +247,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}{{v1}}/document/{{invoice}}",
+							"raw": "{{base_url}}{{version}}{{route_document}}/{{invoice_id}}",
 							"host": [
-								"{{base_url}}{{v1}}"
+								"{{base_url}}{{version}}{{route_document}}"
 							],
 							"path": [
-								"document",
-								"{{invoice}}"
+								"{{invoice_id}}"
 							]
 						}
 					},
@@ -286,13 +264,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/document/{{offer}}",
+							"raw": "{{base_url}}{{version}}{{route_document}}/{{offer_id}}",
 							"host": [
-								"{{base_url}}{{v1}}"
+								"{{base_url}}{{version}}{{route_document}}"
 							],
 							"path": [
-								"document",
-								"{{offer}}"
+								"{{offer_id}}"
 							]
 						}
 					},
@@ -304,14 +281,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/document/print/{{invoice}}",
+							"raw": "{{base_url}}{{version}}{{route_document}}/print/{{invoice_id}}",
 							"host": [
-								"{{base_url}}{{v1}}"
+								"{{base_url}}{{version}}{{route_document}}"
 							],
 							"path": [
-								"document",
 								"print",
-								"{{invoice}}"
+								"{{invoice_id}}"
 							]
 						}
 					},
@@ -323,14 +299,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/document/mail/{{invoice}}",
+							"raw": "{{base_url}}{{version}}{{route_document}}/mail/{{invoice_id}}",
 							"host": [
-								"{{base_url}}{{v1}}"
+								"{{base_url}}{{version}}{{route_document}}"
 							],
 							"path": [
-								"document",
 								"mail",
-								"{{invoice}}"
+								"{{invoice_id}}"
 							]
 						}
 					},
@@ -371,12 +346,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/client",
+									"raw": "{{base_url}}{{version}}{{route_client}}",
 									"host": [
-										"{{base_url}}{{v1}}"
-									],
-									"path": [
-										"client"
+										"{{base_url}}{{version}}{{route_client}}"
 									]
 								}
 							},
@@ -397,13 +369,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/client/{{private_client}}",
+									"raw": "{{base_url}}{{version}}{{route_client}}/{{private_client_id}}",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_client}}"
 									],
 									"path": [
-										"client",
-										"{{private_client}}"
+										"{{private_client_id}}"
 									]
 								}
 							},
@@ -441,13 +412,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/client/company",
+									"raw": "{{base_url}}{{version}}{{route_client}}{{route_client_company}}",
 									"host": [
-										"{{base_url}}{{v1}}"
-									],
-									"path": [
-										"client",
-										"company"
+										"{{base_url}}{{version}}{{route_client}}{{route_client_company}}"
 									]
 								}
 							},
@@ -468,14 +435,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}{{v1}}/client/company/{{company_client}}",
+									"raw": "{{base_url}}{{version}}{{route_client}}{{route_client_company}}/{{company_client_id}}",
 									"host": [
-										"{{base_url}}{{v1}}"
+										"{{base_url}}{{version}}{{route_client}}{{route_client_company}}"
 									],
 									"path": [
-										"client",
-										"company",
-										"{{company_client}}"
+										"{{company_client_id}}"
 									]
 								}
 							},
@@ -489,12 +454,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/client",
+							"raw": "{{base_url}}{{version}}{{route_client}}",
 							"host": [
-								"{{base_url}}{{v1}}"
-							],
-							"path": [
-								"client"
+								"{{base_url}}{{version}}{{route_client}}"
 							]
 						}
 					},
@@ -506,12 +468,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/client/{{private_client}}",
+							"raw": "{{base_url}}{{version}}{{route_client}}/{{private_client}}",
 							"host": [
-								"{{base_url}}{{v1}}"
+								"{{base_url}}{{version}}{{route_client}}"
 							],
 							"path": [
-								"client",
 								"{{private_client}}"
 							]
 						}
@@ -524,13 +485,126 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/client/{{company_client}}",
+							"raw": "{{base_url}}{{version}}{{route_client}}/{{company_client_id}}",
 							"host": [
-								"{{base_url}}{{v1}}"
+								"{{base_url}}{{version}}{{route_client}}"
 							],
 							"path": [
-								"client",
-								"{{company_client}}"
+								"{{company_client_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Setting",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"setting\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"PDF\",\r\n    \"key\": \"abc\",\r\n    \"value\": \"efg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_setting}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_setting}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": \"xyz\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_setting}}/{{setting_id}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_setting}}"
+							],
+							"path": [
+								"{{setting_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_setting}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_setting}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_setting}}/{{setting_id}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_setting}}"
+							],
+							"path": [
+								"{{setting_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_setting}}/{{setting_id}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_setting}}"
+							],
+							"path": [
+								"{{setting_id}}"
 							]
 						}
 					},
@@ -594,12 +668,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}{{v1}}/statistic",
+							"raw": "{{base_url}}{{version}}{{route_statistics}}",
 							"host": [
-								"{{base_url}}{{v1}}"
-							],
-							"path": [
-								"statistic"
+								"{{base_url}}{{version}}{{route_statistics}}"
 							]
 						}
 					},
@@ -634,17 +705,52 @@
 			"value": "http://dev.home:3010"
 		},
 		{
-			"key": "v1",
+			"key": "version",
 			"value": "/v1",
 			"type": "string"
 		},
 		{
-			"key": "private_client",
+			"key": "route_client",
+			"value": "/client",
+			"type": "string"
+		},
+		{
+			"key": "route_client_company",
+			"value": "/company",
+			"type": "string"
+		},
+		{
+			"key": "route_document",
+			"value": "/document",
+			"type": "string"
+		},
+		{
+			"key": "route_document_offer",
+			"value": "/offer",
+			"type": "string"
+		},
+		{
+			"key": "route_document_invoice",
+			"value": "/invoice",
+			"type": "string"
+		},
+		{
+			"key": "route_setting",
+			"value": "/setting",
+			"type": "string"
+		},
+		{
+			"key": "route_statistics",
+			"value": "/statistic",
+			"type": "string"
+		},
+		{
+			"key": "private_client_id",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"key": "company_client",
+			"key": "company_client_id",
 			"value": ""
 		},
 		{
@@ -653,7 +759,7 @@
 			"type": "string"
 		},
 		{
-			"key": "offer",
+			"key": "offer_id",
 			"value": ""
 		},
 		{
@@ -662,8 +768,13 @@
 			"type": "string"
 		},
 		{
-			"key": "invoice",
+			"key": "invoice_id",
 			"value": ""
+		},
+		{
+			"key": "setting_id",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
