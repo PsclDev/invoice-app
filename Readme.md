@@ -42,6 +42,7 @@ If you are using `npm` just replace the `yarn` keyword with `npm run`
 - **`yarn ia`** *to install the frontend and backend depenencies*
 - **`yarn dev`** *run the front and backend*
 - Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
+- If you wanna create migrations with typeorm, you need to setup a `ormconfig.json` file, there is also a example for it `/backend/ormconfig-example.json`
 
 Access the app with `http://localhost:3000`
 
