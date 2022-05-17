@@ -1,3 +1,4 @@
+import { capitalizeString } from '@helper/capitalizeString';
 import {
   Body,
   Controller,
@@ -9,6 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Route } from 'modules/routes';
 import {
   CreateClientDto,
   CreateCompanyClientDto,
@@ -18,8 +20,8 @@ import {
 import { Client, CompanyClient } from './client.entity';
 import { ClientService } from './client.service';
 
-@ApiTags('Client')
-@Controller('client')
+@ApiTags(capitalizeString(Route.CLIENT))
+@Controller(Route.CLIENT)
 export class ClientController {
   private readonly logger = new Logger(ClientController.name);
 

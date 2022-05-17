@@ -1,4 +1,4 @@
-import { Document } from 'document/document.entity';
+import { Document } from '../document/document.entity';
 import {
   IsEmail,
   IsIn,

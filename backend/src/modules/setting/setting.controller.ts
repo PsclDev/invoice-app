@@ -1,3 +1,5 @@
+import { capitalizeString } from '@helper/capitalizeString';
+import { Route } from '@modules/routes';
 import {
   Controller,
   Logger,
@@ -13,8 +15,8 @@ import { CreateSettingDto, UpdateSettingDto } from './setting.dto';
 import { Setting } from './setting.entity';
 import { SettingService } from './setting.service';
 
-@ApiTags('Setting')
-@Controller('setting')
+@ApiTags(capitalizeString(Route.SETTING))
+@Controller(Route.SETTING)
 export class SettingController {
   private readonly logger = new Logger(SettingController.name);
 

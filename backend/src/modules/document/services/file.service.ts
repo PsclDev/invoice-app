@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Client } from 'client/client.entity';
 import { ConfigService } from 'config/config.service';
 import * as dayjs from 'dayjs';
 import { existsSync, writeFileSync } from 'fs';
 import { mkdir } from 'fs/promises';
+import { Client } from 'modules/client/client.entity';
 import { join } from 'path';
 import { Document, Offer } from '../document.entity';
 

@@ -1,3 +1,5 @@
+import { capitalizeString } from '@helper/capitalizeString';
+import { Route } from '@modules/routes';
 import {
   Body,
   Controller,
@@ -20,8 +22,8 @@ import {
 import { Document } from './document.entity';
 import { DocumentService, OfferService, InvoiceService } from './services';
 
-@ApiTags('Document')
-@Controller('document')
+@ApiTags(capitalizeString(Route.DOCUMENT))
+@Controller(Route.DOCUMENT)
 export class DocumentController {
   private readonly logger = new Logger(DocumentController.name);
 

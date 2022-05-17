@@ -6,7 +6,7 @@ import {
   offerId,
   privateClientId,
   TestSqliteModule,
-} from '../util/testing';
+} from 'util/testing';
 import { DocumentController } from './document.controller';
 import { Invoice, Offer } from './document.entity';
 import { DocumentService } from './services/document.service';

@@ -7,7 +7,7 @@ import {
   CreateInvoiceDto,
   CreateOfferDto,
   UpdateOfferDto,
-} from 'document/document.dto';
+} from 'modules/document/document.dto';
 import { Repository } from 'typeorm';
 import { Document, Invoice, Offer } from '../document.entity';
 import { DocumentService } from './document.service';

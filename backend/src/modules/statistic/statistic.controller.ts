@@ -2,9 +2,11 @@ import { Controller, Get, Logger } from '@nestjs/common';
 import { StatisticService } from './statistic.service';
 import { StatisticsDto } from './statistic.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Route } from '@modules/routes';
+import { capitalizeString } from '@helper/capitalizeString';
 
-@ApiTags('Statistics')
-@Controller('statistic')
+@ApiTags(capitalizeString(Route.STATISTICS))
+@Controller(Route.STATISTICS)
 export class StatisticController {
   private readonly logger = new Logger(StatisticController.name);
 

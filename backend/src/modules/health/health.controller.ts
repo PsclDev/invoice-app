@@ -1,3 +1,5 @@
+import { capitalizeString } from '@helper/capitalizeString';
+import { Route } from '@modules/routes';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
@@ -9,8 +11,8 @@ import {
 import { InjectConnection } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 
-@ApiTags('Health')
-@Controller('health')
+@ApiTags(capitalizeString(Route.HEALTH))
+@Controller(Route.HEALTH)
 export class HealthController {
   constructor(
     private health: HealthCheckService,

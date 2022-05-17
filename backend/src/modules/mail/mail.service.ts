@@ -1,7 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger } from '@nestjs/common';
-import { Client } from 'client/client.entity';
-import { Document, Offer } from 'document/document.entity';
+import { Client } from 'modules/client/client.entity';
+import { Document, Offer } from 'modules/document/document.entity';
 import { Attachment } from 'nodemailer/lib/mailer';
 
 @Injectable()

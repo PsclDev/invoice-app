@@ -1,6 +1,6 @@
 import { CacheModule } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { documentSeed, TestSqliteModule } from '../util/testing';
+import { documentSeed, TestSqliteModule } from 'util/testing';
 import { StatisticController } from './statistic.controller';
 import { StatisticService } from './statistic.service';
 

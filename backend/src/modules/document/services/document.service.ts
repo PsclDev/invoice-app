@@ -2,13 +2,13 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document } from '../document.entity';
-import { ClientService } from 'client/client.service';
-import { MailService } from 'mail/mail.service';
 import * as puppeteer from 'puppeteer';
-import { Client } from 'client/client.entity';
 import { FileService } from './file.service';
 import { updateEntity } from '@helper/updateEntity';
 import { ConfigService } from 'config/config.service';
+import { Client } from 'modules/client/client.entity';
+import { ClientService } from 'modules/client/client.service';
+import { MailService } from 'modules/mail/mail.service';
 @Injectable()
 export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);

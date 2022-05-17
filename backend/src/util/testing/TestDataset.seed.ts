@@ -1,7 +1,7 @@
-import { Gender } from '../../client/client.dto';
-import { Client, CompanyClient } from '../../client/client.entity';
+import { Gender } from 'modules/client/client.dto';
+import { Client, CompanyClient } from 'modules/client/client.entity';
+import { Offer, Invoice } from 'modules/document/document.entity';
 import { EntityManager, getConnection } from 'typeorm';
-import { Invoice, Offer } from '../../document/document.entity';
 
 export const privateClientId = 'azx9d3g4';
 export const companyClientId = 'pla5b2i7';
