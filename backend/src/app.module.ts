@@ -12,15 +12,17 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from 'config/config.service';
+import { SettingModule } from './setting/setting.module';
 @Module({
   imports: [
-    ConfigModule,
-    HttpModule,
-    TerminusModule,
     ClientModule,
+    ConfigModule,
     DocumentModule,
-    StatisticModule,
+    HttpModule,
     MailModule,
+    StatisticModule,
+    SettingModule,
+    TerminusModule,
     TypeOrmModule.forRootAsync({
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
