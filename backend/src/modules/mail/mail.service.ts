@@ -1,8 +1,9 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger } from '@nestjs/common';
-import { Client } from 'modules/client/client.entity';
-import { Document, Offer } from 'modules/document/document.entity';
+import { Client } from '@modules/client/client.entity';
+import { Document, Invoice, Offer } from '@modules/document/document.entity';
 import { Attachment } from 'nodemailer/lib/mailer';
+import { DocumentType } from '@helper/types';
 
 @Injectable()
 export class MailService {
@@ -23,10 +24,11 @@ export class MailService {
 
       await this.mailerService.sendMail({
         to: client.email,
-        subject: doc.invoiceNr
-          ? `Invoice #${doc.invoiceNr}`
-          : `Invoice #${(doc as Offer).offerNr}`,
-        template: doc.invoiceNr ? 'invoice' : 'offer',
+        subject:
+          doc.type === DocumentType.INVOICE
+            ? `Invoice #${(doc as Invoice).invoiceNr}`
+            : `Invoice #${(doc as Offer).offerNr}`,
+        template: doc.type === DocumentType.INVOICE ? 'invoice' : 'offer',
         context: {
           salutation: 'abc',
           name: `${client.firstname} ${client.lastname}`,

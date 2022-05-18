@@ -1,3 +1,4 @@
+import { DocumentType } from '@helper/types';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsDateString,
@@ -10,6 +11,7 @@ import {
 
 export interface DocumentBaseDto {
   id: string;
+  type: DocumentType;
   filepath: string;
   clientId: string;
   dateOfIssue: Date;
@@ -42,7 +44,10 @@ export type DocumentDto = OfferDto | InvoiceDto;
 
 export class CreateOfferDto
   implements
-    Omit<OfferDto, 'id' | 'filepath' | 'invoiceId' | 'createdAt' | 'updatedAt'>
+    Omit<
+      OfferDto,
+      'id' | 'type' | 'filepath' | 'invoiceId' | 'createdAt' | 'updatedAt'
+    >
 {
   @ApiProperty()
   @IsDateString()
@@ -84,7 +89,10 @@ export class UpdateOfferDto extends PartialType(CreateOfferDto) {}
 
 export class CreateInvoiceDto
   implements
-    Omit<InvoiceDto, 'id' | 'filepath' | 'offerId' | 'createdAt' | 'updatedAt'>
+    Omit<
+      InvoiceDto,
+      'id' | 'type' | 'filepath' | 'offerId' | 'createdAt' | 'updatedAt'
+    >
 {
   @ApiProperty()
   @IsNumber()
@@ -97,7 +105,7 @@ export class CreateInvoiceDto
 
   @ApiProperty()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   clientId: string;
 
   @ApiProperty({ type: 'string[]' })

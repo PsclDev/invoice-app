@@ -15,6 +15,7 @@ import {
 } from 'typeorm';
 import { DocumentBaseDto, InvoiceDto, OfferDto } from './document.dto';
 import { ColumnNumericTransformer } from '@helper/columnNumericTransformer';
+import { DocumentType } from '@helper/types';
 
 @Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'type' } })
@@ -22,11 +23,11 @@ export class Document implements DocumentBaseDto {
   @PrimaryColumn()
   id: string;
 
+  @Column()
+  type: DocumentType;
+
   @Column({ nullable: true })
   filepath: string;
-
-  @Column()
-  invoiceNr: number;
 
   @Column({ name: 'client_id' })
   clientId: string;
@@ -51,6 +52,9 @@ export class Document implements DocumentBaseDto {
 
 @ChildEntity()
 export class Offer extends Document implements OfferDto {
+  @Column()
+  type: DocumentType.OFFER;
+
   @Column({ unique: true })
   offerNr: number;
 
@@ -78,6 +82,9 @@ export class Offer extends Document implements OfferDto {
 
 @ChildEntity()
 export class Invoice extends Document implements InvoiceDto {
+  @Column()
+  type: DocumentType.INVOICE;
+
   @OneToOne(() => Offer, (offer) => offer.invoiceId, { nullable: true })
   @Exclude()
   offerId: string;

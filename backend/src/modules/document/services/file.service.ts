@@ -1,11 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from 'config/config.service';
+import { ConfigService } from '@config/config.service';
 import * as dayjs from 'dayjs';
 import { existsSync, writeFileSync } from 'fs';
 import { mkdir } from 'fs/promises';
-import { Client } from 'modules/client/client.entity';
+import { Client } from '@modules/client/client.entity';
 import { join } from 'path';
-import { Document, Offer } from '../document.entity';
+import { Document, Invoice, Offer } from '../document.entity';
+import { DocumentType } from '@helper/types';
 
 @Injectable()
 export class FileService {
@@ -48,10 +49,10 @@ export class FileService {
     } else filePath = await this.getPathToFile(document.dateOfIssue);
     await this.checkPathOrCreate(filePath);
 
-    const isInvoice = !!document.invoiceNr;
+    const isInvoice = document.type === DocumentType.INVOICE;
     const filePrefix = isInvoice ? 'I' : 'O';
     const fileNr = String(
-      isInvoice ? document.invoiceNr : (document as Offer).offerNr,
+      isInvoice ? (document as Invoice).invoiceNr : (document as Offer).offerNr,
     ).padStart(4, '0');
     const fileName = `${client.firstname}_${client.lastname}.pdf`;
 
