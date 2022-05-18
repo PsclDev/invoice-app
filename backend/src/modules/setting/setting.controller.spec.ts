@@ -1,11 +1,87 @@
+import { HttpException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import {
+  companyClientId,
+  privateClientId,
+  settingId,
+  settingSeed,
+  TestSqliteModule,
+} from '@testing';
+import { SettingController } from './setting.controller';
+import { SettingType } from './setting.dto';
+import { Setting } from './setting.entity';
+import { SettingService } from './setting.service';
 
-describe('SettingsController', () => {
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({}).compile();
+describe('SettingController', () => {
+  let settingController: SettingController;
+  let createdSettingId;
+
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [...TestSqliteModule()],
+      controllers: [SettingController],
+      providers: [SettingService],
+    }).compile();
+
+    settingController = module.get<SettingController>(SettingController);
+    await settingSeed();
   });
 
-  it('should be defined', () => {
-    expect(true).toBe(true);
+  it('should create a pdf setting', async () => {
+    const setting = await settingController.createSetting({
+      type: SettingType.PDF,
+      key: 'abc',
+      value: 'efg',
+    });
+
+    createdSettingId = setting.id;
+    expect(setting).toBeDefined();
+  });
+
+  it('should fail to create a mail setting', async () => {
+    const create = async () => {
+      await settingController.createSetting({
+        type: SettingType.MAIL,
+        key: 'test',
+        value: 'efg',
+      });
+    };
+
+    expect(create()).rejects.toThrow(HttpException);
+    expect(create()).rejects.toThrow('Setting already exists');
+  });
+
+  it('should find a setting by id', async () => {
+    const setting = await settingController.findById(createdSettingId);
+    expect(setting).toBeDefined();
+  });
+
+  it('should update a setting', async () => {
+    const value = 'xyz';
+    await settingController.updateSetting(settingId, {
+      value,
+    });
+
+    const setting = (await settingController.findById(settingId)) as Setting;
+    expect(setting).toBeDefined();
+    expect(setting.value).toBe(value);
+  });
+
+  it('should delete a setting by id', async () => {
+    const deleted = await settingController.deleteSetting(createdSettingId);
+    expect(deleted).toBe(createdSettingId);
+  });
+
+  it('should fail to delete a setting', async () => {
+    const deleteClient = async () => {
+      await settingController.deleteSetting('abcdefg');
+    };
+
+    expect(deleteClient()).rejects.toThrow(NotFoundException);
+  });
+
+  it('should find all settings', async () => {
+    const clients = await settingController.findAll();
+    expect(clients.length).toBe(1);
   });
 });

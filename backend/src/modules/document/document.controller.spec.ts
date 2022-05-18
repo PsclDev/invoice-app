@@ -15,7 +15,8 @@ import { ClientModule, MailModule } from '..';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;
-  let createdDocumentId;
+  let createdOfferId;
+  let createdInvoiceId;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -26,6 +27,11 @@ describe('DocumentController', () => {
 
     documentController = module.get<DocumentController>(DocumentController);
     await documentSeed();
+  });
+
+  it('should get a new offer number', async () => {
+    const newOfferNr = await documentController.getNewOffereNr();
+    expect(newOfferNr).toBe(2);
   });
 
   it('should create a offer', async () => {
@@ -40,7 +46,18 @@ describe('DocumentController', () => {
       total: 1190,
     });
 
+    createdOfferId = offer.id;
     expect(offer).toBeDefined();
+  });
+
+  it('should create a invoice from a offer', async () => {
+    const invoice = await documentController.convertOffer(createdOfferId);
+    expect(invoice).toBeDefined();
+  });
+
+  it('should get a new invoice number', async () => {
+    const newInvoiceNr = await documentController.getNewInvoiceNr();
+    expect(newInvoiceNr).toBe(2);
   });
 
   it('should create a invoice', async () => {
@@ -57,7 +74,7 @@ describe('DocumentController', () => {
       total: 228,
     });
 
-    createdDocumentId = invoice.id;
+    createdInvoiceId = invoice.id;
     expect(invoice).toBeDefined();
   });
 
@@ -82,7 +99,7 @@ describe('DocumentController', () => {
   });
 
   it('should find a document by id', async () => {
-    const client = await documentController.findById(createdDocumentId);
+    const client = await documentController.findById(createdInvoiceId);
     expect(client).toBeDefined();
   });
 
@@ -101,13 +118,13 @@ describe('DocumentController', () => {
     const alreadyPaid = 228;
     const total = 218;
 
-    await documentController.updateInvoice(createdDocumentId, {
+    await documentController.updateInvoice(createdInvoiceId, {
       alreadyPaid,
       total,
     });
 
     const invoice = (await documentController.findById(
-      createdDocumentId,
+      createdInvoiceId,
     )) as Invoice;
     expect(invoice).toBeDefined();
     expect(invoice.alreadyPaid).toBe(alreadyPaid);
@@ -115,8 +132,8 @@ describe('DocumentController', () => {
   });
 
   it('should delete a document by id', async () => {
-    const deleted = await documentController.deleteDocument(createdDocumentId);
-    expect(deleted).toBe(createdDocumentId);
+    const deleted = await documentController.deleteDocument(createdInvoiceId);
+    expect(deleted).toBe(createdInvoiceId);
   });
 
   it('should fail to delete a document', async () => {
@@ -129,6 +146,6 @@ describe('DocumentController', () => {
 
   it('should find all documents', async () => {
     const docs = await documentController.findAll();
-    expect(docs.length).toBe(3);
+    expect(docs.length).toBe(4);
   });
 });

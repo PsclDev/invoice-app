@@ -1,12 +1,15 @@
 import { Gender } from '@modules/client/client.dto';
 import { Client, CompanyClient } from '@modules/client/client.entity';
 import { Offer, Invoice } from '@modules/document/document.entity';
+import { SettingType } from '@modules/setting/setting.dto';
+import { Setting } from '@modules/setting/setting.entity';
 import { EntityManager, getConnection } from 'typeorm';
 
 export const privateClientId = 'azx9d3g4';
 export const companyClientId = 'pla5b2i7';
 export const offerId = 'inc4sd71';
 export const invoiceId = 'dhc3l1k6';
+export const settingId = 'khu5l2k9';
 
 const insertClients = async (entityManager: EntityManager) => {
   entityManager.insert<Client>(Client, {
@@ -75,4 +78,16 @@ export const documentSeed = async () => {
 
   insertClients(entityManager);
   insertDocuments(entityManager);
+};
+
+export const settingSeed = async () => {
+  const connection = await getConnection();
+  const entityManager = connection.createEntityManager();
+
+  entityManager.insert<Setting>(Setting, {
+    id: settingId,
+    type: SettingType.MAIL,
+    key: 'test',
+    value: 'value',
+  });
 };
