@@ -1,6 +1,6 @@
-import { Gender } from 'modules/client/client.dto';
-import { Client, CompanyClient } from 'modules/client/client.entity';
-import { Offer, Invoice } from 'modules/document/document.entity';
+import { Gender } from '@modules/client/client.dto';
+import { Client, CompanyClient } from '@modules/client/client.entity';
+import { Offer, Invoice } from '@modules/document/document.entity';
 import { EntityManager, getConnection } from 'typeorm';
 
 export const privateClientId = 'azx9d3g4';
@@ -37,6 +37,7 @@ const insertClients = async (entityManager: EntityManager) => {
 const insertDocuments = async (entityManager: EntityManager) => {
   entityManager.insert<Offer>(Offer, {
     id: offerId,
+    offerNr: 1,
     dateOfIssue: new Date('20211-01-01'),
     clientId: 'azx9d3g4',
     description: ['a', 'b', 'c'],

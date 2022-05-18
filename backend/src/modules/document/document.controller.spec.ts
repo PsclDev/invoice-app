@@ -6,10 +6,12 @@ import {
   offerId,
   privateClientId,
   TestSqliteModule,
-} from 'util/testing';
+} from '@testing';
 import { DocumentController } from './document.controller';
 import { Invoice, Offer } from './document.entity';
 import { DocumentService } from './services/document.service';
+import { FileService, InvoiceService, OfferService } from './services';
+import { ClientModule, MailModule } from '..';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;
@@ -17,9 +19,9 @@ describe('DocumentController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TestSqliteModule()],
+      imports: [...TestSqliteModule(), ClientModule, MailModule],
       controllers: [DocumentController],
-      providers: [DocumentService],
+      providers: [DocumentService, FileService, OfferService, InvoiceService],
     }).compile();
 
     documentController = module.get<DocumentController>(DocumentController);
@@ -28,6 +30,7 @@ describe('DocumentController', () => {
 
   it('should create a offer', async () => {
     const offer = await documentController.createOffer({
+      offerNr: 2,
       dateOfIssue: new Date('2022-01-01'),
       clientId: privateClientId,
       description: ['a', 'b', 'c'],
@@ -35,7 +38,6 @@ describe('DocumentController', () => {
       tax: 190,
       taxRate: 19,
       total: 1190,
-      offerNr: 1,
     });
 
     expect(offer).toBeDefined();

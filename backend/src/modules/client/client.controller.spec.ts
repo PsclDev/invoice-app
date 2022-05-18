@@ -5,7 +5,7 @@ import {
   companyClientId,
   privateClientId,
   TestSqliteModule,
-} from 'util/testing';
+} from '@testing';
 import { ClientController } from './client.controller';
 import { Gender } from './client.dto';
 import { Client, CompanyClient } from './client.entity';

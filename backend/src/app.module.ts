@@ -6,7 +6,7 @@ import { HttpModule } from '@nestjs/axios';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ConfigModule } from './config/config.module';
-import { ConfigService } from 'config/config.service';
+import { ConfigService } from '@config/config.service';
 import {
   ClientModule,
   DocumentModule,
@@ -14,7 +14,7 @@ import {
   StatisticModule,
   SettingModule,
   HealthController,
-} from 'modules';
+} from '@modules';
 @Module({
   imports: [
     ClientModule,

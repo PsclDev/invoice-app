@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { Document } from 'modules/document/document.entity';
+import { Document } from '@modules/document/document.entity';
 import {
   ChildEntity,
   Column,

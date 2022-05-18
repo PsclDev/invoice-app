@@ -5,10 +5,10 @@ import { Document } from '../document.entity';
 import * as puppeteer from 'puppeteer';
 import { FileService } from './file.service';
 import { updateEntity } from '@helper/updateEntity';
-import { ConfigService } from 'config/config.service';
-import { Client } from 'modules/client/client.entity';
-import { ClientService } from 'modules/client/client.service';
-import { MailService } from 'modules/mail/mail.service';
+import { ConfigService } from '@config/config.service';
+import { Client } from '@modules/client/client.entity';
+import { ClientService } from '@modules/client/client.service';
+import { MailService } from '@modules/mail/mail.service';
 @Injectable()
 export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);

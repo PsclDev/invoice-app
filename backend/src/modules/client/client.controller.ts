@@ -10,7 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Route } from 'modules/routes';
+import { Route } from '@modules/routes';
 import {
   CreateClientDto,
   CreateCompanyClientDto,
