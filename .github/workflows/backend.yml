@@ -3,6 +3,9 @@ name: backend
 on:
   [push]
 
+env: 
+  APP_IS_RUNNING_IN_PIPELINE: true;
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}

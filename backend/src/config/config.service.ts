@@ -53,4 +53,6 @@ export class ConfigService {
   };
 }
 
-Joi.assert(new ConfigService(), CONFIG_SCHEMA, 'Invalid Configuration');
+if (!Boolean(process.env.APP_IS_RUNNING_IN_PIPELINE)) {
+  Joi.assert(new ConfigService(), CONFIG_SCHEMA, 'Invalid Configuration');
+}
