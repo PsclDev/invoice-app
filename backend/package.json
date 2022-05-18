@@ -48,7 +48,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "sqlite3": "^5.0.3",
+    "sqlite3": "^5.0.8",
     "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41"
   },
@@ -86,10 +86,10 @@
     ],
     "rootDir": "src",
     "moduleNameMapper": {
-      "@helper": "<rootDir>/util/helper/",
-      "@helper/(.*)": "<rootDir>/util/helper/$1",
-      "@testing": "<rootDir>/util/testing",
-      "@testing/(.*)": "<rootDir>/util/testing/$1"
+      "^@config(.*)": "<rootDir>/config$1",
+      "^@modules(.*)": "<rootDir>/modules$1",
+      "^@helper(.*)": "<rootDir>/util/helper$1",
+      "^@testing(.*)": "<rootDir>/util/testing$1"
     },
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
