@@ -169,7 +169,6 @@ export default Vue.extend({
         ),
       };
 
-      console.log('New Document', this.newDocument);
       if (this.newDocumentType === DocumentType.OFFER) {
         document.offerNr = await this.documentStore.getOfferNr();
       } else {
