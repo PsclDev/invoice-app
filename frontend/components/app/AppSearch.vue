@@ -11,6 +11,7 @@
 import Vue from 'vue';
 import { Client } from '~/models/client';
 import { Document } from '~/models/document';
+import { Setting } from '~/models/setting';
 
 export default Vue.extend({
   name: 'AppSearch',
@@ -21,6 +22,10 @@ export default Vue.extend({
     },
     documents: {
       type: Array as () => Document[],
+      default: undefined,
+    },
+    settings: {
+      type: Array as () => Setting[],
       default: undefined,
     },
   },
@@ -44,6 +49,12 @@ export default Vue.extend({
         });
 
         this.$emit('filtered', filtered);
+      } else if (this.settings) {
+        const filtered = this.settings.filter((s) => {
+          return this.checkForValue(s, term);
+        });
+
+        this.$emit('filtered', filtered);
       } else {
         throw new Error('AppSearch has undefined props');
       }
@@ -52,10 +63,11 @@ export default Vue.extend({
   mounted() {
     if (this.clients) this.$emit('filtered', this.clients);
     else if (this.documents) this.$emit('filtered', this.documents);
+    else if (this.settings) this.$emit('filtered', this.settings);
     else throw new Error('AppSearch has undefined props');
   },
   methods: {
-    checkForValue(obj: Client | Document, term: string): boolean {
+    checkForValue(obj: Client | Document | Setting, term: string): boolean {
       for (const key in obj) {
         const val = (obj as any)[key];
         if (
