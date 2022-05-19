@@ -31,6 +31,7 @@
               @change="descriptionChanged"
             ></textarea>
           </div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
           <div v-else v-html="descriptionToView"></div>
         </div>
       </div>
