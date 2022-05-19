@@ -10,9 +10,15 @@
         <font-awesome-icon class="link-icon" :icon="['fas', 'users']" />
         <span>{{ $tc('client', 2) }}</span>
       </NuxtLink>
+
       <NuxtLink to="/documents" class="nav-item">
         <font-awesome-icon class="link-icon" :icon="['fas', 'file-invoice']" />
         <span>{{ $tc('document', 2) }}</span>
+      </NuxtLink>
+
+      <NuxtLink to="/settings" exact class="nav-item">
+        <font-awesome-icon class="link-icon" :icon="['fas', 'cog']" />
+        <span>{{ $tc('setting', 2) }}</span>
       </NuxtLink>
     </div>
 
@@ -107,7 +113,7 @@ a.nuxt-link-active {
 
 @media (max-width: 768px) {
   .navbar {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
   }
 
   span {

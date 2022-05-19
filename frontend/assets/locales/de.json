@@ -1,6 +1,7 @@
 {
   "home": "Übersicht",
   "client": "Kunde | Kunden",
+  "setting": "Einstellung | Einstellungen",
   "document": "Dokument | Dokumente",
   "button": {
     "edit": "Bearbeiten",
@@ -53,5 +54,8 @@
       "print": "Drucken",
       "mail": "E-Mail"
     }
+  },
+  "settings": {
+    "create": "Neuen Key-Value hinzufügen"
   }
 }

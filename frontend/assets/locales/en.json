@@ -1,6 +1,7 @@
 {
   "home": "Dashboard",
   "client": "Client | Clients",
+  "setting": "Setting | Settings",
   "document": "Document | Documents",
   "button": {
     "edit": "Edit",
@@ -53,5 +54,8 @@
       "print": "Print",
       "mail": "Mail"
     }
+  },
+  "settings": {
+    "create": "Create new Key-Value"
   }
 }
