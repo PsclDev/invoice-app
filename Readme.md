@@ -38,6 +38,7 @@ The app is checked on a daily bases by the dependabot.
 If you are using `npm` just replace the `yarn` keyword with `npm run`
 
 - **`yarn` or `npm i`** *to install the project dependencies*
+- **`yarn prepare`** *to install husky*
 - **`yarn ia`** *to install the frontend and backend depenencies*
 - **`yarn dev`** *run the front and backend*
 - Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
