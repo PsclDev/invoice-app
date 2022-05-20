@@ -1,12 +1,6 @@
 import { HttpException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  companyClientId,
-  privateClientId,
-  settingId,
-  settingSeed,
-  TestSqliteModule,
-} from '@testing';
+import { settingId, settingSeed, TestSqliteModule } from '@testing';
 import { SettingController } from './setting.controller';
 import { SettingType } from './setting.dto';
 import { Setting } from './setting.entity';

@@ -15,7 +15,9 @@ import { ClientModule, MailModule } from '..';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;
+  let nextOfferNr;
   let createdOfferId;
+  let nextInvoiceNr;
   let createdInvoiceId;
 
   beforeAll(async () => {
@@ -30,13 +32,13 @@ describe('DocumentController', () => {
   });
 
   it('should get a new offer number', async () => {
-    const newOfferNr = await documentController.getNewOffereNr();
-    expect(newOfferNr).toBe(2);
+    nextOfferNr = await documentController.getNewOffereNr();
+    expect(nextOfferNr).toBe(2);
   });
 
   it('should create a offer', async () => {
     const offer = await documentController.createOffer({
-      offerNr: 2,
+      offerNr: nextOfferNr,
       dateOfIssue: new Date('2022-01-01'),
       clientId: privateClientId,
       description: ['a', 'b', 'c'],
@@ -56,13 +58,13 @@ describe('DocumentController', () => {
   });
 
   it('should get a new invoice number', async () => {
-    const newInvoiceNr = await documentController.getNewInvoiceNr();
-    expect(newInvoiceNr).toBe(2);
+    nextInvoiceNr = await documentController.getNewInvoiceNr();
+    expect(nextInvoiceNr).toBe(3);
   });
 
   it('should create a invoice', async () => {
     const invoice = await documentController.createInvoice({
-      invoiceNr: 2,
+      invoiceNr: nextInvoiceNr,
       dateOfIssue: new Date('2022-01-01'),
       dueDate: new Date('2022-01-15'),
       clientId: companyClientId,

@@ -12,7 +12,7 @@ export const invoiceId = 'dhc3l1k6';
 export const settingId = 'khu5l2k9';
 
 const insertClients = async (entityManager: EntityManager) => {
-  entityManager.insert<Client>(Client, {
+  await entityManager.insert<Client>(Client, {
     id: privateClientId,
     firstname: 'Erika',
     lastname: 'Musermann',
@@ -23,7 +23,7 @@ const insertClients = async (entityManager: EntityManager) => {
     city: 'Musterhausen',
   });
 
-  entityManager.insert<CompanyClient>(CompanyClient, {
+  await entityManager.insert<CompanyClient>(CompanyClient, {
     id: companyClientId,
     company: 'Muster GmbH',
     vat: 'DE999999999',
@@ -38,7 +38,7 @@ const insertClients = async (entityManager: EntityManager) => {
 };
 
 const insertDocuments = async (entityManager: EntityManager) => {
-  entityManager.insert<Offer>(Offer, {
+  await entityManager.insert<Offer>(Offer, {
     id: offerId,
     offerNr: 1,
     dateOfIssue: new Date('20211-01-01'),
@@ -50,7 +50,7 @@ const insertDocuments = async (entityManager: EntityManager) => {
     total: 119,
   });
 
-  entityManager.insert<Invoice>(Invoice, {
+  await entityManager.insert<Invoice>(Invoice, {
     id: invoiceId,
     invoiceNr: 1,
     dateOfIssue: new Date('20211-01-01'),
@@ -69,15 +69,15 @@ export const clientSeed = async () => {
   const connection = await getConnection();
   const entityManager = connection.createEntityManager();
 
-  insertClients(entityManager);
+  await insertClients(entityManager);
 };
 
 export const documentSeed = async () => {
   const connection = await getConnection();
   const entityManager = connection.createEntityManager();
 
-  insertClients(entityManager);
-  insertDocuments(entityManager);
+  await insertClients(entityManager);
+  await insertDocuments(entityManager);
 };
 
 export const settingSeed = async () => {
