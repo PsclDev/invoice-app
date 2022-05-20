@@ -72,7 +72,7 @@ export class OfferService {
     });
 
     offer.invoice = invoice;
-    this.offerRepository.save(offer);
+    await this.offerRepository.save(offer);
     return invoice;
   }
 }
