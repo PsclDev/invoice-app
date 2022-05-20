@@ -70,7 +70,6 @@ if you `merge` or `push` to `master` branch it will create a new docker image
 
 ## Known bugs
 - There is currently a issue that linted files will not be restaged inside the pre-commit hook from husky.
-- `yarn ia` will run forever and cant successfully install the depencies for the frontend and backend. Just navigate in both folders and run `yarn`
 
 ## Screenshots
 

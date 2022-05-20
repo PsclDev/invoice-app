@@ -11,7 +11,7 @@
     "dev": "concurrently -n frontend,backend \"yarn dev:frontend\" \"yarn:dev:backend\"",
     "dev:frontend": "cd frontend && yarn dev",
     "dev:backend": "cd backend && yarn start:dev",
-    "ia": "npx npm-run-all -l -p -c --aggregate-output 'i:*'",
+    "ia": "npx concurrently -n frontend,backend \"yarn\" \"cd frontend && yarn\" \"cd backend && yarn\"",
     "i:frontend": "cd frontend/ && yarn",
     "i:backend": "cd backend/ && yarn",
     "lint": "concurrently -n frontend,backend \"yarn lint:frontend\" \"yarn lint:backend\"",
