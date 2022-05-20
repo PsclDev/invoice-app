@@ -17,10 +17,10 @@
     "lint": "concurrently -n frontend,backend \"yarn lint:frontend\" \"yarn lint:backend\"",
     "lint:frontend": "cd frontend && yarn lint",
     "lint:backend": "cd backend && yarn lint",
-    "lint:hook": "concurrently -n frontend,backend \"yarn hook:frontend\" \"yarn hook:backend\"",
-    "hook:frontend": "cd frontend && yarn lintfix && yarn lint",
-    "hook:backend": "cd backend && yarn lintfix && yarn lint",
     "prepare": "husky install",
+    "precommit": "npx concurrently -n frontend,backend \"yarn\" \"cd frontend && yarn precommit\" \"cd backend && yarn precommit\"",
+    "precommit:frontend": "cd backend/ && yarn precommit",
+    "precommit:backend": "cd backend/ && yarn precommit",
     "test:frontend": "cd frontend && yarn jest",
     "test:backend": "cd backend && yarn jest",
     "test:backend-watch": "cd backend && yarn jest --watch",
@@ -31,6 +31,6 @@
     "@commitlint/config-conventional": "^16.0.0",
     "concurrently": "^7.0.0",
     "husky": "^7.0.4",
-    "npm-run-all": "^4.1.5"
+    "lint-staged": "^12.4.1"
   }
 }

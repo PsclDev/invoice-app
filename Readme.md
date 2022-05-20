@@ -10,7 +10,6 @@
   - [Postman](#postman)
   - [Git / Pre-Commit hook](#git)
   - [Continuous Integration](#ci)
-  - [Known bugs](#known-bugs)
 
 # Invoice-App
 This app allows you to create offers and invoices for your business. Its generates a pdf which can be send by mail or email. You can manage your clients which are split up in two types: private and company clients.
@@ -46,7 +45,6 @@ If you are using `npm` just replace the `yarn` keyword with `npm run`
 
 Access the app with `http://localhost:3000`
 
-
 ## Postman
 If you are importing the postman collection you just need to edit the Folder Varible `base_url` and `v1`. 
 
@@ -68,11 +66,7 @@ It will always run some github actions for both the frontend and backend. It wil
 
 if you `merge` or `push` to `master` branch it will create a new docker image
 
-## Known bugs
-- There is currently a issue that linted files will not be restaged inside the pre-commit hook from husky.
-
 ## Screenshots
-
 ### Desktop
 | Dark | Light |
 | ---- | ----- |
