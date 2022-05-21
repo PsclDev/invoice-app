@@ -1,7 +1,4 @@
-export enum SettingType {
-  PDF = 'PDF',
-  MAIL = 'MAIL',
-}
+import { SettingType } from './enums';
 
 export interface SettingInterface {
   id: string;

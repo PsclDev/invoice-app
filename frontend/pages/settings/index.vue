@@ -25,7 +25,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
-import SettingModule from '~/store/client';
+import SettingModule from '~/store/setting';
 import { Setting } from '~/models/setting';
 
 export default Vue.extend({

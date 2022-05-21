@@ -102,8 +102,7 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
 import { Document } from '~/models/document';
-import { DocumentType } from '~/types/document';
-import { ViewMode } from '~/types/viewMode';
+import { ViewMode, DocumentType } from '~/types';
 import { getDate, getDocumentType, getMutableDocument } from '~/utils/helper';
 
 export default Vue.extend({

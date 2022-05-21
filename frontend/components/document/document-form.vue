@@ -104,8 +104,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Document } from '~/models/document';
-import { ViewMode } from '~/types';
-import { DocumentType } from '~/types/document';
+import { ViewMode, DocumentType } from '~/types';
 import { getDate, getMutableDocument } from '~/utils/helper';
 
 export default Vue.extend({

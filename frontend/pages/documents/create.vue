@@ -85,9 +85,7 @@ import { Client } from '~/models/client';
 import { Document } from '~/models/document';
 import DocumentModule from '~/store/document';
 import ClientModule from '~/store/client';
-import { ViewMode } from '~/types/viewMode';
-import { ClientType } from '~/types/client';
-import { DocumentType } from '~/types/document';
+import { ViewMode, DocumentType, ClientType } from '~/types';
 
 export default Vue.extend({
   name: 'CreateDocumentdPage',

@@ -1,4 +1,5 @@
-import { SettingInterface, SettingType } from '~/types/setting';
+import { SettingType } from '~/types';
+import { SettingInterface } from '~/types/setting';
 
 export class Setting implements SettingInterface {
   id!: string;

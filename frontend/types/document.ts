@@ -1,7 +1,3 @@
-export enum DocumentType {
-  OFFER = 'offer',
-  INVOICE = 'invoice',
-}
 export interface DocumentInterface {
   id: string;
   clientId: string;

@@ -1,5 +1,6 @@
 import { Document } from './document';
-import { ClientInterface, Gender } from '~/types/client';
+import { ClientInterface } from '~/types/client';
+import { Gender } from '~/types';
 
 export class Client implements ClientInterface {
   id!: string;
