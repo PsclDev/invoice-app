@@ -19,12 +19,13 @@
       </div>
     </template>
     <div class="row mb-4">
-      <App-Gender-Select
+      <App-Select
         v-model="mutableClient.gender"
         class="col-sm-4 mb-3 mb-sm-0"
-        :title="$t('clients.gender')"
         :view-mode="viewMode"
-      ></App-Gender-Select>
+        labels="gender"
+        :type="Gender"
+      ></App-Select>
       <App-Input
         v-model="mutableClient.firstname"
         class="col-sm-4 mb-3 mb-sm-0"
@@ -109,9 +110,8 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
 import { Client } from '~/models/client';
-import { ViewMode } from '~/types/viewMode';
+import { ViewMode, ClientType, Gender } from '~/types';
 import { Document } from '~/models/document';
-import { ClientType } from '~/types/client';
 import { getMutableClient, getDocumentsLength } from '~/utils/helper';
 
 export default Vue.extend({
@@ -138,6 +138,7 @@ export default Vue.extend({
     return {
       ClientType,
       ViewMode,
+      Gender,
       shadowClient: {} as Client,
       mutableClient: {} as Client,
     };

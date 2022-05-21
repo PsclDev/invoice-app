@@ -11,15 +11,10 @@
     "delete_confirm": "Confirm delete"
   },
   "common": {
+    "identifier": "Id",
     "createdAt": "Created At",
-    "updatedAt": "Updated At"
-  },
-  "gender": {
-    "title": "Gender",
-    "choose": "Choose your gender",
-    "male": "Male",
-    "female": "Female",
-    "divers": "Divers"
+    "updatedAt": "Updated At",
+    "select": "Select"
   },
   "clients": {
     "create": "Create new client",
@@ -57,5 +52,34 @@
   },
   "settings": {
     "create": "Create new Key-Value"
+  },
+  "enums": {
+    "view_mode": {
+      "title": "Viewmode",
+      "show": "Show",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "client_type": {
+      "title": "Clienttype",
+      "private": "Private",
+      "company": "Company"
+    },
+    "gender": {
+      "title": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "divers": "Divers"
+    },
+    "document_type": {
+      "title": "Documenttype",
+      "offer": "Offer",
+      "invoice": "Invoice"
+    },
+    "setting_type": {
+      "title": "Settingtype",
+      "pdf": "Pdf",
+      "mail": "Mail"
+    }
   }
 }
