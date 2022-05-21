@@ -1,22 +1,22 @@
 <template>
   <div class="row">
     <div class="col-8 col-md-6 mb-2">
-      <AppSearch :clients="store.Clients" @filtered="onFilterChanged" />
-    </div>
-    <div class="col text-center">
-      <button
-        class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"
-        @click="create"
-      >
-        {{ $t('settings.create') }}
-      </button>
+      <AppSearch :settings="store.Settings" @filtered="onFilterChanged" />
     </div>
     <div class="mt-5 col-12">
       <div v-if="isLoading" class="text-center">
         <AppSpinner />
       </div>
       <div v-else>
-        <h1>Todo</h1>
+        <template v-for="key in Object.keys(SettingType)">
+          <SettingContainer
+            v-if="settings.filter((s) => s.type === key).length > 0"
+            :key="key"
+            :type="key"
+            :settings="settings.filter((s) => s.type === key)"
+            class="mb-2"
+          />
+        </template>
       </div>
     </div>
   </div>
@@ -27,11 +27,13 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import SettingModule from '~/store/setting';
 import { Setting } from '~/models/setting';
+import { SettingType } from '~/types';
 
 export default Vue.extend({
   name: 'SettingssPage',
   data() {
     return {
+      SettingType,
       store: getModule(SettingModule, this.$store),
       filteredList: [] as Setting[],
       isLoading: false,
@@ -40,6 +42,12 @@ export default Vue.extend({
   computed: {
     settings(): Setting[] {
       return this.filteredList;
+    },
+    mailSettings(): Setting[] {
+      return this.settings.filter((s) => s.type === SettingType.MAIL);
+    },
+    pdfSettings(): Setting[] {
+      return this.settings.filter((s) => s.type === SettingType.PDF);
     },
   },
   watch: {
@@ -55,9 +63,6 @@ export default Vue.extend({
       this.isLoading = true;
       await this.store.getSettings();
       this.isLoading = false;
-    },
-    create() {
-      //   #TODO
     },
     onFilterChanged(filteredList: Setting[]) {
       this.filteredList = filteredList;

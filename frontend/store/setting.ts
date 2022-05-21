@@ -1,5 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { Setting } from '~/models/setting';
+import { SettingType } from '~/types';
 import { $axios } from '~/utils/axios';
 
 @Module({
@@ -21,11 +22,12 @@ export default class SettingModule extends VuexModule {
   }
 
   @Mutation
-  setSetting(setting: Setting, remove: boolean = false) {
+  setSetting(setting: Setting) {
     const settings = this.settings.filter(
       (c) => c.id !== setting.id && c.id !== undefined
     );
-    if (!remove) settings.push(setting);
+    
+    settings.push(setting);
     this.settings = settings;
   }
 
@@ -45,6 +47,16 @@ export default class SettingModule extends VuexModule {
     return await $axios.$get(this.PREFIX);
   }
 
+  @Action({ commit: 'newSetting', rawError: true })
+  createLocalSetting(type: SettingType): Setting {
+    return {
+      id: '1',
+      type,
+      key: '',
+      value: ''
+    } as Setting;
+  }
+
   @Action({ commit: 'setSetting', rawError: true })
   async createSetting(setting: Setting): Promise<Setting> {
     return await $axios.$post(`${this.PREFIX}`, setting);
@@ -52,7 +64,8 @@ export default class SettingModule extends VuexModule {
 
   @Action({ commit: 'setSetting', rawError: true })
   async updateSetting(setting: Setting): Promise<Setting> {
-    return await $axios.$patch(`${this.PREFIX}/${setting.id}`, setting);
+    await $axios.$patch(`${this.PREFIX}/${setting.id}`, setting);
+    return setting;
   }
 
   @Action({ commit: 'delSetting', rawError: true })

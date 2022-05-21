@@ -51,7 +51,9 @@
     }
   },
   "settings": {
-    "create": "Create new Key-Value"
+    "create": "Create new Key-Value",
+    "key": "Key",
+    "value": "Value"
   },
   "enums": {
     "view_mode": {

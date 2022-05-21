@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { Client } from '~/models/client';
 import { Document } from '~/models/document';
+import { Setting } from '~/models/setting';
 import { ClientType, DocumentType } from '~/types';
 
 export function getDate(
@@ -32,4 +33,8 @@ export function getDocumentsLength(client: Client): number {
 
 export function getMutableDocument(document: Document): Document {
   return { ...document } as Document;
+}
+
+export function getMutableSetting(setting: Setting): Setting {
+  return { ...setting } as Setting;
 }

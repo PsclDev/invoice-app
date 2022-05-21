@@ -51,7 +51,9 @@
     }
   },
   "settings": {
-    "create": "Neuen Key-Value hinzufügen"
+    "create": "Neuen Key-Value hinzufügen",
+    "key": "Schlüssel",
+    "value": "Wert"
   },
   "enums": {
     "view_mode": {

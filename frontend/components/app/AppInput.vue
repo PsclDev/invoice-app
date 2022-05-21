@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="title" class="form-label">
+    <label v-if="!hideLabel" :for="title" class="form-label">
       {{ title }}
     </label>
     <div v-if="viewMode === ViewMode.EDIT">
@@ -25,6 +25,10 @@ import { ViewMode } from '~/types';
 export default Vue.extend({
   name: 'AppInput',
   props: {
+    hideLabel: {
+      type: Boolean,
+      default: false,
+    },
     title: {
       type: String,
       required: true,
