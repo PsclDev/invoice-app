@@ -8,7 +8,8 @@ import { $axios } from '~/utils/axios';
   namespaced: false,
 })
 export default class StatisticsModule extends VuexModule {
-  readonly PREFIX: string = '/statistics';
+  readonly VERSION :string = '/v1'
+  readonly PREFIX: string = `${this.VERSION}/statistics`;
 
   statistics!: Statistics;
 

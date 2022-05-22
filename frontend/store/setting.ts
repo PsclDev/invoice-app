@@ -9,7 +9,8 @@ import { $axios } from '~/utils/axios';
   namespaced: false,
 })
 export default class SettingModule extends VuexModule {
-  readonly PREFIX: string = '/setting';
+  readonly VERSION :string = '/v1'
+  readonly PREFIX: string = `${this.VERSION}/setting`;
   settings: Array<Setting> = [];
 
   get Settings() {

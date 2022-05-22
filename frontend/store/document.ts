@@ -8,7 +8,8 @@ import { $axios } from '~/utils/axios';
   namespaced: false,
 })
 export default class DocumentModule extends VuexModule {
-  readonly PREFIX: string = '/document';
+  readonly VERSION :string = '/v1'
+  readonly PREFIX: string = `${this.VERSION}/document`;
   readonly OFFER: string = '/offer';
   readonly INVOICE: string = '/invoice';
 
