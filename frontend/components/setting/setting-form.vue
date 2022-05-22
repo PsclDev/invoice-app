@@ -17,18 +17,10 @@
       :view-mode="viewMode"
     ></App-Input>
     <div class="col-sm-2 d-flex actions gap-sm-2">
-      <button
-        class="col-4 btn btn-link"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="Tooltip on top"
-      >
-        <font-awesome-icon :icon="['fas', 'info']" />
-      </button>
-      <button class="col-4 btn btn-link" @click="save">
+      <button class="col-6 btn btn-link" @click="save">
         <font-awesome-icon :icon="['fas', 'save']" />
       </button>
-      <button class="col-4 btn btn-link" @click="remove">
+      <button class="col-6 btn btn-link" @click="remove">
         <font-awesome-icon :icon="['fas', 'trash']" />
       </button>
     </div>
@@ -72,6 +64,7 @@ export default Vue.extend({
     setSetting() {
       this.mutableSetting = getMutableSetting(this.value);
     },
+    info() {},
     save() {
       if (this.mutableSetting.id === '1')
         this.store.createSetting(this.mutableSetting);
