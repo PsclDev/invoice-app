@@ -12,7 +12,7 @@ export function getDate(
   switch (format) {
     case DateTimeFormat.FULL: toFormat = 'DD.MM.YYYY HH:MM:ss'; break;
     case DateTimeFormat.DATE: toFormat = 'DD.MM.YYYY'; break;
-    case DateTimeFormat.TIME: toFormat = 'HH:MM:ss'; break;
+    case DateTimeFormat.TIME: toFormat = 'HH:mm:ss'; break;
   }
 
   if (!date) return dayjs().format(toFormat);
