@@ -1,3 +1,9 @@
+export enum DateTimeFormat {
+  FULL = 'FULL',
+  DATE = 'DATE',
+  TIME = 'TIME'
+}
+
 export enum ViewMode {
   SHOW = 'SHOW',
   EDIT = 'EDIT',
@@ -25,4 +31,4 @@ export enum SettingType {
   MAIL = 'MAIL',
 }
 
-export type AppEnums = ViewMode | ClientType | Gender | DocumentType | SettingType;
+export type AppEnums = DateTimeFormat | ViewMode | ClientType | Gender | DocumentType | SettingType;

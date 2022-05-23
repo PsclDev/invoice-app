@@ -36,11 +36,11 @@
           <div v-if="document.createdAt && document.updatedAt" class="row mb-2">
             <div class="col-sm-6 id text-center">
               {{ $t('common.createdAt') }}
-              {{ getDate(document.createdAt, true) }}
+              {{ getDate(document.createdAt, DateTimeFormat.FULL) }}
             </div>
             <div class="col-sm-6 id text-center">
               {{ $t('common.updatedAt') }}
-              {{ getDate(document.updatedAt, true) }}
+              {{ getDate(document.updatedAt, DateTimeFormat.FULL) }}
             </div>
           </div>
           <DocumentForm
@@ -102,7 +102,7 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
 import { Document } from '~/models/document';
-import { ViewMode, DocumentType } from '~/types';
+import { DateTimeFormat, ViewMode, DocumentType } from '~/types';
 import { getDate, getDocumentType, getMutableDocument } from '~/utils/helper';
 
 export default Vue.extend({
@@ -115,6 +115,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      DateTimeFormat,
       ViewMode,
       DocumentType,
       getDate,

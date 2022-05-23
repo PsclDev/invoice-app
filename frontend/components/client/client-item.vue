@@ -42,11 +42,11 @@
         <div v-if="client.createdAt && client.updatedAt" class="row mb-2">
           <div class="col-sm-6 id text-center">
             {{ $t('common.createdAt') }}
-            {{ getDate(client.createdAt, true) }}
+            {{ getDate(client.createdAt, DateTimeFormat.FULL) }}
           </div>
           <div class="col-sm-6 id text-center">
             {{ $t('common.updatedAt') }}
-            {{ getDate(client.updatedAt, true) }}
+            {{ getDate(client.updatedAt, DateTimeFormat.FULL) }}
           </div>
         </div>
         <ClientForm
@@ -65,7 +65,7 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import ClientModule from '~/store/client';
 import { Client } from '~/models/client';
-import { ViewMode, ClientType } from '~/types';
+import { DateTimeFormat, ViewMode, ClientType } from '~/types';
 import {
   getDate,
   getClientType,
@@ -83,6 +83,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      DateTimeFormat,
       ClientType,
       getDate,
       getClientType,
