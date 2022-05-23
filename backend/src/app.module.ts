@@ -45,6 +45,7 @@ import {
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'files'),
+      serveRoot: '/files',
       exclude: ['/v1*'],
     }),
   ],
