@@ -16,6 +16,9 @@
     "updatedAt": "Updated Am",
     "select": "Auswählen"
   },
+  "footer": {
+    "last_checked": "Letzte Prüfung"
+  },
   "clients": {
     "create": "Neuen Kunden anlegen",
     "new_firstname": "Neuer",

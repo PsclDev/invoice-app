@@ -16,6 +16,9 @@
     "updatedAt": "Updated At",
     "select": "Select"
   },
+  "footer": {
+    "last_checked": "Last Check"
+  },
   "clients": {
     "create": "Create new client",
     "new_firstname": "New",
