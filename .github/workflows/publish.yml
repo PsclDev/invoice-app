@@ -22,7 +22,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.ACTOR }}
-          password: ${{ secrets.DC_BOTS_PAT }}
+          password: ${{ secrets.INVOICE_APP_PAT }}
 
       - name: Frontend - Build and push image
         uses: docker/build-push-action@v3
