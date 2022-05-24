@@ -1,4 +1,6 @@
-import { ClientInterface, Gender } from '~/types/client';
+import { Document } from './document';
+import { ClientInterface } from '~/types/client';
+import { Gender } from '~/types';
 
 export class Client implements ClientInterface {
   id!: string;
@@ -7,11 +9,11 @@ export class Client implements ClientInterface {
   lastname!: string;
   email!: string;
   street!: string;
-  postalCode!: number;
+  postalCode!: string;
   city!: string;
-  documents?: Document[] | undefined;
+  documents!: Document[];
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
   company!: string;
-  vat!: number;
+  vat!: string;
 }

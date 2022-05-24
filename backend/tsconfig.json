@@ -18,6 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@config": ["config/"],
+      "@config/*": ["config/*"],
+      "@modules": ["modules/"],
+      "@modules/*": ["modules/*"],
       "@helper": ["util/helper/"],
       "@helper/*": ["util/helper/*"],
       "@testing": ["util/testing/"],

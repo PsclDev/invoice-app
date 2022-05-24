@@ -18,13 +18,17 @@ body {
   font-size: 1rem;
   color: $white;
   --body-text: #{$white};
+  --primary-background: #{$darkblue};
   --secondary-background: #{$lightblue};
+  --tertiary-background: #{$lighterblue};
 
   &.light {
     background-color: $white;
     color: $darkblue;
     --body-text: #{$darkblue};
+    --primary-background: #{$white};
     --secondary-background: #{$lightwhite};
+    --tertiary-background: #{$lighterwhite};
   }
 }
 
@@ -55,4 +59,43 @@ body {
   color: $darkblue;
   font-weight: bolder;
   border: unset;
+}
+
+.btn-info {
+  @include gradientInfoBackground;
+  color: $darkblue;
+  font-weight: bolder;
+  border: unset;
+}
+
+.btn-link {
+  @include gradientPrimaryText;
+  color: #3ee577;
+  font-weight: bolder;
+  border: unset;
+  text-decoration: none;
+}
+
+.form-control,
+.form-control:focus,
+.form-select,
+.form-select:focus {
+  color: $body-text;
+  border-color: $secondary-background;
+  background-color: $primary-background;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.form-check-input:checked {
+  background-color: $green;
+  border-color: $green;
 }

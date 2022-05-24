@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <div class="collapse d-flex flex-column">
+  <AppCard class="d-flex flex-column">
+    <template #default>
       <div
-        class="ml-2 mr-4 collapse-header d-flex align-items-center justify-content-between"
-        @click="toggleOpen"
+        class="me-1 collapse-header d-flex align-items-center justify-content-between"
       >
-        <slot name="header"></slot>
-        <div class="icon">
-          <font-awesome-icon
-            :icon="isOpen ? ['fas', 'chevron-up'] : ['fas', 'chevron-down']"
-          />
+        <div @click="toggleOpen">
+          <slot name="header"></slot>
+        </div>
+        <div class="icons">
+          <slot name="action"></slot>
+          <button class="btn btn-link icon" @click="toggleOpen">
+            <font-awesome-icon
+              :icon="isOpen ? ['fas', 'chevron-up'] : ['fas', 'chevron-down']"
+            />
+          </button>
         </div>
       </div>
       <div class="my-3 collapse-body" :class="isOpen ? '' : 'hide'">
@@ -17,15 +21,15 @@
           <slot name="body"></slot>
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </AppCard>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'ClientList',
+  name: 'AppCollapse',
   data() {
     return {
       isOpen: false,
@@ -40,11 +44,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.collapse {
-  background: $secondary-background;
-  border-radius: 10px;
-}
-
 .collapse-header {
   height: 3rem;
 }
@@ -54,7 +53,7 @@ export default Vue.extend({
 }
 
 .icon {
-  cursor: pointer;
+  color: $body-text;
 }
 
 .hide {

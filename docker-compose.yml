@@ -1,14 +1,11 @@
-version: '3'
+version: '3.9'
 services:
-  invoice-app-frontend:
-    image: invoice-app-frontend:latest
-    environment:
-      PORT: 3000 
+  frontend:
+    image: ghcr.io/pscldev/invoice_app__frontend:latest
     ports:
       - 3000:3000
-  invoice-app-backend:
-    image: invoice-app-backend:latest
-    environment:
-      PORT: 3010
+
+  backend:
+    image: ghcr.io/pscldev/invoice_app__backend:latest
     ports:
       - 3010:3010

@@ -1,6 +1,6 @@
 <template>
   <div class="no-select d-flex justify-content-center">
-    <div class="navbar w-50">
+    <div class="navbar px-3 w-50">
       <NuxtLink to="/" exact class="nav-item">
         <font-awesome-icon class="link-icon" :icon="['fas', 'chart-pie']" />
         <span>{{ $t('home') }}</span>
@@ -10,9 +10,15 @@
         <font-awesome-icon class="link-icon" :icon="['fas', 'users']" />
         <span>{{ $tc('client', 2) }}</span>
       </NuxtLink>
-      <NuxtLink to="/documents" exact class="nav-item">
+
+      <NuxtLink to="/documents" class="nav-item">
         <font-awesome-icon class="link-icon" :icon="['fas', 'file-invoice']" />
         <span>{{ $tc('document', 2) }}</span>
+      </NuxtLink>
+
+      <NuxtLink to="/settings" exact class="nav-item">
+        <font-awesome-icon class="link-icon" :icon="['fas', 'cog']" />
+        <span>{{ $tc('setting', 2) }}</span>
       </NuxtLink>
     </div>
 
@@ -107,7 +113,7 @@ a.nuxt-link-active {
 
 @media (max-width: 768px) {
   .navbar {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
   }
 
   span {

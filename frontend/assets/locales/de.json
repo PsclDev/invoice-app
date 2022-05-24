@@ -1,5 +1,90 @@
 {
   "home": "Übersicht",
   "client": "Kunde | Kunden",
-  "document": "Dokument | Dokumente"
+  "setting": "Einstellung | Einstellungen",
+  "document": "Dokument | Dokumente",
+  "button": {
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "delete_confirm": "Löschen bestätigen"
+  },
+  "common": {
+    "identifier": "Id",
+    "createdAt": "Erstellt Am",
+    "updatedAt": "Updated Am",
+    "select": "Auswählen"
+  },
+  "footer": {
+    "last_checked": "Letzte Prüfung"
+  },
+  "clients": {
+    "create": "Neuen Kunden anlegen",
+    "new_firstname": "Neuer",
+    "new_lastname": "Kunde",
+    "company": "Firma",
+    "vat": "VAT.",
+    "gender": "Geschlecht",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "email": "E-Mail",
+    "street": "Straße",
+    "postalCode": "Postleitzahl",
+    "city": "Ort"
+  },
+  "documents": {
+    "create": "Neues Dokument erstellen",
+    "offer": "Angebot",
+    "invoice": "Rechnung",
+    "clientId": "Kunden Id",
+    "invoiceNr": "Rechnungs Nr.",
+    "dateOfIssue": "Ausstellungsdatum",
+    "description": "Beschreibung",
+    "subTotal": "Zwischensumme",
+    "tax": "Steuern",
+    "alreadyPaid": "Bereits Bezahlt",
+    "total": "Gesamtbetrag",
+    "dueDate": "Fälligkeitsdatum",
+    "send_modal": {
+      "title": "Dokument versenden",
+      "body": "Wie soll das Dokument versendet werden?",
+      "print": "Drucken",
+      "mail": "E-Mail"
+    }
+  },
+  "settings": {
+    "create": "Neuen Key-Value hinzufügen",
+    "key": "Schlüssel",
+    "value": "Wert"
+  },
+  "enums": {
+    "view_mode": {
+      "title": "Ansicht",
+      "show": "Show",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "client_type": {
+      "title": "Kundentyp",
+      "private": "Private",
+      "company": "Company"
+    },
+    "gender": {
+      "title": "Geschlecht",
+      "male": "Männlich",
+      "female": "Weiblich",
+      "divers": "Divers"
+    },
+    "document_type": {
+      "title": "Dokumenttyp",
+      "offer": "Offer",
+      "invoice": "Invoice"
+    },
+    "setting_type": {
+      "title": "Einstellungstyp",
+      "pdf": "Pdf",
+      "mail": "Mail"
+    }
+  }
 }

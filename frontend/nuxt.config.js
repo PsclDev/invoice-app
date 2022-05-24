@@ -27,13 +27,17 @@ export default {
     scss: [
       '../node_modules/bootstrap/scss/_functions.scss',
       '../node_modules/bootstrap/scss/_variables.scss',
+      'vue-multiselect/dist/vue-multiselect.min.css',
       '~assets/scss/mixins.scss',
       '~assets/scss/variables.scss',
     ],
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/axios-accessor.ts' }],
+  plugins: [
+    { src: '@/plugins/bootstrap.ts', mode: 'client' },
+    { src: '@/plugins/axios-accessor.ts' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -68,11 +72,16 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
+    '@nuxtjs/dayjs',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://dev.home:3010',
+    baseURL: process.env.BASE_URL,
+  },
+
+  publicRuntimeConfig: {
+    apiBaseUrl: process.env.BASE_URL,
   },
 
   i18n: {
@@ -92,6 +101,10 @@ export default {
     vueI18n: {
       messages: { en, de },
     },
+  },
+
+  dayjs: {
+    plugins: ['customParseFormat'],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -3,6 +3,9 @@ name: backend
 on:
   [push]
 
+env: 
+  APP_IS_RUNNING_IN_PIPELINE: true;
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -36,13 +39,10 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn i:backend
+        run: cd backend && yarn
 
-      - name: Run linter 👀
-        run: yarn lint:backend
-
-      - name: Prepare Tests 💉
-        run: yarn add sqlite3
+      # - name: Run linter 👀
+      #   run: cd backend && yarn lint
 
       - name: Run tests 🧪
-        run: yarn test:backend
+        run: cd backend && yarn test

@@ -9,21 +9,31 @@
 }
 
 @mixin gradientDangerText {
-  background: linear-gradient(147deg, #f71735 0%, #db3445 74%);
+  background: linear-gradient(147deg, $red1735 0%, $red-light 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 @mixin gradientDangerBackground {
-  background-image: linear-gradient(147deg, #f71735 0%, #db3445 74%);
+  background-image: linear-gradient(147deg, $red 0%, $red-light 74%);
 }
 
 @mixin gradientWarningText {
-  background: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+  background: linear-gradient(315deg, $orange 0%,  $orange-light 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 @mixin gradientWarningBackground {
-  background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+  background-image: linear-gradient(315deg, $orange 0%, $orange-light 74%);
+}
+
+@mixin gradientInfoText {
+  background-image: linear-gradient(315deg, $blue 0%, $blue-light 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientInfoBackground {
+  background-image: linear-gradient(315deg, $blue 0%, $blue-light 74%);
 }

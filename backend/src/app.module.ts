@@ -1,21 +1,53 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { DocumentModule } from './document/document.module';
-import { ClientModule } from './client/client.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TerminusModule } from '@nestjs/terminus';
-import { HealthController } from './health/health.controller';
 import { HttpModule } from '@nestjs/axios';
-import { ConfigModule } from '@nestjs/config';
-import configuration from 'config/configuration';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { ConfigModule } from './config/config.module';
+import { ConfigService } from '@config/config.service';
+import {
+  ClientModule,
+  DocumentModule,
+  MailModule,
+  StatisticModule,
+  SettingModule,
+  HealthController,
+} from '@modules';
 @Module({
   imports: [
-    ConfigModule.forRoot({ load: [configuration] }),
-    HttpModule,
-    TerminusModule,
-    TypeOrmModule.forRoot(),
     ClientModule,
+    ConfigModule,
     DocumentModule,
+    HttpModule,
+    MailModule,
+    StatisticModule,
+    SettingModule,
+    TerminusModule,
+    TypeOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.database.host,
+        port: config.database.port,
+        username: config.database.user,
+        password: config.database.pass,
+        database: config.database.name,
+        entities: [config.database.entitiesPath],
+        synchronize: config.database.synchronize,
+        migrationsRun: config.database.migrationsRun,
+        migrations: [config.database.migrationsPath],
+        cli: {
+          migrationsDir: 'src/migrations',
+        },
+      }),
+      inject: [ConfigService],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'files'),
+      serveRoot: '/files',
+      exclude: ['/v1*'],
+    }),
   ],
   controllers: [AppController, HealthController],
 })

@@ -1,20 +1,17 @@
-FROM node:lts-bullseye
+FROM node:lts as builder
 
-RUN mkdir -p /app
 WORKDIR /app
 
-RUN apt update && apt upgrade -y
-
-COPY package.json .
-COPY yarn.lock .
-
-RUN yarn install
-
 COPY . .
+
+RUN yarn install \
+  --prefer-offline \
+  --frozen-lockfile \
+  --non-interactive \
+  --production=false
+
 RUN yarn build
 
-EXPOSE $PORT
-ENV NUXT_PORT=$PORT
-ENV NUXT_HOST=0.0.0.0
+EXPOSE 3000
 
 CMD [ "yarn", "start" ]
