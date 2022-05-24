@@ -38,8 +38,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: cd frontend && yarn
 
-      - name: Run linter 👀
-        run: cd frontend && yarn lint
+      # - name: Run linter 👀
+      #   run: cd frontend && yarn lint
 
       # - name: Run tests 🧪
       #   run: yarn test:frontend

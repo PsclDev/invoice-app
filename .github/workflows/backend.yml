@@ -41,8 +41,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: cd backend && yarn
 
-      - name: Run linter 👀
-        run: cd backend && yarn lint
+      # - name: Run linter 👀
+      #   run: cd backend && yarn lint
 
       - name: Run tests 🧪
         run: cd backend && yarn test
