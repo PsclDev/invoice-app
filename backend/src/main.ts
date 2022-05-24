@@ -20,12 +20,14 @@ async function bootstrap() {
 
   app.setGlobalPrefix('v1', { exclude: ['', 'health'] });
 
-  const documentBuilder = new DocumentBuilder()
-    .setTitle('Invoice-App')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, documentBuilder);
-  SwaggerModule.setup('api', app, document);
+  if (config.nodeEnv === 'development' || config.nodeEnv === 'dev') {
+    const documentBuilder = new DocumentBuilder()
+      .setTitle('Invoice-App')
+      .setVersion('1.0')
+      .build();
+    const document = SwaggerModule.createDocument(app, documentBuilder);
+    SwaggerModule.setup('docs', app, document);
+  }
 
   const port = config.httpPort;
   await app.listen(port);
