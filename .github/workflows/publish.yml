@@ -28,13 +28,13 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: frontend/Dockerfile
+          context: "{{defaultContext}}:frontend"
           tags: ghcr.io/pscldev/invoice_app__frontend:latest
 
       - name: Backend - Build and push image
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: backend/Dockerfile
+          context: "{{defaultContext}}:backend"
           tags: ghcr.io/pscldev/invoice_app__backend:latest
       
