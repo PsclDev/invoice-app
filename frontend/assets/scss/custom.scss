@@ -69,7 +69,8 @@ body {
 }
 
 .btn-link {
-  @include gradientInfoText;
+  @include gradientPrimaryText;
+  color: #3ee577;
   font-weight: bolder;
   border: unset;
   text-decoration: none;
