@@ -1,11 +1,11 @@
 version: '3.9'
 services:
   frontend:
-    image: ghcr.io/pscldev/invoice_app__frontend:latest
+    image: ghcr.io/pscldev/invoice-app/frontend:latest
     ports:
       - 3000:3000
 
   backend:
-    image: ghcr.io/pscldev/invoice_app__backend:latest
+    image: ghcr.io/pscldev/invoice-app/backend:latest
     ports:
       - 3010:3010
