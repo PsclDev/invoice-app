@@ -5,4 +5,8 @@ describe('StatisticController', () => {
     const module: TestingModule = await Test.createTestingModule({}).compile();
     expect(module).toBeDefined();
   });
+
+  it('should be true', () => {
+    expect(true).toBe(true);
+  });
 });

@@ -94,7 +94,7 @@ jobs:
 
   build-frontend-package:
       if: github.ref == 'refs/heads/master'
-      needs: [build-lint-and-test-frontend]
+      needs: [build-lint-and-test-frontend, build-lint-and-test-backend]
       runs-on: ubuntu-latest
 
       steps:
@@ -115,7 +115,7 @@ jobs:
   
   build-backend-package:
       if: github.ref == 'refs/heads/master'
-      needs: [build-lint-and-test-backend]
+      needs: [build-lint-and-test-frontend, build-lint-and-test-backend]
       runs-on: ubuntu-latest
 
       steps:
