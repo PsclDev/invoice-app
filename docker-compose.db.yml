@@ -1,16 +1,12 @@
 version: '3.9'
 services:
   frontend:
-    build:
-      context: frontend
-      dockerfile: Dockerfile
+    image: ghcr.io/pscldev/invoice-app/frontend:latest
     ports:
       - 3000:3000
 
   backend:
-    build:
-      context: backend
-      dockerfile: Dockerfile
+    image: ghcr.io/pscldev/invoice-app/backend:latest
     ports:
       - 3010:3010
 

@@ -9,7 +9,7 @@ import { $axios } from '~/utils/axios';
   namespaced: false,
 })
 export default class ClientModule extends VuexModule {
-  readonly VERSION :string = '/v1'
+  readonly VERSION: string = '/v1';
   readonly PREFIX: string = `${this.VERSION}/client`;
   readonly COMPANY: string = '/company';
   clients: Array<Client> = [];

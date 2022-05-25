@@ -9,7 +9,7 @@ import { $axios } from '~/utils/axios';
   namespaced: false,
 })
 export default class SettingModule extends VuexModule {
-  readonly VERSION :string = '/v1'
+  readonly VERSION: string = '/v1';
   readonly PREFIX: string = `${this.VERSION}/setting`;
   settings: Array<Setting> = [];
 
@@ -27,7 +27,7 @@ export default class SettingModule extends VuexModule {
     const settings = this.settings.filter(
       (c) => c.id !== setting.id && c.id !== undefined
     );
-    
+
     settings.push(setting);
     this.settings = settings;
   }
@@ -54,7 +54,7 @@ export default class SettingModule extends VuexModule {
       id: '1',
       type,
       key: '',
-      value: ''
+      value: '',
     } as Setting;
   }
 
