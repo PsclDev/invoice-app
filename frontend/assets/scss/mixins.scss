@@ -19,7 +19,7 @@
 }
 
 @mixin gradientWarningText {
-  background: linear-gradient(315deg, $orange 0%,  $orange-light 74%);
+  background: linear-gradient(315deg, $orange 0%, $orange-light 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

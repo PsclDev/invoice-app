@@ -10,9 +10,15 @@ export function getDate(
 ): string {
   let toFormat = '';
   switch (format) {
-    case DateTimeFormat.FULL: toFormat = 'DD.MM.YYYY HH:MM:ss'; break;
-    case DateTimeFormat.DATE: toFormat = 'DD.MM.YYYY'; break;
-    case DateTimeFormat.TIME: toFormat = 'HH:mm:ss'; break;
+    case DateTimeFormat.FULL:
+      toFormat = 'DD.MM.YYYY HH:MM:ss';
+      break;
+    case DateTimeFormat.DATE:
+      toFormat = 'DD.MM.YYYY';
+      break;
+    case DateTimeFormat.TIME:
+      toFormat = 'HH:mm:ss';
+      break;
   }
 
   if (!date) return dayjs().format(toFormat);

@@ -21,21 +21,21 @@ export default class HealthModule extends VuexModule {
   }
 
   @Mutation
-  setHealth(health: { apiRunning: boolean, dbConnected:boolean }) {
+  setHealth(health: { apiRunning: boolean; dbConnected: boolean }) {
     this.apiRunning = health.apiRunning;
     this.dbConnected = health.dbConnected;
   }
 
   @Action({ commit: 'setHealth', rawError: true })
-  async getHealth(): Promise<{ apiRunning: boolean, dbConnected: boolean }> {
+  async getHealth(): Promise<{ apiRunning: boolean; dbConnected: boolean }> {
     try {
       const res = await $axios.$get(this.PREFIX);
       const apiRunning = res.details.api.status === 'up';
       const dbConnected = res.details.database.status === 'up';
-      
-      return { apiRunning, dbConnected};
+
+      return { apiRunning, dbConnected };
     } catch {
-      return { apiRunning: false, dbConnected: false};
+      return { apiRunning: false, dbConnected: false };
     }
   }
 }
