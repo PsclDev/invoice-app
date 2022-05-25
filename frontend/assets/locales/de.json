@@ -19,6 +19,15 @@
   "footer": {
     "last_checked": "Letzte Prüfung"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "stats_update": "Statistiken zuletzt aktualisiert um",
+    "all_time": "Gesamtstatistiken",
+    "revenue": "Umsatz",
+    "tax": "Steuern",
+    "total_revenue": "Gesamumsatz",
+    "yearly": "Jährliche Statistik"
+  },
   "clients": {
     "create": "Neuen Kunden anlegen",
     "new_firstname": "Neuer",
@@ -61,14 +70,14 @@
   "enums": {
     "view_mode": {
       "title": "Ansicht",
-      "show": "Show",
-      "edit": "Edit",
-      "delete": "Delete"
+      "show": "Anzeigen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
     },
     "client_type": {
       "title": "Kundentyp",
-      "private": "Private",
-      "company": "Company"
+      "private": "Privat",
+      "company": "Firma"
     },
     "gender": {
       "title": "Geschlecht",
@@ -78,8 +87,8 @@
     },
     "document_type": {
       "title": "Dokumenttyp",
-      "offer": "Offer",
-      "invoice": "Invoice"
+      "offer": "Angebot",
+      "invoice": "Rechnung"
     },
     "setting_type": {
       "title": "Einstellungstyp",

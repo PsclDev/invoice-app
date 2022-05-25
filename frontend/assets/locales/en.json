@@ -19,6 +19,15 @@
   "footer": {
     "last_checked": "Last Check"
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "stats_update": "Stats updated today at",
+    "all_time": "All-Time Stats",
+    "revenue": "Revenue",
+    "tax": "Tax",
+    "total_revenue": "Total Revenue",
+    "yearly": "Yearly Stats"
+  },
   "clients": {
     "create": "Create new client",
     "new_firstname": "New",
