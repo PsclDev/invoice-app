@@ -5,6 +5,7 @@ export interface SettingInterface {
   type: SettingType;
   key: string;
   value: string;
+  deletable: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -17,10 +17,14 @@
       :view-mode="viewMode"
     ></App-Input>
     <div class="col-sm-2 d-flex actions gap-sm-2">
-      <button class="col-6 btn btn-link" @click="save">
+      <button class="col-6 btn btn-link" :disabled="!hasChanged" @click="save">
         <font-awesome-icon :icon="['fas', 'save']" />
       </button>
-      <button class="col-6 btn btn-link" @click="remove">
+      <button
+        class="col-6 btn btn-link"
+        :disabled="!mutableSetting.deletable"
+        @click="remove"
+      >
         <font-awesome-icon :icon="['fas', 'trash']" />
       </button>
     </div>
@@ -52,16 +56,29 @@ export default Vue.extend({
       ViewMode,
       SettingType,
       store: getModule(SettingModule, this.$store),
+      shadowSetting: {} as Setting,
       mutableSetting: {} as Setting,
+      hasChanged: false,
     };
   },
   watch: {
     value() {
       this.setSetting();
     },
+    mutableSetting: {
+      handler() {
+        const equal =
+          JSON.stringify(this.mutableSetting) ===
+          JSON.stringify(this.shadowSetting);
+
+        this.hasChanged = !equal;
+      },
+      deep: true,
+    },
   },
   methods: {
     setSetting() {
+      this.shadowSetting = getMutableSetting(this.value);
       this.mutableSetting = getMutableSetting(this.value);
     },
     info() {},

@@ -6,6 +6,7 @@ export class Setting implements SettingInterface {
   type!: SettingType;
   key!: string;
   value!: string;
+  deletable!: boolean;
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
 }
