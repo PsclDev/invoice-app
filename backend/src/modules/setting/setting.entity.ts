@@ -21,6 +21,9 @@ export class Setting implements SettingDto {
   @Column()
   value: string;
 
+  @Column()
+  deletable: boolean;
+
   @CreateDateColumn()
   createdAt?: Date;
 

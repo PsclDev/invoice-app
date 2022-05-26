@@ -11,12 +11,13 @@ export interface SettingDto {
   type: SettingType;
   key: string;
   value: string;
+  deletable: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 export class CreateSettingDto
-  implements Omit<SettingDto, 'id' | 'createdAt' | 'updatedAt'>
+  implements Omit<SettingDto, 'id' | 'deletable' | 'createdAt' | 'updatedAt'>
 {
   @ApiProperty({ enum: ['PDF', 'MAIL'] })
   @IsIn([SettingType.PDF, SettingType.MAIL])

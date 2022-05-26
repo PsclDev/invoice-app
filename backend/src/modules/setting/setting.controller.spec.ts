@@ -1,6 +1,15 @@
-import { HttpException, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  HttpException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { settingId, settingSeed, TestSqliteModule } from '@testing';
+import {
+  deletableSettingId,
+  nonDeletableSettingId,
+  settingSeed,
+  TestSqliteModule,
+} from '@testing';
 import { SettingController } from './setting.controller';
 import { SettingType } from './setting.dto';
 import { Setting } from './setting.entity';
@@ -52,11 +61,13 @@ describe('SettingController', () => {
 
   it('should update a setting', async () => {
     const value = 'xyz';
-    await settingController.updateSetting(settingId, {
+    await settingController.updateSetting(deletableSettingId, {
       value,
     });
 
-    const setting = (await settingController.findById(settingId)) as Setting;
+    const setting = (await settingController.findById(
+      deletableSettingId,
+    )) as Setting;
     expect(setting).toBeDefined();
     expect(setting.value).toBe(value);
   });
@@ -66,7 +77,7 @@ describe('SettingController', () => {
     expect(deleted).toBe(createdSettingId);
   });
 
-  it('should fail to delete a setting', async () => {
+  it('should fail to delete a setting because not found', async () => {
     const deleteClient = async () => {
       await settingController.deleteSetting('abcdefg');
     };
@@ -74,8 +85,16 @@ describe('SettingController', () => {
     expect(deleteClient()).rejects.toThrow(NotFoundException);
   });
 
+  it('should fail to delete a setting because not deletable', async () => {
+    const deleteClient = async () => {
+      await settingController.deleteSetting(nonDeletableSettingId);
+    };
+
+    expect(deleteClient()).rejects.toThrow(ForbiddenException);
+  });
+
   it('should find all settings', async () => {
     const clients = await settingController.findAll();
-    expect(clients.length).toBe(1);
+    expect(clients.length).toBe(2);
   });
 });

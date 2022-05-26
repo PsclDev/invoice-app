@@ -9,7 +9,8 @@ export const privateClientId = 'azx9d3g4';
 export const companyClientId = 'pla5b2i7';
 export const offerId = 'inc4sd71';
 export const invoiceId = 'dhc3l1k6';
-export const settingId = 'khu5l2k9';
+export const deletableSettingId = 'khu5l2k9';
+export const nonDeletableSettingId = 'cu28xhg7';
 
 const insertClients = async (entityManager: EntityManager) => {
   await entityManager.insert<Client>(Client, {
@@ -85,9 +86,18 @@ export const settingSeed = async () => {
   const entityManager = connection.createEntityManager();
 
   entityManager.insert<Setting>(Setting, {
-    id: settingId,
+    id: deletableSettingId,
     type: SettingType.MAIL,
     key: 'test',
     value: 'value',
+    deletable: true,
+  });
+
+  entityManager.insert<Setting>(Setting, {
+    id: nonDeletableSettingId,
+    type: SettingType.PDF,
+    key: 'important',
+    value: 'value',
+    deletable: false,
   });
 };
