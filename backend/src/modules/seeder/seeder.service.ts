@@ -15,11 +15,7 @@ export class SeederService implements OnApplicationBootstrap {
   async onApplicationBootstrap() {
     await this.baseData();
 
-    if (
-      (this.configService.nodeEnv === 'development' ||
-        this.configService.nodeEnv === 'dev') &&
-      !this.configService.disableSeeding
-    )
+    if (this.configService.devMode && !this.configService.disableSeeding)
       await this.devData();
     else this.logger.log('Disbaled development seeding');
   }
