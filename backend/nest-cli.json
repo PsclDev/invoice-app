@@ -8,5 +8,11 @@
       }
     ],
     "watchAssets": true
+  },
+  "generateOptions": {
+    "spec": {
+      "service": false,
+      "s": false
+    }
   }
 }
