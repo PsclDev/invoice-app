@@ -20,6 +20,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
     migrationsRun: Joi.bool().optional(),
     migrationsPath: Joi.string().optional(),
   }),
+  disableSeeding: Joi.bool().optional(),
   frontendUrl: Joi.string().required(),
   pdfBackupExport: Joi.string().optional(),
   mail: Joi.object().keys({
@@ -45,6 +46,7 @@ export class ConfigService {
     migrationsRun: Boolean(process.env.APP_RUN_MIGRATIONS) || true,
     migrationsPath: process.env.APP_MIGRATIONS_PATH || 'dist/migrations/*.js',
   };
+  disableSeeding = process.env.APP_DISABLE_SEEDING || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
   pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
   mail = {

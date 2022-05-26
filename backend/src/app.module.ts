@@ -10,10 +10,11 @@ import { ConfigService } from '@config/config.service';
 import {
   ClientModule,
   DocumentModule,
+  HealthController,
   MailModule,
   StatisticModule,
   SettingModule,
-  HealthController,
+  SeederModule,
 } from '@modules';
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import {
       serveRoot: '/files',
       exclude: ['/v1*'],
     }),
+    SeederModule,
   ],
   controllers: [AppController, HealthController],
 })
