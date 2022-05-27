@@ -71,6 +71,7 @@ if you `merge` or `push` to `master` branch it will create a new docker image
 ### Desktop
 | Dark | Light |
 | ---- | ----- |
+| ![](https://invoice-app.pscl.dev/statistics_view_dark.png) | ![](https://invoice-app.pscl.dev/statistics_view_light.png) |
 | ![](https://invoice-app.pscl.dev/client_view_dark.png) | ![](https://invoice-app.pscl.dev/client_view_light.png) |
 | ![](https://invoice-app.pscl.dev/client_edit_dark.png) | ![](https://invoice-app.pscl.dev/client_edit_light.png) |
 | ![](https://invoice-app.pscl.dev/document_view_dark.png) | ![](https://invoice-app.pscl.dev/document_view_light.png) |
@@ -78,9 +79,11 @@ if you `merge` or `push` to `master` branch it will create a new docker image
 | ![](https://invoice-app.pscl.dev/document_send_dark.png) | ![](https://invoice-app.pscl.dev/document_send_light.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_1.png) | ![](https://invoice-app.pscl.dev/document_create_light_1.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_2.png) | ![](https://invoice-app.pscl.dev/document_create_light_2.png) |
+| ![](https://invoice-app.pscl.dev/settings_view_dark.png) | ![](https://invoice-app.pscl.dev/settings_view_light.png) |
 ### Mobile
 | Dark | Light |
 | ---- | ----- |
+| ![](https://invoice-app.pscl.dev/statistics_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/statistics_view_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/client_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/client_view_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/client_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/client_edit_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_view_light_mobile.png) |
@@ -88,3 +91,4 @@ if you `merge` or `push` to `master` branch it will create a new docker image
 | ![](https://invoice-app.pscl.dev/document_send_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_send_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_1_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_1_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_2_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_2_mobile.png) |
+| ![](https://invoice-app.pscl.dev/settings_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/settings_view_light_mobile.png) |
