@@ -104,7 +104,7 @@ jobs:
       - name: Semantic release
         uses: cycjimmy/semantic-release-action@v3
         with:
-          semantic_version: 0.1.0
+          semantic_version: 18
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.INVOICE_APP_PAT }}
