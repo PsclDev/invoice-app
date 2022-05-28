@@ -10,6 +10,8 @@
   - [Postman](#postman)
   - [Git / Pre-Commit hook](#git)
   - [Continuous Integration](#ci)
+  - [Usage Guide](#usage-guide)
+  - [Screenshots](#screenshots)
 
 # Invoice-App
 This app allows you to create offers and invoices for your business. Its generates a pdf which can be send by mail or email. You can manage your clients which are split up in two types: private and company clients.
@@ -44,6 +46,8 @@ If you are using `npm` just replace the `yarn` keyword with `npm run`
 - Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
 - If you wanna create migrations with typeorm, you need to setup a `ormconfig.json` file, there is also a example for it `/backend/ormconfig-example.json`
 
+*`Note to .env: If any env value contains a dollar sign ($) you have to encode that with a backslash (\$)`*
+
 Access the app with `http://localhost:3000`
 
 ## Postman
@@ -66,6 +70,15 @@ Check out `https://github.com/conventional-changelog/commitlint` for more inform
 It will always run some github actions for both the frontend and backend. It will check the linting and run some unit-tests.
 
 if you `merge` or `push` to `master` branch it will create a new docker image
+
+## Usage Guide
+Regarding the mail settings you can use the mustache-syntax to use object values. 
+E.g. `Hello {{fullname}}` will be transformed to the `client.firstname + client.lastname` currently there are 3 transform functions which can be used.
+- fullname
+- formattedInvoiceNr
+- formattedOfferNr
+
+if you wanna use any other value from the client, document or settings just put in the name of the field.
 
 ## Screenshots
 ### Desktop
