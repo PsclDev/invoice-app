@@ -30,39 +30,40 @@ export class SeederService implements OnApplicationBootstrap {
       this.logger.log('Seeding Settings...');
       await this.settingService.findByTypeAndKey(
         SettingType.MAIL,
-        'Subject German',
+        'Invoice Subject',
       );
-
-      const subjectGerman: CreateSettingDto = {
-        type: SettingType.MAIL,
-        key: 'Subject German',
-        value: '',
-      };
-
-      const subjectEnglish: CreateSettingDto = {
-        type: SettingType.MAIL,
-        key: 'Subject English',
-        value: '',
-      };
-
-      const textGerman: CreateSettingDto = {
-        type: SettingType.MAIL,
-        key: 'Text German',
-        value: '',
-      };
-
-      const textEnglish: CreateSettingDto = {
-        type: SettingType.MAIL,
-        key: 'Text English',
-        value: '',
-      };
-
-      await this.settingService.createSetting(subjectGerman, false);
-      await this.settingService.createSetting(subjectEnglish, false);
-      await this.settingService.createSetting(textGerman, false);
-      await this.settingService.createSetting(textEnglish, false);
+      this.logger.warn('Settings already seeded...');
     } catch (error) {
-      this.logger.log('Settings already seeded...');
+      if (error.status === 404) {
+        const invoiceSubject: CreateSettingDto = {
+          type: SettingType.MAIL,
+          key: 'Invoice Subject',
+          value: '',
+        };
+
+        const invoiceText: CreateSettingDto = {
+          type: SettingType.MAIL,
+          key: 'Invoice Text',
+          value: '',
+        };
+
+        const offerSubject: CreateSettingDto = {
+          type: SettingType.MAIL,
+          key: 'Offer Subject',
+          value: '',
+        };
+
+        const offerText: CreateSettingDto = {
+          type: SettingType.MAIL,
+          key: 'Offer Text',
+          value: '',
+        };
+
+        await this.settingService.createSetting(invoiceSubject, false);
+        await this.settingService.createSetting(invoiceText, false);
+        await this.settingService.createSetting(offerSubject, false);
+        await this.settingService.createSetting(offerText, false);
+      }
     }
   }
 

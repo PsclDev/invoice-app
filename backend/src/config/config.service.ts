@@ -25,6 +25,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
   frontendUrl: Joi.string().required(),
   pdfBackupExport: Joi.string().optional(),
   mail: Joi.object().keys({
+    logging: Joi.bool().optional(),
     host: Joi.string().required(),
     user: Joi.string().required(),
     pass: Joi.string().required(),
@@ -52,6 +53,7 @@ export class ConfigService {
   frontendUrl = process.env.APP_FRONTEND_URL;
   pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
   mail = {
+    logging: Boolean(process.env.APP_MAIL_LOGGING) || false,
     host: process.env.APP_MAIL_HOST,
     user: process.env.APP_MAIL_USER,
     pass: process.env.APP_MAIL_PASS,
