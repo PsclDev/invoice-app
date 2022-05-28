@@ -1,5 +1,6 @@
 import { generateId, updateEntity } from '@helper';
 import {
+  ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -8,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateSettingDto, UpdateSettingDto } from './setting.dto';
+import { CreateSettingDto, SettingType, UpdateSettingDto } from './setting.dto';
 import { Setting } from './setting.entity';
 
 @Injectable()
@@ -36,7 +37,18 @@ export class SettingService {
     return setting;
   }
 
-  async createSetting(settingDto: CreateSettingDto): Promise<Setting> {
+  async findByTypeAndKey(type: SettingType, key: string): Promise<Setting> {
+    const setting = await this.settingRepository.findOne({ type, key });
+
+    if (!setting) throw new NotFoundException();
+
+    return setting;
+  }
+
+  async createSetting(
+    settingDto: CreateSettingDto,
+    deletable = true,
+  ): Promise<Setting> {
     const existingSetting = await this.settingRepository.findOne({
       type: settingDto.type,
       key: settingDto.key,
@@ -53,6 +65,7 @@ export class SettingService {
       type: settingDto.type,
       key: settingDto.key,
       value: settingDto.value,
+      deletable,
     };
 
     return await this.settingRepository.save(setting);
@@ -63,6 +76,9 @@ export class SettingService {
   }
 
   async delete(id: string): Promise<string> {
+    const setting = await this.findById(id);
+    if (!setting.deletable) throw new ForbiddenException();
+
     const result = await this.settingRepository.delete({ id });
     if (result.affected <= 0) {
       throw new NotFoundException();

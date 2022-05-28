@@ -20,7 +20,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('v1', { exclude: ['', 'health'] });
 
-  if (config.nodeEnv === 'development' || config.nodeEnv === 'dev') {
+  if (config.devMode) {
     const documentBuilder = new DocumentBuilder()
       .setTitle('Invoice-App')
       .setVersion('1.0')

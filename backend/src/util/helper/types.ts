@@ -4,6 +4,6 @@ import { Document } from '../../modules/document/document.entity';
 export type AppTypes = Client | Document;
 
 export enum DocumentType {
-  OFFER = 'offer',
-  INVOICE = 'invoice',
+  OFFER = 'Offer',
+  INVOICE = 'Invoice',
 }

@@ -8,6 +8,7 @@ dotenvExpand.expand(dotenv.config());
 
 const CONFIG_SCHEMA = Joi.object().keys({
   nodeEnv: Joi.string().required(),
+  devMode: Joi.bool().required(),
   httpPort: Joi.number().integer().greater(0).required(),
   database: Joi.object().keys({
     host: Joi.string().required(),
@@ -20,9 +21,11 @@ const CONFIG_SCHEMA = Joi.object().keys({
     migrationsRun: Joi.bool().optional(),
     migrationsPath: Joi.string().optional(),
   }),
+  disableSeeding: Joi.bool().optional(),
   frontendUrl: Joi.string().required(),
   pdfBackupExport: Joi.string().optional(),
   mail: Joi.object().keys({
+    logging: Joi.bool().optional(),
     host: Joi.string().required(),
     user: Joi.string().required(),
     pass: Joi.string().required(),
@@ -33,6 +36,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
 @Injectable()
 export class ConfigService {
   nodeEnv = process.env.NODE_ENV || 'prod';
+  devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   httpPort = Number(process.env.APP_PORT) || 3010;
   database = {
     host: process.env.APP_DB_HOST,
@@ -45,9 +49,11 @@ export class ConfigService {
     migrationsRun: Boolean(process.env.APP_RUN_MIGRATIONS) || true,
     migrationsPath: process.env.APP_MIGRATIONS_PATH || 'dist/migrations/*.js',
   };
+  disableSeeding = process.env.APP_DISABLE_SEEDING || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
   pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
   mail = {
+    logging: Boolean(process.env.APP_MAIL_LOGGING) || false,
     host: process.env.APP_MAIL_HOST,
     user: process.env.APP_MAIL_USER,
     pass: process.env.APP_MAIL_PASS,

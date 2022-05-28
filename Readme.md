@@ -10,6 +10,8 @@
   - [Postman](#postman)
   - [Git / Pre-Commit hook](#git)
   - [Continuous Integration](#ci)
+  - [Usage Guide](#usage-guide)
+  - [Screenshots](#screenshots)
 
 # Invoice-App
 This app allows you to create offers and invoices for your business. Its generates a pdf which can be send by mail or email. You can manage your clients which are split up in two types: private and company clients.
@@ -44,6 +46,8 @@ If you are using `npm` just replace the `yarn` keyword with `npm run`
 - Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
 - If you wanna create migrations with typeorm, you need to setup a `ormconfig.json` file, there is also a example for it `/backend/ormconfig-example.json`
 
+*`Note to .env: If any env value contains a dollar sign ($) you have to encode that with a backslash (\$)`*
+
 Access the app with `http://localhost:3000`
 
 ## Postman
@@ -67,10 +71,20 @@ It will always run some github actions for both the frontend and backend. It wil
 
 if you `merge` or `push` to `master` branch it will create a new docker image
 
+## Usage Guide
+Regarding the mail settings you can use the mustache-syntax to use object values. 
+E.g. `Hello {{fullname}}` will be transformed to the `client.firstname + client.lastname` currently there are 3 transform functions which can be used.
+- fullname
+- formattedInvoiceNr
+- formattedOfferNr
+
+if you wanna use any other value from the client, document or settings just put in the name of the field.
+
 ## Screenshots
 ### Desktop
 | Dark | Light |
 | ---- | ----- |
+| ![](https://invoice-app.pscl.dev/statistics_view_dark.png) | ![](https://invoice-app.pscl.dev/statistics_view_light.png) |
 | ![](https://invoice-app.pscl.dev/client_view_dark.png) | ![](https://invoice-app.pscl.dev/client_view_light.png) |
 | ![](https://invoice-app.pscl.dev/client_edit_dark.png) | ![](https://invoice-app.pscl.dev/client_edit_light.png) |
 | ![](https://invoice-app.pscl.dev/document_view_dark.png) | ![](https://invoice-app.pscl.dev/document_view_light.png) |
@@ -78,9 +92,11 @@ if you `merge` or `push` to `master` branch it will create a new docker image
 | ![](https://invoice-app.pscl.dev/document_send_dark.png) | ![](https://invoice-app.pscl.dev/document_send_light.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_1.png) | ![](https://invoice-app.pscl.dev/document_create_light_1.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_2.png) | ![](https://invoice-app.pscl.dev/document_create_light_2.png) |
+| ![](https://invoice-app.pscl.dev/settings_view_dark.png) | ![](https://invoice-app.pscl.dev/settings_view_light.png) |
 ### Mobile
 | Dark | Light |
 | ---- | ----- |
+| ![](https://invoice-app.pscl.dev/statistics_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/statistics_view_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/client_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/client_view_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/client_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/client_edit_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_view_light_mobile.png) |
@@ -88,3 +104,4 @@ if you `merge` or `push` to `master` branch it will create a new docker image
 | ![](https://invoice-app.pscl.dev/document_send_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_send_light_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_1_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_1_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_2_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_2_mobile.png) |
+| ![](https://invoice-app.pscl.dev/settings_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/settings_view_light_mobile.png) |

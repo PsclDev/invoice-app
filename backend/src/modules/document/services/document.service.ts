@@ -26,6 +26,7 @@ export class DocumentService {
     return await this.documentRepository.find({
       order: {
         dateOfIssue: 'DESC',
+        createdAt: 'DESC',
       },
     });
   }
