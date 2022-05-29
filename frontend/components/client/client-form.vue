@@ -109,9 +109,8 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
-import { Client } from '~/models/client';
+import { Client, Document } from '~/models';
 import { ViewMode, ClientType, Gender } from '~/types';
-import { Document } from '~/models/document';
 import { getMutableClient, getDocumentsLength } from '~/utils/helper';
 
 export default Vue.extend({

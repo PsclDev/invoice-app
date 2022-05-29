@@ -1,5 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Statistics } from '~/models/statistics';
+import { Statistics } from '~/models';
 import { $axios } from '~/utils/axios';
 
 @Module({

@@ -64,7 +64,7 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import ClientModule from '~/store/client';
-import { Client } from '~/models/client';
+import { Client } from '~/models';
 import { DateTimeFormat, ViewMode, ClientType } from '~/types';
 import {
   getDate,

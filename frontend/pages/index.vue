@@ -72,7 +72,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
-import { DocumentYearsStatistics, Statistics } from '~/models/statistics';
+import { DocumentYearsStatistics, Statistics } from '~/models';
 import StatisticsModule from '~/store/statistics';
 import { getDate } from '~/utils/helper';
 import { DateTimeFormat } from '~/types';

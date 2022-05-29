@@ -1,5 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Setting } from '~/models/setting';
+import { Setting } from '~/models';
 import { SettingType } from '~/types';
 import { $axios } from '~/utils/axios';
 

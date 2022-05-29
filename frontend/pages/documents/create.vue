@@ -81,8 +81,7 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import Multiselect from 'vue-multiselect';
-import { Client } from '~/models/client';
-import { Document } from '~/models/document';
+import { Client, Document } from '~/models';
 import DocumentModule from '~/store/document';
 import ClientModule from '~/store/client';
 import { ViewMode, DocumentType, ClientType } from '~/types';

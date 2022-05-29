@@ -25,7 +25,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
-import { Setting } from '~/models/setting';
+import { Setting } from '~/models';
 import SettingModule from '~/store/setting';
 import { SettingType, ViewMode } from '~/types';
 import { getMutableSetting } from '~/utils/helper';

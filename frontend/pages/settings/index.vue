@@ -26,7 +26,7 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import SettingModule from '~/store/setting';
-import { Setting } from '~/models/setting';
+import { Setting } from '~/models';
 import { SettingType } from '~/types';
 
 export default Vue.extend({

@@ -9,9 +9,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Client } from '~/models/client';
-import { Document } from '~/models/document';
-import { Setting } from '~/models/setting';
+import { Client, Document, Setting } from '~/models';
 
 export default Vue.extend({
   name: 'AppSearch',
