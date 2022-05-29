@@ -177,6 +177,7 @@ export default Vue.extend({
       }
 
       await this.documentStore.createDocument(document);
+      this.$router.push({ name: 'documents' });
     },
   },
 });
