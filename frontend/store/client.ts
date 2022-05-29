@@ -1,6 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Client } from '~/models/client';
-import { Document } from '~/models/document';
+import { Client, Document } from '~/models';
 import { $axios } from '~/utils/axios';
 
 @Module({
@@ -47,6 +46,11 @@ export default class ClientModule extends VuexModule {
   @Action({ commit: 'setClients', rawError: true })
   async getClients(): Promise<Client[]> {
     return await $axios.$get(this.PREFIX);
+  }
+
+  @Action({ rawError: true })
+  async getClientById(id: string): Promise<Client> {
+    return await $axios.$get(`${this.PREFIX}/${id}`);
   }
 
   @Action({ commit: 'newClient', rawError: true })
