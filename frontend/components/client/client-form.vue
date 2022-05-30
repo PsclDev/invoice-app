@@ -59,7 +59,10 @@
         :view-mode="viewMode"
       ></App-Input>
     </div>
-    <div class="row mb-4">
+    <div
+      v-if="mutableClient.email || viewMode === ViewMode.EDIT"
+      class="row mb-4"
+    >
       <App-Input
         v-model="mutableClient.email"
         class="col-sm-4"

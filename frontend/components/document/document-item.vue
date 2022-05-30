@@ -24,10 +24,14 @@
           <font-awesome-icon :icon="['fas', 'file-invoice']" />
         </button>
         <button
+          v-if="clientHasEmail"
           class="btn btn-link"
           data-bs-toggle="modal"
           :data-bs-target="`#d${document.id}`"
         >
+          <font-awesome-icon :icon="['fas', 'paper-plane']" />
+        </button>
+        <button v-else class="btn btn-link" @click="openDocument">
           <font-awesome-icon :icon="['fas', 'paper-plane']" />
         </button>
       </template>
@@ -99,6 +103,7 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
+import ClientModule from '~/store/client';
 import { Document } from '~/models';
 import { DateTimeFormat, ViewMode, DocumentType } from '~/types';
 import { getDate, getDocumentType, getMutableDocument } from '~/utils/helper';
@@ -120,7 +125,9 @@ export default Vue.extend({
       getDocumentType,
       viewMode: ViewMode.SHOW,
       store: getModule(DocumentModule, this.$store),
+      clientStore: getModule(ClientModule, this.$store),
       mutableDoc: {} as Document,
+      clientHasEmail: false,
     };
   },
   computed: {
@@ -142,8 +149,11 @@ export default Vue.extend({
     this.setDocument();
   },
   methods: {
-    setDocument() {
+    async setDocument() {
       this.mutableDoc = getMutableDocument(this.document);
+      this.clientHasEmail = !!(
+        await this.clientStore.getClientById(this.mutableDoc.clientId)
+      ).email;
     },
     async convertToInvoice() {
       await this.store.convertToInvoice(this.document);
