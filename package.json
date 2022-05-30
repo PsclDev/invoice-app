@@ -18,7 +18,7 @@
     "test": "npx concurrently -n frontend,backend \"cd frontend/ && yarn test\" \"cd backend/ && yarn test\""
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
+    "@commitlint/cli": "^17.0.1",
     "@commitlint/config-conventional": "^16.0.0",
     "concurrently": "^7.0.0",
     "husky": "^7.0.4",
