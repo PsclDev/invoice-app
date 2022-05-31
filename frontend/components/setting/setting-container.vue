@@ -10,8 +10,7 @@
         <SettingForm
           v-for="setting of settings"
           :key="setting.id"
-          :value="mutableSetting(setting)"
-          :view-mode="ViewMode.EDIT"
+          :value="setting"
           class="mb-2"
         ></SettingForm>
         <div class="col-10 text-center p-2 add" @click="add">
@@ -28,7 +27,6 @@ import { getModule } from 'vuex-module-decorators';
 import { Setting } from '~/models';
 import SettingModule from '~/store/setting';
 import { SettingType, ViewMode } from '~/types';
-import { getMutableSetting } from '~/utils/helper';
 
 export default Vue.extend({
   name: 'SettingContainerComponent',
@@ -49,9 +47,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    mutableSetting(setting: Setting): Setting {
-      return getMutableSetting(setting);
-    },
     add() {
       this.store.createLocalSetting(this.type);
     },

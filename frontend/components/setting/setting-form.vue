@@ -6,7 +6,7 @@
       class="col-sm-5 mb-3 mb-sm-0"
       :title="$t('settings.key')"
       :hide-label="false"
-      :view-mode="viewMode"
+      :view-mode="ViewMode.EDIT"
     ></App-Input>
     <App-Input
       v-model="mutableSetting.value"
@@ -14,7 +14,7 @@
       class="col-sm-5 mb-3 mb-sm-0"
       :title="$t('settings.value')"
       :hide-label="false"
-      :view-mode="viewMode"
+      :view-mode="ViewMode.EDIT"
     ></App-Input>
     <div class="col-sm-2 d-flex actions gap-sm-2">
       <button class="col-6 btn btn-link" :disabled="!hasChanged" @click="save">
@@ -46,10 +46,6 @@ export default Vue.extend({
       type: Object as () => Setting,
       required: true,
     },
-    viewMode: {
-      type: String as () => ViewMode,
-      required: true,
-    },
   },
   data() {
     return {
@@ -76,12 +72,14 @@ export default Vue.extend({
       deep: true,
     },
   },
+  mounted() {
+    this.setSetting();
+  },
   methods: {
     setSetting() {
       this.shadowSetting = getMutableSetting(this.value);
       this.mutableSetting = getMutableSetting(this.value);
     },
-    info() {},
     save() {
       if (this.mutableSetting.id === '1')
         this.store.createSetting(this.mutableSetting);
