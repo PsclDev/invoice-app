@@ -25,7 +25,7 @@ export default class ClientModule extends VuexModule {
   @Mutation
   setClient(client: Client) {
     const clients = this.clients.filter(
-      (c) => c.id !== client.id && c.id !== undefined
+      (c) => c.id !== client.id && c.id !== '1'
     );
 
     clients.push(client);

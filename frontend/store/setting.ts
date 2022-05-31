@@ -25,7 +25,7 @@ export default class SettingModule extends VuexModule {
   @Mutation
   setSetting(setting: Setting) {
     const settings = this.settings.filter(
-      (c) => c.id !== setting.id && c.id !== undefined
+      (s) => s.id !== setting.id && s.id !== '1'
     );
 
     settings.push(setting);
@@ -53,8 +53,9 @@ export default class SettingModule extends VuexModule {
     return {
       id: '1',
       type,
-      key: '',
-      value: '',
+      key: 'Key',
+      value: 'Value',
+      deletable: true
     } as Setting;
   }
 
