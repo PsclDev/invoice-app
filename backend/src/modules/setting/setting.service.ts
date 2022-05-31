@@ -24,6 +24,7 @@ export class SettingService {
   async findAll(): Promise<Setting[]> {
     return await this.settingRepository.find({
       order: {
+        type: 'ASC',
         key: 'ASC',
       },
     });
