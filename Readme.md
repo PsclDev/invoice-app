@@ -48,7 +48,12 @@ If you are using `npm` just replace the `yarn` keyword with `npm run`
 
 *`Note to .env: If any env value contains a dollar sign ($) you have to encode that with a backslash (\$)`*
 
-Access the app with `http://localhost:3000`
+### Access the app:
+| Name | Port | Path |
+| --- | --- | --- |
+| frontend | `3000` | `/*` |
+| backend  | `3010` | `/v1/*` |
+| swagger docs  | `3010` | `/docs` |
 
 ## Postman
 If you are importing the postman collection you just need to edit the Folder Varible `base_url` and `v1`. 
