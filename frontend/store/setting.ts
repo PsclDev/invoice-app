@@ -55,7 +55,7 @@ export default class SettingModule extends VuexModule {
       type,
       key: 'Key',
       value: 'Value',
-      deletable: true
+      deletable: true,
     } as Setting;
   }
 
