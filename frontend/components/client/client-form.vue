@@ -59,7 +59,10 @@
         :view-mode="viewMode"
       ></App-Input>
     </div>
-    <div class="row mb-4">
+    <div
+      v-if="mutableClient.email || viewMode === ViewMode.EDIT"
+      class="row mb-4"
+    >
       <App-Input
         v-model="mutableClient.email"
         class="col-sm-4"
@@ -109,9 +112,8 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
-import { Client } from '~/models/client';
+import { Client, Document } from '~/models';
 import { ViewMode, ClientType, Gender } from '~/types';
-import { Document } from '~/models/document';
 import { getMutableClient, getDocumentsLength } from '~/utils/helper';
 
 export default Vue.extend({

@@ -79,7 +79,7 @@ export class DocumentService {
 
   async print(id: string): Promise<string> {
     const path = await this.generate(id);
-    return path.replace('files', '');
+    return '/' + path;
   }
 
   async mail(id: string): Promise<boolean> {

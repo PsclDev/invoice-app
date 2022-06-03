@@ -31,7 +31,7 @@
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
-import { Document } from '~/models/document';
+import { Document } from '~/models';
 
 export default Vue.extend({
   name: 'DocumentsPage',

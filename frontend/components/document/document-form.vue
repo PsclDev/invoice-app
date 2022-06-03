@@ -103,7 +103,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Document } from '~/models/document';
+import { Document } from '~/models';
 import { ViewMode, DocumentType } from '~/types';
 import { getDate, getMutableDocument } from '~/utils/helper';
 

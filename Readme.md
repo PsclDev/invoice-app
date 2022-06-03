@@ -2,11 +2,11 @@
 
   - [About](#invoice-app)
   - [Feature list](#features)
-  - [Screenshots](#screenshots)
-  - [Responsiveness](#responsiveness)
   - [Tech-Stack](#tech-stack)
-  - [Dependabot](#dependabot-integration)
+  - [Requirements](#requirements)
   - [Getting Started](#getting-started)
+  - [Responsiveness](#responsiveness)
+  - [Dependabot](#dependabot-integration)
   - [Postman](#postman)
   - [Git / Pre-Commit hook](#git)
   - [Continuous Integration](#ci)
@@ -27,17 +27,28 @@ You get simple statistics monthly and yearly based on.
 - Currently supports german and english
 - Dockerized for easy deployment
 
-## Responsiveness
-It is optimised for desktop and mobile but should work also on the tablet without issues.
-
 ## Tech Stack
-The frontend is based on nestjs version 2. Backend is written with nestjs and postgres database.
+The frontend is based on nuxtjs 2. Backend is written with nestjs and postgres database.
 
-## Dependabot Integration
-The app is checked on a daily bases by the dependabot.
+## Requirements
+The listed versions are not strictly needed, but tested with.
+
+- `Node v16`
+- `Yarn v1` or `Npm v8.5`
+- `Python 3` is needed for the sqlite3 npm package, which is only used for unit-testing.
+- `Docker v20`
+- `Docker-Compose 2.6`
 
 ## Getting Started
 If you are using `npm` just replace the `yarn` keyword with `npm run`
+
+You can also run the project in a dockershell. If you want that just run the following two commands first:
+
+- *Docker only*
+  -  **`yarn shell:build`** or **`npm run shell:build`**
+  - **`yarn shell`** or **`npm run shell`**
+
+<br>
 
 - **`yarn` or `npm i`** *to install the project dependencies*
 - **`yarn prepare`** *to install husky*
@@ -48,7 +59,19 @@ If you are using `npm` just replace the `yarn` keyword with `npm run`
 
 *`Note to .env: If any env value contains a dollar sign ($) you have to encode that with a backslash (\$)`*
 
-Access the app with `http://localhost:3000`
+### Access the app:
+| Name | Port | Path |
+| --- | --- | --- |
+| frontend | `3000` | `/*` |
+| backend  | `3010` | `/v1/*` |
+| swagger docs  | `3010` | `/docs` |
+| postgres *(docker shell only)*  | `5432` |  |
+
+## Responsiveness
+It is optimised for desktop and mobile but should work also on the tablet without issues.
+
+## Dependabot Integration
+The app is checked on a daily bases by the dependabot.
 
 ## Postman
 If you are importing the postman collection you just need to edit the Folder Varible `base_url` and `v1`. 

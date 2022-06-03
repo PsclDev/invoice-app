@@ -1,5 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Document } from '~/models/document';
+import { Document } from '~/models';
 import { $axios } from '~/utils/axios';
 
 @Module({
@@ -52,6 +52,11 @@ export default class DocumentModule extends VuexModule {
   @Action({ commit: 'setDocuments', rawError: true })
   async getDocuments(): Promise<Document[]> {
     return await $axios.$get(this.PREFIX);
+  }
+
+  @Action({ rawError: true })
+  async getDocumentById(id: string): Promise<Document> {
+    return await $axios.$get(`${this.PREFIX}/${id}`);
   }
 
   @Action({ rawError: true })
