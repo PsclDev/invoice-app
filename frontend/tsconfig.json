@@ -21,7 +21,8 @@
       "@types/node",
       "@nuxtjs/i18n",
       "@nuxtjs/dayjs",
-      "dayjs/plugin/customParseFormat"
+      "dayjs/plugin/customParseFormat",
+      "@types/mustache"
     ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]

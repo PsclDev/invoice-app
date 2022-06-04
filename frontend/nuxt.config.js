@@ -58,6 +58,7 @@ export default {
   googleFonts: {
     families: {
       Barlow: true,
+      Cousine: true,
     },
   },
 
