@@ -1,24 +1,44 @@
 <template>
   <div v-if="!isLoading" class="page" size="A4">
     <div class="letterHeading">
-      <div>Feld für Briefkopf / Logo Whatever</div>
+      <div>{{ convertTemplate('Letterhead') }}</div>
     </div>
     <div class="content">
       <div class="addressHeading">
         <div class="address">
           <address class="sender">
-            <span>Muster GmbH - Musterstr. 1337 - 12345 Musterhausen</span>
+            <span>{{
+              `${convertTemplate('Company Name')} ${convertTemplate(
+                'Company Address'
+              )}`
+            }}</span>
           </address>
           <address class="recipient">
-            MusterMann GmbH<br />
-            Musterstr. 7331<br />
-            12345 Musterstadt
+            <div v-if="client.company" class="fw-bold">
+              {{ client.company }}
+            </div>
+            <div v-if="client.firstname && client.lastname" class="fw-bold">
+              {{ `${client.firstname} ${client.lastname}` }}
+            </div>
+            <div>
+              {{ client.street }}
+            </div>
+            <div>
+              {{ `${client.postalCode} ${client.city}` }}
+            </div>
           </address>
         </div>
         <div class="invoiceSpecs">
-          <strong>Date:</strong> 05.06.2022<br />
-          <strong>Order Nr:</strong> 1337<br />
-          <strong>Contact Person:</strong> Max MusterMann
+          <strong>Ausstellungsdatum:</strong> {{ getDate(document.dateOfIssue)
+          }}<br />
+          <strong>{{ isInvoice ? 'Rechnung' : 'Angebot' }} Nr:</strong>
+          {{ isInvoice ? 'I#' : 'O#' }}
+          {{
+            String(isInvoice ? document.invoiceNr : document.offerNr).padStart(
+              4,
+              '0'
+            )
+          }}<br />
         </div>
       </div>
       <div class="mainContent">
@@ -30,43 +50,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1 Lorem Ipsum dolor $50.00 1 $50.00</td>
-              </tr>
-              <tr>
-                <td>2 cyka bljat $20.00 3 $60.00</td>
-              </tr>
-              <tr>
-                <td>1 Lorem Ipsum dolor $50.00 1 $50.00</td>
-              </tr>
-              <tr>
-                <td>2 cyka bljat $20.00 3 $60.00</td>
+              <tr v-for="(text, index) of document.description" :key="index">
+                <td>{{ text }}</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="foot">
-          <div class="col">
-            <strong>Thanks for your Purchase</strong><br />
-            <p>
-              <strong>Payment Info</strong><br />
-              Account Nr: 123 456 789<br />
-              A/C Name: Lorem Ipsum<br />
-              Bank Details: Dolor sit amet
-            </p>
+          <div v-if="isInvoice" class="col">
+            <strong>Vielen Dank für Ihr Vertrauen!</strong><br />
+            <div>Zahlungsinformationen</div>
+            <div>Name: {{ convertTemplate('Payment Name') }}</div>
+            <div>IBAN: {{ convertTemplate('Payment Iban') }}</div>
+            <div>
+              Reference: I#{{
+                `${String(document.invoiceNr).padStart(4, '0')}`
+              }}
+            </div>
           </div>
           <div class="col">
             <div class="price">
-              <strong>Before Taxes Total:</strong> 1337€<br />
-              <strong>Taxrate:</strong> 15%<br />
-              <strong>Total After Taxes:</strong> 1537,55€
+              <strong>Zwischensumme:</strong> {{ document.subTotal }}€<br />
+              <strong>Steuern ({{ document.taxRate }}%):</strong>
+              {{ document.tax }}€<br />
+              <strong v-if="isInvoice && document.alreadyPaid"
+                >Bereits gezahlt:</strong
+              >
+              {{ document.alreadyPaid }}€<br />
+              <strong>Rechnungsbetrag:</strong> {{ document.total }}€<br />
             </div>
           </div>
-        </div>
-        <div class="footAddress">
-          Muster GmbH - Musterstr. 1337 - 12345 Musterhausen<br />
-          Account Nr: 123 456 789 - A/C Name: Lorem Ipsum - Bank Details: Dolor
-          sit amet
         </div>
       </div>
     </div>
@@ -76,7 +89,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
-import * as Mustache from 'mustache';
+import Mustache from 'mustache';
 import ClientModule from '~/store/client';
 import DocumentModule from '~/store/document';
 import SettingModule from '~/store/setting';
@@ -124,7 +137,6 @@ export default Vue.extend({
         });
 
       this.isLoading = false;
-      console.log('Data', this.document, this.client, this.settings);
     },
     convertTemplate(key: string): string {
       return Mustache.render(`{{${key}}}`, {
@@ -150,6 +162,7 @@ body,
   margin: 0;
   padding: 0;
   box-shadow: none;
+  color: black;
   background-color: white;
   font-size: 12pt;
   font-family: 'Cousine', monospace;
@@ -261,12 +274,5 @@ body,
 
 .price {
   text-align: right;
-}
-
-.footAddress {
-  text-align: center;
-  background-color: #373b44;
-  color: #fff;
-  padding: 2.5mm;
 }
 </style>
