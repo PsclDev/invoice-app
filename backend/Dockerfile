@@ -57,7 +57,7 @@ RUN apk add --no-cache --virtual .gyp \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-RUN npm install --only=production
+RUN yarn install --production
 
 COPY --from=development /usr/src/app/dist ./dist
 
