@@ -59,6 +59,12 @@ export class SeederService implements OnApplicationBootstrap {
           value: '',
         };
 
+        const letterHead: CreateSettingDto = {
+          type: SettingType.PDF,
+          key: 'Letterhead',
+          value: 'Muster GmbH',
+        };
+
         const companyName: CreateSettingDto = {
           type: SettingType.PDF,
           key: 'Company Name',
@@ -93,6 +99,7 @@ export class SeederService implements OnApplicationBootstrap {
         await this.settingService.createSetting(invoiceText, false);
         await this.settingService.createSetting(offerSubject, false);
         await this.settingService.createSetting(offerText, false);
+        await this.settingService.createSetting(letterHead, false);
         await this.settingService.createSetting(companyName, false);
         await this.settingService.createSetting(companyAddress, false);
         await this.settingService.createSetting(companyTaxId, false);
