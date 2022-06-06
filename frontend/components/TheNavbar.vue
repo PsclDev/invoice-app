@@ -58,8 +58,8 @@ export default Vue.extend({
       localStorage.setItem(this.THEME_LS_KEY, 'dark');
     }
 
-    const locale = this.$i18n.getLocaleCookie() === 'en' ? 'de' : 'en';
-    this.$i18n.setLocale(locale);
+    const locale = this.$i18n.getLocaleCookie();
+    if (locale) this.$i18n.setLocale(locale);
   },
   methods: {
     switchLanguage(): void {
@@ -68,8 +68,10 @@ export default Vue.extend({
     },
     switchTheme(): void {
       this.isDarkMode = !this.isDarkMode;
-      const theme = this.isDarkMode ? 'dark' : 'light';
-      localStorage.setItem(this.THEME_LS_KEY, theme);
+      localStorage.setItem(
+        this.THEME_LS_KEY,
+        this.isDarkMode ? 'dark' : 'light'
+      );
       document.querySelector('body')!.classList.toggle('light');
     },
   },
