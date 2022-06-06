@@ -92,8 +92,9 @@
           </template>
           <template #body>
             <ul>
-              <li v-for="doc of documents" :key="doc.id">
+              <li v-for="doc of documents" :key="doc.id" class="mb-1">
                 <a
+                  class="href"
                   target="_blank"
                   rel="noopener noreferrer"
                   :href="printUrl(doc.id)"
@@ -189,3 +190,14 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.href {
+  @include gradientInfoText;
+  text-decoration: unset;
+}
+
+.href:hover {
+  @include gradientInfoReversedText;
+}
+</style>

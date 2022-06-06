@@ -41,39 +41,57 @@ body {
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+.btn,
+.btn:hover {
+  font-weight: bolder;
+  color: $darkblue;
+  border: unset;
+}
+
 .btn-primary {
   @include gradientPrimaryBackground;
-  color: $darkblue;
-  border: unset;
 }
 
-.btn-danger {
-  @include gradientDangerBackground;
-  color: $darkblue;
-  font-weight: bolder;
-  border: unset;
-}
-
-.btn-warning {
-  @include gradientWarningBackground;
-  color: $darkblue;
-  font-weight: bolder;
-  border: unset;
+.btn-primary:hover {
+  @include gradientPrimaryReversedBackground;
 }
 
 .btn-info {
   @include gradientInfoBackground;
-  color: $darkblue;
-  font-weight: bolder;
-  border: unset;
+}
+
+.btn-info:hover {
+  @include gradientInfoReversedBackground;
 }
 
 .btn-link {
   @include gradientPrimaryText;
-  color: #3ee577;
-  font-weight: bolder;
-  border: unset;
+  color: $green;
   text-decoration: none;
+}
+
+.btn-link:hover {
+  color: $turquoise;
+}
+
+.btn-warning {
+  @include gradientWarningBackground;
+}
+
+.btn-warning:hover {
+  @include gradientWarningReversedBackground;
+}
+
+.btn-danger {
+  @include gradientDangerBackground;
+}
+
+.btn-danger:hover {
+  @include gradientDangerReversedBackground;
+}
+
+.btn-danger:disabled {
+  color: $darkblue;
 }
 
 .form-control,

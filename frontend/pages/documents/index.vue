@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-8 col-md-6 mb-2">
+    <div class="col-8 col-md-6 mb-2 p-0">
       <AppSearch :documents="store.Documents" @filtered="onFilterChanged" />
     </div>
-    <div class="col text-center">
+    <div class="col text-center p-0">
       <NuxtLink
         to="/documents/create"
         class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"

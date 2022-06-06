@@ -88,6 +88,11 @@ export default Vue.extend({
   text-decoration: none;
 }
 
+.nav-item:hover {
+  opacity: 0.75;
+  @include gradientPrimaryText;
+}
+
 a.nuxt-link-active {
   font-weight: bold;
   @include gradientPrimaryText;
@@ -109,6 +114,11 @@ a.nuxt-link-active {
   right: 20px;
   font-size: 1.6rem;
   cursor: pointer;
+}
+
+.actionbar-lt:hover,
+.actionbar-rt:hover {
+  color: $green;
 }
 
 @media (max-width: 768px) {

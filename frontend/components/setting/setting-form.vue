@@ -21,7 +21,7 @@
         <font-awesome-icon :icon="['fas', 'save']" />
       </button>
       <button
-        class="col-6 btn btn-link"
+        class="col-6 btn btn-link delete"
         :disabled="!mutableSetting.deletable"
         @click="remove"
       >
@@ -92,9 +92,17 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .actions {
   align-items: flex-end;
   margin-bottom: 0.25rem;
+}
+
+.delete {
+  color: $red-light;
+}
+
+.delete:hover {
+  color: $red;
 }
 </style>

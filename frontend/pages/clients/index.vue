@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-8 col-md-6 mb-2">
+    <div class="col-8 col-md-6 mb-2 p-0">
       <AppSearch :clients="store.Clients" @filtered="onFilterChanged" />
     </div>
-    <div class="col text-center">
+    <div class="col text-center p-0">
       <button
         class="col-8 col-md-6 btn btn-primary px-5 font-weight-bold"
         @click="create"

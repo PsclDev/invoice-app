@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-8 col-md-6 mb-2">
+    <div class="col-8 col-md-6 mb-2 p-0">
       <AppSearch :settings="store.Settings" @filtered="onFilterChanged" />
     </div>
     <div class="mt-5 col-12">

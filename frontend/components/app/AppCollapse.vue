@@ -16,7 +16,7 @@
           </button>
         </div>
       </div>
-      <div class="my-3 collapse-body" :class="isOpen ? '' : 'hide'">
+      <div class="mb-3 collapse-body" :class="isOpen ? '' : 'hide'">
         <div class="d-flex justify-content-center">
           <slot name="body"></slot>
         </div>
@@ -53,7 +53,12 @@ export default Vue.extend({
 }
 
 .icon {
+  opacity: 0.5;
   color: $body-text;
+}
+
+.icon:hover {
+  opacity: 1;
 }
 
 .hide {

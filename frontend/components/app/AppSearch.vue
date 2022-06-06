@@ -1,7 +1,7 @@
 <template>
   <div class="input-box">
     <input v-model="searchTerm" type="text" class="form-control" />
-    <i>
+    <i :class="searchTerm.length > 0 ? 'active' : 'inactive'">
       <font-awesome-icon :icon="['fas', 'search']" />
     </i>
   </div>
@@ -89,8 +89,17 @@ export default Vue.extend({
 
 .input-box i {
   position: absolute;
-  right: 13px;
-  top: 15px;
+  right: 12px;
+  top: 12px;
+}
+
+.inactive {
+  opacity: 0.5;
+}
+
+.active {
+  color: $green;
+  opacity: 1;
 }
 
 .form-control {

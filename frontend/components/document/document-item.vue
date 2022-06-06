@@ -37,7 +37,7 @@
       </template>
       <template #body>
         <div class="container">
-          <div v-if="document.createdAt && document.updatedAt" class="row mb-2">
+          <div v-if="document.createdAt && document.updatedAt" class="row mb-4">
             <div class="col-sm-6 id text-center">
               {{ $t('common.createdAt') }}
               {{ getDate(document.createdAt, DateTimeFormat.FULL) }}

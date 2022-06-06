@@ -4,18 +4,38 @@
   -webkit-text-fill-color: transparent;
 }
 
-@mixin gradientPrimaryBackground {
-  background-image: linear-gradient(315deg, $green 0%, $turquoise 74%);
-}
-
-@mixin gradientDangerText {
-  background: linear-gradient(147deg, $red1735 0%, $red-light 74%);
+@mixin gradientPrimaryReversedText {
+  background: linear-gradient(315deg, $turquoise 0%, $green 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@mixin gradientDangerBackground {
-  background-image: linear-gradient(147deg, $red 0%, $red-light 74%);
+@mixin gradientPrimaryBackground {
+  background-image: linear-gradient(315deg, $green 0%, $turquoise 74%);
+}
+
+@mixin gradientPrimaryReversedBackground {
+  background-image: linear-gradient(315deg, $turquoise 0%, $green 74%);
+}
+
+@mixin gradientInfoText {
+  background-image: linear-gradient(315deg, $blue 0%, $blue-light 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientInfoReversedText {
+  background-image: linear-gradient(315deg, $blue-light 0%, $blue 74%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientInfoBackground {
+  background-image: linear-gradient(315deg, $blue 0%, $blue-light 74%);
+}
+
+@mixin gradientInfoReversedBackground {
+  background-image: linear-gradient(315deg, $blue-light 0%, $blue 74%);
 }
 
 @mixin gradientWarningText {
@@ -28,12 +48,20 @@
   background-image: linear-gradient(315deg, $orange 0%, $orange-light 74%);
 }
 
-@mixin gradientInfoText {
-  background-image: linear-gradient(315deg, $blue 0%, $blue-light 74%);
+@mixin gradientWarningReversedBackground {
+  background-image: linear-gradient(315deg, $orange-light 0%, $orange 74%);
+}
+
+@mixin gradientDangerText {
+  background: linear-gradient(147deg, $red 0%, $red-light 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@mixin gradientInfoBackground {
-  background-image: linear-gradient(315deg, $blue 0%, $blue-light 74%);
+@mixin gradientDangerBackground {
+  background-image: linear-gradient(147deg, $red 0%, $red-light 74%);
+}
+
+@mixin gradientDangerReversedBackground {
+  background-image: linear-gradient(147deg, $red-light 0%, $red 74%);
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="row text-center mb-5">
+  <div class="row text-center">
     <h1>{{ $t('dashboard.title') }}</h1>
     <h5>
       {{ $t('dashboard.stats_update') }}
@@ -45,7 +45,7 @@
             {{ yearObj.year }}
           </button>
         </div>
-        <div class="row d-flex justify-content-center gap-5 mb-5">
+        <div class="row d-flex justify-content-end gap-5 mb-5">
           <highchart
             class="col-12 col-sm-6 chart"
             :options="getDocumentStatsByYear(currentYear.year)"
