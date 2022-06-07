@@ -8,15 +8,13 @@
     <template v-if="!isLoading">
       <section class="mb-5">
         <h3>{{ $t('dashboard.all_time') }}</h3>
-        <div class="row d-flex justify-content-center gap-5 mb-5">
-          <highchart
-            class="col-12 col-sm-6 chart"
-            :options="getClientStats()"
-          />
-          <highchart
-            class="col-12 col-sm-6 chart"
-            :options="getDocumentStats()"
-          />
+        <div class="row d-flex justify-content-center mb-5">
+          <div class="col-12 col-sm-6 d-flex justify-content-end">
+            <highchart class="chart" :options="getClientStats()" />
+          </div>
+          <div class="col-12 col-sm-6">
+            <highchart class="chart" :options="getDocumentStats()" />
+          </div>
         </div>
         <div class="row">
           <div class="col-4 h4">
@@ -45,11 +43,13 @@
             {{ yearObj.year }}
           </button>
         </div>
-        <div class="row d-flex justify-content-end gap-5 mb-5">
-          <highchart
-            class="col-12 col-sm-6 chart"
-            :options="getDocumentStatsByYear(currentYear.year)"
-          />
+        <div class="row d-flex justify-content-center">
+          <div class="col-12 col-sm-6 mb-3 mb-sm-0 d-flex justify-content-end">
+            <highchart
+              class="chart"
+              :options="getDocumentStatsByYear(currentYear.year)"
+            />
+          </div>
           <div class="col-12 col-sm-6 d-flex justify-content-center">
             <div class="d-flex flex-column">
               <div class="col-sm-4 h4">
