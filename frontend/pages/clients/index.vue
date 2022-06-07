@@ -33,10 +33,6 @@
     </div>
   </div>
 </template>
-      </div>
-    </div>
-  </div>
-</template>
 
 <script lang="ts">
 import Vue from 'vue';
