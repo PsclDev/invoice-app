@@ -16,12 +16,19 @@
         <AppSpinner />
       </div>
       <div v-else>
-        <DocumentItem
-          v-for="doc of documents"
-          :key="doc.id"
-          :document="doc"
-          class="mb-2"
-        />
+        <template v-if="documents.length > 0">
+          <DocumentItem
+            v-for="doc of documents"
+            :key="doc.id"
+            :document="doc"
+            class="mb-2"
+          />
+        </template>
+        <template v-else>
+          <div class="text-center fw-bold text-danger">
+            No Results could be found by the search term
+          </div>
+        </template>
       </div>
     </div>
   </div>

@@ -1,9 +1,10 @@
 <template>
   <AppCollapse>
     <template #header>
-      <slot name="header">{{
-        $t(`enums.setting_type.${type.toLowerCase()}`)
-      }}</slot>
+      <slot name="header"
+        >{{ $t(`enums.setting_type.${type.toLowerCase()}`) }}
+        {{ $tc('setting', 2) }}
+      </slot>
     </template>
     <template #body>
       <div class="container">

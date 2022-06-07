@@ -16,12 +16,23 @@
         <AppSpinner />
       </div>
       <div v-else>
-        <ClientItem
-          v-for="client of clients"
-          :key="client.id"
-          :client="client"
-          class="mb-2"
-        />
+        <template v-if="clients.length > 0">
+          <ClientItem
+            v-for="client of clients"
+            :key="client.id"
+            :client="client"
+            class="mb-2"
+          />
+        </template>
+        <template v-else>
+          <div class="text-center fw-bold text-danger">
+            No Results could be found by the search term
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
       </div>
     </div>
   </div>
