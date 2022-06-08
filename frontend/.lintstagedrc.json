@@ -1,0 +1,7 @@
+{
+  "**/*": [
+    "prettier --write --list-different .",
+    "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "prettier --check ."
+  ]
+}
