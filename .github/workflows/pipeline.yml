@@ -140,4 +140,6 @@ jobs:
           git config --global user.name 'VersionMaster'
           git config --global user.email 'vc@pscl.dev'
           npm version ${{ steps.semantic.outputs.new_release_version }}
+          cd frontend && npm version ${{ steps.semantic.outputs.new_release_version }}
+          cd backend && npm version ${{ steps.semantic.outputs.new_release_version }}
           git push
