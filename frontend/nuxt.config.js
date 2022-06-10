@@ -83,6 +83,7 @@ export default {
   },
 
   publicRuntimeConfig: {
+    appVersion: process.env.npm_package_version,
     apiBaseUrl: process.env.BASE_URL,
   },
 
