@@ -46,7 +46,7 @@
     "create": "Neues Dokument erstellen",
     "offer": "Angebot",
     "invoice": "Rechnung",
-    "clientId": "Kunden Id",
+    "client": "Kunde",
     "invoiceNr": "Rechnungs Nr.",
     "dateOfIssue": "Ausstellungsdatum",
     "description": "Beschreibung",

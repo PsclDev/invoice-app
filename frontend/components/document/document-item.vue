@@ -24,7 +24,7 @@
           <font-awesome-icon :icon="['fas', 'file-invoice']" />
         </button>
         <button
-          v-if="clientHasEmail"
+          v-if="client.email"
           class="btn btn-link"
           data-bs-toggle="modal"
           :data-bs-target="`#d${document.id}`"
@@ -49,6 +49,7 @@
           </div>
           <DocumentForm
             :value="mutableDoc"
+            :client="client"
             :document-type="getDocumentType(mutableDoc)"
             :view-mode="viewMode"
             @input="(e) => (mutableDoc = e)"
@@ -104,7 +105,7 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
 import ClientModule from '~/store/client';
-import { Document } from '~/models';
+import { Client, Document } from '~/models';
 import { DateTimeFormat, ViewMode, DocumentType } from '~/types';
 import { getDate, getDocumentType, getMutableDocument } from '~/utils/helper';
 
@@ -127,7 +128,7 @@ export default Vue.extend({
       store: getModule(DocumentModule, this.$store),
       clientStore: getModule(ClientModule, this.$store),
       mutableDoc: {} as Document,
-      clientHasEmail: false,
+      client: {} as Client,
     };
   },
   computed: {
@@ -151,9 +152,9 @@ export default Vue.extend({
   methods: {
     async setDocument() {
       this.mutableDoc = getMutableDocument(this.document);
-      this.clientHasEmail = !!(
-        await this.clientStore.getClientById(this.mutableDoc.clientId)
-      ).email;
+      this.client = await this.clientStore.getClientById(
+        this.mutableDoc.clientId
+      );
     },
     async convertToInvoice() {
       await this.store.convertToInvoice(this.document);
