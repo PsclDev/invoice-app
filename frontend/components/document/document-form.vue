@@ -3,8 +3,15 @@
     <div v-if="!hideClient" class="row mb-4">
       <App-Input
         :value="clientName"
-        class="col-sm-4"
+        class="col-sm-4 mb-3 mb-sm-0"
         :title="$t('documents.client')"
+        :view-mode="ViewMode.SHOW"
+      ></App-Input>
+      <App-Input
+        v-if="relatedInvoiceNr"
+        :value="relatedInvoiceNr"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('documents.relatedInvoice')"
         :view-mode="ViewMode.SHOW"
       ></App-Input>
     </div>
@@ -117,6 +124,11 @@ export default Vue.extend({
     documentType: {
       type: String as () => DocumentType,
       required: true,
+    },
+    relatedInvoiceNr: {
+      type: String,
+      required: false,
+      default: undefined,
     },
     client: {
       type: Object as () => Client,

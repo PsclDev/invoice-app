@@ -47,6 +47,7 @@
     "offer": "Offer",
     "invoice": "Invoice",
     "client": "Client",
+    "relatedInvoice": "Related invoice",
     "invoiceNr": "Invoice Nr.",
     "dateOfIssue": "Date of Issue",
     "description": "Description",

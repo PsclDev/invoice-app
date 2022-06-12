@@ -47,6 +47,7 @@
     "offer": "Angebot",
     "invoice": "Rechnung",
     "client": "Kunde",
+    "relatedInvoice": "Zugehörige Rechnung",
     "invoiceNr": "Rechnungs Nr.",
     "dateOfIssue": "Ausstellungsdatum",
     "description": "Beschreibung",

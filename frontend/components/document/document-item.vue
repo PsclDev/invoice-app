@@ -49,6 +49,7 @@
           </div>
           <DocumentForm
             :value="mutableDoc"
+            :related-invoice-nr="formatNr(relatedInvoiceNr)"
             :client="client"
             :document-type="getDocumentType(mutableDoc)"
             :view-mode="viewMode"
@@ -128,19 +129,20 @@ export default Vue.extend({
       store: getModule(DocumentModule, this.$store),
       clientStore: getModule(ClientModule, this.$store),
       mutableDoc: {} as Document,
+      relatedInvoiceNr: 0,
       client: {} as Client,
     };
   },
   computed: {
-    title() {
+    title(): string {
       if (this.document.invoiceNr) {
-        return `${this.$t('documents.invoice')} #${String(
+        return `${this.$t('documents.invoice')} ${this.formatNr(
           this.document.invoiceNr
-        ).padStart(4, '0')}`;
+        )}`;
       }
-      return `${this.$t('documents.offer')} #${String(
+      return `${this.$t('documents.offer')} ${this.formatNr(
         this.document.offerNr
-      ).padStart(4, '0')}`;
+      )}`;
     },
     isInvoice() {
       return getDocumentType(this.document) === DocumentType.INVOICE;
@@ -155,6 +157,13 @@ export default Vue.extend({
       this.client = await this.clientStore.getClientById(
         this.mutableDoc.clientId
       );
+      if (this.mutableDoc.invoiceId)
+        this.relatedInvoiceNr = this.store.Documents.filter(
+          (d) => d.id === this.mutableDoc.invoiceId
+        )[0].invoiceNr!;
+    },
+    formatNr(nr: number | undefined) {
+      return nr === 0 ? null : `#${String(nr).padStart(4, '0')}`;
     },
     async convertToInvoice() {
       await this.store.convertToInvoice(this.document);
