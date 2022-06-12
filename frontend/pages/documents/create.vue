@@ -1,7 +1,7 @@
 <template>
   <div class="container pb-5">
     <div class="row mb-4">
-      <h1>New Document</h1>
+      <h1>{{ $t('documents.new') }}</h1>
     </div>
     <div v-if="isLoading" class="text-center">
       <AppSpinner />

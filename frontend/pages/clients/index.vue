@@ -54,6 +54,11 @@ export default Vue.extend({
       isLoading: false,
     };
   },
+  head() {
+    return {
+      title: `${this.$t('title')} - ${this.$tc('client', 2)}`,
+    };
+  },
   computed: {
     clients(): Client[] {
       return this.filteredList;

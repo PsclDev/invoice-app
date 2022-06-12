@@ -1,4 +1,5 @@
 {
+  "title": "InvoiceApp",
   "home": "Übersicht",
   "client": "Kunde | Kunden",
   "setting": "Einstellung | Einstellungen",
@@ -43,6 +44,7 @@
     "city": "Ort"
   },
   "documents": {
+    "new": "Neues Dokuement",
     "create": "Neues Dokument erstellen",
     "offer": "Angebot",
     "invoice": "Rechnung",
