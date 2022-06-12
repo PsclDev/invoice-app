@@ -1,3 +1,4 @@
+import { ConfigService } from '@config/config.service';
 import { capitalizeString } from '@helper/capitalizeString';
 import { Route } from '@modules/routes';
 import { Controller, Get } from '@nestjs/common';
@@ -20,15 +21,18 @@ export class HealthController {
     private db: TypeOrmHealthIndicator,
     @InjectConnection()
     private defaultConnection: Connection,
+    private configSerivce: ConfigService,
   ) {}
 
   @Get()
   @HealthCheck()
-  check() {
-    return this.health.check([
+  async check() {
+    const healthCheck = await this.health.check([
       () => this.http.pingCheck('api', 'http://127.0.0.1:3010/'),
       () =>
         this.db.pingCheck('database', { connection: this.defaultConnection }),
     ]);
+
+    return { version: this.configSerivce.appVersion, ...healthCheck };
   }
 }

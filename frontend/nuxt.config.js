@@ -77,13 +77,14 @@ export default {
     'nuxt-highcharts',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: process.env.BASE_URL,
-  },
-
   publicRuntimeConfig: {
-    apiBaseUrl: process.env.BASE_URL,
+    // Axios module configuration: https://go.nuxtjs.dev/config-axios
+    axios: {
+      baseURL: process.env.API_URL,
+    },
+
+    appVersion: process.env.npm_package_version,
+    apiBaseUrl: process.env.API_URL,
   },
 
   i18n: {

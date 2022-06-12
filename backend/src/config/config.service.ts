@@ -7,6 +7,7 @@ import * as Joi from 'joi';
 dotenvExpand.expand(dotenv.config());
 
 const CONFIG_SCHEMA = Joi.object().keys({
+  appVersion: Joi.string().required(),
   nodeEnv: Joi.string().required(),
   devMode: Joi.bool().required(),
   httpPort: Joi.number().integer().greater(0).required(),
@@ -35,6 +36,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
 
 @Injectable()
 export class ConfigService {
+  appVersion = process.env.npm_package_version;
   nodeEnv = process.env.NODE_ENV || 'prod';
   devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   httpPort = Number(process.env.APP_PORT) || 3010;

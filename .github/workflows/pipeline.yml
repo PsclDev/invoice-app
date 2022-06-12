@@ -109,6 +109,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.INVOICE_APP_PAT }}
 
+      - name: Update npm version 📈
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          git config --global user.name 'VersionMaster'
+          git config --global user.email 'vc@pscl.dev'
+          npm version ${{ steps.semantic.outputs.new_release_version }} --no-git-tag-version
+          git add .
+          cd frontend && npm version ${{ steps.semantic.outputs.new_release_version }} --no-git-tag-version
+          git add .
+          cd ../backend && npm version ${{ steps.semantic.outputs.new_release_version }} --no-git-tag-version
+          git add .
+          git commit -m "Set new app version ${{ steps.semantic.outputs.new_release_version }}"
+          git push
+          
       - name: Login to registry 🔐
         uses: docker/login-action@v1
         with:
@@ -133,13 +147,3 @@ jobs:
           context: "./backend"
           file: "./backend/Dockerfile"
           tags: ghcr.io/pscldev/invoice-app/backend:latest,ghcr.io/pscldev/invoice-app/backend:${{ steps.semantic.outputs.new_release_version }}
-
-      - name: Update npm version 📈
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          git config --global user.name 'VersionMaster'
-          git config --global user.email 'vc@pscl.dev'
-          npm version ${{ steps.semantic.outputs.new_release_version }}
-          cd frontend && npm version ${{ steps.semantic.outputs.new_release_version }}
-          cd backend && npm version ${{ steps.semantic.outputs.new_release_version }}
-          git push
