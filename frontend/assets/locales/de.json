@@ -1,4 +1,5 @@
 {
+  "title": "InvoiceApp",
   "home": "Übersicht",
   "client": "Kunde | Kunden",
   "setting": "Einstellung | Einstellungen",
@@ -43,10 +44,12 @@
     "city": "Ort"
   },
   "documents": {
+    "new": "Neues Dokuement",
     "create": "Neues Dokument erstellen",
     "offer": "Angebot",
     "invoice": "Rechnung",
-    "clientId": "Kunden Id",
+    "client": "Kunde",
+    "relatedInvoice": "Zugehörige Rechnung",
     "invoiceNr": "Rechnungs Nr.",
     "dateOfIssue": "Ausstellungsdatum",
     "description": "Beschreibung",

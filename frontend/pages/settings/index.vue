@@ -39,6 +39,11 @@ export default Vue.extend({
       isLoading: false,
     };
   },
+  head() {
+    return {
+      title: `${this.$t('title')} - ${this.$tc('setting', 2)}`,
+    };
+  },
   computed: {
     settings(): Setting[] {
       return this.filteredList;

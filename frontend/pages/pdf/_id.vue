@@ -1,17 +1,26 @@
+/* eslint-disable vue/no-v-html */
 <template>
   <div v-if="!isLoading" class="page" size="A4">
+    <div class="falzLeft"></div>
+    <div class="falzRight"></div>
+
     <div class="letterHeading">
-      <div>{{ convertTemplate('Letterhead') }}</div>
+      <div>
+        {{
+          `${convertTemplate('Company Name')} • ${convertTemplate(
+            'Company Address'
+          )} • USt.-IdNr. DE${convertTemplate('Company Tax Id')}`
+        }}
+      </div>
     </div>
     <div class="content">
       <div class="addressHeading">
         <div class="address">
-          <address class="sender">
-            <span>{{
-              `${convertTemplate('Company Name')} ${convertTemplate(
-                'Company Address'
-              )}`
-            }}</span>
+          <address
+            class="sender"
+            :style="`font-size: ${senderLength > 50 ? '8' : '9'}pt`"
+          >
+            <span>{{ sender }}</span>
           </address>
           <address class="recipient">
             <div v-if="client.company" class="fw-bold">
@@ -29,16 +38,30 @@
           </address>
         </div>
         <div class="invoiceSpecs">
-          <strong>Ausstellungsdatum:</strong> {{ getDate(document.dateOfIssue)
-          }}<br />
-          <strong>{{ isInvoice ? 'Rechnung' : 'Angebot' }} Nr:</strong>
-          {{ isInvoice ? 'I#' : 'O#' }}
-          {{
-            String(isInvoice ? document.invoiceNr : document.offerNr).padStart(
-              4,
-              '0'
-            )
-          }}<br />
+          <div class="fw-bold h1">{{ isInvoice ? 'Rechnung' : 'Angebot' }}</div>
+          <div class="d-flex justify-content-between">
+            <div>Datum:</div>
+            <div class="fw-bold">
+              {{ getDate(document.dateOfIssue) }}
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>Nr:</div>
+            <div class="fw-bold">
+              {{ isInvoice ? 'R#' : 'A#' }}
+              {{
+                String(
+                  isInvoice ? document.invoiceNr : document.offerNr
+                ).padStart(4, '0')
+              }}
+            </div>
+          </div>
+          <div v-if="isInvoice" class="d-flex justify-content-between">
+            <div>Fällig bis:</div>
+            <div class="fw-bold">
+              {{ getDate(document.dueDate) }}
+            </div>
+          </div>
         </div>
       </div>
       <div class="mainContent">
@@ -56,29 +79,56 @@
             </tbody>
           </table>
         </div>
-        <div class="foot">
-          <div v-if="isInvoice" class="col">
-            <strong>Vielen Dank für Ihr Vertrauen!</strong><br />
-            <div>Zahlungsinformationen</div>
-            <div>Name: {{ convertTemplate('Payment Name') }}</div>
-            <div>IBAN: {{ convertTemplate('Payment Iban') }}</div>
+        <div class="pricing">
+          <div class="col">
             <div>
-              Reference: I#{{
-                `${String(document.invoiceNr).padStart(4, '0')}`
-              }}
+              <div v-if="isInvoice">Vielen Dank für Ihr Vertrauen!</div>
+              <div v-else>Vorab bedanken wir uns bei Ihren Vertrauen!</div>
+            </div>
+            <div v-if="isInvoice" class="payment mt-3">
+              <div>Zahlungsinformationen</div>
+              <div class="d-flex justify-content-between">
+                <div>Name:</div>
+                <div class="fw-bold">{{ convertTemplate('Payment Name') }}</div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div>IBAN:</div>
+                <div class="fw-bold">{{ convertTemplate('Payment Iban') }}</div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div>Referenz:</div>
+                <div class="fw-bold">
+                  R#{{ `${String(document.invoiceNr).padStart(4, '0')}` }}
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div class="price">
-              <strong>Zwischensumme:</strong> {{ document.subTotal }}€<br />
-              <strong>Steuern ({{ document.taxRate }}%):</strong>
-              {{ document.tax }}€<br />
-              <strong v-if="isInvoice && document.alreadyPaid"
-                >Bereits gezahlt:</strong
-              >
-              {{ document.alreadyPaid }}€<br />
-              <strong>Rechnungsbetrag:</strong> {{ document.total }}€<br />
+          <div class="col d-flex justify-content-end">
+            <div class="monetary">
+              <div class="d-flex justify-content-between">
+                <div>Zwischensumme:</div>
+                <div>{{ document.subTotal }}€</div>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <div>Steuern ({{ document.taxRate }}%):</div>
+                <div>{{ document.tax }}€</div>
+              </div>
+              <div v-if="isInvoice" class="d-flex justify-content-between">
+                <div>Bereits gezahlt:</div>
+                <div>{{ document.alreadyPaid }}€</div>
+              </div>
+              <div class="d-flex justify-content-between total fw-bold mt-3">
+                <div>Gesamtbetrag:</div>
+                <div>{{ document.total }}€</div>
+              </div>
             </div>
+          </div>
+        </div>
+        <div v-if="isInvoice" class="footer">
+          <div>
+            Für Privatpersonen besteht eine Aufbewahrungspflicht von 2 Jahren
+            für Rechnungen.
           </div>
         </div>
       </div>
@@ -116,6 +166,14 @@ export default Vue.extend({
     isInvoice(): boolean {
       return !!this.document.invoiceNr;
     },
+    sender(): string {
+      return `${this.convertTemplate('Company Name')}, ${this.convertTemplate(
+        'Company Address'
+      )}`;
+    },
+    senderLength(): number {
+      return this.sender.length;
+    },
   },
   mounted() {
     const { params } = this.$route;
@@ -137,6 +195,9 @@ export default Vue.extend({
         });
 
       this.isLoading = false;
+    },
+    getDescriptionItem(index: number): string {
+      return this.document.description[index] || '&nbsp;';
     },
     convertTemplate(key: string): string {
       return Mustache.render(`{{${key}}}`, {
@@ -165,29 +226,67 @@ body,
   color: black;
   background-color: white;
   font-size: 12pt;
-  font-family: 'Cousine', monospace;
-}
-
-.page {
-  background: white;
-  display: block;
+  font-family: 'Poppins', monospace;
 }
 
 .page[size='A4'] {
   width: 21cm;
   height: 29.7cm;
+  position: relative;
 }
-.page[size='A4'][direction='landscape'] {
-  width: 29.7cm;
-  height: 21cm;
+
+.falzLeft,
+.falzRight {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 1;
+  width: 0.5cm;
 }
+.falzLeft {
+  left: 0;
+}
+.falzRight {
+  right: 0;
+}
+.falzLeft::before,
+.falzLeft::after,
+.falzRight::before,
+.falzRight::after {
+  content: ' ';
+  position: absolute;
+  height: 0;
+  z-index: 2;
+  width: 0.5cm;
+  border-top: 0.25cm solid #fff;
+  border-bottom: 0.25cm solid #fff;
+  background-color: #000;
+}
+.falzLeft::before,
+.falzLeft::after {
+  left: 0;
+}
+.falzRight::before,
+.falzRight::after {
+  right: 0;
+}
+.falzLeft::before,
+.falzRight::before {
+  top: 102.5mm;
+}
+.falzLeft::after,
+.falzRight::after {
+  top: 207.5mm;
+}
+
 .letterHeading {
+  font-size: 10pt;
   height: 4.5cm;
-  width: 12.5cm;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .content {
   width: 100%;
 }
@@ -195,6 +294,7 @@ body,
 .addressHeading {
   display: flex;
   flex-direction: row;
+  width: 16.5cm;
 }
 
 .address {
@@ -206,28 +306,34 @@ body,
 .recipient,
 .sender {
   width: 8cm;
-  margin-left: 0.5cm;
   font-style: normal;
+  margin-left: 0.5cm;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 .sender {
   padding: 6.2mm 0mm;
   font-size: 9pt;
-  max-height: 1.77cm;
-  min-height: 1.77cm;
+  max-height: 1.4cm;
+  min-height: 1.4cm;
 }
 .sender span {
   display: block;
   padding-bottom: 0.5mm;
-  border-bottom: 0.5mm solid #373b44;
+  border-bottom: 0.5mm solid $green;
 }
 .recipient {
   height: 2.73cm;
 }
 
 .invoiceSpecs {
-  width: 7.5cm;
-  margin-top: 0.5cm;
+  .h1 {
+    color: $green;
+  }
+
+  min-width: 6.5cm;
   height: 4cm;
+  margin-top: -0.5cm;
 }
 
 .mainContent {
@@ -236,7 +342,7 @@ body,
   margin-top: 0.846cm;
 }
 .tableContainer {
-  min-height: 14cm;
+  min-height: 13cm;
 }
 .table {
   border: 0;
@@ -244,35 +350,66 @@ body,
   width: 100%;
 }
 .table thead {
-  background-color: #373b44;
-  color: #fff;
+  background-color: $green;
 }
 .table thead th {
   width: 100%;
   text-align: left;
 }
-.table td,
+.table tr {
+  .first {
+    font-size: 13pt;
+  }
+
+  td {
+    padding: 0.4rem 0.5rem;
+  }
+}
+.table,
 .table th {
-  padding: 0.42333cm;
+  padding: 0.32cm;
 }
 .table tbody tr {
-  border-bottom: 1px solid #373b44;
+  border-bottom: 1px solid $gray;
+  background-color: #fbfbf9;
+}
+.table tbody tr:nth-of-type(odd) {
+  background-color: #eeefeb;
 }
 .table tbody tr:last-of-type {
   border-bottom: 0;
 }
 
-.foot {
+.pricing {
   display: flex;
   flex-direction: row;
   margin-bottom: 1cm;
 }
 
-.foot .col {
+.pricing .col {
   width: 50%;
+  max-height: 3.5cm;
 }
 
-.price {
-  text-align: right;
+.payment {
+  width: 7.5cm;
+}
+
+.monetary {
+  width: 7cm;
+}
+
+.total {
+  background-color: $green;
+  padding: 10px;
+  font-size: 13.5pt;
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  height: 1cm;
+  color: $gray;
+  font-size: 10pt;
 }
 </style>

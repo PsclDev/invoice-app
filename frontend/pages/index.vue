@@ -89,6 +89,11 @@ export default Vue.extend({
       currentYear: {} as DocumentYearsStatistics,
     };
   },
+  head() {
+    return {
+      title: `${this.$t('title')} - ${this.$t('home')}`,
+    };
+  },
   computed: {
     yearlyRevenues(): number {
       return this.currentYear.revenues;

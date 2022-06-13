@@ -49,6 +49,11 @@ export default Vue.extend({
       isLoading: false,
     };
   },
+  head() {
+    return {
+      title: `${this.$t('title')} - ${this.$tc('document', 2)}`,
+    };
+  },
   computed: {
     documents: {
       get(): Document[] {

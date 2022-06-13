@@ -24,7 +24,7 @@
           <font-awesome-icon :icon="['fas', 'file-invoice']" />
         </button>
         <button
-          v-if="clientHasEmail"
+          v-if="client.email"
           class="btn btn-link"
           data-bs-toggle="modal"
           :data-bs-target="`#d${document.id}`"
@@ -49,6 +49,8 @@
           </div>
           <DocumentForm
             :value="mutableDoc"
+            :related-invoice-nr="formatNr(relatedInvoiceNr)"
+            :client="client"
             :document-type="getDocumentType(mutableDoc)"
             :view-mode="viewMode"
             @input="(e) => (mutableDoc = e)"
@@ -104,7 +106,7 @@ import Vue from 'vue';
 import { getModule } from 'vuex-module-decorators';
 import DocumentModule from '~/store/document';
 import ClientModule from '~/store/client';
-import { Document } from '~/models';
+import { Client, Document } from '~/models';
 import { DateTimeFormat, ViewMode, DocumentType } from '~/types';
 import { getDate, getDocumentType, getMutableDocument } from '~/utils/helper';
 
@@ -127,19 +129,20 @@ export default Vue.extend({
       store: getModule(DocumentModule, this.$store),
       clientStore: getModule(ClientModule, this.$store),
       mutableDoc: {} as Document,
-      clientHasEmail: false,
+      relatedInvoiceNr: 0,
+      client: {} as Client,
     };
   },
   computed: {
-    title() {
+    title(): string {
       if (this.document.invoiceNr) {
-        return `${this.$t('documents.invoice')} #${String(
+        return `${this.$t('documents.invoice')} ${this.formatNr(
           this.document.invoiceNr
-        ).padStart(4, '0')}`;
+        )}`;
       }
-      return `${this.$t('documents.offer')} #${String(
+      return `${this.$t('documents.offer')} ${this.formatNr(
         this.document.offerNr
-      ).padStart(4, '0')}`;
+      )}`;
     },
     isInvoice() {
       return getDocumentType(this.document) === DocumentType.INVOICE;
@@ -151,9 +154,16 @@ export default Vue.extend({
   methods: {
     async setDocument() {
       this.mutableDoc = getMutableDocument(this.document);
-      this.clientHasEmail = !!(
-        await this.clientStore.getClientById(this.mutableDoc.clientId)
-      ).email;
+      this.client = await this.clientStore.getClientById(
+        this.mutableDoc.clientId
+      );
+      if (this.mutableDoc.invoiceId)
+        this.relatedInvoiceNr = this.store.Documents.filter(
+          (d) => d.id === this.mutableDoc.invoiceId
+        )[0].invoiceNr!;
+    },
+    formatNr(nr: number | undefined) {
+      return nr === 0 ? null : `#${String(nr).padStart(4, '0')}`;
     },
     async convertToInvoice() {
       await this.store.convertToInvoice(this.document);

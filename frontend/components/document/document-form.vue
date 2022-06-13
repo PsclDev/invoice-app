@@ -2,9 +2,16 @@
   <div>
     <div v-if="!hideClient" class="row mb-4">
       <App-Input
-        v-model="mutableDocument.clientId"
-        class="col-sm-4"
-        :title="$t('documents.clientId')"
+        :value="clientName"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('documents.client')"
+        :view-mode="ViewMode.SHOW"
+      ></App-Input>
+      <App-Input
+        v-if="relatedInvoiceNr"
+        :value="relatedInvoiceNr"
+        class="col-sm-4 mb-3 mb-sm-0"
+        :title="$t('documents.relatedInvoice')"
         :view-mode="ViewMode.SHOW"
       ></App-Input>
     </div>
@@ -103,7 +110,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Document } from '~/models';
+import { Client, Document } from '~/models';
 import { ViewMode, DocumentType } from '~/types';
 import { getDate, getMutableDocument } from '~/utils/helper';
 
@@ -116,6 +123,15 @@ export default Vue.extend({
     },
     documentType: {
       type: String as () => DocumentType,
+      required: true,
+    },
+    relatedInvoiceNr: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+    client: {
+      type: Object as () => Client,
       required: true,
     },
     viewMode: {
@@ -138,6 +154,12 @@ export default Vue.extend({
     };
   },
   computed: {
+    clientName() {
+      const company = `${this.client.company} | `;
+      const name = `${this.client.firstname} ${this.client.lastname}`;
+
+      return this.client.company ? company + name : name;
+    },
     descriptionToView() {
       let text = '';
       if (this.mutableDocument.description)
