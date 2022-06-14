@@ -128,3 +128,8 @@ if you wanna use any other value from the client, document or settings just put 
 | ![](https://invoice-app.pscl.dev/document_create_dark_1_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_1_mobile.png) |
 | ![](https://invoice-app.pscl.dev/document_create_dark_2_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_2_mobile.png) |
 | ![](https://invoice-app.pscl.dev/settings_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/settings_view_light_mobile.png) |
+
+### Pdf
+| Offer | Invoice |
+| ---- | ----- |
+| ![](https://invoice-app.pscl.dev/offer_example.png) | ![](https://invoice-app.pscl.dev/invoice_example.png) |
