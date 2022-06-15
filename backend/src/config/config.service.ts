@@ -24,6 +24,8 @@ const CONFIG_SCHEMA = Joi.object().keys({
   }),
   disableSeeding: Joi.bool().optional(),
   frontendUrl: Joi.string().required(),
+  chromiumPath: Joi.string().optional(),
+  chromiumNoSandboxMode: Joi.bool().optional(),
   pdfBackupExport: Joi.string().optional(),
   mail: Joi.object().keys({
     logging: Joi.bool().optional(),
@@ -36,7 +38,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
 
 @Injectable()
 export class ConfigService {
-  appVersion = process.env.npm_package_version;
+  appVersion = process.env.npm_package_version || 'unkown';
   nodeEnv = process.env.NODE_ENV || 'prod';
   devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   httpPort = Number(process.env.APP_PORT) || 3010;
@@ -52,6 +54,8 @@ export class ConfigService {
     migrationsPath: process.env.APP_MIGRATIONS_PATH || 'dist/migrations/*.js',
   };
   disableSeeding = process.env.APP_DISABLE_SEEDING || false;
+  chromiumPath = process.env.APP_CHROMIUM_PATH;
+  chromiumNoSandboxMode = process.env.APP_CHROMIUM_NO_SANDBOX || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
   pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
   mail = {

@@ -55,8 +55,14 @@ export class DocumentService {
 
   async generate(id: string): Promise<string> {
     const infos = await this.getDocument(id, true);
+    const executablePath = this.configService.chromiumPath || null;
+    this.logger.debug(`Chromium path: ${executablePath}`);
+    const browser = await puppeteer.launch({
+      executablePath,
+      headless: true,
+      args: this.configService.chromiumNoSandboxMode ? ['--no-sandbox'] : [],
+    });
 
-    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     page.setViewport({ width: 1920, height: 1080 });
     await page.goto(`${this.configService.frontendUrl}/pdf/${id}`, {
