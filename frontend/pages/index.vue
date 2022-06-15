@@ -12,7 +12,7 @@
           <div class="col-12 col-sm-6 d-flex justify-content-end">
             <highchart class="chart" :options="getClientStats()" />
           </div>
-          <div class="col-12 col-sm-6">
+          <div class="col-12 col-sm-6 d-flex justify-content-start">
             <highchart class="chart" :options="getDocumentStats()" />
           </div>
         </div>
