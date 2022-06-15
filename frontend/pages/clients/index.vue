@@ -24,9 +24,14 @@
             class="mb-2"
           />
         </template>
-        <template v-else>
+        <template v-else-if="store.Clients.length > 0 && clients.length == 0">
           <div class="text-center fw-bold text-danger">
             No Results could be found by the search term
+          </div>
+        </template>
+        <template v-else>
+          <div class="text-center fw-bold text-warning">
+            No Clients created yet
           </div>
         </template>
       </div>

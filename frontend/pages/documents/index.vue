@@ -24,9 +24,16 @@
             class="mb-2"
           />
         </template>
-        <template v-else>
+        <template
+          v-else-if="store.Documents.length > 0 && documents.length == 0"
+        >
           <div class="text-center fw-bold text-danger">
             No Results could be found by the search term
+          </div>
+        </template>
+        <template v-else>
+          <div class="text-center fw-bold text-warning">
+            No Documents created yet
           </div>
         </template>
       </div>
