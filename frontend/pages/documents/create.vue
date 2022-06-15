@@ -20,7 +20,10 @@
         >
         </multiselect>
       </div>
-      <div v-show="selectedClient.id === '1'" class="row mb-4">
+      <div
+        v-show="selectedClient && selectedClient.id === '1'"
+        class="row mb-4"
+      >
         <ClientForm
           :value="newClient"
           :client-type="ClientType.COMPANY"

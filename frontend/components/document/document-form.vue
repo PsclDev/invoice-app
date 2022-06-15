@@ -132,7 +132,7 @@ export default Vue.extend({
     },
     client: {
       type: Object as () => Client,
-      required: true,
+      default: null,
     },
     viewMode: {
       type: String as () => ViewMode,
