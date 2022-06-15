@@ -26,6 +26,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
   frontendUrl: Joi.string().required(),
   chromiumPath: Joi.string().optional(),
   chromiumNoSandboxMode: Joi.bool().optional(),
+  ignoreHTTPSErrors: Joi.bool().optional(),
   pdfBackupExport: Joi.string().optional(),
   mail: Joi.object().keys({
     logging: Joi.bool().optional(),
@@ -55,7 +56,8 @@ export class ConfigService {
   };
   disableSeeding = process.env.APP_DISABLE_SEEDING || false;
   chromiumPath = process.env.APP_CHROMIUM_PATH;
-  chromiumNoSandboxMode = process.env.APP_CHROMIUM_NO_SANDBOX || false;
+  chromiumNoSandboxMode = Boolean(process.env.APP_CHROMIUM_NO_SANDBOX) || false;
+  ignoreHTTPSErrors = Boolean(process.env.APP_IGNORE_HTTPS_ERRORS) || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
   pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
   mail = {

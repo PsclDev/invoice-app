@@ -60,6 +60,7 @@ export class DocumentService {
     const browser = await puppeteer.launch({
       executablePath,
       headless: true,
+      ignoreHTTPSErrors: this.configService.ignoreHTTPSErrors,
       args: this.configService.chromiumNoSandboxMode ? ['--no-sandbox'] : [],
     });
 
