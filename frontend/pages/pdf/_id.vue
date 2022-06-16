@@ -107,20 +107,23 @@
             <div class="monetary">
               <div class="d-flex justify-content-between">
                 <div>Zwischensumme:</div>
-                <div>{{ document.subTotal }}€</div>
+                <div>{{ document.subTotal.toFixed(2) }}€</div>
               </div>
 
               <div class="d-flex justify-content-between">
                 <div>Steuern ({{ document.taxRate }}%):</div>
-                <div>{{ document.tax }}€</div>
+                <div>{{ document.tax.toFixed(2) }}€</div>
               </div>
-              <div v-if="isInvoice" class="d-flex justify-content-between">
+              <div
+                v-if="isInvoice && document.alreadyPaid"
+                class="d-flex justify-content-between"
+              >
                 <div>Bereits gezahlt:</div>
-                <div>{{ document.alreadyPaid }}€</div>
+                <div>{{ document.alreadyPaid.toFixed(2) }}€</div>
               </div>
               <div class="d-flex justify-content-between total fw-bold mt-3">
                 <div>Gesamtbetrag:</div>
-                <div>{{ document.total }}€</div>
+                <div>{{ document.total.toFixed(2) }}€</div>
               </div>
             </div>
           </div>
@@ -182,7 +185,13 @@ export default Vue.extend({
   methods: {
     async getDocument(id: string) {
       this.isLoading = true;
-      this.document = await this.documentStore.getDocumentById(id);
+
+      try {
+        this.document = await this.documentStore.getDocumentById(id);
+      } catch {
+        this.$router.push('/');
+      }
+
       this.client = await this.clientStore.getClientById(
         this.document.clientId
       );
