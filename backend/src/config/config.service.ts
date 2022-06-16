@@ -56,7 +56,8 @@ export class ConfigService {
   };
   disableSeeding = process.env.APP_DISABLE_SEEDING || false;
   chromiumPath = process.env.APP_CHROMIUM_PATH;
-  chromiumNoSandboxMode = Boolean(process.env.APP_CHROMIUM_NO_SANDBOX) || false;
+  chromiumNoSandboxMode =
+    Boolean(process.env.APP_CHROMIUM_NO_SANDBOX_MODE) || false;
   ignoreHTTPSErrors = Boolean(process.env.APP_IGNORE_HTTPS_ERRORS) || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
   pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;

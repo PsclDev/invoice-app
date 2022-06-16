@@ -31,6 +31,6 @@ async function bootstrap() {
 
   const port = config.httpPort;
   await app.listen(port);
-  logger.log(`listening on port: ${port}`);
+  logger.log(`App listening on port: ${port} | version: ${config.appVersion}`);
 }
 bootstrap();
