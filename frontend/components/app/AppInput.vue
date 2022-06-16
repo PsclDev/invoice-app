@@ -14,7 +14,11 @@
         @change="$emit('valueChanged', $event.target.value)"
       />
     </div>
-    <div v-else>{{ value + postfix }}</div>
+    <div v-else>
+      {{
+        type === 'number' ? Number(value).toFixed(2) + postfix : value + postfix
+      }}
+    </div>
   </div>
 </template>
 

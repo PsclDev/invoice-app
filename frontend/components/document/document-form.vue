@@ -73,7 +73,13 @@
               <span id="taxRate" class="input-group-text">%</span>
             </div>
           </div>
-          <div v-else>{{ mutableDocument.tax + '€' }}</div>
+          <div v-else>
+            {{
+              mutableDocument.tax
+                ? mutableDocument.tax.toFixed(2) + '€'
+                : '0.00€'
+            }}
+          </div>
         </div>
       </div>
       <App-Input
