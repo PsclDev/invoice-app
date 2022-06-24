@@ -57,11 +57,20 @@ export class DocumentService {
     const infos = await this.getDocument(id, true);
     const executablePath = this.configService.chromiumPath || null;
     this.logger.debug(`Chromium path: ${executablePath}`);
+
+    const ignoreHTTPSErrors = this.configService.ignoreHTTPSErrors;
+    this.logger.debug(`Chromium ignore HTTPS errors: ${ignoreHTTPSErrors}`);
+
+    const args = this.configService.chromiumNoSandboxMode
+      ? ['--no-sandbox']
+      : [];
+    this.logger.debug(`Chromium args: ${executablePath}`);
+
     const browser = await puppeteer.launch({
       executablePath,
       headless: true,
-      ignoreHTTPSErrors: this.configService.ignoreHTTPSErrors,
-      args: this.configService.chromiumNoSandboxMode ? ['--no-sandbox'] : [],
+      ignoreHTTPSErrors,
+      args,
     });
 
     const page = await browser.newPage();
