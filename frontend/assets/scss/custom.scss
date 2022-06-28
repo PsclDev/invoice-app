@@ -21,6 +21,7 @@ body {
   --primary-background: #{$darkblue};
   --secondary-background: #{$lightblue};
   --tertiary-background: #{$lighterblue};
+  transition: background-color 0.25s;
 
   &.light {
     background-color: $white;
@@ -30,6 +31,15 @@ body {
     --secondary-background: #{$lightwhite};
     --tertiary-background: #{$lighterwhite};
   }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }
 
 .no-select {
