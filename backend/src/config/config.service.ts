@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const dotenvExpand = require('dotenv-expand');
 import * as Joi from 'joi';
+import { version } from '../../package.json';
 
 dotenvExpand.expand(dotenv.config());
 
@@ -39,7 +40,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
 
 @Injectable()
 export class ConfigService {
-  appVersion = process.env.npm_package_version || 'unkown';
+  appVersion = process.env.npm_package_version || version || 'unkown';
   nodeEnv = process.env.NODE_ENV || 'prod';
   devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   httpPort = Number(process.env.APP_PORT) || 3010;
