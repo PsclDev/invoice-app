@@ -61,4 +61,4 @@ RUN yarn install --production
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/main"]
+CMD ["yarn", "start"]
