@@ -2,7 +2,6 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger } from '@nestjs/common';
 import { Client } from '@modules/client/client.entity';
 import { Document } from '@modules/document/document.entity';
-import { Attachment } from 'nodemailer/lib/mailer';
 import * as Mustache from 'mustache';
 import { SettingService } from '@modules/setting/setting.service';
 import { SettingType } from '@modules/setting/setting.dto';
@@ -25,7 +24,7 @@ export class MailService {
 
     try {
       const filename = path.slice(path.lastIndexOf('/'), 1);
-      const attachments: Attachment[] = [
+      const attachments: any[] = [
         {
           filename,
           path,
