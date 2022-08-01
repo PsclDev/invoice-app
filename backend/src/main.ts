@@ -9,7 +9,9 @@ async function bootstrap() {
   const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
-  logger.log(`App Configuration: ${JSON.stringify(config, undefined, 2)}`);
+
+  if (config.printConfiguration)
+    logger.log(`App Configuration: ${JSON.stringify(config, undefined, 2)}`);
 
   app.enableCors();
   app.useGlobalPipes(
