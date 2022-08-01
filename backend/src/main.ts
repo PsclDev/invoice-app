@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@config/config.service';
 import { AppModule } from './app.module';
+import { Route } from '@modules/routes';
 
 async function bootstrap() {
   const logger = new Logger('Main');
@@ -19,7 +20,7 @@ async function bootstrap() {
     }),
   );
 
-  app.setGlobalPrefix('v1', { exclude: ['', 'health'] });
+  app.setGlobalPrefix('v1', { exclude: ['', Route.HEALTH] });
 
   if (config.devMode) {
     const documentBuilder = new DocumentBuilder()
