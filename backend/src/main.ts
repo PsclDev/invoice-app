@@ -24,7 +24,7 @@ async function bootstrap() {
   if (config.devMode) {
     const documentBuilder = new DocumentBuilder()
       .setTitle('Invoice-App')
-      .setVersion('1.0')
+      .setVersion(config.appVersion)
       .build();
     const document = SwaggerModule.createDocument(app, documentBuilder);
     SwaggerModule.setup('docs', app, document);
