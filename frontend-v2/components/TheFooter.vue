@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { DateTime } from "luxon";
 
 const healthStore = useHealthStore();

@@ -1,4 +1,10 @@
 {
+    "header": {
+        "dashboard": "Dashboard",
+        "clients": "Clients",
+        "documents": "Documents",
+        "settings": "Settings"
+    },
     "footer": {
         "checked": "Last checked"
     }

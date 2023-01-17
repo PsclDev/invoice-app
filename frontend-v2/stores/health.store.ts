@@ -9,12 +9,15 @@ export const useHealthStore = defineStore('health', () => {
         try {
             const apiUrl = useRuntimeConfig().public.apiUrl;
             const { data } = await useFetch<HealthResponse>(`${apiUrl}/health`)
+            if (data.value === null) return
+            
             apiIsRunning.value = data.value!.info.api.status === 'up'
             dbIsRunning.value = data.value!.info.database.status === 'up';
-            lastCheck.value = Date.now()
         } catch (error) {
-            console.log(error)
+            console.log(error) //TODO
         }
+
+        lastCheck.value = Date.now()
     }
 
     return { apiIsRunning, dbIsRunning, lastCheck, checkHealth }
