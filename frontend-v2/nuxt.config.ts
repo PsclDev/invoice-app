@@ -10,6 +10,14 @@ export default defineNuxtConfig({
         },
     },
     css: ['@/assets/styles/index.css'],
+    imports: {
+        dirs: ['stores']
+    },
+    runtimeConfig: {
+        public: {
+            apiUrl: process.env.API_URL
+        }
+    },
 
     modules: [
         '@nuxtjs/tailwindcss',
@@ -39,5 +47,8 @@ export default defineNuxtConfig({
         classSuffix: '',
         preference: 'system',
         fallback: 'dark'
+    },
+    pinia: {
+        autoImports: ['defineStore', 'acceptHMRUpdate']
     }
 })

@@ -11,6 +11,7 @@
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/i18n": "^8.0.0-beta.7",
     "@nuxtjs/tailwindcss": "^6.2.0",
+    "@types/luxon": "^3.2.0",
     "@vueuse/core": "^9.10.0",
     "@vueuse/nuxt": "^9.10.0",
     "nuxt": "^3.0.0",
@@ -19,6 +20,7 @@
   "dependencies": {
     "@formkit/nuxt": "^1.0.0-beta.12",
     "@pinia/nuxt": "^0.4.6",
+    "luxon": "^3.2.1",
     "pinia": "^2.0.28"
   }
 }
