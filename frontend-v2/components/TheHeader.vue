@@ -3,46 +3,48 @@
     <div>
       <Icon
         @click="changeLanguage"
-        class="cursor-pointer hover:text-emerald-500"
+        class="cursor-pointer hover:text-emerald-300"
         size="40px"
         name="material-symbols:language"
       />
     </div>
 
-    <div class="flex gap-5 md:gap-16 bg-white dark:bg-slate-900 rounded-md p-3">
-      <NuxtLink to="/" exact class="hover:text-emerald-500">
+    <div
+      class="flex gap-5 md:gap-16 bg-slate-100 dark:bg-zinc-800 rounded-lg py-3 px-6"
+    >
+      <NuxtLink to="/" exact class="hover:text-emerald-300">
         <div class="md:hidden">
           <Icon size="40px" name="material-symbols:query-stats" />
         </div>
         <div class="hidden md:block">
-          <span class="text-xl">{{ $t("header.dashboard") }}</span>
+          <span class="text-2xl">{{ $t("header.dashboard") }}</span>
         </div>
       </NuxtLink>
 
-      <NuxtLink to="/clients" exact class="hover:text-emerald-500">
+      <NuxtLink to="/clients" exact class="hover:text-emerald-300">
         <div class="md:hidden">
           <Icon size="40px" name="material-symbols:manage-accounts" />
         </div>
         <div class="hidden md:block">
-          <span class="text-xl">{{ $t("header.clients") }}</span>
+          <span class="text-2xl">{{ $t("header.clients") }}</span>
         </div>
       </NuxtLink>
 
-      <NuxtLink to="/documents" exact class="hover:text-emerald-500">
+      <NuxtLink to="/documents" exact class="hover:text-emerald-300">
         <div class="md:hidden">
           <Icon size="40px" name="material-symbols:document-scanner-rounded" />
         </div>
         <div class="hidden md:block">
-          <span class="text-xl">{{ $t("header.documents") }}</span>
+          <span class="text-2xl">{{ $t("header.documents") }}</span>
         </div>
       </NuxtLink>
 
-      <NuxtLink to="/settings" exact class="hover:text-emerald-500">
+      <NuxtLink to="/settings" exact class="hover:text-emerald-300">
         <div class="md:hidden">
           <Icon size="40px" name="material-symbols:settings-rounded" />
         </div>
         <div class="hidden md:block">
-          <span class="text-xl">{{ $t("header.settings") }}</span>
+          <span class="text-2xl">{{ $t("header.settings") }}</span>
         </div>
       </NuxtLink>
     </div>
@@ -50,7 +52,7 @@
     <div>
       <Icon
         @click="switchTheme"
-        class="cursor-pointer hover:text-emerald-500"
+        class="cursor-pointer hover:text-emerald-300"
         size="40px"
         :name="
           colorMode.preference === 'dark'
@@ -62,9 +64,10 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const i18n = useI18n();
 const colorMode = useColorMode();
+const { $toast } = useNuxtApp();
 
 function changeLanguage() {
   const curLang = i18n.getLocaleCookie();
@@ -73,11 +76,16 @@ function changeLanguage() {
 
 function switchTheme() {
   colorMode.preference = colorMode.preference === "light" ? "dark" : "light";
+  $toast.show({
+    type: "danger",
+    message: "abc",
+    timeout: 12,
+  });
 }
 </script>
 
 <style scoped>
 .router-link-exact-active {
-  @apply text-emerald-400;
+  @apply font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-emerald-400;
 }
 </style>

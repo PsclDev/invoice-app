@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 w-full">
+  <div class="fixed bottom-2 w-full">
     <div class="flex justify-center gap-10">
       <p>{{ $t("footer.checked") }}: {{ lastChecked }}</p>
       <Icon
@@ -20,8 +20,10 @@
 
 <script lang="ts" setup>
 import { DateTime } from "luxon";
+import { storeToRefs } from "pinia";
 
 const healthStore = useHealthStore();
+const { lastCheck } = storeToRefs(healthStore);
 healthStore.checkHealth();
 
 onMounted(() => {
@@ -31,8 +33,6 @@ onMounted(() => {
 });
 
 const lastChecked = computed(() =>
-  DateTime.fromMillis(healthStore.lastCheck).toLocaleString(
-    DateTime.TIME_24_SIMPLE
-  )
+  DateTime.fromMillis(lastCheck.value).toLocaleString(DateTime.TIME_24_SIMPLE)
 );
 </script>

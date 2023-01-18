@@ -7,5 +7,10 @@
     },
     "footer": {
         "checked": "Letzte Prüfung"
+    },
+    "toast": {
+        "health": {
+            "failed": "API ist nicht erreichbar"
+        }
     }
 }

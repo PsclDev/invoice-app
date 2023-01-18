@@ -11,6 +11,8 @@
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/i18n": "^8.0.0-beta.7",
     "@nuxtjs/tailwindcss": "^6.2.0",
+    "@tailvue/nuxt": "^0.1.64",
+    "@types/chart.js": "^2.9.37",
     "@types/luxon": "^3.2.0",
     "@vueuse/core": "^9.10.0",
     "@vueuse/nuxt": "^9.10.0",
@@ -20,6 +22,8 @@
   "dependencies": {
     "@formkit/nuxt": "^1.0.0-beta.12",
     "@pinia/nuxt": "^0.4.6",
+    "chart.js": "^4.1.2",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "luxon": "^3.2.1",
     "pinia": "^2.0.28"
   }
