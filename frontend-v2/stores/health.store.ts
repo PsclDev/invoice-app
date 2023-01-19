@@ -1,10 +1,10 @@
-import { useNuxtApp } from "#app";
-import { HealthResponse } from "~/types";
-import { showToast } from "~/helper/toast.helper";
+import { useNuxtApp } from '#app';
+import { HealthResponse } from '~/types';
+import { showToast } from '~/helper/toast.helper';
+import { Logger } from '~/helper/logger.helper';
 
-export const useHealthStore = defineStore("health", () => {
-  const { $toast } = useNuxtApp();
-  const { t } = useI18n();
+export const useHealthStore = defineStore('health', () => {
+  const logger = new Logger('healthStore');
   const apiIsRunning = ref(false);
   const dbIsRunning = ref(false);
   const lastCheck = ref(Date.now());
@@ -16,17 +16,17 @@ export const useHealthStore = defineStore("health", () => {
       lastCheck.value = Date.now();
 
       if (data.value) {
-        apiIsRunning.value = data.value!.info.api.status === "up";
-        dbIsRunning.value = data.value!.info.database.status === "up";
+        apiIsRunning.value = data.value!.info.api.status === 'up';
+        dbIsRunning.value = data.value!.info.database.status === 'up';
         return;
       }
 
       apiIsRunning.value = false;
       dbIsRunning.value = false;
 
-      showToast("danger", "toast.health.failed");
+      showToast('danger', 'toast.health.failed');
     } catch (error) {
-      console.log(error); //TODO
+      logger.error('failed to check health', error);
     }
   }
 

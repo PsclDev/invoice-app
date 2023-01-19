@@ -1,15 +1,13 @@
-import { useNuxtApp } from "#app";
-
-const { $toast } = useNuxtApp();
+//import { useNuxtApp } from '#app';
 
 export function showToast(
-  type: "success" | "info" | "warning" | "danger" | "denied",
+  type: 'success' | 'info' | 'warning' | 'danger' | 'denied',
   message: string,
   timeout: number = 12
 ) {
-  const { t } = useI18n();
-
   if (process.client) {
+    const { $toast } = useNuxtApp();
+    const { t } = useI18n();
     $toast.show({
       type,
       message: t(message),

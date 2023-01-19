@@ -13,6 +13,7 @@
     "@nuxtjs/tailwindcss": "^6.2.0",
     "@tailvue/nuxt": "^0.1.64",
     "@types/chart.js": "^2.9.37",
+    "@types/debug": "^4.1.7",
     "@types/luxon": "^3.2.0",
     "@vueuse/core": "^9.10.0",
     "@vueuse/nuxt": "^9.10.0",
