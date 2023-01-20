@@ -1,7 +1,7 @@
 <template>
   <div class="fixed bottom-2 w-full">
     <div class="flex justify-center gap-10">
-      <p>{{ $t("footer.checked") }}: {{ lastChecked }}</p>
+      <p>{{ $t('footer.checked') }}: {{ lastChecked }}</p>
       <Icon
         class="select-none"
         :class="healthStore.apiIsRunning ? 'text-emerald-400' : 'text-red-500'"
@@ -19,8 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DateTime } from "luxon";
-import { storeToRefs } from "pinia";
+import { DateTime } from 'luxon';
 
 const healthStore = useHealthStore();
 const { lastCheck } = storeToRefs(healthStore);
