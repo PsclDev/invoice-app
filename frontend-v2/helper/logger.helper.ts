@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import debug from "debug";
+import debug from 'debug';
 
 export class Logger {
   private loggers: {
@@ -14,7 +14,7 @@ export class Logger {
       debug: debug(`app:${namespace}`),
       info: debug(`app:${namespace}`),
       warn: debug(`app:${namespace}`),
-      error: debug(`app:${namespace}`),
+      error: debug(`app:${namespace}`)
     };
 
     this.loggers.debug.log = console.debug.bind(console);
@@ -28,11 +28,11 @@ export class Logger {
   }
 
   debug(...args: unknown[]): void {
-    this.loggers.debug.apply(null, ["DEBUG", ...args]);
+    this.loggers.debug.apply(null, ['DEBUG', ...args]);
   }
 
   info(...args: unknown[]): void {
-    this.loggers.info.apply(null, ["INFO", ...args]);
+    this.loggers.info.apply(null, ['INFO', ...args]);
   }
 
   log(...args: unknown[]): void {
@@ -40,10 +40,10 @@ export class Logger {
   }
 
   warn(...args: unknown[]): void {
-    this.loggers.warn.apply(null, ["WARN", ...args]);
+    this.loggers.warn.apply(null, ['WARN', ...args]);
   }
 
   error(...args: unknown[]): void {
-    this.loggers.error.apply(null, ["ERROR", ...args]);
+    this.loggers.error.apply(null, ['ERROR', ...args]);
   }
 }

@@ -11,7 +11,7 @@ export function showToast(
     $toast.show({
       type,
       message: t(message),
-      timeout,
+      timeout
     });
   }
 }

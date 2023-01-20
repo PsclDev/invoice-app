@@ -17,7 +17,7 @@
           <Icon size="40px" name="material-symbols:query-stats" />
         </div>
         <div class="hidden md:block">
-          <span class="text-2xl">{{ $t("header.dashboard") }}</span>
+          <span class="text-2xl">{{ $t('header.dashboard') }}</span>
         </div>
       </NuxtLink>
 
@@ -26,7 +26,7 @@
           <Icon size="40px" name="material-symbols:manage-accounts" />
         </div>
         <div class="hidden md:block">
-          <span class="text-2xl">{{ $t("header.clients") }}</span>
+          <span class="text-2xl">{{ $t('header.clients') }}</span>
         </div>
       </NuxtLink>
 
@@ -35,7 +35,7 @@
           <Icon size="40px" name="material-symbols:document-scanner-rounded" />
         </div>
         <div class="hidden md:block">
-          <span class="text-2xl">{{ $t("header.documents") }}</span>
+          <span class="text-2xl">{{ $t('header.documents') }}</span>
         </div>
       </NuxtLink>
 
@@ -44,7 +44,7 @@
           <Icon size="40px" name="material-symbols:settings-rounded" />
         </div>
         <div class="hidden md:block">
-          <span class="text-2xl">{{ $t("header.settings") }}</span>
+          <span class="text-2xl">{{ $t('header.settings') }}</span>
         </div>
       </NuxtLink>
     </div>
@@ -71,15 +71,15 @@ const { $toast } = useNuxtApp();
 
 function changeLanguage() {
   const curLang = i18n.getLocaleCookie();
-  i18n.setLocale(curLang === "en" ? "de" : "en");
+  i18n.setLocale(curLang === 'en' ? 'de' : 'en');
 }
 
 function switchTheme() {
-  colorMode.preference = colorMode.preference === "light" ? "dark" : "light";
+  colorMode.preference = colorMode.preference === 'light' ? 'dark' : 'light';
   $toast.show({
-    type: "danger",
-    message: "abc",
-    timeout: 12,
+    type: 'danger',
+    message: 'abc',
+    timeout: 12
   });
 }
 </script>

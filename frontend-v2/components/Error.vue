@@ -12,8 +12,8 @@
 const props = defineProps({
   error: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const { error } = toRefs(props);

@@ -6,18 +6,18 @@ import { definePageMeta } from 'nuxt/dist/pages/runtime';
 export default defineNuxtConfig({
   app: {
     head: {
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    },
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    }
   },
   css: ['@/assets/styles/index.css'],
   imports: {
-    dirs: ['stores'],
+    dirs: ['stores']
   },
   runtimeConfig: {
     public: {
       apiUrl: process.env.API_URL,
-      apiVersion: process.env.API_VERSION,
-    },
+      apiVersion: process.env.API_VERSION
+    }
   },
 
   modules: [
@@ -28,29 +28,29 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/color-mode',
     'nuxt-icon',
-    '@formkit/nuxt',
+    '@formkit/nuxt'
   ],
   i18n: {
     strategy: 'no_prefix',
     locales: [
       {
-        code: 'en',
+        code: 'en'
       },
       {
-        code: 'de',
-      },
+        code: 'de'
+      }
     ],
     defaultLocale: 'en',
     vueI18n: {
-      messages: { en, de },
-    },
+      messages: { en, de }
+    }
   },
   colorMode: {
     classSuffix: '',
     preference: 'system',
-    fallback: 'dark',
+    fallback: 'dark'
   },
   pinia: {
-    autoImports: ['defineStore', 'acceptHMRUpdate', 'storeToRefs'],
-  },
+    autoImports: ['defineStore', 'acceptHMRUpdate', 'storeToRefs']
+  }
 });

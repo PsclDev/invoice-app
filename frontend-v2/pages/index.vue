@@ -87,8 +87,8 @@ const clientsChart = computed(() => {
     dataset: {
       label: `Out of ${stats.value.clients.all}`,
       data: [stats.value.clients.privates, stats.value.clients.companies],
-      borderWidth: 3,
-    },
+      borderWidth: 3
+    }
   };
 });
 
@@ -106,10 +106,10 @@ const allTimeDocumentChart = computed(() => {
       label: `Out of ${stats.value.documents.allTime.all}`,
       data: [
         stats.value.documents.allTime.offers,
-        stats.value.documents.allTime.invoices,
+        stats.value.documents.allTime.invoices
       ],
-      borderWidth: 3,
-    },
+      borderWidth: 3
+    }
   };
 });
 
@@ -126,8 +126,8 @@ const yearlyDocumentChart = computed(() => {
     dataset: {
       label: `Out of ${activeYear.value.all}`,
       data: [activeYear.value.offers, activeYear.value.invoices],
-      borderWidth: 3,
-    },
+      borderWidth: 3
+    }
   };
 });
 </script>
