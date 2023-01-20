@@ -8,10 +8,8 @@ dotenvExpand.expand(dotenv.config());
 
 const CONFIG_SCHEMA = Joi.object().keys({
   appVersion: Joi.string().required(),
-  nodeEnv: Joi.string().required(),
-  devMode: Joi.bool().required(),
-  httpPort: Joi.number().integer().greater(0).required(),
-  printConfiguration: Joi.bool().optional(),
+  chromiumNoSandboxMode: Joi.bool().optional(),
+  chromiumPath: Joi.string().optional(),
   database: Joi.object().keys({
     host: Joi.string().required(),
     port: Joi.number().integer().greater(0).required(),
@@ -23,12 +21,11 @@ const CONFIG_SCHEMA = Joi.object().keys({
     migrationsRun: Joi.bool().optional(),
     migrationsPath: Joi.string().optional(),
   }),
+  devMode: Joi.bool().required(),
   disableSeeding: Joi.bool().optional(),
   frontendUrl: Joi.string().required(),
-  chromiumPath: Joi.string().optional(),
-  chromiumNoSandboxMode: Joi.bool().optional(),
+  httpPort: Joi.number().integer().greater(0).required(),
   ignoreHTTPSErrors: Joi.bool().optional(),
-  pdfBackupExport: Joi.string().optional(),
   mail: Joi.object().keys({
     logging: Joi.bool().optional(),
     host: Joi.string().required(),
@@ -36,15 +33,18 @@ const CONFIG_SCHEMA = Joi.object().keys({
     pass: Joi.string().required(),
     from: Joi.string().required(),
   }),
+  nodeEnv: Joi.string().required(),
+  pdfBackupExport: Joi.string().optional(),
+  printConfiguration: Joi.bool().optional(),
 });
 
 @Injectable()
 export class ConfigService {
-  appVersion = process.env.npm_package_version || 'unkown';
   nodeEnv = process.env.NODE_ENV || 'prod';
-  devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
-  httpPort = Number(process.env.APP_PORT) || 3010;
-  printConfiguration = bool(process.env.APP_PRINT_CONFIGURATION) || false;
+  appVersion = process.env.npm_package_version || 'unkown';
+  chromiumPath = process.env.APP_CHROMIUM_PATH;
+  chromiumNoSandboxMode =
+    bool(process.env.APP_CHROMIUM_NO_SANDBOX_MODE) || false;
   database = {
     host: process.env.APP_DB_HOST,
     port: Number(process.env.APP_DB_PORT) || 5432,
@@ -56,13 +56,11 @@ export class ConfigService {
     migrationsRun: bool(process.env.APP_RUN_MIGRATIONS) || true,
     migrationsPath: process.env.APP_MIGRATIONS_PATH || 'dist/migrations/*.js',
   };
+  devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   disableSeeding = process.env.APP_DISABLE_SEEDING || false;
-  chromiumPath = process.env.APP_CHROMIUM_PATH;
-  chromiumNoSandboxMode =
-    bool(process.env.APP_CHROMIUM_NO_SANDBOX_MODE) || false;
-  ignoreHTTPSErrors = bool(process.env.APP_IGNORE_HTTPS_ERRORS) || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
-  pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
+  httpPort = Number(process.env.APP_PORT) || 3010;
+  ignoreHTTPSErrors = bool(process.env.APP_IGNORE_HTTPS_ERRORS) || false;
   mail = {
     logging: bool(process.env.APP_MAIL_LOGGING) || false,
     host: process.env.APP_MAIL_HOST,
@@ -70,6 +68,8 @@ export class ConfigService {
     pass: process.env.APP_MAIL_PASS,
     from: process.env.APP_MAIL_FROM,
   };
+  printConfiguration = bool(process.env.APP_PRINT_CONFIGURATION) || false;
+  pdfBackupExport = process.env.APP_PDF_BACKUP_EXPORT;
 }
 
 function bool(input: string): boolean {
