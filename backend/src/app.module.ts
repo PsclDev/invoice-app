@@ -5,8 +5,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { ConfigModule } from './config/config.module';
-import { ConfigService } from '@config/config.service';
+import { ConfigModule, ConfigService } from '@config';
 import {
   ClientModule,
   DocumentModule,

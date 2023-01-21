@@ -1,6 +1,9 @@
-import { ConfigService } from '@config/config.service';
-import { CreateSettingDto, SettingType } from '@modules/setting/setting.dto';
-import { SettingService } from '@modules/setting/setting.service';
+import { ConfigService } from '@config';
+import {
+  CreateSettingDto,
+  SettingService,
+  SettingType,
+} from '@modules/setting';
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 
 @Injectable()

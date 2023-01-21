@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@config/config.service';
+import { ConfigService } from '@config';
 import * as dayjs from 'dayjs';
 import { existsSync, writeFileSync } from 'fs';
 import { mkdir } from 'fs/promises';
-import { Client } from '@modules/client/client.entity';
+import { Client } from '@modules/client';
 import { join } from 'path';
 import { Document, Invoice, Offer } from '../document.entity';
-import { DocumentType } from '@helper/types';
+import { DocumentType } from '@helper';
 
 @Injectable()
 export class FileService {

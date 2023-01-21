@@ -1,7 +1,7 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ClientModule } from '@modules/client/client.module';
-import { MailModule } from '@modules/mail/mail.module';
+import { ClientModule } from '@modules/client';
+import { MailModule } from '@modules/mail';
 import { DocumentController } from './document.controller';
 import { Document, Invoice, Offer } from './document.entity';
 import {

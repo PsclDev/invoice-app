@@ -5,10 +5,9 @@ import { Document } from '../document.entity';
 import * as puppeteer from 'puppeteer';
 import { FileService } from './file.service';
 import { CustomCacheService, updateEntity } from '@helper';
-import { ConfigService } from '@config/config.service';
-import { Client } from '@modules/client/client.entity';
-import { ClientService } from '@modules/client/client.service';
-import { MailService } from '@modules/mail/mail.service';
+import { ConfigService } from '@config';
+import { Client, ClientService } from '@modules/client';
+import { MailService } from '@modules/mail';
 
 @Injectable()
 export class DocumentService {

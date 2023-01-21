@@ -3,7 +3,7 @@ import { StatisticService } from './statistic.service';
 import { StatisticsDto } from './statistic.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Route } from '@modules/routes';
-import { capitalizeString } from '@helper/capitalizeString';
+import { capitalizeString } from '@helper';
 
 @ApiTags(capitalizeString(Route.STATISTICS))
 @Controller(Route.STATISTICS)

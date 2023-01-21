@@ -1,7 +1,7 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Client, CompanyClient } from '@modules/client/client.entity';
-import { Document, Offer, Invoice } from '@modules/document/document.entity';
-import { Setting } from '@modules/setting/setting.entity';
+import { Client, CompanyClient } from '@modules/client';
+import { Document, Offer, Invoice } from '@modules/document';
+import { Setting } from '@modules/setting';
 
 export const TestSqliteModule = () => [
   TypeOrmModule.forRoot({

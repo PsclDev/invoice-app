@@ -1,8 +1,6 @@
-import { Gender } from '@modules/client/client.dto';
-import { Client, CompanyClient } from '@modules/client/client.entity';
-import { Offer, Invoice } from '@modules/document/document.entity';
-import { SettingType } from '@modules/setting/setting.dto';
-import { Setting } from '@modules/setting/setting.entity';
+import { Client, CompanyClient, Gender } from '@modules/client';
+import { Offer, Invoice } from '@modules/document';
+import { Setting, SettingType } from '@modules/setting';
 import { EntityManager, getConnection } from 'typeorm';
 
 export const privateClientId = 'azx9d3g4';

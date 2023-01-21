@@ -1,5 +1,5 @@
-import { ConfigService } from '@config/config.service';
-import { capitalizeString } from '@helper/capitalizeString';
+import { ConfigService } from '@config';
+import { capitalizeString } from '@helper';
 import { Route } from '@modules/routes';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';

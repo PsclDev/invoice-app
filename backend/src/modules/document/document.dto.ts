@@ -1,4 +1,4 @@
-import { DocumentType } from '@helper/types';
+import { DocumentType } from '@helper';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsDateString,
