@@ -4,17 +4,19 @@ import { Repository } from 'typeorm';
 import { Document } from '../document.entity';
 import * as puppeteer from 'puppeteer';
 import { FileService } from './file.service';
-import { updateEntity } from '@helper/updateEntity';
+import { CustomCacheService, updateEntity } from '@helper';
 import { ConfigService } from '@config/config.service';
 import { Client } from '@modules/client/client.entity';
 import { ClientService } from '@modules/client/client.service';
 import { MailService } from '@modules/mail/mail.service';
+
 @Injectable()
 export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);
 
   constructor(
     private readonly configService: ConfigService,
+    private readonly customCacheService: CustomCacheService<Document>,
     private readonly fileService: FileService,
     private readonly clientService: ClientService,
     private readonly mailService: MailService,
@@ -23,15 +25,34 @@ export class DocumentService {
   ) {}
 
   async findAll(): Promise<Document[]> {
-    return await this.documentRepository.find({
+    const cachedDocuments = await this.customCacheService.getCachedData();
+    if (cachedDocuments) {
+      this.logger.log('Getting documents from cache');
+      return cachedDocuments;
+    }
+
+    const documents = await this.documentRepository.find({
       order: {
         dateOfIssue: 'DESC',
         createdAt: 'DESC',
       },
     });
+    await this.customCacheService.setDataToCache(documents);
+
+    return documents;
   }
 
   async findById(id: string): Promise<Document> {
+    const cachedDocuments = await this.customCacheService.getCachedData();
+    if (cachedDocuments) {
+      const document = cachedDocuments.find((c) => c.id === id);
+
+      if (document) {
+        this.logger.log(`Getting document '${id}' from cache`);
+        return document;
+      }
+    }
+
     const document = await this.documentRepository.findOne({ id });
 
     if (!document) throw new NotFoundException();
@@ -47,9 +68,13 @@ export class DocumentService {
 
   async delete(id: string): Promise<string> {
     const result = await this.documentRepository.delete({ id });
+
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
+
+    await this.customCacheService.deleteDataFromCache(id);
+
     return id;
   }
 
@@ -110,7 +135,7 @@ export class DocumentService {
     id: string,
     withClient = false,
   ): Promise<{ doc: Document; client?: Client }> {
-    const doc = await this.documentRepository.findOne({ id });
+    const doc = await this.findById(id);
     if (!doc) throw new NotFoundException('Document not found');
 
     if (withClient) {

@@ -1,4 +1,4 @@
-import { generateId, updateEntity } from '@helper';
+import { CustomCacheService, generateId, updateEntity } from '@helper';
 import {
   HttpException,
   HttpStatus,
@@ -21,6 +21,7 @@ export class ClientService {
   private readonly logger = new Logger(ClientService.name);
 
   constructor(
+    private readonly customCacheService: CustomCacheService<Client>,
     @InjectRepository(Client)
     private clientRepository: Repository<Client>,
     @InjectRepository(CompanyClient)
@@ -28,14 +29,31 @@ export class ClientService {
   ) {}
 
   async findAll(): Promise<Client[]> {
-    return await this.clientRepository.find({
+    const cachedClients = await this.customCacheService.getCachedData();
+    if (cachedClients) {
+      this.logger.log('Getting clients from cache');
+      return cachedClients;
+    }
+
+    const clients = await this.clientRepository.find({
       order: {
         lastname: 'ASC',
       },
     });
+    await this.customCacheService.setDataToCache(clients);
+
+    return clients;
   }
 
   async findById(id: string): Promise<Client> {
+    const cachedClient = await this.customCacheService.getItemFromCachedData(
+      id,
+    );
+    if (cachedClient) {
+      this.logger.log(`Getting client '${id}' from cache`);
+      return cachedClient;
+    }
+
     const client = await this.clientRepository.findOne({ id });
 
     if (!client) throw new NotFoundException();
@@ -66,11 +84,17 @@ export class ClientService {
       city: clientDto.city,
     };
 
-    return await this.clientRepository.save(client);
+    const newClient = await this.clientRepository.save(client);
+    await this.customCacheService.addNewDataToCache(newClient);
+
+    return newClient;
   }
 
   async updateClient(id: string, clientDto: UpdateClientDto) {
     await updateEntity<Client>(this.clientRepository, id, clientDto);
+
+    const client = await this.findById(id);
+    await this.customCacheService.updateExistingDataInCache(id, client);
   }
 
   async createCompanyClient(
@@ -99,7 +123,10 @@ export class ClientService {
       city: clientDto.city,
     };
 
-    return await this.companyClientRepository.save(client);
+    const newClient = await this.companyClientRepository.save(client);
+    await this.customCacheService.addNewDataToCache(newClient);
+
+    return newClient;
   }
 
   async updateCompanyClient(id: string, clientDto: UpdateCompanyClientDto) {
@@ -108,6 +135,9 @@ export class ClientService {
       id,
       clientDto,
     );
+
+    const client = await this.findById(id);
+    await this.customCacheService.updateExistingDataInCache(id, client);
   }
 
   async delete(id: string): Promise<string> {
@@ -115,6 +145,9 @@ export class ClientService {
     if (result.affected <= 0) {
       throw new NotFoundException();
     }
+
+    await this.customCacheService.deleteDataFromCache(id);
+
     return id;
   }
 }

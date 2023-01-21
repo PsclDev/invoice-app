@@ -8,6 +8,7 @@ dotenvExpand.expand(dotenv.config());
 
 const CONFIG_SCHEMA = Joi.object().keys({
   appVersion: Joi.string().required(),
+  cacheTTL: Joi.number().integer().required(),
   chromiumNoSandboxMode: Joi.bool().optional(),
   chromiumPath: Joi.string().optional(),
   database: Joi.object().keys({
@@ -42,6 +43,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
 export class ConfigService {
   nodeEnv = process.env.NODE_ENV || 'prod';
   appVersion = process.env.npm_package_version || 'unkown';
+  cacheTTL = Number(process.env.APP_CACHE_TTL) || 30;
   chromiumPath = process.env.APP_CHROMIUM_PATH;
   chromiumNoSandboxMode =
     bool(process.env.APP_CHROMIUM_NO_SANDBOX_MODE) || false;

@@ -4,6 +4,7 @@ import { StatisticController } from './statistic.controller';
 import { StatisticService } from './statistic.service';
 import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
+import { CacheKeys, CustomCacheService } from '@helper';
 
 @Module({
   imports: [
@@ -11,6 +12,13 @@ import { Offer, Invoice } from '../document/document.entity';
     TypeOrmModule.forFeature([Client, CompanyClient, Offer, Invoice]),
   ],
   controllers: [StatisticController],
-  providers: [StatisticService],
+  providers: [
+    {
+      provide: 'CACHE_KEY',
+      useValue: CacheKeys.STATISTIC,
+    },
+    CustomCacheService,
+    StatisticService,
+  ],
 })
 export class StatisticModule {}

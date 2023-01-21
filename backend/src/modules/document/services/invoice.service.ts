@@ -1,5 +1,4 @@
-import { generateId } from '@helper/generateId';
-import { updateEntity } from '@helper/updateEntity';
+import { CustomCacheService, generateId, updateEntity } from '@helper';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,6 +11,7 @@ export class InvoiceService {
   private readonly logger = new Logger(InvoiceService.name);
 
   constructor(
+    private readonly customCacheService: CustomCacheService<Document>,
     private readonly documentService: DocumentService,
     @InjectRepository(Document)
     private documentRepository: Repository<Document>,
@@ -39,13 +39,20 @@ export class InvoiceService {
       throw new HttpException('Invoice already exists', HttpStatus.CONFLICT);
     }
 
-    return await this.invoiceRepository.save({
+    const invoice = await this.invoiceRepository.save({
       id: generateId<Document>(this.documentRepository),
       ...invoiceDto,
     });
+
+    await this.customCacheService.addNewDataToCache(invoice);
+
+    return invoice;
   }
 
   async updateInvoice(id: string, invoiceDto: UpdateInvoiceDto) {
     await updateEntity<Invoice>(this.invoiceRepository, id, invoiceDto);
+
+    const invoice = await this.documentService.findById(id);
+    await this.customCacheService.updateExistingDataInCache(id, invoice);
   }
 }

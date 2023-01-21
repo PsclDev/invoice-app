@@ -1,5 +1,4 @@
-import { Inject, Injectable, Logger, CACHE_MANAGER } from '@nestjs/common';
-import { Cache } from 'cache-manager';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
@@ -14,6 +13,7 @@ import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
 import * as dayjs from 'dayjs';
 import * as isBetween from 'dayjs/plugin/isBetween';
+import { CustomCacheService } from '@helper';
 dayjs.extend(isBetween);
 
 @Injectable()
@@ -21,8 +21,7 @@ export class StatisticService {
   private readonly logger = new Logger(StatisticService.name);
 
   constructor(
-    @Inject(CACHE_MANAGER)
-    private cacheManager: Cache,
+    private readonly customCacheService: CustomCacheService<StatisticsDto>,
     @InjectRepository(Client)
     private clientRepository: Repository<Client>,
     @InjectRepository(CompanyClient)
@@ -34,15 +33,16 @@ export class StatisticService {
   ) {}
 
   async getStats(): Promise<StatisticsDto> {
-    const cachedStats = (await this.cacheManager.get('key')) as StatisticsDto;
+    const cachedStats = await this.customCacheService.getCachedData();
     if (cachedStats) {
       this.logger.log('Getting stats from cache');
-      return cachedStats;
+      return cachedStats[0];
     }
 
     this.logger.log('No cached stats found, calculating...');
     const stats = await this.generateStats();
-    await this.cacheManager.set('key', stats, { ttl: 10 });
+    await this.customCacheService.setDataToCache([stats]);
+
     return stats;
   }
 

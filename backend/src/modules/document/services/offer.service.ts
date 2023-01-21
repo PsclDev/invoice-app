@@ -1,5 +1,4 @@
-import { generateId } from '@helper/generateId';
-import { updateEntity } from '@helper/updateEntity';
+import { CustomCacheService, generateId, updateEntity } from '@helper';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
@@ -18,6 +17,7 @@ export class OfferService {
   private readonly logger = new Logger(OfferService.name);
 
   constructor(
+    private readonly customCacheService: CustomCacheService<Document>,
     private readonly documentService: DocumentService,
     private readonly invoiceService: InvoiceService,
     @InjectRepository(Document)
@@ -38,14 +38,21 @@ export class OfferService {
   }
 
   async createOffer(offerDto: CreateOfferDto): Promise<Document> {
-    return await this.offerRepository.save({
+    const offer = await this.offerRepository.save({
       id: generateId<Document>(this.documentRepository),
       ...offerDto,
     });
+
+    await this.customCacheService.addNewDataToCache(offer);
+
+    return offer;
   }
 
   async updateOffer(id: string, offerDto: UpdateOfferDto) {
     await updateEntity<Offer>(this.offerRepository, id, offerDto);
+
+    const offer = await this.documentService.findById(id);
+    await this.customCacheService.updateExistingDataInCache(id, offer);
   }
 
   async convertOffer(id: string): Promise<Invoice> {
@@ -71,8 +78,12 @@ export class OfferService {
       ...createInvoice,
     });
 
+    this.customCacheService.addNewDataToCache(invoice);
+
     offer.invoice = invoice;
     await this.offerRepository.save(offer);
+    await this.customCacheService.updateExistingDataInCache(id, offer);
+
     return invoice;
   }
 }

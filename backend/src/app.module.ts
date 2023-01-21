@@ -16,6 +16,7 @@ import {
   SettingModule,
   SeederModule,
 } from '@modules';
+
 @Module({
   imports: [
     ClientModule,

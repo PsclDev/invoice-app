@@ -7,3 +7,9 @@ export enum DocumentType {
   OFFER = 'Offer',
   INVOICE = 'Invoice',
 }
+
+export enum CacheKeys {
+  CLIENT = 'clients',
+  DOCUMENT = 'docs',
+  STATISTIC = 'stats',
+}
