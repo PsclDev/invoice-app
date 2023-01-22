@@ -101,7 +101,7 @@ export class SeederService implements OnApplicationBootstrap {
     };
 
     const invoiceDocumentPrefix: CreateSettingDto = {
-      type: SettingType.PDF,
+      type: SettingType.FILE,
       key: FileKey.INVOICE_PREFIX,
       title: 'Invoice Document Prefix',
       value: 'I_',
@@ -109,11 +109,27 @@ export class SeederService implements OnApplicationBootstrap {
     };
 
     const offerDocumentPrefix: CreateSettingDto = {
-      type: SettingType.PDF,
+      type: SettingType.FILE,
       key: FileKey.OFFER_PREFIX,
       title: 'Offer Document Prefix',
       value: 'O_',
       inputType: 'string',
+    };
+
+    const invoiceStartingNumber: CreateSettingDto = {
+      type: SettingType.FILE,
+      key: FileKey.INVOICE_STARTING_NR,
+      title: 'Invoice starting number',
+      value: '0',
+      inputType: 'number',
+    };
+
+    const offerStartingNumber: CreateSettingDto = {
+      type: SettingType.FILE,
+      key: FileKey.OFFER_STARTING_NR,
+      title: 'Offer starting number',
+      value: '0',
+      inputType: 'number',
     };
 
     await this.settingService.bulkInsert([
@@ -128,6 +144,8 @@ export class SeederService implements OnApplicationBootstrap {
       { setting: paymentIban, deletable: false },
       { setting: invoiceDocumentPrefix, deletable: false },
       { setting: offerDocumentPrefix, deletable: false },
+      { setting: invoiceStartingNumber, deletable: false },
+      { setting: offerStartingNumber, deletable: false },
     ]);
   }
 

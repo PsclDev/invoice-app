@@ -6,13 +6,17 @@ import { mkdir } from 'fs/promises';
 import { Client } from '@modules/client';
 import { join } from 'path';
 import { Document, Invoice, Offer } from '../document.entity';
-import { DocumentType } from '@helper';
+import { DocumentType, FileKey, SettingType } from '@helper';
+import { SettingService } from '@modules/setting';
 
 @Injectable()
 export class FileService {
   private readonly logger = new Logger(FileService.name);
 
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly settingsService: SettingService,
+  ) {}
 
   async saveDocument(
     client: Client,
@@ -50,7 +54,10 @@ export class FileService {
     await this.checkPathOrCreate(filePath);
 
     const isInvoice = document.type === DocumentType.INVOICE;
-    const filePrefix = isInvoice ? 'I' : 'O';
+    const filePrefix = this.settingsService.findByTypeAndKey(
+      SettingType.FILE,
+      isInvoice ? FileKey.INVOICE_PREFIX : FileKey.OFFER_PREFIX,
+    );
     const fileNr = String(
       isInvoice ? (document as Invoice).invoiceNr : (document as Offer).offerNr,
     ).padStart(4, '0');

@@ -71,13 +71,13 @@ export class SettingService {
       key: settingDto.key,
     });
     if (existingSetting) {
+      if (bulkInsert) return;
+
       this.logger.warn(
         `Setting with the type "${settingDto.type}" and key "${settingDto.key}" already exists`,
       );
 
-      if (!bulkInsert) {
-        throw new HttpException('Setting already exists', HttpStatus.CONFLICT);
-      }
+      throw new HttpException('Setting already exists', HttpStatus.CONFLICT);
     }
 
     const setting: Setting = {

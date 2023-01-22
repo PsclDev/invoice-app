@@ -1,4 +1,10 @@
-import { CustomCacheService, generateId, updateEntity } from '@helper';
+import {
+  CustomCacheService,
+  FileKey,
+  generateId,
+  SettingType,
+  updateEntity,
+} from '@helper';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
@@ -11,6 +17,7 @@ import { Repository } from 'typeorm';
 import { Document, Invoice, Offer } from '../document.entity';
 import { DocumentService } from './document.service';
 import { InvoiceService } from './invoice.service';
+import { SettingService } from '@modules/setting';
 
 @Injectable()
 export class OfferService {
@@ -20,6 +27,7 @@ export class OfferService {
     private readonly customCacheService: CustomCacheService<Document>,
     private readonly documentService: DocumentService,
     private readonly invoiceService: InvoiceService,
+    private readonly settingService: SettingService,
     @InjectRepository(Document)
     private documentRepository: Repository<Document>,
     @InjectRepository(Invoice)
@@ -33,6 +41,15 @@ export class OfferService {
       this.offerRepository,
       'offerNr',
     );
+
+    if (latestNr === null) {
+      const setting = await this.settingService.findByTypeAndKey(
+        SettingType.FILE,
+        FileKey.OFFER_STARTING_NR,
+      );
+
+      return Number(setting.value);
+    }
 
     return latestNr + 1;
   }

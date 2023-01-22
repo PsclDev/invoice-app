@@ -1,4 +1,11 @@
-import { CustomCacheService, generateId, updateEntity } from '@helper';
+import {
+  CustomCacheService,
+  FileKey,
+  generateId,
+  SettingType,
+  updateEntity,
+} from '@helper';
+import { SettingService } from '@modules/setting/setting.service';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,6 +20,7 @@ export class InvoiceService {
   constructor(
     private readonly customCacheService: CustomCacheService<Document>,
     private readonly documentService: DocumentService,
+    private readonly settingService: SettingService,
     @InjectRepository(Document)
     private documentRepository: Repository<Document>,
     @InjectRepository(Invoice)
@@ -24,6 +32,15 @@ export class InvoiceService {
       this.invoiceRepository,
       'invoiceNr',
     );
+
+    if (latestNr === null) {
+      const setting = await this.settingService.findByTypeAndKey(
+        SettingType.FILE,
+        FileKey.INVOICE_STARTING_NR,
+      );
+
+      return Number(setting.value);
+    }
 
     return latestNr + 1;
   }
