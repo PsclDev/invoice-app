@@ -1,6 +1,7 @@
+import { SettingType, MailKey, PdfKey, FileKey } from '@helper';
 import { Client, CompanyClient, Gender } from '@modules/client';
 import { Offer, Invoice } from '@modules/document';
-import { Setting, SettingType } from '@modules/setting';
+import { Setting } from '@modules/setting';
 import { EntityManager, getConnection } from 'typeorm';
 
 export const privateClientId = 'azx9d3g4';
@@ -86,7 +87,8 @@ export const settingSeed = async () => {
   entityManager.insert<Setting>(Setting, {
     id: deletableSettingId,
     type: SettingType.MAIL,
-    key: 'test',
+    key: MailKey.INVOICE_SUBJECT,
+    title: 'test',
     value: 'value',
     deletable: true,
   });
@@ -94,7 +96,17 @@ export const settingSeed = async () => {
   entityManager.insert<Setting>(Setting, {
     id: nonDeletableSettingId,
     type: SettingType.PDF,
-    key: 'important',
+    key: PdfKey.COMPANY_NAME,
+    title: 'test',
+    value: 'value',
+    deletable: false,
+  });
+
+  entityManager.insert<Setting>(Setting, {
+    id: nonDeletableSettingId,
+    type: SettingType.FILE,
+    key: FileKey.INVOICE_PREFIX,
+    title: 'test',
     value: 'value',
     deletable: false,
   });

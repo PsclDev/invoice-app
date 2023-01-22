@@ -1,4 +1,4 @@
-import { generateId, updateEntity } from '@helper';
+import { generateId, SettingKeyType, SettingType, updateEntity } from '@helper';
 import {
   ForbiddenException,
   HttpException,
@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateSettingDto, SettingType, UpdateSettingDto } from './setting.dto';
+import { CreateSettingDto, UpdateSettingDto } from './setting.dto';
 import { Setting } from './setting.entity';
 
 @Injectable()
@@ -38,7 +38,10 @@ export class SettingService {
     return setting;
   }
 
-  async findByTypeAndKey(type: SettingType, key: string): Promise<Setting> {
+  async findByTypeAndKey(
+    type: SettingType,
+    key: SettingKeyType,
+  ): Promise<Setting> {
     const setting = await this.settingRepository.findOne({ type, key });
 
     if (!setting) throw new NotFoundException();
@@ -46,9 +49,22 @@ export class SettingService {
     return setting;
   }
 
+  async bulkInsert(
+    settings: { setting: CreateSettingDto; deletable: boolean }[],
+  ): Promise<void> {
+    for (let idx = 0; idx < settings.length; idx++) {
+      await this.createSetting(
+        settings[idx].setting,
+        settings[idx].deletable,
+        true,
+      );
+    }
+  }
+
   async createSetting(
     settingDto: CreateSettingDto,
     deletable = true,
+    bulkInsert = false,
   ): Promise<Setting> {
     const existingSetting = await this.settingRepository.findOne({
       type: settingDto.type,
@@ -58,14 +74,20 @@ export class SettingService {
       this.logger.warn(
         `Setting with the type "${settingDto.type}" and key "${settingDto.key}" already exists`,
       );
-      throw new HttpException('Setting already exists', HttpStatus.CONFLICT);
+
+      if (!bulkInsert) {
+        throw new HttpException('Setting already exists', HttpStatus.CONFLICT);
+      }
     }
 
     const setting: Setting = {
       id: generateId<Setting>(this.settingRepository),
       type: settingDto.type,
       key: settingDto.key,
+      title: settingDto.title,
       value: settingDto.value,
+      inputType: settingDto.inputType,
+      inputMask: settingDto.inputMask,
       deletable,
     };
 

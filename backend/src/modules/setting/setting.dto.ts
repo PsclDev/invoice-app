@@ -1,16 +1,22 @@
-import { IsIn, IsNotEmpty, IsString } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-
-export enum SettingType {
-  PDF = 'PDF',
-  MAIL = 'MAIL',
-}
+import {
+  FileKey,
+  MailKey,
+  PdfKey,
+  SettingInputType,
+  SettingKeyType,
+  SettingType,
+} from '@helper';
 
 export interface SettingDto {
   id: string;
   type: SettingType;
-  key: string;
+  key: SettingKeyType;
+  title: string;
   value: string;
+  inputType: SettingInputType;
+  inputMask?: string;
   deletable: boolean;
   createdAt?: Date;
   updatedAt?: Date;
@@ -26,12 +32,27 @@ export class CreateSettingDto
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  key: string;
+  key: PdfKey | MailKey | FileKey;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  title: string;
 
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
   value: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  inputType: SettingInputType;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  inputMask?: string;
 }
 
 export class UpdateSettingDto extends PartialType(CreateSettingDto) {}

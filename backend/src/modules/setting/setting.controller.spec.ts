@@ -11,8 +11,8 @@ import {
   TestSqliteModule,
 } from '@testing';
 import { SettingController } from './setting.controller';
-import { SettingType } from './setting.dto';
 import { Setting } from './setting.entity';
+import { PdfKey, SettingType } from '@helper';
 import { SettingService } from './setting.service';
 
 describe('SettingController', () => {
@@ -33,8 +33,10 @@ describe('SettingController', () => {
   it('should create a pdf setting', async () => {
     const setting = await settingController.createSetting({
       type: SettingType.PDF,
-      key: 'abc',
+      key: PdfKey.COMPANY_NAME,
+      title: 'abc',
       value: 'efg',
+      inputType: 'string',
     });
 
     createdSettingId = setting.id;
@@ -44,9 +46,11 @@ describe('SettingController', () => {
   it('should fail to create a mail setting', async () => {
     const create = async () => {
       await settingController.createSetting({
-        type: SettingType.MAIL,
-        key: 'test',
+        type: SettingType.PDF,
+        key: PdfKey.COMPANY_NAME,
+        title: 'abc',
         value: 'efg',
+        inputType: 'string',
       });
     };
 

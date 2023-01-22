@@ -1,3 +1,4 @@
+import { SettingKeyType, SettingInputType, SettingType } from '@helper';
 import {
   Column,
   CreateDateColumn,
@@ -5,7 +6,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { SettingDto, SettingType } from './setting.dto';
+import { SettingDto } from './setting.dto';
 
 @Entity()
 export class Setting implements SettingDto {
@@ -16,10 +17,19 @@ export class Setting implements SettingDto {
   type: SettingType;
 
   @Column()
-  key: string;
+  key: SettingKeyType;
+
+  @Column()
+  title: string;
 
   @Column()
   value: string;
+
+  @Column()
+  inputType: SettingInputType;
+
+  @Column({ nullable: true })
+  inputMask?: string;
 
   @Column()
   deletable: boolean;

@@ -3,7 +3,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Client } from '@modules/client';
 import { Document } from '@modules/document';
 import * as Mustache from 'mustache';
-import { Setting, SettingService, SettingType } from '@modules/setting';
+import { Setting, SettingService } from '@modules/setting';
+import { DocumentType, MailKey, SettingKeyType, SettingType } from '@helper';
 
 @Injectable()
 export class MailService {
@@ -32,8 +33,8 @@ export class MailService {
 
       await this.mailerService.sendMail({
         to: client.email,
-        subject: await this.getContent('Subject', client, doc),
-        html: await this.getContent('Text', client, doc),
+        subject: await this.getSubject(client, doc),
+        html: await this.getBody(client, doc),
         attachments,
       });
       return true;
@@ -43,16 +44,29 @@ export class MailService {
     }
   }
 
-  async getContent(
-    key: string,
-    client: Client,
-    doc: Document,
-  ): Promise<string> {
-    const value = await this.getKey(`${doc.type} ${key}`);
+  async getSubject(client: Client, doc: Document) {
+    let value = '';
+    if (doc.type === DocumentType.INVOICE) {
+      value = await this.getKey(MailKey.INVOICE_SUBJECT);
+    } else {
+      value = await this.getKey(MailKey.OFFER_SUBJECT);
+    }
+
     return this.convertTemplates(value, client, doc);
   }
 
-  async getKey(key: string): Promise<string> {
+  async getBody(client: Client, doc: Document) {
+    let value = '';
+    if (doc.type === DocumentType.INVOICE) {
+      value = await this.getKey(MailKey.INVOICE_TEXT);
+    } else {
+      value = await this.getKey(MailKey.OFFER_TEXT);
+    }
+
+    return this.convertTemplates(value, client, doc);
+  }
+
+  async getKey(key: SettingKeyType): Promise<string> {
     const setting = await this.settingsService.findByTypeAndKey(
       SettingType.MAIL,
       key,
