@@ -29,8 +29,9 @@ export class ClientService {
   ) {}
 
   async findAll(): Promise<Client[]> {
+    const expectedItems = await this.clientRepository.count();
     const cachedClients = await this.customCacheService.getCachedData();
-    if (cachedClients) {
+    if (cachedClients && expectedItems === cachedClients.length) {
       this.logger.log('Getting clients from cache');
       return cachedClients;
     }

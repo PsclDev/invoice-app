@@ -18,11 +18,9 @@ export class CustomCacheService<T> {
 
   async getItemFromCachedData(id: string): Promise<T | null> {
     const cachedData = await this.getCachedData();
-    if (cachedData) {
-      return cachedData.find((i: any) => i.id === id);
-    }
+    if (!cachedData) return null;
 
-    return null;
+    return cachedData.find((i: any) => i.id === id);
   }
 
   async setDataToCache(data: T[]): Promise<void> {
@@ -32,13 +30,18 @@ export class CustomCacheService<T> {
   }
 
   async addNewDataToCache(data: T): Promise<void> {
-    const cachedData = await this.getCachedData();
-    cachedData.push(data);
+    let cachedData = await this.getCachedData();
+    cachedData = cachedData ? [data, ...cachedData] : [data];
+
     await this.setDataToCache(cachedData);
   }
 
   async updateExistingDataInCache(id: string, updatedData: T): Promise<void> {
     const cachedData = await this.getCachedData();
+    if (!cachedData) {
+      return this.addNewDataToCache(updatedData);
+    }
+
     const dataIdx = cachedData.findIndex((i: any) => i.id === id);
     if (dataIdx === -1) return;
 
@@ -48,6 +51,8 @@ export class CustomCacheService<T> {
 
   async deleteDataFromCache(id: string) {
     let cachedData = await this.getCachedData();
+    if (!cachedData) return;
+
     cachedData = cachedData.filter((i: any) => i.id !== id);
     this.setDataToCache(cachedData);
   }

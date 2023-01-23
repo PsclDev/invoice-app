@@ -24,8 +24,9 @@ export class DocumentService {
   ) {}
 
   async findAll(): Promise<Document[]> {
+    const expectedItems = await this.documentRepository.count();
     const cachedDocuments = await this.customCacheService.getCachedData();
-    if (cachedDocuments) {
+    if (cachedDocuments && cachedDocuments.length === expectedItems) {
       this.logger.log('Getting documents from cache');
       return cachedDocuments;
     }
