@@ -4,7 +4,13 @@ import { Client } from '@modules/client';
 import { Document } from '@modules/document';
 import * as Mustache from 'mustache';
 import { Setting, SettingService } from '@modules/setting';
-import { DocumentType, MailKey, SettingKeyType, SettingType } from '@helper';
+import {
+  DocumentType,
+  formatDocumentNumber,
+  MailKey,
+  SettingKeyType,
+  SettingType,
+} from '@helper';
 
 @Injectable()
 export class MailService {
@@ -87,10 +93,10 @@ export class MailService {
         return `${this.firstname} ${this.lastname}`;
       },
       formattedInvoiceNr: function () {
-        return this.invoiceNr.toString().padStart(4, '0');
+        return formatDocumentNumber(this.invoiceNr);
       },
       formattedOfferNr: function () {
-        return this.offerNr.toString().padStart(4, '0');
+        return formatDocumentNumber(this.offerNr);
       },
     });
   }

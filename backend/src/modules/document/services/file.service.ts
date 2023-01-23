@@ -6,7 +6,12 @@ import { mkdir } from 'fs/promises';
 import { Client } from '@modules/client';
 import { join } from 'path';
 import { Document, Invoice, Offer } from '../document.entity';
-import { DocumentType, FileKey, SettingType } from '@helper';
+import {
+  DocumentType,
+  FileKey,
+  formatDocumentNumber,
+  SettingType,
+} from '@helper';
 import { SettingService } from '@modules/setting';
 
 @Injectable()
@@ -58,9 +63,11 @@ export class FileService {
       SettingType.FILE,
       isInvoice ? FileKey.INVOICE_PREFIX : FileKey.OFFER_PREFIX,
     );
-    const fileNr = String(
-      isInvoice ? (document as Invoice).invoiceNr : (document as Offer).offerNr,
-    ).padStart(4, '0');
+
+    const docNr = isInvoice
+      ? (document as Invoice).invoiceNr
+      : (document as Offer).offerNr;
+    const fileNr = formatDocumentNumber(docNr);
     const fileName = `${client.firstname}_${client.lastname}.pdf`;
 
     return `${filePath}/${filePrefix}${fileNr}_${fileName}`;
