@@ -24,8 +24,18 @@ export interface DocumentBasePeriodStatsDto {
   totalRevenues: number;
 }
 
+export interface DocumentMonthStatsDto extends DocumentBasePeriodStatsDto {
+  month: number;
+}
+
+export interface DocumentQuarterStatsDto extends DocumentBasePeriodStatsDto {
+  quarter: number;
+}
+
 export interface DocumentYearStatsDto extends DocumentBasePeriodStatsDto {
   year: number;
+  quarters: DocumentQuarterStatsDto[];
+  months: DocumentMonthStatsDto[];
 }
 
 export interface Cashflow {

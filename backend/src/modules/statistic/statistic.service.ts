@@ -8,6 +8,8 @@ import {
   ClientStatsDto,
   DocumentStatsDto,
   Cashflow,
+  DocumentMonthStatsDto,
+  DocumentQuarterStatsDto,
 } from './statistic.dto';
 import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
@@ -19,6 +21,8 @@ dayjs.extend(isBetween);
 @Injectable()
 export class StatisticService {
   private readonly logger = new Logger(StatisticService.name);
+  private offers: Offer[];
+  private invoices: Invoice[];
 
   constructor(
     private readonly customCacheService: CustomCacheService<StatisticsDto>,
@@ -71,15 +75,37 @@ export class StatisticService {
   }
 
   private async getDocumentStats(): Promise<DocumentStatsDto> {
-    const offers = await this.offerRepository.find();
-    const invoices = await this.invoiceRepository.find({
+    this.offers = await this.offerRepository.find({
+      order: {
+        dateOfIssue: 'ASC',
+      },
+    });
+    this.invoices = await this.invoiceRepository.find({
       order: {
         dateOfIssue: 'ASC',
       },
     });
 
-    const allTime = await this.getAllTimeStats(offers, invoices);
-    const years = await this.getStatsForYears(offers, invoices);
+    const allTime = await this.getAllTimeStats();
+
+    let years: DocumentYearStatsDto[];
+    if (this.invoices.length > 1) {
+      years = await this.getStatsForYears();
+    } else {
+      years = [
+        {
+          year: new Date().getFullYear(),
+          quarters: [],
+          months: [],
+          all: 0,
+          offers: 0,
+          invoices: 0,
+          revenues: 0,
+          taxes: 0,
+          totalRevenues: 0,
+        },
+      ];
+    }
 
     return {
       allTime,
@@ -87,49 +113,46 @@ export class StatisticService {
     };
   }
 
-  private getAllTimeStats(
-    offers: Offer[],
-    invoices: Invoice[],
-  ): DocumentBasePeriodStatsDto {
-    const allTimeRevenues = this.calculateRevenues(invoices);
+  private getAllTimeStats(): DocumentBasePeriodStatsDto {
+    const allTimeRevenues = this.calculateRevenues(this.invoices);
     return {
-      all: offers.length + invoices.length,
-      offers: offers.length,
-      invoices: invoices.length,
+      all: this.offers.length + this.invoices.length,
+      offers: this.offers.length,
+      invoices: this.invoices.length,
       revenues: allTimeRevenues.revenues,
       taxes: allTimeRevenues.taxes,
       totalRevenues: allTimeRevenues.totalRevenues,
     };
   }
 
-  private getStatsForYears(
-    offers: Offer[],
-    invoices: Invoice[],
-  ): DocumentYearStatsDto[] {
+  private getStatsForYears(): DocumentYearStatsDto[] {
     const years: DocumentYearStatsDto[] = [];
-    const firstYear = dayjs(invoices[0].dateOfIssue).year();
-    const lastYear = dayjs(invoices[invoices.length - 1].dateOfIssue).year();
+    const firstYear = dayjs(this.invoices[0].dateOfIssue).year();
+    const lastYear = dayjs(
+      this.invoices[this.invoices.length - 1].dateOfIssue,
+    ).year();
 
     for (let curYear = firstYear; curYear <= lastYear; curYear++) {
-      const yearlyOffers = this.getDocumentsBetweenYear<Offer>(curYear, offers);
-      const yearlyInvoices = this.getDocumentsBetweenYear<Invoice>(
+      const yearlyOffers = this.getDocumentsBetweenRange<Offer>(
+        this.offers,
         curYear,
-        invoices,
       );
+      const yearlyInvoices = this.getDocumentsBetweenRange<Invoice>(
+        this.invoices,
+        curYear,
+      );
+      const yearlyRevenues: Cashflow = this.calculateRevenues(yearlyInvoices);
 
-      let yearlyRevenues: Cashflow;
-      if (yearlyInvoices.length > 0)
-        yearlyRevenues = this.calculateRevenues(yearlyInvoices);
-      else {
-        yearlyRevenues = {
-          revenues: 0,
-          taxes: 0,
-          totalRevenues: 0,
-        };
-      }
+      const months = this.getStatsForMonths(curYear);
+      const quarterOne = this.getStatsForQuarter(curYear, 1, 1, 3);
+      const quarterTwo = this.getStatsForQuarter(curYear, 2, 4, 6);
+      const quarterThree = this.getStatsForQuarter(curYear, 3, 7, 9);
+      const quarterFour = this.getStatsForQuarter(curYear, 4, 10, 12);
 
       const year: DocumentYearStatsDto = {
         year: curYear,
+        quarters: [quarterOne, quarterTwo, quarterThree, quarterFour],
+        months,
         all: yearlyOffers.length + yearlyInvoices.length,
         offers: yearlyOffers.length,
         invoices: yearlyInvoices.length,
@@ -143,16 +166,94 @@ export class StatisticService {
     return years;
   }
 
-  private getDocumentsBetweenYear<T>(year: number, arr: T[]): T[] {
+  private getStatsForMonths(year: number): DocumentMonthStatsDto[] {
+    const months: DocumentMonthStatsDto[] = [];
+    for (let curMonth = 1; curMonth <= 12; curMonth++) {
+      const monthlyOffers = this.getDocumentsBetweenRange<Offer>(
+        this.offers,
+        year,
+        curMonth,
+        curMonth,
+      );
+
+      const monthlyInvoices = this.getDocumentsBetweenRange<Invoice>(
+        this.invoices,
+        year,
+        curMonth,
+        curMonth,
+      );
+
+      const monthlyRevenues: Cashflow = this.calculateRevenues(monthlyInvoices);
+
+      const month: DocumentMonthStatsDto = {
+        month: curMonth,
+        all: monthlyOffers.length + monthlyInvoices.length,
+        offers: monthlyOffers.length,
+        invoices: monthlyInvoices.length,
+        revenues: monthlyRevenues.revenues,
+        taxes: monthlyRevenues.taxes,
+        totalRevenues: monthlyRevenues.totalRevenues,
+      };
+      months.push(month);
+    }
+
+    return months;
+  }
+
+  private getStatsForQuarter(
+    year: number,
+    quarter: number,
+    startingMonth,
+    endingMonth,
+  ): DocumentQuarterStatsDto {
+    const quarterOffers = this.getDocumentsBetweenRange<Offer>(
+      this.offers,
+      year,
+      startingMonth,
+      endingMonth,
+    );
+    const quarterInvoices = this.getDocumentsBetweenRange<Invoice>(
+      this.invoices,
+      year,
+      startingMonth,
+      endingMonth,
+    );
+    const quarterRevenues: Cashflow = this.calculateRevenues(quarterInvoices);
+
+    return {
+      quarter,
+      all: quarterOffers.length + quarterInvoices.length,
+      offers: quarterOffers.length,
+      invoices: quarterInvoices.length,
+      revenues: quarterRevenues.revenues,
+      taxes: quarterRevenues.taxes,
+      totalRevenues: quarterRevenues.totalRevenues,
+    };
+  }
+
+  private getDocumentsBetweenRange<T>(
+    arr: T[],
+    year: number,
+    startingMonth = 1,
+    endingMonth = 12,
+  ): T[] {
     return arr.filter((i) => {
       return dayjs(i['dateOfIssue']).isBetween(
-        `${year}-01-01`,
-        `${year}-12-31`,
+        `${year}-${startingMonth.toString().padStart(2, '0')}-01`,
+        `${year}-${endingMonth.toString().padStart(2, '0')}-31`,
       );
     });
   }
 
   private calculateRevenues(invoices: Invoice[]): Cashflow {
+    if (invoices.length === 0) {
+      return {
+        revenues: 0,
+        taxes: 0,
+        totalRevenues: 0,
+      };
+    }
+
     const revenues = this.sum(invoices, 'subTotal');
     const taxes = this.sum(invoices, 'tax');
 
