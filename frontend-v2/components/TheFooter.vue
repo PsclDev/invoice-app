@@ -1,6 +1,8 @@
 <template>
-  <div class="fixed bottom-2 w-full">
-    <div class="flex justify-center gap-10">
+  <div
+    class="fixed left-0 bottom-0 bg-slate-50 dark:bg-zinc-900 pb:2 md:pb-4 w-full"
+  >
+    <div class="flex justify-center gap-5 md:gap-10">
       <p>{{ $t('footer.checked') }}: {{ lastChecked }}</p>
       <Icon
         class="select-none"

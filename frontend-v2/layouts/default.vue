@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5">
+  <div class="p-5">
     <TheHeader />
     <div class="flex justify-center mt-10">
       <slot />

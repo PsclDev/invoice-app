@@ -26,6 +26,7 @@
     "chart.js": "^4.1.2",
     "chartjs-plugin-datalabels": "^2.2.0",
     "luxon": "^3.2.1",
-    "pinia": "^2.0.28"
+    "pinia": "^2.0.28",
+    "sass": "^1.57.1"
   }
 }
