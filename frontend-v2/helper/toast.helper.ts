@@ -1,5 +1,3 @@
-//import { useNuxtApp } from '#app';
-
 export function showToast(
   type: 'success' | 'info' | 'warning' | 'danger' | 'denied',
   message: string,

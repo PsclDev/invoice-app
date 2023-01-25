@@ -17,7 +17,6 @@ const props = defineProps({
 
 const { chartData } = toRefs(props);
 const chart = ref<Chart>();
-const colorMode = useColorMode();
 
 Chart.register(...registerables);
 const chartCanvas = ref<HTMLCanvasElement>();
@@ -45,7 +44,7 @@ onMounted(() => {
             weight: 'bold'
           },
           textAlign: 'center',
-          rotation: -45,
+
           formatter: function (value, context) {
             return `${value}\n${context.chart.data.labels![context.dataIndex]}`;
           }

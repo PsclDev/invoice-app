@@ -12,5 +12,25 @@
         "health": {
             "failed": "API ist nicht erreichbar"
         }
+    },
+    "common": {
+        "invoice": "Rechnung | Rechnungen",
+        "offer": "Angebot | Angebote",
+        "client": "Kunde | Kunden",
+        "private": "Privat",
+        "company": "Firma | Firmen"
+    },
+    "chart": {
+        "label": "Von"
+    },
+    "pages": {
+        "dashboard": {
+            "updatedAt": "Letzte Aktualisierung, um",
+            "all-time": "Gesamtstatistik",
+            "yearly-stats": "Jährliche Statistiken",
+            "revenue": "Umsatz",
+            "taxes": "Steuern",
+            "total": "Gesamt"
+        }
     }
 }

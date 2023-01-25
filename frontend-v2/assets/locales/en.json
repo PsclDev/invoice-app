@@ -12,5 +12,25 @@
         "health": {
             "failed": "API didn't respond"
         }
+    },
+    "common": {
+        "invoice": "Invoice | Invoices",
+        "offer": "Offer | Offers",
+        "client": "Client | Clients",
+        "private": "Private",
+        "company": "Company | Companies"
+    },
+    "chart": {
+        "label": "Out of"
+    },
+    "pages": {
+        "dashboard": {
+            "updatedAt": "Updated today, at",
+            "all-time": "All-Time Stats",
+            "yearly-stats": "Yearly Stats",
+            "revenue": "Revenue",
+            "taxes": "Taxes",
+            "total": "Total"
+        }
     }
 }

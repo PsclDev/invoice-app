@@ -4,35 +4,49 @@
     <template v-else-if="stats">
       <div class="text-5xl text-center">Dashboard</div>
       <div class="text-xl text-center mt-2">
-        Updated today, at {{ updatedAt }}
+        {{ $t('pages.dashboard.updatedAt') }} {{ updatedAt }}
       </div>
 
       <div class="mt-16">
-        <div class="text-4xl text-center">All-Time Stats</div>
-        <div class="flex gap-24 mt-5 justify-center">
+        <div class="text-4xl text-center">
+          {{ $t('pages.dashboard.all-time') }}
+        </div>
+        <div
+          class="flex flex-col md:flex-row items-center md:justify-center gap-10 md:gap-24 mt-5"
+        >
           <div class="w-56 h-56">
-            <ChartDoughnut :chart-data="clientsChart" />
+            <ChartDoughnut
+              :key="allTimeDocumentChartKey"
+              :chart-data="clientsChart"
+            />
           </div>
           <div class="w-56 h-56">
-            <ChartDoughnut :chart-data="allTimeDocumentChart" />
+            <ChartDoughnut
+              :key="allTimeDocumentChartKey"
+              :chart-data="allTimeDocumentChart"
+            />
           </div>
         </div>
-        <div class="flex justify-center gap-10 mt-8">
-          <div class="text-2xl">
-            Revenue: {{ stats.documents.allTime.revenues.toFixed(2) }}€
+        <div class="flex justify-center gap-4 md:gap-10 mt-8">
+          <div class="flex flex-col items-center text-2xl">
+            <p>{{ $t('pages.dashboard.revenue') }}</p>
+            {{ useCurrencyFormat(stats.documents.allTime.revenues) }}
           </div>
-          <div class="text-2xl">
-            Tax: {{ stats.documents.allTime.taxes.toFixed(2) }}€
+          <div class="flex flex-col items-center text-2xl">
+            <p>{{ $t('pages.dashboard.taxes') }}</p>
+            {{ useCurrencyFormat(stats.documents.allTime.taxes) }}
           </div>
-          <div class="text-2xl">
-            Total Revenue:
-            {{ stats.documents.allTime.totalRevenues.toFixed(2) }}€
+          <div class="flex flex-col items-center text-2xl">
+            <p class="truncate">{{ $t('pages.dashboard.total') }}</p>
+            {{ useCurrencyFormat(stats.documents.allTime.totalRevenues) }}
           </div>
         </div>
       </div>
 
       <div class="mt-16">
-        <div class="text-4xl text-center">Yearly Stats</div>
+        <div class="text-4xl text-center">
+          {{ $t('pages.dashboard.yearly-stats') }}
+        </div>
         <div class="flex justify-center gap-10 mt-2">
           <div v-for="yearObj in stats.documents.years" :key="yearObj.year">
             <button
@@ -54,11 +68,18 @@
               :chart-data="yearlyDocumentChart"
             />
           </div>
-          <div class="flex flex-col gap-5">
-            <div class="text-2xl">Revenue: {{ activeYear.revenues }}€</div>
-            <div class="text-2xl">Tax: {{ activeYear.revenues }}€</div>
-            <div class="text-2xl">
-              Total Revenue: {{ activeYear.revenues }}€
+          <div class="flex flex-col gap-2 md:gap-5">
+            <div class="flex flex-col items-center text-2xl">
+              <p>{{ $t('pages.dashboard.revenue') }}</p>
+              {{ useCurrencyFormat(activeYear.revenues) }}
+            </div>
+            <div class="flex flex-col items-center text-2xl">
+              <p>{{ $t('pages.dashboard.taxes') }}</p>
+              {{ useCurrencyFormat(activeYear.taxes) }}
+            </div>
+            <div class="flex flex-col items-center text-2xl">
+              <p>{{ $t('pages.dashboard.total') }}</p>
+              {{ useCurrencyFormat(activeYear.totalRevenues) }}
             </div>
           </div>
         </div>
@@ -71,6 +92,11 @@
 import { DateTime } from 'luxon';
 import { DocumentYearStatsInterface } from '~/types';
 
+useHead({
+  title: 'Statistics'
+});
+
+const { t: translate, locale } = useI18n();
 const statsStore = useStatsStore();
 const { stats, error } = storeToRefs(statsStore);
 statsStore.getStats();
@@ -81,11 +107,12 @@ const updatedAt = computed(() => {
   );
 });
 
+const allTimeDocumentChartKey = ref(0);
 const clientsChart = computed(() => {
   return {
-    labels: ['Private', 'Company'],
+    labels: [translate('common.private'), translate('common.company', 2)],
     dataset: {
-      label: `Out of ${stats.value.clients.all}`,
+      label: `${translate('chart.label')} ${stats.value.clients.all}`,
       data: [stats.value.clients.privates, stats.value.clients.companies],
       borderWidth: 3
     }
@@ -101,9 +128,9 @@ const allTimeDocumentChart = computed(() => {
     stats.value.documents.years[stats.value.documents.years.length - 1];
 
   return {
-    labels: ['Offers', 'Invoices'],
+    labels: [translate('common.offer', 2), translate('common.invoice', 2)],
     dataset: {
-      label: `Out of ${stats.value.documents.allTime.all}`,
+      label: `${translate('chart.label')} ${stats.value.documents.allTime.all}`,
       data: [
         stats.value.documents.allTime.offers,
         stats.value.documents.allTime.invoices
@@ -122,12 +149,17 @@ const yearlyDocumentChart = computed(() => {
   yearlyDocumentChartKey.value += 1;
 
   return {
-    labels: ['Offers', 'Invoices'],
+    labels: [translate('common.offer', 2), translate('common.invoice', 2)],
     dataset: {
-      label: `Out of ${activeYear.value.all}`,
+      label: `${translate('chart.label')} ${activeYear.value.all}`,
       data: [activeYear.value.offers, activeYear.value.invoices],
       borderWidth: 3
     }
   };
+});
+
+watch(locale, () => {
+  allTimeDocumentChartKey.value += 1;
+  yearlyDocumentChartKey.value += 1;
 });
 </script>
