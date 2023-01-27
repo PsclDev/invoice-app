@@ -35,6 +35,11 @@
             "revenue": "Revenue",
             "taxes": "Taxes",
             "total": "Total"
+        },
+        "error": {
+            "title": "Oops, something went wrong",
+            "no-response": "Failed to reach the API",
+            "unknown": "Unknown error"
         }
     }
 }

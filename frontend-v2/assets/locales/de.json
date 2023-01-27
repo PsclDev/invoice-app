@@ -35,6 +35,11 @@
             "revenue": "Umsatz",
             "taxes": "Steuern",
             "total": "Gesamt"
+        },
+        "error": {
+            "title": "Oops, da ist etwas schief gelaufen",
+            "no-response": "API ist nicht erreichbar",
+            "unknown": "Unbekannter Fehler"
         }
     }
 }
