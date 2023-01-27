@@ -1,10 +1,8 @@
-import { useNuxtApp } from '#app';
 import { HealthResponse } from '~/types';
-import { showToast } from '~/helper/toast.helper';
-import { Logger } from '~/helper/logger.helper';
 
 export const useHealthStore = defineStore('health', () => {
-  const logger = new Logger('healthStore');
+  const logger = useLogger('healthStore');
+  const toast = useToast();
   const apiIsRunning = ref(false);
   const dbIsRunning = ref(false);
   const lastCheck = ref(Date.now());
@@ -24,9 +22,10 @@ export const useHealthStore = defineStore('health', () => {
       apiIsRunning.value = false;
       dbIsRunning.value = false;
 
-      showToast('danger', 'toast.health.failed');
+      toast.show('danger', 'toast.health.no-response');
     } catch (error) {
       logger.error('failed to check health', error);
+      toast.show('danger', 'toast.health.failed');
     }
   }
 

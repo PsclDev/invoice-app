@@ -1,8 +1,8 @@
 import { StatisticsResponse } from '~/types';
-import { Logger } from '~/helper/logger.helper';
 
 export const useStatsStore = defineStore('stats', () => {
-  const logger = new Logger('statsStore');
+  const logger = useLogger('statsStore');
+  const toast = useToast();
   const stats = ref<StatisticsResponse>({} as StatisticsResponse);
   const error = ref<string>();
 
@@ -22,6 +22,7 @@ export const useStatsStore = defineStore('stats', () => {
       stats.value.updatedAt = new Date(data.value.updatedAt);
     } catch (error) {
       logger.error('failed to get stats', error);
+      toast.show('danger', 'toast.stats.failed');
     }
   }
   return { stats, error, getStats };

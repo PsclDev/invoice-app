@@ -10,7 +10,11 @@
     },
     "toast": {
         "health": {
-            "failed": "API didn't respond"
+            "no-response": "API didn't respond",
+            "failed": "Failed to check health"
+        },
+        "stats": {
+            "failed": "Failed to get stats"
         }
     },
     "common": {
