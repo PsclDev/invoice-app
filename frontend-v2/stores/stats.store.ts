@@ -29,5 +29,5 @@ export const useStatsStore = defineStore('stats', () => {
 });
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useHealthStore, import.meta.hot));
+  import.meta.hot.accept(acceptHMRUpdate(useStatsStore, import.meta.hot));
 }

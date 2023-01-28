@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col justify-center">
+  <div class="flex flex-col items-center w-full">
     <template v-if="error"> <Error :error="error" /> </template>
     <template v-else-if="stats">
-      <div class="text-5xl text-center">Dashboard</div>
+      <div class="text-5xl text-center">{{ $t('header.dashboard') }}</div>
       <div class="text-xl text-center mt-2">
         {{ $t('pages.dashboard.updatedAt') }} {{ updatedAt }}
       </div>
