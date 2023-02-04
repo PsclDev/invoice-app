@@ -31,7 +31,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: MailKey.INVOICE_SUBJECT,
       title: 'Invoice Subject',
       value: '',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const invoiceText: CreateSettingDto = {
@@ -39,7 +39,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: MailKey.INVOICE_TEXT,
       title: 'Invoice Text',
       value: '',
-      inputType: 'string',
+      inputType: 'textarea',
     };
 
     const offerSubject: CreateSettingDto = {
@@ -47,7 +47,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: MailKey.OFFER_SUBJECT,
       title: 'Offer Subject',
       value: '',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const offerText: CreateSettingDto = {
@@ -55,7 +55,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: MailKey.OFFER_TEXT,
       title: 'Offer Text',
       value: '',
-      inputType: 'string',
+      inputType: 'textarea',
     };
 
     const companyName: CreateSettingDto = {
@@ -63,7 +63,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: PdfKey.COMPANY_NAME,
       title: 'Company Name',
       value: 'Muster GmbH',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const companyAddress: CreateSettingDto = {
@@ -71,7 +71,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: PdfKey.COMPANY_ADRESS,
       title: 'Company Address',
       value: 'Musterweg 2, 12345 Musterstadt',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const companyTaxId: CreateSettingDto = {
@@ -88,7 +88,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: PdfKey.PAYMENT_NAME,
       title: 'Payment Name',
       value: 'Hans Muster',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const paymentIban: CreateSettingDto = {
@@ -96,7 +96,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: PdfKey.PAYMENT_IBAN,
       title: 'Payment Iban',
       value: 'DE89 3704 0044 0532 0130 00',
-      inputType: 'string',
+      inputType: 'text',
       inputMask: '#### #### #### #### #### ##',
     };
 
@@ -105,7 +105,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: FileKey.INVOICE_PREFIX,
       title: 'Invoice Document Prefix',
       value: 'I_',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const offerDocumentPrefix: CreateSettingDto = {
@@ -113,7 +113,7 @@ export class SeederService implements OnApplicationBootstrap {
       key: FileKey.OFFER_PREFIX,
       title: 'Offer Document Prefix',
       value: 'O_',
-      inputType: 'string',
+      inputType: 'text',
     };
 
     const invoiceStartingNumber: CreateSettingDto = {

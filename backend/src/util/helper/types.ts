@@ -3,7 +3,7 @@ import { Document } from '@modules/document';
 
 export type AppTypes = Client | Document;
 export type SettingKeyType = PdfKey | MailKey | FileKey;
-export type SettingInputType = 'string' | 'number';
+export type SettingInputType = 'text' | 'number' | 'textarea';
 
 export enum DocumentType {
   OFFER = 'Offer',
