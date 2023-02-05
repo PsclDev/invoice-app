@@ -1,17 +1,22 @@
 import { HttpException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  companyClientId,
-  documentSeed,
-  offerId,
-  privateClientId,
-  TestSqliteModule,
-} from '@testing';
 import { DocumentController } from './document.controller';
 import { Invoice, Offer } from './document.entity';
 import { DocumentService } from './services/document.service';
 import { FileService, InvoiceService, OfferService } from './services';
-import { ClientModule, MailModule } from '..';
+import { ClientModule, MailModule, SettingModule } from '..';
+import {
+  initSeeder,
+  documentSeed,
+  SqliteTestingImports,
+  companyClientId,
+  offerId,
+  privateClientId,
+  clientSeed,
+  SqliteTestingProviders,
+  invoiceId,
+} from '@modules/testing';
+import { CacheKeys } from '@helper';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;
@@ -22,12 +27,29 @@ describe('DocumentController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TestSqliteModule(), ClientModule, MailModule],
+      imports: [
+        ...SqliteTestingImports(),
+        ClientModule,
+        MailModule,
+        SettingModule,
+      ],
       controllers: [DocumentController],
-      providers: [DocumentService, FileService, OfferService, InvoiceService],
+      providers: [
+        {
+          provide: 'CACHE_KEY',
+          useValue: CacheKeys.DOCUMENT,
+        },
+        DocumentService,
+        FileService,
+        OfferService,
+        InvoiceService,
+        ...SqliteTestingProviders(),
+      ],
     }).compile();
 
     documentController = module.get<DocumentController>(DocumentController);
+    await initSeeder();
+    await clientSeed();
     await documentSeed();
   });
 
@@ -117,17 +139,15 @@ describe('DocumentController', () => {
   });
 
   it('should update a invoice', async () => {
-    const alreadyPaid = 228;
-    const total = 218;
+    const alreadyPaid = 190;
+    const total = 1000;
 
-    await documentController.updateInvoice(createdInvoiceId, {
+    await documentController.updateInvoice(invoiceId, {
       alreadyPaid,
       total,
     });
 
-    const invoice = (await documentController.findById(
-      createdInvoiceId,
-    )) as Invoice;
+    const invoice = (await documentController.findById(invoiceId)) as Invoice;
     expect(invoice).toBeDefined();
     expect(invoice.alreadyPaid).toBe(alreadyPaid);
     expect(invoice.total).toBe(total);

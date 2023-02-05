@@ -50,7 +50,6 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.6",
-    "sqlite3": "^5.0.10",
     "swagger-ui-express": "^4.5.0",
     "typeorm": "^0.2.45"
   },
@@ -75,6 +74,7 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "source-map-support": "^0.5.21",
+    "sqlite3": "^5.1.4",
     "supertest": "^6.2.4",
     "ts-jest": "^27.1.5",
     "ts-loader": "^9.3.1",
@@ -92,8 +92,7 @@
     "moduleNameMapper": {
       "^@config(.*)": "<rootDir>/config$1",
       "^@modules(.*)": "<rootDir>/modules$1",
-      "^@helper(.*)": "<rootDir>/util/helper$1",
-      "^@testing(.*)": "<rootDir>/util/testing$1"
+      "^@helper(.*)": "<rootDir>/util/helper$1"
     },
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {

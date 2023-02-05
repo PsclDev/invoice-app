@@ -3,13 +3,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import {
   clientSeed,
   companyClientId,
+  initSeeder,
   privateClientId,
-  TestSqliteModule,
-} from '@testing';
+  SqliteTestingImports,
+  SqliteTestingProviders,
+} from '@modules/testing';
 import { ClientController } from './client.controller';
 import { Gender } from './client.dto';
 import { Client, CompanyClient } from './client.entity';
 import { ClientService } from './client.service';
+import { CacheKeys } from '@helper';
 
 describe('ClientController', () => {
   let clientController: ClientController;
@@ -17,12 +20,20 @@ describe('ClientController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TestSqliteModule()],
+      imports: [...SqliteTestingImports()],
       controllers: [ClientController],
-      providers: [ClientService],
+      providers: [
+        {
+          provide: 'CACHE_KEY',
+          useValue: CacheKeys.CLIENT,
+        },
+        ClientService,
+        ...SqliteTestingProviders(),
+      ],
     }).compile();
 
     clientController = module.get<ClientController>(ClientController);
+    await initSeeder();
     await clientSeed();
   });
 

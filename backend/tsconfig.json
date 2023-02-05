@@ -24,9 +24,7 @@
       "@modules": ["modules/"],
       "@modules/*": ["modules/*"],
       "@helper": ["util/helper/"],
-      "@helper/*": ["util/helper/*"],
-      "@testing": ["util/testing/"],
-      "@testing/*": ["util/testing/*"]
+      "@helper/*": ["util/helper/*"]
     }
   }
 }

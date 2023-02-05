@@ -4,16 +4,18 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  deletableSettingId,
-  nonDeletableSettingId,
-  settingSeed,
-  TestSqliteModule,
-} from '@testing';
 import { SettingController } from './setting.controller';
 import { Setting } from './setting.entity';
 import { PdfKey, SettingType } from '@helper';
 import { SettingService } from './setting.service';
+import {
+  deletableSettingId,
+  initSeeder,
+  nonDeletableSettingId,
+  settingSeed,
+  SqliteTestingImports,
+  SqliteTestingProviders,
+} from '@modules/testing';
 
 describe('SettingController', () => {
   let settingController: SettingController;
@@ -21,22 +23,30 @@ describe('SettingController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...TestSqliteModule()],
+      imports: [...SqliteTestingImports()],
       controllers: [SettingController],
-      providers: [SettingService],
+      providers: [
+        {
+          provide: 'CACHE_KEY',
+          useValue: '',
+        },
+        ...SqliteTestingProviders(),
+        SettingService,
+      ],
     }).compile();
 
     settingController = module.get<SettingController>(SettingController);
+    await initSeeder();
     await settingSeed();
   });
 
   it('should create a pdf setting', async () => {
     const setting = await settingController.createSetting({
       type: SettingType.PDF,
-      key: PdfKey.COMPANY_NAME,
-      title: 'abc',
+      key: PdfKey.COMPANY_ADRESS,
+      title: 'company adress',
       value: 'efg',
-      inputType: 'string',
+      inputType: 'text',
     });
 
     createdSettingId = setting.id;
@@ -50,7 +60,7 @@ describe('SettingController', () => {
         key: PdfKey.COMPANY_NAME,
         title: 'abc',
         value: 'efg',
-        inputType: 'string',
+        inputType: 'text',
       });
     };
 
@@ -99,6 +109,6 @@ describe('SettingController', () => {
 
   it('should find all settings', async () => {
     const clients = await settingController.findAll();
-    expect(clients.length).toBe(2);
+    expect(clients.length).toBe(3);
   });
 });

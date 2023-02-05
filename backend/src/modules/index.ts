@@ -5,3 +5,4 @@ export * from './mail/mail.module';
 export * from './seeder/seeder.module';
 export * from './setting/setting.module';
 export * from './statistic/statistic.module';
+export * from './testing/testing.module';

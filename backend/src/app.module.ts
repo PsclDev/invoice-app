@@ -14,6 +14,7 @@ import {
   StatisticModule,
   SettingModule,
   SeederModule,
+  TestingModule,
 } from '@modules';
 
 @Module({
@@ -50,6 +51,7 @@ import {
       exclude: ['/v1*'],
     }),
     SeederModule,
+    TestingModule,
   ],
   controllers: [AppController, HealthController],
 })

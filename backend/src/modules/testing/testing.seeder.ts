@@ -4,14 +4,21 @@ import { Offer, Invoice } from '@modules/document';
 import { Setting } from '@modules/setting';
 import { EntityManager, getConnection } from 'typeorm';
 
+export const initSeeder = () => {
+  const connection = getConnection();
+  entityManager = connection.createEntityManager();
+};
+
+let entityManager: EntityManager;
 export const privateClientId = 'azx9d3g4';
 export const companyClientId = 'pla5b2i7';
 export const offerId = 'inc4sd71';
 export const invoiceId = 'dhc3l1k6';
 export const deletableSettingId = 'khu5l2k9';
+export const deletableSettingIdTwo = 'koa491s7';
 export const nonDeletableSettingId = 'cu28xhg7';
 
-const insertClients = async (entityManager: EntityManager) => {
+export const clientSeed = async () => {
   await entityManager.insert<Client>(Client, {
     id: privateClientId,
     firstname: 'Erika',
@@ -37,7 +44,7 @@ const insertClients = async (entityManager: EntityManager) => {
   });
 };
 
-const insertDocuments = async (entityManager: EntityManager) => {
+export const documentSeed = async () => {
   await entityManager.insert<Offer>(Offer, {
     id: offerId,
     offerNr: 1,
@@ -65,40 +72,24 @@ const insertDocuments = async (entityManager: EntityManager) => {
   });
 };
 
-export const clientSeed = async () => {
-  const connection = await getConnection();
-  const entityManager = connection.createEntityManager();
-
-  await insertClients(entityManager);
-};
-
-export const documentSeed = async () => {
-  const connection = await getConnection();
-  const entityManager = connection.createEntityManager();
-
-  await insertClients(entityManager);
-  await insertDocuments(entityManager);
-};
-
 export const settingSeed = async () => {
-  const connection = await getConnection();
-  const entityManager = connection.createEntityManager();
-
   entityManager.insert<Setting>(Setting, {
     id: deletableSettingId,
     type: SettingType.MAIL,
     key: MailKey.INVOICE_SUBJECT,
-    title: 'test',
+    title: 'invoice subject',
     value: 'value',
+    inputType: 'text',
     deletable: true,
   });
 
   entityManager.insert<Setting>(Setting, {
-    id: nonDeletableSettingId,
+    id: deletableSettingIdTwo,
     type: SettingType.PDF,
     key: PdfKey.COMPANY_NAME,
-    title: 'test',
+    title: 'company name',
     value: 'value',
+    inputType: 'text',
     deletable: false,
   });
 
@@ -106,8 +97,9 @@ export const settingSeed = async () => {
     id: nonDeletableSettingId,
     type: SettingType.FILE,
     key: FileKey.INVOICE_PREFIX,
-    title: 'test',
+    title: 'invoice prefix',
     value: 'value',
+    inputType: 'text',
     deletable: false,
   });
 };

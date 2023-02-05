@@ -2,8 +2,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Client, CompanyClient } from '@modules/client';
 import { Document, Offer, Invoice } from '@modules/document';
 import { Setting } from '@modules/setting';
+import { CacheModule } from '@nestjs/common';
+import { ConfigModule } from '@config';
+import { CustomCacheService } from '@helper';
 
-export const TestSqliteModule = () => [
+export const SqliteTestingImports = () => [
+  ConfigModule,
+  CacheModule.register(),
   TypeOrmModule.forRoot({
     type: 'sqlite',
     database: ':memory:',
@@ -20,3 +25,5 @@ export const TestSqliteModule = () => [
     Setting,
   ]),
 ];
+
+export const SqliteTestingProviders = () => [CustomCacheService];
