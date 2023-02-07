@@ -1,11 +1,6 @@
-import {
-  CustomCacheService,
-  FileKey,
-  generateId,
-  SettingType,
-  updateEntity,
-} from '@helper';
-import { SettingService } from '@modules/setting/setting.service';
+import { generateId, updateEntity } from '@utils';
+import { CustomCacheService } from '@modules/common';
+import { SettingService, FileKey, SettingType } from '@modules/setting';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

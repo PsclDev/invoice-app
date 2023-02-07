@@ -2,15 +2,16 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger } from '@nestjs/common';
 import { Client } from '@modules/client';
 import { Document } from '@modules/document';
+import { DocumentType } from '@modules/document/document.types';
 import * as Mustache from 'mustache';
-import { Setting, SettingService } from '@modules/setting';
 import {
-  DocumentType,
-  formatDocumentNumber,
+  Setting,
+  SettingService,
   MailKey,
   SettingKeyType,
   SettingType,
-} from '@helper';
+} from '@modules/setting';
+import { formatDocumentNumber } from '@utils';
 
 @Injectable()
 export class MailService {

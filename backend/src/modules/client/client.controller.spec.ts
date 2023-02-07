@@ -12,7 +12,7 @@ import { ClientController } from './client.controller';
 import { Gender } from './client.dto';
 import { Client, CompanyClient } from './client.entity';
 import { ClientService } from './client.service';
-import { CacheKeys } from '@helper';
+import { CacheKeys, ProvideCacheKey } from '@utils';
 
 describe('ClientController', () => {
   let clientController: ClientController;
@@ -23,10 +23,7 @@ describe('ClientController', () => {
       imports: [...SqliteTestingImports()],
       controllers: [ClientController],
       providers: [
-        {
-          provide: 'CACHE_KEY',
-          useValue: CacheKeys.CLIENT,
-        },
+        ProvideCacheKey(CacheKeys.CLIENT),
         ClientService,
         ...SqliteTestingProviders(),
       ],

@@ -4,7 +4,8 @@ import { StatisticController } from './statistic.controller';
 import { StatisticService } from './statistic.service';
 import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
-import { CacheKeys, CustomCacheService } from '@helper';
+import { CustomCacheService } from '@modules/common';
+import { CacheKeys, ProvideCacheKey } from '@utils';
 
 @Module({
   imports: [
@@ -13,10 +14,7 @@ import { CacheKeys, CustomCacheService } from '@helper';
   ],
   controllers: [StatisticController],
   providers: [
-    {
-      provide: 'CACHE_KEY',
-      useValue: CacheKeys.STATISTIC,
-    },
+    ProvideCacheKey(CacheKeys.STATISTIC),
     CustomCacheService,
     StatisticService,
   ],

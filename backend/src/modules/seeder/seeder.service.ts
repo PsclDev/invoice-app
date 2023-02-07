@@ -1,6 +1,12 @@
 import { ConfigService } from '@config';
-import { SettingType, MailKey, PdfKey, FileKey } from '@helper';
-import { CreateSettingDto, SettingService } from '@modules/setting';
+import {
+  CreateSettingDto,
+  SettingService,
+  SettingType,
+  MailKey,
+  PdfKey,
+  FileKey,
+} from '@modules/setting';
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 
 @Injectable()

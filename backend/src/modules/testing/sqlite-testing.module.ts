@@ -4,7 +4,7 @@ import { Document, Offer, Invoice } from '@modules/document';
 import { Setting } from '@modules/setting';
 import { CacheModule } from '@nestjs/common';
 import { ConfigModule } from '@config';
-import { CustomCacheService } from '@helper';
+import { CustomCacheService } from '@modules/common';
 
 export const SqliteTestingImports = () => [
   ConfigModule,

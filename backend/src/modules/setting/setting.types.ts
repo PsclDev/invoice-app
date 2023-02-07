@@ -1,21 +1,3 @@
-import { Client } from '@modules/client/';
-import { Document } from '@modules/document';
-
-export type AppTypes = Client | Document;
-export type SettingKeyType = PdfKey | MailKey | FileKey;
-export type SettingInputType = 'text' | 'number' | 'textarea';
-
-export enum DocumentType {
-  OFFER = 'Offer',
-  INVOICE = 'Invoice',
-}
-
-export enum CacheKeys {
-  CLIENT = 'clients',
-  DOCUMENT = 'docs',
-  STATISTIC = 'stats',
-}
-
 export enum SettingType {
   PDF = 'PDF',
   MAIL = 'MAIL',
@@ -43,3 +25,6 @@ export enum FileKey {
   INVOICE_STARTING_NR = 'INVOICE_STARTING_NR',
   OFFER_STARTING_NR = 'OFFER_STARTING_NR',
 }
+
+export type SettingKeyType = PdfKey | MailKey | FileKey;
+export type SettingInputType = 'text' | 'number' | 'textarea';

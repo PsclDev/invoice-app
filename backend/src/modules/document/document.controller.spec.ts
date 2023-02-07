@@ -16,7 +16,7 @@ import {
   SqliteTestingProviders,
   invoiceId,
 } from '@modules/testing';
-import { CacheKeys } from '@helper';
+import { CacheKeys, ProvideCacheKey } from '@utils';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;
@@ -35,10 +35,7 @@ describe('DocumentController', () => {
       ],
       controllers: [DocumentController],
       providers: [
-        {
-          provide: 'CACHE_KEY',
-          useValue: CacheKeys.DOCUMENT,
-        },
+        ProvideCacheKey(CacheKeys.DOCUMENT),
         DocumentService,
         FileService,
         OfferService,

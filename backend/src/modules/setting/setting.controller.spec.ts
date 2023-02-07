@@ -6,7 +6,7 @@ import {
 import { Test, TestingModule } from '@nestjs/testing';
 import { SettingController } from './setting.controller';
 import { Setting } from './setting.entity';
-import { PdfKey, SettingType } from '@helper';
+import { PdfKey, SettingType } from './setting.types';
 import { SettingService } from './setting.service';
 import {
   deletableSettingId,
@@ -16,6 +16,7 @@ import {
   SqliteTestingImports,
   SqliteTestingProviders,
 } from '@modules/testing';
+import { CacheKeys, ProvideCacheKey } from '@utils';
 
 describe('SettingController', () => {
   let settingController: SettingController;
@@ -26,10 +27,7 @@ describe('SettingController', () => {
       imports: [...SqliteTestingImports()],
       controllers: [SettingController],
       providers: [
-        {
-          provide: 'CACHE_KEY',
-          useValue: '',
-        },
+        ProvideCacheKey(CacheKeys.NONE),
         ...SqliteTestingProviders(),
         SettingService,
       ],

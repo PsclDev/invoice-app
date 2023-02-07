@@ -1,4 +1,4 @@
-import { capitalizeString } from '@helper';
+import { capitalizeString } from '@utils';
 import {
   Body,
   Controller,

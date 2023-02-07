@@ -23,8 +23,8 @@
       "@config/*": ["config/*"],
       "@modules": ["modules/"],
       "@modules/*": ["modules/*"],
-      "@helper": ["util/helper/"],
-      "@helper/*": ["util/helper/*"]
+      "@utils": ["utils/"],
+      "@utils/*": ["utils/*"]
     }
   }
 }

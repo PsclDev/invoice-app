@@ -15,7 +15,7 @@ import { Client, CompanyClient } from '../client/client.entity';
 import { Offer, Invoice } from '../document/document.entity';
 import * as dayjs from 'dayjs';
 import * as isBetween from 'dayjs/plugin/isBetween';
-import { CustomCacheService } from '@helper';
+import { CustomCacheService } from '@modules/common';
 dayjs.extend(isBetween);
 
 @Injectable()

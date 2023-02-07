@@ -1,7 +1,12 @@
-import { SettingType, MailKey, PdfKey, FileKey } from '@helper';
 import { Client, CompanyClient, Gender } from '@modules/client';
 import { Offer, Invoice } from '@modules/document';
-import { Setting } from '@modules/setting';
+import {
+  Setting,
+  SettingType,
+  MailKey,
+  PdfKey,
+  FileKey,
+} from '@modules/setting';
 import { EntityManager, getConnection } from 'typeorm';
 
 export const initSeeder = () => {

@@ -6,13 +6,9 @@ import { mkdir } from 'fs/promises';
 import { Client } from '@modules/client';
 import { join } from 'path';
 import { Document, Invoice, Offer } from '../document.entity';
-import {
-  DocumentType,
-  FileKey,
-  formatDocumentNumber,
-  SettingType,
-} from '@helper';
-import { SettingService } from '@modules/setting';
+import { DocumentType } from '../document.types';
+import { SettingService, FileKey, SettingType } from '@modules/setting';
+import { formatDocumentNumber } from '@utils';
 
 @Injectable()
 export class FileService {

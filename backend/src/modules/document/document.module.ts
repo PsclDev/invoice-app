@@ -11,7 +11,8 @@ import {
   InvoiceService,
   FileService,
 } from './services';
-import { CacheKeys, CustomCacheService } from '@helper';
+import { CustomCacheService } from '@modules/common';
+import { CacheKeys, ProvideCacheKey } from '@utils';
 
 @Module({
   imports: [
@@ -23,10 +24,7 @@ import { CacheKeys, CustomCacheService } from '@helper';
   ],
   controllers: [DocumentController],
   providers: [
-    {
-      provide: 'CACHE_KEY',
-      useValue: CacheKeys.DOCUMENT,
-    },
+    ProvideCacheKey(CacheKeys.DOCUMENT),
     CustomCacheService,
     DocumentService,
     OfferService,

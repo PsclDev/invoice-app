@@ -1,4 +1,4 @@
-import { SettingKeyType, SettingInputType, SettingType } from '@helper';
+import { SettingKeyType, SettingInputType, SettingType } from './setting.types';
 import {
   Column,
   CreateDateColumn,

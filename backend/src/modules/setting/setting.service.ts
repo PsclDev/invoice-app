@@ -1,4 +1,5 @@
-import { generateId, SettingKeyType, SettingType, updateEntity } from '@helper';
+import { SettingKeyType, SettingType } from './setting.types';
+import { generateId, updateEntity } from '@utils';
 import {
   ForbiddenException,
   HttpException,

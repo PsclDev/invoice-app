@@ -1,10 +1,5 @@
-import {
-  CustomCacheService,
-  FileKey,
-  generateId,
-  SettingType,
-  updateEntity,
-} from '@helper';
+import { generateId, updateEntity } from '@utils';
+import { CustomCacheService } from '@modules/common';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
@@ -17,7 +12,7 @@ import { Repository } from 'typeorm';
 import { Document, Invoice, Offer } from '../document.entity';
 import { DocumentService } from './document.service';
 import { InvoiceService } from './invoice.service';
-import { SettingService } from '@modules/setting';
+import { SettingService, FileKey, SettingType } from '@modules/setting';
 
 @Injectable()
 export class OfferService {

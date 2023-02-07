@@ -1,6 +1,8 @@
-import { CacheKeys, CustomCacheService } from '@helper';
+import { CacheKeys } from '@utils';
+import { CustomCacheService } from '@modules/common';
 import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProvideCacheKey } from '@utils';
 import { ClientController } from './client.controller';
 import { Client, CompanyClient } from './client.entity';
 import { ClientService } from './client.service';
@@ -12,10 +14,7 @@ import { ClientService } from './client.service';
   ],
   controllers: [ClientController],
   providers: [
-    {
-      provide: 'CACHE_KEY',
-      useValue: CacheKeys.CLIENT,
-    },
+    ProvideCacheKey(CacheKeys.CLIENT),
     CustomCacheService,
     ClientService,
   ],

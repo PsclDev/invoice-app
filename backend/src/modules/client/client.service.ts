@@ -1,4 +1,5 @@
-import { CustomCacheService, generateId, updateEntity } from '@helper';
+import { generateId, updateEntity } from '@utils';
+import { CustomCacheService } from '@modules/common';
 import {
   HttpException,
   HttpStatus,

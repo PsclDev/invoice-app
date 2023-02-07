@@ -7,7 +7,7 @@ import {
   SettingInputType,
   SettingKeyType,
   SettingType,
-} from '@helper';
+} from './setting.types';
 
 export interface SettingDto {
   id: string;

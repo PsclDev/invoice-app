@@ -14,7 +14,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { DocumentBaseDto, InvoiceDto, OfferDto } from './document.dto';
-import { ColumnNumericTransformer, DocumentType } from '@helper';
+import { DocumentType } from './document.types';
+import { ColumnNumericTransformer } from '@utils';
 
 @Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'type' } })
