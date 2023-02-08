@@ -41,8 +41,8 @@ describe('SettingController', () => {
   it('should create a pdf setting', async () => {
     const setting = await settingController.createSetting({
       type: SettingType.PDF,
-      key: PdfKey.COMPANY_ADRESS,
-      title: 'company adress',
+      key: PdfKey.COMPANY_TAXID,
+      title: 'company tax id',
       value: 'efg',
       inputType: 'text',
     });

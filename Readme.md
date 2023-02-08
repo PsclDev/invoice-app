@@ -100,6 +100,8 @@ E.g. `Hello {{fullname}}` will be transformed to the `client.firstname + client.
 - fullname
 - formattedInvoiceNr
 - formattedOfferNr
+- issueDate
+- dateOfDue
 
 if you wanna use any other value from the client, document or settings just put in the name of the field.
 

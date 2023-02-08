@@ -73,7 +73,7 @@ export class MailService {
     return this.convertTemplates(value, client, doc);
   }
 
-  async getKey(key: SettingKeyType): Promise<string> {
+  private async getKey(key: SettingKeyType): Promise<string> {
     const setting = await this.settingsService.findByTypeAndKey(
       SettingType.MAIL,
       key,
@@ -81,7 +81,7 @@ export class MailService {
     return setting.value;
   }
 
-  async convertTemplates(
+  private async convertTemplates(
     content: string,
     client: Client,
     doc: Document,
@@ -98,6 +98,12 @@ export class MailService {
       },
       formattedOfferNr: function () {
         return formatDocumentNumber(this.offerNr);
+      },
+      issueDate: function () {
+        return this.dateOfIssue.toLocaleDateString('de');
+      },
+      dateOfDue: function () {
+        return this.dueDate.toLocaleDateString('de');
       },
     });
   }

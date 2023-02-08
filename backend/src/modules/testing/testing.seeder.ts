@@ -79,16 +79,6 @@ export const documentSeed = async () => {
 
 export const settingSeed = async () => {
   entityManager.insert<Setting>(Setting, {
-    id: deletableSettingId,
-    type: SettingType.MAIL,
-    key: MailKey.INVOICE_SUBJECT,
-    title: 'invoice subject',
-    value: 'value',
-    inputType: 'text',
-    deletable: true,
-  });
-
-  entityManager.insert<Setting>(Setting, {
     id: deletableSettingIdTwo,
     type: SettingType.PDF,
     key: PdfKey.COMPANY_NAME,
@@ -99,11 +89,65 @@ export const settingSeed = async () => {
   });
 
   entityManager.insert<Setting>(Setting, {
+    id: deletableSettingId,
+    type: SettingType.PDF,
+    key: PdfKey.COMPANY_ADRESS,
+    title: 'company adress',
+    value: 'value',
+    inputType: 'text',
+    deletable: true,
+  });
+
+  entityManager.insert<Setting>(Setting, {
     id: nonDeletableSettingId,
     type: SettingType.FILE,
     key: FileKey.INVOICE_PREFIX,
     title: 'invoice prefix',
     value: 'value',
+    inputType: 'text',
+    deletable: false,
+  });
+};
+
+export const mailSeed = async () => {
+  entityManager.insert<Setting>(Setting, {
+    id: 'khu3l5k8',
+    type: SettingType.MAIL,
+    key: MailKey.INVOICE_SUBJECT,
+    title: 'invoice subject',
+    value: 'Your Invoice (I#{{formattedInvoiceNr}})',
+    inputType: 'text',
+    deletable: true,
+  });
+
+  entityManager.insert<Setting>(Setting, {
+    id: 'khu2l6k9',
+    type: SettingType.MAIL,
+    key: MailKey.INVOICE_TEXT,
+    title: 'invoice text',
+    value:
+      'Hello {{fullname}}, your Invoice I#{{formattedInvoiceNr}} was created at {{issueDate}} and is due at {{dateOfDue}}',
+    inputType: 'text',
+    deletable: false,
+  });
+
+  entityManager.insert<Setting>(Setting, {
+    id: 'khu1l7k0',
+    type: SettingType.MAIL,
+    key: MailKey.OFFER_SUBJECT,
+    title: 'offer subject',
+    value: 'Your Offer (O#{{formattedOfferNr}})',
+    inputType: 'text',
+    deletable: true,
+  });
+
+  entityManager.insert<Setting>(Setting, {
+    id: 'khu2l4k1',
+    type: SettingType.MAIL,
+    key: MailKey.OFFER_TEXT,
+    title: 'offer text',
+    value:
+      'Hello {{fullname}}, your Offer O#{{formattedOfferNr}} was created at {{issueDate}}',
     inputType: 'text',
     deletable: false,
   });
