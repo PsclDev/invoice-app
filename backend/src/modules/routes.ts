@@ -4,4 +4,5 @@ export enum Route {
   HEALTH = 'health',
   SETTING = 'setting',
   STATISTICS = 'statistics',
+  TESTING = 'testing',
 }

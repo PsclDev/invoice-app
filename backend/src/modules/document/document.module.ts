@@ -31,5 +31,6 @@ import { CacheKeys, ProvideCacheKey } from '@utils';
     InvoiceService,
     FileService,
   ],
+  exports: [DocumentService, OfferService, InvoiceService],
 })
 export class DocumentModule {}

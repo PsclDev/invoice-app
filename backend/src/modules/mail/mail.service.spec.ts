@@ -1,8 +1,7 @@
-import { Client, Gender } from '@modules/client';
-import { DocumentType, Invoice, Offer } from '@modules/document';
 import {
   initSeeder,
   mailSeed,
+  exampleDataSet,
   SqliteTestingImports,
   SqliteTestingProviders,
 } from '@modules/testing';
@@ -14,9 +13,7 @@ import { MailService } from './mail.service';
 
 describe('MailService', () => {
   let mailService: MailService;
-  let client: Client;
-  let invoice: Invoice;
-  let offer: Offer;
+  let exampleData;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -52,88 +49,58 @@ describe('MailService', () => {
     await initSeeder();
     await mailSeed();
 
-    client = {
-      id: 'client1',
-      gender: Gender.MALE,
-      firstname: 'John',
-      lastname: 'Doe',
-      email: 'email@mail.de',
-      street: 'Example Street 1',
-      postalCode: '12345',
-      city: 'Example City',
-    };
-
-    invoice = {
-      client,
-      id: 'invoice1',
-      offerId: null,
-      invoiceNr: 1,
-      type: DocumentType.INVOICE,
-      subTotal: 100,
-      tax: 19,
-      taxRate: 19,
-      alreadyPaid: 10,
-      total: 109,
-      clientId: 'client1',
-      dateOfIssue: new Date(),
-      dueDate: new Date(),
-      description: [],
-      filepath: '',
-    };
-
-    offer = {
-      client,
-      id: 'offer1',
-      invoice: null,
-      invoiceId: null,
-      offerNr: 1,
-      type: DocumentType.OFFER,
-      subTotal: 100,
-      tax: 19,
-      taxRate: 19,
-      total: 119,
-      clientId: 'client1',
-      dateOfIssue: new Date(),
-      description: [],
-      filepath: '',
-    };
+    exampleData = exampleDataSet();
   });
 
   it('should get invoice subject', async () => {
-    const subject = await mailService.getSubject(client, invoice);
+    const subject = await mailService.getSubject(
+      exampleData.client,
+      exampleData.invoice,
+    );
     expect(subject).toBe(
-      `Your Invoice (I#${formatDocumentNumber(invoice.invoiceNr)})`,
+      `Your Invoice (I#${formatDocumentNumber(exampleData.invoice.invoiceNr)})`,
     );
   });
 
   it('should get invoice text', async () => {
-    const body = await mailService.getBody(client, invoice);
+    const body = await mailService.getBody(
+      exampleData.client,
+      exampleData.invoice,
+    );
     expect(body).toBe(
-      `Hello ${client.firstname} ${
-        client.lastname
+      `Hello ${exampleData.client.firstname} ${
+        exampleData.client.lastname
       }, your Invoice I#${formatDocumentNumber(
-        invoice.invoiceNr,
-      )} was created at ${invoice.dateOfIssue.toLocaleDateString(
+        exampleData.invoice.invoiceNr,
+      )} was created at ${exampleData.invoice.dateOfIssue.toLocaleDateString(
         'de',
-      )} and is due at ${invoice.dueDate.toLocaleDateString('de')}`,
+      )} and is due at ${exampleData.invoice.dueDate.toLocaleDateString('de')}`,
     );
   });
 
   it('should get offer subject', async () => {
-    const subject = await mailService.getSubject(client, offer);
+    const subject = await mailService.getSubject(
+      exampleData.client,
+      exampleData.offer,
+    );
     expect(subject).toBe(
-      `Your Offer (O#${formatDocumentNumber(offer.offerNr)})`,
+      `Your Offer (O#${formatDocumentNumber(exampleData.offer.offerNr)})`,
     );
   });
 
   it('should get offer text', async () => {
-    const body = await mailService.getBody(client, offer);
+    const body = await mailService.getBody(
+      exampleData.client,
+      exampleData.offer,
+    );
     expect(body).toBe(
-      `Hello ${client.firstname} ${
-        client.lastname
+      `Hello ${exampleData.client.firstname} ${
+        exampleData.client.lastname
       }, your Offer O#${formatDocumentNumber(
-        offer.offerNr,
-      )} was created at ${offer.dateOfIssue.toLocaleDateString('de')}`,
+        exampleData.offer.offerNr,
+      )} was created at ${exampleData.offer.dateOfIssue.toLocaleDateString(
+        'de',
+      )}`,
     );
   });
 });

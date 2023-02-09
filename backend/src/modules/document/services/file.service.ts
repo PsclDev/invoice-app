@@ -55,7 +55,7 @@ export class FileService {
     await this.checkPathOrCreate(filePath);
 
     const isInvoice = document.type === DocumentType.INVOICE;
-    const filePrefix = this.settingsService.findByTypeAndKey(
+    const filePrefixSetting = await this.settingsService.findByTypeAndKey(
       SettingType.FILE,
       isInvoice ? FileKey.INVOICE_PREFIX : FileKey.OFFER_PREFIX,
     );
@@ -66,7 +66,7 @@ export class FileService {
     const fileNr = formatDocumentNumber(docNr);
     const fileName = `${client.firstname}_${client.lastname}.pdf`;
 
-    return `${filePath}/${filePrefix}${fileNr}_${fileName}`;
+    return `${filePath}/${filePrefixSetting.value}${fileNr}_${fileName}`;
   }
 
   async checkPathOrCreate(path: string) {

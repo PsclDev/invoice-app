@@ -1,5 +1,5 @@
 import { Client, CompanyClient, Gender } from '@modules/client';
-import { Offer, Invoice } from '@modules/document';
+import { Offer, Invoice, DocumentType } from '@modules/document';
 import {
   Setting,
   SettingType,
@@ -151,4 +151,62 @@ export const mailSeed = async () => {
     inputType: 'text',
     deletable: false,
   });
+};
+
+export const exampleDataSet = () => {
+  const client = {
+    id: 'client1',
+    gender: Gender.MALE,
+    firstname: 'John Max',
+    lastname: 'Doe Example',
+    email: 'email@mail.de',
+    street: 'Example Street 1',
+    postalCode: '12345',
+    city: 'Example City',
+  };
+
+  const invoice = {
+    client,
+    id: 'invoice1',
+    offerId: null,
+    invoiceNr: 9876,
+    type: DocumentType.INVOICE,
+    subTotal: 1000,
+    tax: 190,
+    taxRate: 19,
+    alreadyPaid: 100,
+    total: 1090,
+    clientId: 'client1',
+    dateOfIssue: new Date(),
+    dueDate: new Date(Date.now() + 12096e5),
+    description: [
+      'This is a description',
+      'This is a description',
+      'This is a description',
+    ],
+    filepath: '',
+  };
+
+  const offer = {
+    client,
+    id: 'offer1',
+    invoice: null,
+    invoiceId: null,
+    offerNr: 1234,
+    type: DocumentType.OFFER,
+    subTotal: 1000,
+    tax: 190,
+    taxRate: 19,
+    total: 1190,
+    clientId: 'client1',
+    dateOfIssue: new Date(),
+    description: [
+      'This is a description',
+      'This is a description',
+      'This is a description',
+    ],
+    filepath: '',
+  };
+
+  return { client, invoice, offer };
 };
