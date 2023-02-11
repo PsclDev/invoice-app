@@ -5,7 +5,6 @@ import {
   OfferService,
 } from '@modules/document';
 import { Injectable, Logger } from '@nestjs/common';
-import { unlinkSync } from 'fs';
 import { exampleDataSet } from './testing.seeder';
 
 @Injectable()
@@ -30,7 +29,6 @@ export class TestingService {
 
     this.exampleData.offer.client = client;
     const offer = await this.offerService.createOffer(this.exampleData.offer);
-    this.cleanUp(offer.filepath);
 
     const link = await this.documentService.print(offer.id);
     await this.documentService.delete(offer.id);
@@ -49,7 +47,6 @@ export class TestingService {
     const invoice = await this.invoiceService.createInvoice(
       this.exampleData.invoice,
     );
-    this.cleanUp(invoice.filepath);
 
     const link = await this.documentService.print(invoice.id);
     await this.documentService.delete(invoice.id);
@@ -67,7 +64,6 @@ export class TestingService {
 
     this.exampleData.offer.client = client;
     const offer = await this.offerService.createOffer(this.exampleData.offer);
-    this.cleanUp(offer.filepath);
 
     await this.documentService.mail(offer.id);
     await this.documentService.delete(offer.id);
@@ -88,18 +84,10 @@ export class TestingService {
       this.exampleData.invoice,
     );
 
-    this.cleanUp(invoice.filepath);
     await this.documentService.mail(invoice.id);
     await this.documentService.delete(invoice.id);
     await this.clientService.delete(client.id);
 
     return `Mail was sent to '${email}'`;
-  }
-
-  private cleanUp(filepath: string) {
-    this.logger.log('cleanUp');
-    setTimeout(() => {
-      unlinkSync(filepath);
-    }, 90000);
   }
 }

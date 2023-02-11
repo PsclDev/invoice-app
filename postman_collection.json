@@ -735,6 +735,85 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Testing",
+			"item": [
+				{
+					"name": "Offer PDF Example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_testing}}/pdf/offer",
+							"host": [
+								"{{base_url}}{{version}}{{route_testing}}"
+							],
+							"path": [
+								"pdf",
+								"offer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Offer Mail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_testing}}/mail/offer/test@example.com",
+							"host": [
+								"{{base_url}}{{version}}{{route_testing}}"
+							],
+							"path": [
+								"mail",
+								"offer",
+								"test@example.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice PDF Example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_testing}}/pdf/invoice",
+							"host": [
+								"{{base_url}}{{version}}{{route_testing}}"
+							],
+							"path": [
+								"pdf",
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice Mail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_testing}}/mail/invoice/test@example.com",
+							"host": [
+								"{{base_url}}{{version}}{{route_testing}}"
+							],
+							"path": [
+								"mail",
+								"invoice",
+								"test@example.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -800,6 +879,11 @@
 		{
 			"key": "route_statistics",
 			"value": "/statistic",
+			"type": "string"
+		},
+		{
+			"key": "route_testing",
+			"value": "/testing",
 			"type": "string"
 		},
 		{
