@@ -16,12 +16,14 @@
         >
           <div class="w-56 h-56">
             <ChartDoughnut
+              v-if="stats.clients.all > 0"
               :key="allTimeDocumentChartKey"
               :chart-data="clientsChart"
             />
           </div>
           <div class="w-56 h-56">
             <ChartDoughnut
+              v-if="stats.documents.allTime.all > 0"
               :key="allTimeDocumentChartKey"
               :chart-data="allTimeDocumentChart"
             />
@@ -64,6 +66,7 @@
         <div class="flex justify-center items-center gap-10 mt-10">
           <div class="w-56 h-56">
             <ChartDoughnut
+              v-if="activeYear.all > 0"
               :key="yearlyDocumentChartKey"
               :chart-data="yearlyDocumentChart"
             />
