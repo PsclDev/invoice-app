@@ -13,6 +13,11 @@
             "no-response": "API didn't respond",
             "failed": "Failed to check health"
         },
+        "settings": {
+            "get": "Failed to get settings",
+            "updated": "Updated setting successfully",
+            "failed": "Failed to update setting"
+        },
         "stats": {
             "failed": "Failed to get stats"
         }

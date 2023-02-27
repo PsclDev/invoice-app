@@ -13,6 +13,11 @@
             "no-response": "API ist nicht erreichbar",
             "failed": "Health check fehlgeschlagen"
         },
+        "settings": {
+            "get": "Einstellungen konnten nicht geladen werden",
+            "updated": "Einstellung erfolgreich aktualisiert",
+            "failed": "Einstellung konnte nicht aktualisiert werden"
+        },
         "stats": {
             "failed": "Stats konnten nicht geladen werden"
         }
