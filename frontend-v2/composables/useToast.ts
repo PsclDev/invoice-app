@@ -7,11 +7,11 @@ export default function useToast() {
     timeout: number = 12
   ) => {
     if (process.client) {
-      const { $toast } = useNuxtApp();
-      const { t } = useI18n();
+      const { $toast, $i18n } = useNuxtApp();
+
       $toast.show({
         type,
-        message: t(message, plural, formats),
+        message: $i18n.t(message, plural, formats),
         timeout
       });
     }
