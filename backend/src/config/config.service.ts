@@ -59,7 +59,7 @@ export class ConfigService {
     migrationsPath: process.env.APP_MIGRATIONS_PATH || 'dist/migrations/*.js',
   };
   devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
-  disableSeeding = process.env.APP_DISABLE_SEEDING || false;
+  disableSeeding = bool(process.env.APP_DISABLE_SEEDING) || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
   httpPort = Number(process.env.APP_PORT) || 3010;
   ignoreHTTPSErrors = bool(process.env.APP_IGNORE_HTTPS_ERRORS) || false;

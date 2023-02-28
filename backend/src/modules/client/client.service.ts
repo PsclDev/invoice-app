@@ -63,12 +63,23 @@ export class ClientService {
     return client;
   }
 
-  async createClient(clientDto: CreateClientDto): Promise<Client> {
+  async bulkInsert(clients: CreateClientDto[]): Promise<void> {
+    for (let idx = 0; idx < clients.length; idx++) {
+      await this.createClient(clients[idx]);
+    }
+  }
+
+  async createClient(
+    clientDto: CreateClientDto,
+    bulkInsert = false,
+  ): Promise<Client> {
     const existingClient = await this.clientRepository.findOne({
       firstname: clientDto.firstname,
       lastname: clientDto.lastname,
     });
     if (existingClient) {
+      if (bulkInsert) return;
+
       this.logger.warn(
         `Client with the name: ${clientDto.firstname} ${clientDto.lastname} already exists`,
       );
@@ -99,13 +110,24 @@ export class ClientService {
     await this.customCacheService.updateExistingDataInCache(id, client);
   }
 
+  async bulkInsertCompanies(
+    companies: CreateCompanyClientDto[],
+  ): Promise<void> {
+    for (let idx = 0; idx < companies.length; idx++) {
+      await this.createCompanyClient(companies[idx]);
+    }
+  }
+
   async createCompanyClient(
     clientDto: CreateCompanyClientDto,
+    bulkInsert = false,
   ): Promise<CompanyClient> {
     const existingClient = await this.companyClientRepository.findOne({
       company: clientDto.company,
     });
     if (existingClient) {
+      if (bulkInsert) return;
+
       this.logger.warn(
         `Client with the name: ${clientDto.firstname} ${clientDto.lastname} already exists`,
       );

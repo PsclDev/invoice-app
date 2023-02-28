@@ -1,4 +1,11 @@
+import { faker } from '@faker-js/faker/locale/de';
 import { ConfigService } from '@config';
+import {
+  ClientService,
+  CreateClientDto,
+  CreateCompanyClientDto,
+  Gender,
+} from '@modules/client';
 import {
   CreateSettingDto,
   SettingService,
@@ -8,6 +15,7 @@ import {
   FileKey,
 } from '@modules/setting';
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { CreateOfferDto, DocumentService } from '@modules/document';
 
 @Injectable()
 export class SeederService implements OnApplicationBootstrap {
@@ -15,6 +23,8 @@ export class SeederService implements OnApplicationBootstrap {
 
   constructor(
     private readonly configService: ConfigService,
+    private readonly clientService: ClientService,
+    private readonly documentService: DocumentService,
     private readonly settingService: SettingService,
   ) {}
 
@@ -156,6 +166,38 @@ export class SeederService implements OnApplicationBootstrap {
   }
 
   private async devData() {
-    //
+    const existingClients = await this.clientService.findAll();
+    if (existingClients.length === 0) {
+      const clients: CreateClientDto[] = [];
+      for (let idx = 0; idx < 10; idx++) {
+        clients.push({
+          gender: Gender[faker.name.sexType().toUpperCase()],
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName(),
+          email: faker.internet.email(),
+          street: faker.address.streetAddress(),
+          postalCode: faker.address.zipCode('#####'),
+          city: faker.address.city(),
+        });
+      }
+
+      const companies: CreateCompanyClientDto[] = [];
+      for (let idx = 0; idx < 5; idx++) {
+        companies.push({
+          company: faker.company.name(),
+          vat: `DE-${faker.random.numeric(9)}`,
+          gender: Gender[faker.name.sexType().toUpperCase()],
+          firstname: faker.name.firstName(),
+          lastname: faker.name.lastName(),
+          email: faker.internet.email(),
+          street: faker.address.streetAddress(),
+          postalCode: faker.address.zipCode('#####'),
+          city: faker.address.city(),
+        });
+      }
+
+      await this.clientService.bulkInsert(clients);
+      await this.clientService.bulkInsertCompanies(companies);
+    }
   }
 }
