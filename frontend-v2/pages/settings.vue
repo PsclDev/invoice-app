@@ -2,9 +2,7 @@
   <div class="flex flex-col w-full">
     <template v-if="error"> <Error :error="error" /> </template>
     <template v-else-if="settings">
-      <div class="text-5xl text-center">{{ $t('header.settings') }}</div>
-
-      <div class="flex flex-col items-center mt-8">
+      <div class="flex flex-col items-center">
         <template v-for="settingGroup in Object.keys(groupedSettings)">
           <AppCollapse class="pb-5 mb-5" :title="settingGroup">
             <div class="flex flex-col gap-6 md:gap-3">

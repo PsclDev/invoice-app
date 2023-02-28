@@ -3,14 +3,14 @@ import { StatisticsResponse } from '~/types';
 export const useStatsStore = defineStore('stats', () => {
   const logger = useLogger('statsStore');
   const toast = useToast();
+  const reqUrl = useApiUrl() + '/statistics';
   const stats = ref<StatisticsResponse>({} as StatisticsResponse);
   const error = ref<string>();
 
   async function getStats() {
     try {
-      const { apiUrl, apiVersion } = useRuntimeConfig().public;
       const { data, error: reqErr } = await useFetch<StatisticsResponse>(
-        `${apiUrl}/${apiVersion}/statistics`
+        reqUrl
       );
 
       if (!data.value || reqErr.value) {

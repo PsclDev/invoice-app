@@ -2,12 +2,10 @@
   <div class="flex flex-col items-center w-full">
     <template v-if="error"> <Error :error="error" /> </template>
     <template v-else-if="stats">
-      <div class="text-5xl text-center">{{ $t('header.dashboard') }}</div>
-      <div class="text-xl text-center mt-2">
-        {{ $t('pages.dashboard.updatedAt') }} {{ updatedAt }}
-      </div>
-
-      <div class="mt-16">
+      <div>
+        <div class="text-2xl text-center">
+          {{ $t('pages.dashboard.updatedAt') }} {{ updatedAt }}
+        </div>
         <div class="text-4xl text-center">
           {{ $t('pages.dashboard.all-time') }}
         </div>

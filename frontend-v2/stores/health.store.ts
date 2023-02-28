@@ -3,14 +3,14 @@ import { HealthResponse } from '~/types';
 export const useHealthStore = defineStore('health', () => {
   const logger = useLogger('healthStore');
   const toast = useToast();
+  const reqUrl = useBaseApiUrl() + '/health';
   const apiIsRunning = ref(false);
   const dbIsRunning = ref(false);
   const lastCheck = ref(Date.now());
 
   async function checkHealth() {
     try {
-      const apiUrl = useRuntimeConfig().public.apiUrl;
-      const { data } = await useFetch<HealthResponse>(`${apiUrl}/health`);
+      const { data } = await useFetch<HealthResponse>(reqUrl);
       lastCheck.value = Date.now();
 
       if (data.value) {
