@@ -4,7 +4,7 @@
     <template v-else-if="settings">
       <div class="flex flex-col items-center">
         <template v-for="settingGroup in Object.keys(groupedSettings)">
-          <AppCollapse class="pb-5 mb-5" :title="settingGroup">
+          <AppCollapse :title="settingGroup">
             <div class="flex flex-col gap-6 md:gap-3">
               <template
                 v-for="setting in Object.values(groupedSettings[settingGroup])"

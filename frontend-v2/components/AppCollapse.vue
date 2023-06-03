@@ -1,6 +1,7 @@
 <template>
   <div
-    class="bg-slate-100 dark:bg-zinc-800 rounded-lg w-full md:w-3/4 pl-5 pr-3"
+    class="bg-slate-100 dark:bg-zinc-800 rounded-lg w-full md:w-3/4 pl-5 pr-3 mb-5"
+    :class="collapsed ? '' : 'pb-5'"
   >
     <div class="flex justify-between items-center text-2xl h-16">
       <div class="truncate mr-5">
@@ -32,5 +33,5 @@ const props = defineProps({
 });
 
 const { icon, title } = toRefs(props);
-const collapsed = ref(false);
+const collapsed = ref(true);
 </script>
