@@ -1,9 +1,0 @@
-#toasts > div > div > div {
-  @apply bg-slate-100 text-slate-600 
-  dark:bg-zinc-800 dark:text-slate-100 
-  border-2 border-slate-200 dark:border-zinc-700;
-}
-
-#toasts div[class*='bg-gray-200 dark:bg-gray-600'] {
-    @apply h-0.5
-}

@@ -9,19 +9,19 @@
   "private": true,
   "scripts": {
     "dev": "concurrently -n frontend,backend \"yarn dev:frontend\" \"yarn:dev:backend\"",
-    "dev:frontend": "cd frontend-v2 && yarn dev",
+    "dev:frontend": "cd frontend && yarn dev",
     "dev:backend": "cd backend && yarn start:dev",
-    "ia": "npx concurrently -n frontend,backend \"yarn\" \"cd frontend-v2 && yarn\" \"cd backend && yarn\"",
-    "lint": "npx concurrently -n frontend,backend \"cd frontend-v2/ && yarn lint\" \"cd backend/ && yarn lint\"",
+    "ia": "npx concurrently -n frontend,backend \"yarn\" \"cd frontend && yarn\" \"cd backend && yarn\"",
+    "lint": "npx concurrently -n frontend,backend \"cd frontend/ && yarn lint\" \"cd backend/ && yarn lint\"",
     "prepare": "husky install",
-    "precommit:frontend": "cd frontend-v2 && yarn precommit",
+    "precommit:frontend": "cd frontend && yarn precommit",
     "precommit:backend": "cd backend && yarn precommit",
     "precommit": "npm-run-all precommit:*",
     "shell": "npm run shell:build && docker-compose -f docker-compose.db.shell.yml run --rm -u 1000 --name invoice-app --service-ports invoice-app bash || true && echo Stopping environment... && docker-compose -f docker-compose.db.shell.yml down",
     "shell:build": "docker-compose -f docker-compose.db.shell.yml build",
     "shell:join": "docker exec -it invoice-app bash",
     "shell:stop": "docker-compose -f docker-compose.db.shell.yml down",
-    "test": "npx concurrently -n frontend,backend \"cd frontend-v2/ && yarn test\" \"cd backend/ && yarn test\""
+    "test": "npx concurrently -n frontend,backend \"cd frontend/ && yarn test\" \"cd backend/ && yarn test\""
   },
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",
