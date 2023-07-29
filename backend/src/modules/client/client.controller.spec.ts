@@ -1,5 +1,3 @@
-import { HttpException, NotFoundException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import {
   clientSeed,
   companyClientId,
@@ -8,11 +6,14 @@ import {
   SqliteTestingImports,
   SqliteTestingProviders,
 } from '@modules/testing';
+import { HttpException, NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { CacheKeys, ProvideCacheKey } from '@utils';
+
 import { ClientController } from './client.controller';
 import { Gender } from './client.dto';
 import { Client, CompanyClient } from './client.entity';
 import { ClientService } from './client.service';
-import { CacheKeys, ProvideCacheKey } from '@utils';
 
 describe('ClientController', () => {
   let clientController: ClientController;

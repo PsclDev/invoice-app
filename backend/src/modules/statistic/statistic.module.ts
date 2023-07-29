@@ -1,11 +1,12 @@
-import { Module, CacheModule } from '@nestjs/common';
+import { CustomCacheService } from '@modules/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CacheKeys, ProvideCacheKey } from '@utils';
+
+import { Client, CompanyClient } from '../client/client.entity';
+import { Invoice, Offer } from '../document/document.entity';
 import { StatisticController } from './statistic.controller';
 import { StatisticService } from './statistic.service';
-import { Client, CompanyClient } from '../client/client.entity';
-import { Offer, Invoice } from '../document/document.entity';
-import { CustomCacheService } from '@modules/common';
-import { CacheKeys, ProvideCacheKey } from '@utils';
 
 @Module({
   imports: [

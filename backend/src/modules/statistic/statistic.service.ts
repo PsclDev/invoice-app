@@ -1,21 +1,22 @@
+import { CustomCacheService } from '@modules/common';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import {
-  DocumentBasePeriodStatsDto,
-  DocumentYearStatsDto,
-  StatisticsDto,
-  ClientStatsDto,
-  DocumentStatsDto,
-  Cashflow,
-  DocumentMonthStatsDto,
-  DocumentQuarterStatsDto,
-} from './statistic.dto';
-import { Client, CompanyClient } from '../client/client.entity';
-import { Offer, Invoice } from '../document/document.entity';
 import * as dayjs from 'dayjs';
 import * as isBetween from 'dayjs/plugin/isBetween';
-import { CustomCacheService } from '@modules/common';
+import { Repository } from 'typeorm';
+
+import { Client, CompanyClient } from '../client/client.entity';
+import { Invoice, Offer } from '../document/document.entity';
+import {
+  Cashflow,
+  ClientStatsDto,
+  DocumentBasePeriodStatsDto,
+  DocumentMonthStatsDto,
+  DocumentQuarterStatsDto,
+  DocumentStatsDto,
+  DocumentYearStatsDto,
+  StatisticsDto,
+} from './statistic.dto';
 dayjs.extend(isBetween);
 
 @Injectable()

@@ -1,9 +1,10 @@
+import { Route } from '@modules/routes';
 import { Controller, Get, Logger, Param, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Route } from '@modules/routes';
 import { capitalizeString } from '@utils';
-import { TestingService } from './testing.service';
 import { Response } from 'express';
+
+import { TestingService } from './testing.service';
 
 @ApiTags(capitalizeString(Route.TESTING))
 @Controller(Route.TESTING)

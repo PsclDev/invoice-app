@@ -1,15 +1,16 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Document } from '../document.entity';
-import * as puppeteer from 'puppeteer';
-import { FileService } from './file.service';
-import { updateEntity } from '@utils';
-import { CustomCacheService } from '@modules/common';
 import { ConfigService } from '@config';
 import { Client, ClientService } from '@modules/client';
+import { CustomCacheService } from '@modules/common';
 import { MailService } from '@modules/mail';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { updateEntity } from '@utils';
+import * as puppeteer from 'puppeteer';
+import { Repository } from 'typeorm';
+
 import { DocumentMailOptionsDto } from '../document.dto';
+import { Document } from '../document.entity';
+import { FileService } from './file.service';
 
 @Injectable()
 export class DocumentService {

@@ -1,4 +1,4 @@
-import { Document } from '../document/document.entity';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsEmail,
   IsIn,
@@ -6,7 +6,8 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+
+import { Document } from '../document/document.entity';
 
 export enum Gender {
   MALE = 'MALE',

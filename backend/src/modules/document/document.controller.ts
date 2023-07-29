@@ -1,4 +1,3 @@
-import { capitalizeString } from '@utils';
 import { Route } from '@modules/routes';
 import {
   Body,
@@ -12,7 +11,9 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { capitalizeString } from '@utils';
 import { Response } from 'express';
+
 import {
   CreateInvoiceDto,
   CreateOfferDto,
@@ -21,7 +22,7 @@ import {
   UpdateOfferDto,
 } from './document.dto';
 import { Document } from './document.entity';
-import { DocumentService, OfferService, InvoiceService } from './services';
+import { DocumentService, InvoiceService, OfferService } from './services';
 
 @ApiTags(capitalizeString(Route.DOCUMENT))
 @Controller(Route.DOCUMENT)

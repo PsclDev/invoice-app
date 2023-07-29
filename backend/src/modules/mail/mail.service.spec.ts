@@ -1,13 +1,14 @@
 import {
+  exampleDataSet,
   initSeeder,
   mailSeed,
-  exampleDataSet,
   SqliteTestingImports,
   SqliteTestingProviders,
 } from '@modules/testing';
-import { MailerModule } from '@nestjs-modules/mailer';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MailerModule } from '@nestjs-modules/mailer';
 import { CacheKeys, formatDocumentNumber, ProvideCacheKey } from '@utils';
+
 import { SettingModule } from '..';
 import { MailService } from './mail.service';
 

@@ -1,4 +1,3 @@
-import { SettingKeyType, SettingInputType, SettingType } from './setting.types';
 import {
   Column,
   CreateDateColumn,
@@ -6,7 +5,9 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 import { SettingDto } from './setting.dto';
+import { SettingInputType, SettingKeyType, SettingType } from './setting.types';
 
 @Entity()
 export class Setting implements SettingDto {

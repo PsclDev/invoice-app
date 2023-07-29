@@ -1,4 +1,3 @@
-import { DocumentType } from './document.types';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsBoolean,
@@ -9,6 +8,8 @@ import {
   IsString,
   Min,
 } from 'class-validator';
+
+import { DocumentType } from './document.types';
 
 export interface DocumentBaseDto {
   id: string;

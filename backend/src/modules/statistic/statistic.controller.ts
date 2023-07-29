@@ -1,9 +1,10 @@
-import { Controller, Get, Logger } from '@nestjs/common';
-import { StatisticService } from './statistic.service';
-import { StatisticsDto } from './statistic.dto';
-import { ApiTags } from '@nestjs/swagger';
 import { Route } from '@modules/routes';
+import { Controller, Get, Logger } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { capitalizeString } from '@utils';
+
+import { StatisticsDto } from './statistic.dto';
+import { StatisticService } from './statistic.service';
 
 @ApiTags(capitalizeString(Route.STATISTICS))
 @Controller(Route.STATISTICS)

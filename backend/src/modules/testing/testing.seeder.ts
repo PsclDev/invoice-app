@@ -1,11 +1,11 @@
 import { Client, CompanyClient, Gender } from '@modules/client';
-import { Offer, Invoice, DocumentType } from '@modules/document';
+import { DocumentType, Invoice, Offer } from '@modules/document';
 import {
-  Setting,
-  SettingType,
+  FileKey,
   MailKey,
   PdfKey,
-  FileKey,
+  Setting,
+  SettingType,
 } from '@modules/setting';
 import { EntityManager, getConnection } from 'typeorm';
 

@@ -1,5 +1,4 @@
 import { ConfigService } from '@config';
-import { capitalizeString } from '@utils';
 import { Route } from '@modules/routes';
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -10,6 +9,7 @@ import {
   TypeOrmHealthIndicator,
 } from '@nestjs/terminus';
 import { InjectConnection } from '@nestjs/typeorm';
+import { capitalizeString } from '@utils';
 import { Connection } from 'typeorm';
 
 @ApiTags(capitalizeString(Route.HEALTH))

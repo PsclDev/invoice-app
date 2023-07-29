@@ -1,22 +1,23 @@
-import { HttpException, NotFoundException } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
-import { DocumentController } from './document.controller';
-import { Invoice, Offer } from './document.entity';
-import { DocumentService } from './services/document.service';
-import { FileService, InvoiceService, OfferService } from './services';
-import { ClientModule, MailModule, SettingModule } from '..';
 import {
-  initSeeder,
-  documentSeed,
-  SqliteTestingImports,
+  clientSeed,
   companyClientId,
+  documentSeed,
+  initSeeder,
+  invoiceId,
   offerId,
   privateClientId,
-  clientSeed,
+  SqliteTestingImports,
   SqliteTestingProviders,
-  invoiceId,
 } from '@modules/testing';
+import { HttpException, NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { CacheKeys, ProvideCacheKey } from '@utils';
+
+import { ClientModule, MailModule, SettingModule } from '..';
+import { DocumentController } from './document.controller';
+import { Invoice, Offer } from './document.entity';
+import { FileService, InvoiceService, OfferService } from './services';
+import { DocumentService } from './services/document.service';
 
 describe('DocumentController', () => {
   let documentController: DocumentController;

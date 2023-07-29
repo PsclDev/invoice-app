@@ -1,21 +1,21 @@
-import { faker } from '@faker-js/faker/locale/de';
 import { ConfigService } from '@config';
+import { faker } from '@faker-js/faker/locale/de';
 import {
   ClientService,
   CreateClientDto,
   CreateCompanyClientDto,
   Gender,
 } from '@modules/client';
+import { DocumentService } from '@modules/document';
 import {
   CreateSettingDto,
-  SettingService,
-  SettingType,
+  FileKey,
   MailKey,
   PdfKey,
-  FileKey,
+  SettingService,
+  SettingType,
 } from '@modules/setting';
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
-import { CreateOfferDto, DocumentService } from '@modules/document';
 
 @Injectable()
 export class SeederService implements OnApplicationBootstrap {

@@ -1,20 +1,21 @@
-import { CacheModule, Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientModule } from '@modules/client';
+import { CustomCacheService } from '@modules/common';
 import { MailModule, QueueItem } from '@modules/mail';
 import { SettingModule } from '@modules/setting';
+import { CacheModule, Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CacheKeys, ProvideCacheKey } from '@utils';
+
 import { DocumentController } from './document.controller';
 import { Document, Invoice, Offer } from './document.entity';
-import { ScheduleModule } from '@nestjs/schedule';
+import { MailCronJob } from './mail.cron';
 import {
   DocumentService,
-  OfferService,
-  InvoiceService,
   FileService,
+  InvoiceService,
+  OfferService,
 } from './services';
-import { CustomCacheService } from '@modules/common';
-import { CacheKeys, ProvideCacheKey } from '@utils';
-import { MailCronJob } from './mail.cron';
 
 @Module({
   imports: [

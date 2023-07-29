@@ -1,14 +1,4 @@
 import {
-  ForbiddenException,
-  HttpException,
-  NotFoundException,
-} from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
-import { SettingController } from './setting.controller';
-import { Setting } from './setting.entity';
-import { PdfKey, SettingType } from './setting.types';
-import { SettingService } from './setting.service';
-import {
   deletableSettingId,
   initSeeder,
   nonDeletableSettingId,
@@ -16,7 +6,18 @@ import {
   SqliteTestingImports,
   SqliteTestingProviders,
 } from '@modules/testing';
+import {
+  ForbiddenException,
+  HttpException,
+  NotFoundException,
+} from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { CacheKeys, ProvideCacheKey } from '@utils';
+
+import { SettingController } from './setting.controller';
+import { Setting } from './setting.entity';
+import { SettingService } from './setting.service';
+import { PdfKey, SettingType } from './setting.types';
 
 describe('SettingController', () => {
   let settingController: SettingController;

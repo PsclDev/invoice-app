@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
 import { ClientModule, DocumentModule } from '@modules';
+import { Module } from '@nestjs/common';
+
 import { TestingController } from './testing.controller';
 import { TestingService } from './testing.service';
 

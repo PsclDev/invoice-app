@@ -5,6 +5,7 @@ import {
   OfferService,
 } from '@modules/document';
 import { Injectable, Logger } from '@nestjs/common';
+
 import { exampleDataSet } from './testing.seeder';
 
 @Injectable()

@@ -1,10 +1,10 @@
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@config';
 import { Client, CompanyClient } from '@modules/client';
-import { Document, Offer, Invoice } from '@modules/document';
+import { CustomCacheService } from '@modules/common';
+import { Document, Invoice, Offer } from '@modules/document';
 import { Setting } from '@modules/setting';
 import { CacheModule } from '@nestjs/common';
-import { ConfigModule } from '@config';
-import { CustomCacheService } from '@modules/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 export const SqliteTestingImports = () => [
   ConfigModule,

@@ -1,5 +1,5 @@
+import { ColumnNumericTransformer } from '@utils';
 import { Exclude } from 'class-transformer';
-import { Client } from '../client/client.entity';
 import {
   ChildEntity,
   Column,
@@ -13,9 +13,10 @@ import {
   TableInheritance,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { Client } from '../client/client.entity';
 import { DocumentBaseDto, InvoiceDto, OfferDto } from './document.dto';
 import { DocumentType } from './document.types';
-import { ColumnNumericTransformer } from '@utils';
 
 @Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'type' } })

@@ -1,20 +1,21 @@
-import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable, Logger } from '@nestjs/common';
 import { Client } from '@modules/client';
 import { Document } from '@modules/document';
 import { DocumentType } from '@modules/document/document.types';
-import * as Mustache from 'mustache';
 import {
-  Setting,
-  SettingService,
   MailKey,
+  Setting,
   SettingKeyType,
+  SettingService,
   SettingType,
 } from '@modules/setting';
-import { formatDocumentNumber } from '@utils';
-import { QueueItem } from '../document/queue.entity';
-import { Repository } from 'typeorm';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MailerService } from '@nestjs-modules/mailer';
+import { formatDocumentNumber } from '@utils';
+import * as Mustache from 'mustache';
+import { Repository } from 'typeorm';
+
+import { QueueItem } from '../document/queue.entity';
 
 @Injectable()
 export class MailService {

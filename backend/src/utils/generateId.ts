@@ -1,6 +1,6 @@
+import { AppTypes } from '@utils';
 import { customAlphabet } from 'nanoid';
 import { FindManyOptions, Repository } from 'typeorm';
-import { AppTypes } from '@utils';
 
 export function generateId<T = AppTypes>(repository: Repository<T>): string {
   const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';

@@ -1,9 +1,10 @@
+import { ConfigService } from '@config';
+import { Route } from '@modules/routes';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ConfigService } from '@config';
+
 import { AppModule } from './app.module';
-import { Route } from '@modules/routes';
 
 async function bootstrap() {
   const logger = new Logger('Main');

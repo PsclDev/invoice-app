@@ -1,11 +1,12 @@
-import { MailerModule } from '@nestjs-modules/mailer';
-import { Module } from '@nestjs/common';
-import { MailService } from './mail.service';
 import { ConfigService } from '@config';
 import { ConfigModule } from '@config';
-import { SettingModule } from '@modules/setting';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { QueueItem } from '@modules/document/queue.entity';
+import { SettingModule } from '@modules/setting';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MailerModule } from '@nestjs-modules/mailer';
+
+import { MailService } from './mail.service';
 
 @Module({
   imports: [

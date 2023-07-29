@@ -1,11 +1,12 @@
-import { generateId, updateEntity } from '@utils';
 import { CustomCacheService } from '@modules/common';
-import { SettingService, FileKey, SettingType } from '@modules/setting';
+import { FileKey, SettingService, SettingType } from '@modules/setting';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { generateId, updateEntity } from '@utils';
 import { Repository } from 'typeorm';
+
 import { CreateInvoiceDto, UpdateInvoiceDto } from '../document.dto';
-import { Invoice, Document } from '../document.entity';
+import { Document, Invoice } from '../document.entity';
 import { DocumentService } from './document.service';
 
 @Injectable()

@@ -1,5 +1,5 @@
-import { Exclude } from 'class-transformer';
 import { Document } from '@modules/document/document.entity';
+import { Exclude } from 'class-transformer';
 import {
   ChildEntity,
   Column,
@@ -10,6 +10,7 @@ import {
   TableInheritance,
   UpdateDateColumn,
 } from 'typeorm';
+
 import { ClientBaseDto, CompanyClientDto, Gender } from './client.dto';
 
 @Entity()

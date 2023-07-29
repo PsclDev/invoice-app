@@ -1,10 +1,11 @@
+import { MailService } from '@modules/mail';
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
-import { QueueItem } from './queue.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { QueueItem } from './queue.entity';
 import { DocumentService } from './services';
-import { MailService } from '@modules/mail';
 
 @Injectable()
 export class MailCronJob {

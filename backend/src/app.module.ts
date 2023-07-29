@@ -1,21 +1,22 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { TerminusModule } from '@nestjs/terminus';
-import { HttpModule } from '@nestjs/axios';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 import { ConfigModule, ConfigService } from '@config';
 import {
   ClientModule,
   DocumentModule,
   HealthController,
   MailModule,
-  StatisticModule,
-  SettingModule,
   SeederModule,
+  SettingModule,
+  StatisticModule,
   TestingModule,
 } from '@modules';
+import { HttpModule } from '@nestjs/axios';
+import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { TerminusModule } from '@nestjs/terminus';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
+
+import { AppController } from './app.controller';
 
 @Module({
   imports: [

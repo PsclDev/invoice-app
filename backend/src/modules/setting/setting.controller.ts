@@ -1,16 +1,17 @@
-import { capitalizeString } from '@utils';
 import { Route } from '@modules/routes';
 import {
-  Controller,
-  Logger,
-  Get,
-  Param,
-  Post,
   Body,
-  Patch,
+  Controller,
   Delete,
+  Get,
+  Logger,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { capitalizeString } from '@utils';
+
 import { CreateSettingDto, UpdateSettingDto } from './setting.dto';
 import { Setting } from './setting.entity';
 import { SettingService } from './setting.service';

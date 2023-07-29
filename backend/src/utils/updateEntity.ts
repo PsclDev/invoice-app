@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { AppTypes } from '@utils';
+import { Repository } from 'typeorm';
 
 export async function updateEntity<T = AppTypes>(
   repository: Repository<T>,
