@@ -12,6 +12,9 @@ import {
   SettingType,
 } from '@modules/setting';
 import { formatDocumentNumber } from '@utils';
+import { QueueItem } from '../document/queue.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class MailService {
@@ -21,7 +24,31 @@ export class MailService {
   constructor(
     private readonly mailerService: MailerService,
     private readonly settingsService: SettingService,
+    @InjectRepository(QueueItem)
+    private queueRepository: Repository<QueueItem>,
   ) {}
+
+  async addToQueue(documentId: string): Promise<boolean> {
+    const existingDocument = await this.queueRepository.findOne({
+      documentId,
+    });
+    if (existingDocument) {
+      return;
+    }
+
+    const item: QueueItem = {
+      documentId,
+    };
+
+    await this.queueRepository.save(item);
+    return true;
+  }
+
+  async removeFromQueue(documentId: string): Promise<void> {
+    await this.queueRepository.delete({
+      documentId,
+    });
+  }
 
   async send(client: Client, doc: Document, path: string): Promise<boolean> {
     this.settings = await (

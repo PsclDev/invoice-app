@@ -16,6 +16,7 @@ import { Response } from 'express';
 import {
   CreateInvoiceDto,
   CreateOfferDto,
+  DocumentMailOptionsDto,
   UpdateInvoiceDto,
   UpdateOfferDto,
 } from './document.dto';
@@ -108,8 +109,11 @@ export class DocumentController {
   }
 
   @Post('/mail/:id')
-  async sendDocument(@Param('id') id: string): Promise<boolean> {
-    this.logger.log(`Mail document with id: ${id}`);
-    return await this.docService.mail(id);
+  async sendDocument(
+    @Param('id') id: string,
+    @Body() body: DocumentMailOptionsDto,
+  ): Promise<boolean> {
+    this.logger.log(`Mail document with id: ${id}, with options: ${body}`);
+    return await this.docService.mail(id, body);
   }
 }

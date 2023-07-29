@@ -4,11 +4,14 @@ import { MailService } from './mail.service';
 import { ConfigService } from '@config';
 import { ConfigModule } from '@config';
 import { SettingModule } from '@modules/setting';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { QueueItem } from '@modules/document/queue.entity';
 
 @Module({
   imports: [
     ConfigModule,
     SettingModule,
+    TypeOrmModule.forFeature([QueueItem]),
     MailerModule.forRootAsync({
       useFactory: (config: ConfigService) => ({
         transport: {

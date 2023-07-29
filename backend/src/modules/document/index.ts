@@ -4,3 +4,5 @@ export * from './document.entity';
 export * from './document.module';
 export * from './services';
 export * from './document.types';
+export * from './queue.entity';
+export * from './mail.cron';

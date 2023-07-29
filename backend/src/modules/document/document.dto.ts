@@ -1,6 +1,7 @@
 import { DocumentType } from './document.types';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
+  IsBoolean,
   IsDateString,
   IsNotEmpty,
   IsNumber,
@@ -41,6 +42,12 @@ export interface InvoiceDto extends DocumentBaseDto {
 }
 
 export type DocumentDto = OfferDto | InvoiceDto;
+
+export class DocumentMailOptionsDto {
+  @ApiProperty()
+  @IsBoolean()
+  delayDelivery: boolean;
+}
 
 export class CreateOfferDto
   implements

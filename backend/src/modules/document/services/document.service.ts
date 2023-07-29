@@ -9,6 +9,7 @@ import { CustomCacheService } from '@modules/common';
 import { ConfigService } from '@config';
 import { Client, ClientService } from '@modules/client';
 import { MailService } from '@modules/mail';
+import { DocumentMailOptionsDto } from '../document.dto';
 
 @Injectable()
 export class DocumentService {
@@ -124,7 +125,14 @@ export class DocumentService {
     return '/' + path;
   }
 
-  async mail(id: string): Promise<boolean> {
+  async mail(
+    id: string,
+    options: DocumentMailOptionsDto | undefined,
+  ): Promise<boolean> {
+    if (options.delayDelivery) {
+      return this.mailService.addToQueue(id);
+    }
+
     const infos = await this.getDocument(id, true);
     const { client, doc } = infos;
     const filepath = await this.generate(id);

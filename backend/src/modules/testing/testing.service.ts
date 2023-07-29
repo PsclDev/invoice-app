@@ -65,7 +65,7 @@ export class TestingService {
     this.exampleData.offer.client = client;
     const offer = await this.offerService.createOffer(this.exampleData.offer);
 
-    await this.documentService.mail(offer.id);
+    await this.documentService.mail(offer.id, { delayDelivery: false });
     await this.documentService.delete(offer.id);
     await this.clientService.delete(client.id);
 
@@ -84,7 +84,7 @@ export class TestingService {
       this.exampleData.invoice,
     );
 
-    await this.documentService.mail(invoice.id);
+    await this.documentService.mail(invoice.id, { delayDelivery: false });
     await this.documentService.delete(invoice.id);
     await this.clientService.delete(client.id);
 
