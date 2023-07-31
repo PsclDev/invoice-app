@@ -1,0 +1,8 @@
+{
+  "NAVIGATION": {
+    "DASHBOARD": "Dashboard",
+    "CLIENTS": "Clients",
+    "DOCUMENTS": "Documents",
+    "SETTINGS": "Settings"
+  }
+}

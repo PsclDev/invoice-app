@@ -1,13 +1,13 @@
 <template>
-  <div>Hello World</div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style>
 html,
 body,
 #__nuxt {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+  @apply w-full h-full p-0 m-0 bg-slate-100 dark:bg-neutral-950 text-black dark:text-white;
 }
 </style>
