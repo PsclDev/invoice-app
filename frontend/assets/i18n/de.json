@@ -1,8 +1,13 @@
 {
   "NAVIGATION": {
-    "DASHBOARD": "Dashboard",
-    "CLIENTS": "Clients",
-    "DOCUMENTS": "Documents",
-    "SETTINGS": "Settings"
+    "CLIENTS": "Kunden",
+    "DASHBOARD": "Übersicht",
+    "DOCUMENTS": "Dokumente",
+    "SETTINGS": "Einstellungen"
+  },
+  "SETTINGS": {
+    "DARKMODE": "Darkmode",
+    "GERMAN": "Deutsch",
+    "TITLE": "Einstellungen"
   }
 }

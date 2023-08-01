@@ -25,7 +25,7 @@ const items = ref([
 
 <template>
   <nav
-    class="justify-between w-4/5 sm:w-2/3 lg:w-1/3 flex gap-5 px-4 pt-4 md:gap-16 md:px-6 md:py-3 border-t-2 sm:border-t-0 border-slate-200"
+    class="flex w-4/5 justify-between gap-5 border-t-2 border-slate-200 px-4 pt-4 sm:w-2/3 sm:border-t-0 md:gap-16 md:px-6 md:py-3 lg:w-1/3"
   >
     <NuxtLink
       v-for="item in items"
@@ -41,3 +41,15 @@ const items = ref([
     </NuxtLink>
   </nav>
 </template>
+
+<style scoped>
+.router-link-exact-active {
+  @apply font-bold text-spring-green-600;
+
+  div {
+    .icon {
+      @apply text-spring-green-600;
+    }
+  }
+}
+</style>

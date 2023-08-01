@@ -11,7 +11,7 @@ const colorIcon = computed(() => {
 
 <template>
   <header
-    class="flex justify-center sm:justify-between gap-6 items-center p-1 sm:p-5"
+    class="flex items-center justify-center gap-6 p-1 sm:justify-between sm:p-5"
   >
     <div class="hidden sm:block">
       <button @click="toggleLanguage()">
