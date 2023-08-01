@@ -1,3 +1,12 @@
+<script setup>
+import { useStorage } from '@vueuse/core';
+
+const i18n = useI18n();
+const curLang = useStorage(LocalStorageKeys.Language, 'en');
+
+i18n.setLocale(curLang.value);
+</script>
+
 <template>
   <NuxtLayout>
     <NuxtPage />

@@ -1,9 +1,14 @@
+import { useStorage } from '@vueuse/core';
+
 export function useToggleSettings() {
   const i18n = useI18n();
   const colorMode = useColorMode();
 
   function toggleLanguage() {
-    i18n.setLocale(i18n.getLocaleCookie() === 'en' ? 'de' : 'en');
+    const curLang = useStorage(LocalStorageKeys.Language, 'en');
+
+    i18n.setLocale(curLang.value === 'en' ? 'de' : 'en');
+    curLang.value = curLang.value === 'en' ? 'de' : 'en';
   }
 
   function toggleColorMode() {
