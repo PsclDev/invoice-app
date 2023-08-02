@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { useStorage } from '@vueuse/core';
-
 const colorMode = useColorMode();
-const { toggleLanguage, toggleColorMode } = useToggleSettings();
+const { currentLanguage, toggleLanguage, toggleColorMode } =
+  useToggleSettings();
 
 const useDarkMode = ref(colorMode.preference === 'dark');
 watch(useDarkMode, () => {
   toggleColorMode();
 });
 
-const useGerman = ref(
-  useStorage(LocalStorageKeys.Language, 'en').value === 'de',
-);
+const useGerman = ref(currentLanguage.value === 'de');
 watch(useGerman, () => {
   toggleLanguage();
 });
