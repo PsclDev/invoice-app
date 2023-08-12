@@ -18,7 +18,7 @@ export class MailCronJob {
     private queueRepository: Repository<QueueItem>,
   ) {}
 
-  @Cron('45 * * * * *')
+  @Cron('0 8 * * * *')
   async handleCron() {
     const documentIds = await this.queueRepository.find();
     this.logger.debug(
