@@ -1,6 +1,6 @@
 import { ConfigService } from '@config';
 import { Route } from '@modules/routes';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
   HealthCheck,
@@ -33,6 +33,19 @@ export class HealthController {
         this.db.pingCheck('database', { connection: this.defaultConnection }),
     ]);
 
-    return { version: this.configSerivce.appVersion, ...healthCheck };
+    const isOk = Object.values(healthCheck.info).every(
+      (v) => v.status === 'up',
+    );
+
+    if (!isOk) {
+      throw new HttpException(
+        'Service unavailable',
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
+    }
+
+    return {
+      version: this.configSerivce.appVersion,
+    };
   }
 }
