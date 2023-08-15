@@ -7,7 +7,7 @@ export default <Partial<Config>>{
   content: [
     './index.html',
     './**/*.vue',
-    '~/assets/styles/tailwind-formkit.ts',
+    './assets/styles/tailwind-formkit.ts',
   ],
   plugins: [FormKitVariants],
   theme: {

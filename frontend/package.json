@@ -1,5 +1,6 @@
 {
   "name": "nuxt-app",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -20,6 +21,8 @@
     "@nuxtjs/google-fonts": "^3.0.0-1",
     "@nuxtjs/i18n": "8.0.0-beta.13",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/debug": "^4.1.8",
+    "@types/lodash": "^4.14.197",
     "@types/node": "^18.17.1",
     "@typescript-eslint/parser": "^6.2.0",
     "eslint": "^8.46.0",
@@ -33,11 +36,12 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@formkit/icons": "^0.17.5",
-    "@formkit/nuxt": "^0.17.5",
-    "@formkit/themes": "^0.17.5",
+    "@formkit/icons": "^0.18.0",
+    "@formkit/nuxt": "^0.18.0",
+    "@formkit/themes": "^0.18.0",
     "@pinia/nuxt": "^0.4.11",
     "@vueuse/nuxt": "^10.3.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.6"
   }
 }

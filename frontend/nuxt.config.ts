@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: [
     '@nuxthq/ui',
     '@pinia/nuxt',
@@ -32,10 +32,21 @@ export default defineNuxtConfig({
           sizes: '16x16',
           href: '~/public/favicon-16x16.png',
         },
-        { rel: 'manifest', href: '~/public/site.webmanifest' },
         { rel: 'mask-icon', href: '~/public/safari-pinned-tab.svg' },
       ],
     },
+  },
+  imports: {
+    dirs: ['stores'],
+  },
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.API_URL,
+      apiVersion: process.env.API_VERSION,
+    },
+  },
+  pinia: {
+    autoImports: ['defineStore', ['defineStore', 'definePiniaStore']],
   },
   colorMode: {
     classSuffix: '',

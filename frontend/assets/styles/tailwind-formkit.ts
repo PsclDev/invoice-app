@@ -15,7 +15,7 @@ export default {
     loaderIcon: 'inline-flex items-center w-4 text-gray-600 animate-spin',
     message: 'text-red-500 mb-1 text-xs',
     messages: 'list-none p-0 mt-1 mb-0',
-    outer: 'mb-4 formkit-disabled:opacity-50',
+    outer: 'formkit-disabled:opacity-50',
     prefixIcon:
       'w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-gray-400 bg-white bg-gradient-to-b from-transparent to-gray-200 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto',
     suffixIcon:
@@ -67,14 +67,13 @@ export default {
   },
   'family:text': {
     inner:
-      'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
-    input:
-      'w-full px-3 py-2 border-none text-base text-gray-700 placeholder-gray-400',
+      'flex items-center ring-1 ring-slate-400 dark:ring-neutral-700 focus-within:ring-slate-500 dark:focus-within:ring-neutral-500 focus-within:ring-2 rounded',
+    input: 'w-full px-3 py-2 border-none text-base text-black dark:text-white',
   },
   'family:date': {
     inner:
       'flex items-center max-w-md ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>label:first-child]:focus-within:text-blue-500 rounded mb-1',
-    input: 'w-full px-3 py-2 border-none text-gray-700 placeholder-gray-400',
+    input: 'w-full px-3 py-2 border-none text-black dark:text-white',
   },
 
   // Specific styles apply only to a given input type
@@ -117,16 +116,16 @@ export default {
     inner:
       'flex relative max-w-md items-center rounded mb-1 ring-1 ring-gray-400 focus-within:ring-blue-500 focus-within:ring-2 [&>span:first-child]:focus-within:text-blue-500',
     input:
-      'w-full pl-3 pr-8 py-2 border-none text-base text-gray-700 placeholder-gray-400 formkit-multiple:p-0 data-[placeholder="true"]:text-gray-400 formkit-multiple:data-[placeholder="true"]:text-inherit',
+      'w-full pl-3 pr-8 py-2 border-none text-base text-black dark:text-white formkit-multiple:p-0 data-[placeholder="true"]:text-gray-400 formkit-multiple:data-[placeholder="true"]:text-inherit',
     selectIcon:
       'flex p-[3px] shrink-0 w-5 mr-2 -ml-[1.5em] h-full pointer-events-none [&>svg]:w-[1em]',
     option: 'formkit-multiple:p-3 formkit-multiple:text-sm text-gray-700',
   },
   textarea: {
     inner:
-      'flex max-w-md rounded mb-1 ring-1 ring-gray-400 focus-within:ring-blue-500 [&>label:first-child]:focus-within:text-blue-500',
+      'flex rounded ring-1 ring-slate-400 dark:ring-neutral-700 focus-within:ring-slate-500 dark:focus-within:ring-neutral-500 focus-within:ring-2',
     input:
-      'block w-full h-32 px-3 py-3 border-none text-base text-gray-700 placeholder-gray-400 focus:shadow-outline',
+      'block w-full h-32 px-3 py-3 border-none text-base text-black dark:text-white focus:shadow-outline',
   },
 
   // PRO input styles

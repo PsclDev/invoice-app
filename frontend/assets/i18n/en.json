@@ -8,6 +8,17 @@
   "SETTINGS": {
     "DARKMODE": "Darkmode",
     "GERMAN": "German",
-    "TITLE": "Settings"
+    "TITLE": "Settings",
+    "ALERT": {
+      "TITLE": "You have unsaved changes, how do you want to proceed?",
+      "DISCARD": "Discard all",
+      "SAVE": "Save all"
+    }
+  },
+  "STORE": {
+    "SETTING": {
+      "GET_FAILED": "Failed to get settings",
+      "UPDATE_FAILED": "Failed to update settings"
+    }
   }
 }

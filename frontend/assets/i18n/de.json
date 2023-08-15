@@ -8,6 +8,17 @@
   "SETTINGS": {
     "DARKMODE": "Darkmode",
     "GERMAN": "Deutsch",
-    "TITLE": "Einstellungen"
+    "TITLE": "Einstellungen",
+    "ALERT": {
+      "TITLE": "Es sind ungespeicherte Änderungen vorhanden, was möchtest Sie tun?",
+      "DISCARD": "Änderungen verwerfen",
+      "SAVE": "Änderungen speichern"
+    }
+  },
+  "STORE": {
+    "SETTING": {
+      "GET_FAILED": "Fehler beim Laden der Einstellungen",
+      "UPDATE_FAILED": "Fehler beim Speichern der Einstellungen aufgetreten"
+    }
   }
 }

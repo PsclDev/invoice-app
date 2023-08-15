@@ -20,12 +20,9 @@ const colorIcon = computed(() => {
     </div>
     <TheNavbar />
     <div class="hidden sm:block">
-      <!-- used because of hydration issues with the useColorMode composable -->
-      <ClientOnly>
-        <button @click="toggleColorMode()">
-          <Icon :name="colorIcon" size="32" />
-        </button>
-      </ClientOnly>
+      <button @click="toggleColorMode()">
+        <Icon :name="colorIcon" size="32" />
+      </button>
     </div>
   </header>
 </template>
