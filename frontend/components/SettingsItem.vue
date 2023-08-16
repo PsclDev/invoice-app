@@ -20,7 +20,7 @@ watch(
   debounce(() => {
     disabled.value = initialValue.value === setting.value.value;
     emits('unsavedChanges', !disabled.value);
-  }, 500),
+  }, 300),
   { deep: true },
 );
 

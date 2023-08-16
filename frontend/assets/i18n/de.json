@@ -1,4 +1,9 @@
 {
+  "BASE": {
+    "PAGE": {
+      "MIN_LEN": "Suchbegriff muss mindestens 3 Zeichen lang sein"
+    }
+  },
   "NAVIGATION": {
     "CLIENTS": "Kunden",
     "DASHBOARD": "Übersicht",

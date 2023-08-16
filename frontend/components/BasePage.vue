@@ -25,12 +25,15 @@ defineProps({
 
 const emits = defineEmits(['search', 'action']);
 const searchterm = ref('');
+const searchtermValid = ref(true);
 
 watch(
   searchterm,
   debounce(() => {
+    searchtermValid.value =
+      searchterm.value.length >= 3 || searchterm.value.length === 0;
     emits('search', searchterm.value);
-  }, 500),
+  }, 300),
 );
 </script>
 
@@ -55,9 +58,12 @@ watch(
             v-model="searchterm"
             type="search"
             class="block h-11 w-full rounded border border-slate-300 bg-slate-200 p-2 pl-12 text-sm placeholder:text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:placeholder:text-slate-300"
-            :placeholder="searchPlaceholder"
+            :placeholder="$t(searchPlaceholder)"
           />
         </div>
+        <p v-if="!searchtermValid" class="text-cannon-pink-800">
+          {{ $t('BASE.PAGE.MIN_LEN') }}
+        </p>
         <button
           class="bg-spring-green-600 hover:bg-spring-green-700 order-last w-full rounded px-4 py-2 font-bold sm:order-2"
           @click="$emit('action')"

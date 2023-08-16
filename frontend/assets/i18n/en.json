@@ -1,4 +1,9 @@
 {
+  "BASE": {
+    "PAGE": {
+      "MIN_LEN": "Searchterm must be at least 3 characters long"
+    }
+  },
   "NAVIGATION": {
     "CLIENTS": "Clients",
     "DASHBOARD": "Dashboard",
