@@ -64,12 +64,9 @@ watch(
         <p v-if="!searchtermValid" class="text-cannon-pink-800">
           {{ $t('BASE.PAGE.MIN_LEN') }}
         </p>
-        <button
-          class="bg-spring-green-600 hover:bg-spring-green-700 order-last w-full rounded px-4 py-2 font-bold sm:order-2"
-          @click="$emit('action')"
-        >
-          {{ $t(actionLabel) }}
-        </button>
+        <div class="order-last w-full sm:order-2">
+          <AppButton :label="actionLabel" @click="$emit('action')" />
+        </div>
       </form>
       <div class="w-full sm:pb-0" :class="withActions ? 'pb-48' : 'pb-16'">
         <slot />
