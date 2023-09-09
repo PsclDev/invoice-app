@@ -46,6 +46,7 @@
     "nanoid": "^3.3.4",
     "nestjs-joi": "^1.7.0",
     "nodemailer": "^6.7.7",
+    "openai": "^4.5.0",
     "pg": "^8.7.3",
     "puppeteer": "^13.7.0",
     "reflect-metadata": "^0.1.13",

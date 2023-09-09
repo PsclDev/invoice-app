@@ -10,6 +10,7 @@ import { DocumentService } from '@modules/document';
 import {
   CreateSettingDto,
   FileKey,
+  GptKey,
   MailKey,
   PdfKey,
   SettingService,
@@ -148,6 +149,23 @@ export class SeederService implements OnApplicationBootstrap {
       inputType: 'number',
     };
 
+    const gptModel: CreateSettingDto = {
+      type: SettingType.GPT,
+      key: GptKey.MODEL,
+      title: 'GPT Model',
+      value: 'gpt-4',
+      inputType: 'text',
+    };
+
+    const gptPrePrompt: CreateSettingDto = {
+      type: SettingType.GPT,
+      key: GptKey.PRE_PROMPT,
+      title: 'GPT Pre Prompt',
+      value:
+        'The context is an invoicing app, the user uses the chat assistant to automatically generate and improve for descriptions of their quotes and invoices. The answer should summarize and better formulate the user input. The format of the response is a list with Maximum 10 entries. Maximum 60 characters per entry. The format of the list should be without numbers, letters or characters but only separated with new lines.',
+      inputType: 'textarea',
+    };
+
     await this.settingService.bulkInsert([
       { setting: invoiceSubject, deletable: false },
       { setting: invoiceText, deletable: false },
@@ -162,6 +180,12 @@ export class SeederService implements OnApplicationBootstrap {
       { setting: offerDocumentPrefix, deletable: false },
       { setting: invoiceStartingNumber, deletable: false },
       { setting: offerStartingNumber, deletable: false },
+      ...(this.configService.gpt.enabled
+        ? [
+            { setting: gptModel, deletable: false },
+            { setting: gptPrePrompt, deletable: false },
+          ]
+        : []),
     ]);
   }
 

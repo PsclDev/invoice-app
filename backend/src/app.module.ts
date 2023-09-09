@@ -1,5 +1,6 @@
 import { ConfigModule, ConfigService } from '@config';
 import {
+  AiModule,
   ClientModule,
   DocumentModule,
   HealthController,
@@ -20,6 +21,7 @@ import { AppController } from './app.controller';
 
 @Module({
   imports: [
+    AiModule,
     ClientModule,
     ConfigModule,
     DocumentModule,

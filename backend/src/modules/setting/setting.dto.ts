@@ -3,6 +3,7 @@ import { IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 import {
   FileKey,
+  GptKey,
   MailKey,
   PdfKey,
   SettingInputType,
@@ -33,7 +34,7 @@ export class CreateSettingDto
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  key: PdfKey | MailKey | FileKey;
+  key: PdfKey | MailKey | FileKey | GptKey;
 
   @ApiProperty()
   @IsString()

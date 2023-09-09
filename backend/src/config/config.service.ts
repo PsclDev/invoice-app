@@ -25,6 +25,21 @@ const CONFIG_SCHEMA = Joi.object().keys({
   devMode: Joi.bool().required(),
   disableSeeding: Joi.bool().optional(),
   frontendUrl: Joi.string().required(),
+  gpt: Joi.object().keys({
+    enabled: Joi.bool().required(),
+    apiKey: Joi.when('enabled', {
+      is: true,
+      then: Joi.string().required(),
+    }),
+    organizationId: Joi.when('enabled', {
+      is: true,
+      then: Joi.string(),
+    }),
+    temperature: Joi.when('enabled', {
+      is: true,
+      then: Joi.number().precision(1).greater(0).less(1).required(),
+    }),
+  }),
   httpPort: Joi.number().integer().greater(0).required(),
   ignoreHTTPSErrors: Joi.bool().optional(),
   mail: Joi.object().keys({
@@ -61,6 +76,12 @@ export class ConfigService {
   devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   disableSeeding = bool(process.env.APP_DISABLE_SEEDING) || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
+  gpt = {
+    enabled: bool(process.env.APP_GPT_ENABLED) || false,
+    apiKey: process.env.APP_GPT_API_KEY,
+    organizationId: process.env.APP_GPT_ORG_ID,
+    temperature: Number(process.env.APP_GPT_TEMPEARATURE) || 0.3,
+  };
   httpPort = Number(process.env.APP_PORT) || 3010;
   ignoreHTTPSErrors = bool(process.env.APP_IGNORE_HTTPS_ERRORS) || false;
   mail = {
@@ -76,7 +97,7 @@ export class ConfigService {
 
 function bool(input: string): boolean {
   if (!input) return null;
-  return input.toLowerCase() === 'true';
+  return input.toLowerCase() === 'true' || input === '1';
 }
 
 if (!Boolean(process.env.APP_IS_RUNNING_IN_PIPELINE)) {

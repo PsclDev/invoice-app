@@ -1,3 +1,4 @@
+export * from './ai/ai.module';
 export * from './client/client.module';
 export * from './document/document.module';
 export * from './health/health.controller';

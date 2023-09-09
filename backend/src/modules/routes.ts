@@ -1,4 +1,5 @@
 export enum Route {
+  AI = 'ai',
   CLIENT = 'client',
   DOCUMENT = 'document',
   HEALTH = 'health',

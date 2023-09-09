@@ -2,6 +2,7 @@ export enum SettingType {
   PDF = 'PDF',
   MAIL = 'MAIL',
   FILE = 'FILE',
+  GPT = 'GPT',
 }
 
 export enum PdfKey {
@@ -26,5 +27,10 @@ export enum FileKey {
   OFFER_STARTING_NR = 'OFFER_STARTING_NR',
 }
 
-export type SettingKeyType = PdfKey | MailKey | FileKey;
+export enum GptKey {
+  MODEL = 'MODEL',
+  PRE_PROMPT = 'PRE_PROMPT',
+}
+
+export type SettingKeyType = PdfKey | MailKey | FileKey | GptKey;
 export type SettingInputType = 'text' | 'number' | 'textarea';
