@@ -46,7 +46,7 @@ export default defineNuxtConfig({
     },
   },
   pinia: {
-    autoImports: ['defineStore', ['defineStore', 'definePiniaStore']],
+    autoImports: ['defineStore', 'definePiniaStore', 'storeToRefs'],
   },
   colorMode: {
     classSuffix: '',

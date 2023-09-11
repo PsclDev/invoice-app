@@ -4,6 +4,40 @@
       "MIN_LEN": "Suchbegriff muss mindestens 3 Zeichen lang sein"
     }
   },
+  "COMMON": {
+    "BUTTONS": {
+      "CANCEL": "Abbrechen",
+      "DELETE": "Löschen",
+      "EDIT": "Bearbeiten",
+      "SAVE": "Speichern"
+    },
+    "LABELS": {
+      "CREATED_AT": "Erstellt am",
+      "UPDATED_AT": "Bearbeitet am"
+    }
+  },
+  "CLIENTS": {
+    "TITLE": "Kunden",
+    "SEARCH_PLACEHOLDER": "Name, Straße, Stadt, Email, ...",
+    "NEW": "Neuen Kunden anlegen",
+    "LABELS": {
+      "COMPANY": "Firmenname",
+      "VAT": "VAT",
+      "GENDER": "Geschlecht",
+      "FIRSTNAME": "Vorname",
+      "LASTNAME": "Nachname",
+      "STREET": "Straße",
+      "POSTAL_CODE": "Postleitzahl",
+      "CITY": "Stadt",
+      "EMAIL": "Email",
+      "DOCUMENTS": "Dokumente"
+    },
+    "GENDER": {
+      "MALE": "Männlich",
+      "FEMALE": "Weiblich",
+      "DIVERS": "Divers"
+    }
+  },
   "NAVIGATION": {
     "CLIENTS": "Kunden",
     "DASHBOARD": "Übersicht",

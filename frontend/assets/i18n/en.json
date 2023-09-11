@@ -4,6 +4,40 @@
       "MIN_LEN": "Searchterm must be at least 3 characters long"
     }
   },
+  "COMMON": {
+    "BUTTONS": {
+      "CANCEL": "Cancel",
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "SAVE": "Save"
+    },
+    "LABELS": {
+      "CREATED_AT": "Created at",
+      "UPDATED_AT": "Updated at"
+    }
+  },
+  "CLIENTS": {
+    "TITLE": "Clients",
+    "SEARCH_PLACEHOLDER": "Name, Street, City, Email, ...",
+    "NEW": "Create new Client",
+    "LABELS": {
+      "COMPANY": "Company Name",
+      "VAT": "VAT",
+      "GENDER": "Gender",
+      "FIRSTNAME": "Firstname",
+      "LASTNAME": "Lastname",
+      "STREET": "Street",
+      "POSTAL_CODE": "Postal code",
+      "CITY": "City",
+      "EMAIL": "Email",
+      "DOCUMENTS": "Documents"
+    },
+    "GENDER": {
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "DIVERS": "Divers"
+    }
+  },
   "NAVIGATION": {
     "CLIENTS": "Clients",
     "DASHBOARD": "Dashboard",

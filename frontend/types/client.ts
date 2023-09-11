@@ -21,3 +21,8 @@ export interface Client {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type ClientForm = Omit<
+  Client,
+  'id' | 'documents' | 'createdAt' | 'updatedAt'
+>;

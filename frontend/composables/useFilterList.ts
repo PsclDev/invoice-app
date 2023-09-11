@@ -1,25 +1,27 @@
 export default function useFilterList<T>() {
+  const currentFilterTerm = ref<string>('');
   const initialList = ref<T[]>([]) as Ref<T[]>;
   const filteredList = ref<T[]>([]) as Ref<T[]>;
 
   function setInitialList(list: T[]) {
     initialList.value = list;
     filteredList.value = list;
+    filter(currentFilterTerm.value);
   }
 
-  function filter(searchTerm: string) {
-    if (!searchTerm) {
+  function filter(filterTerm: string) {
+    if (!filterTerm) {
       filteredList.value = initialList.value;
       return;
     }
 
-    if (searchTerm.length < 3) {
+    if (filterTerm.length < 3) {
       return;
     }
 
-    const term = searchTerm.trim().toLowerCase();
+    currentFilterTerm.value = filterTerm.trim().toLowerCase();
     filteredList.value = initialList.value.filter((i: T) =>
-      checkForValue(i, term),
+      checkForValue(i, currentFilterTerm.value),
     );
   }
 
@@ -38,5 +40,5 @@ export default function useFilterList<T>() {
     return false;
   }
 
-  return { filter, filteredList, setInitialList };
+  return { filter, filteredList, initialList, setInitialList };
 }
