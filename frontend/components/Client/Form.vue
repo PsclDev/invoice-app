@@ -91,7 +91,7 @@ function onCancel() {
       <div class="flex w-full flex-col gap-5">
         <div
           v-if="formMode === FormMode.CREATE || form.company"
-          class="grid w-full grid-cols-3 gap-3"
+          class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3"
         >
           <div class="flex w-full flex-col gap-2">
             <p class="font-bold">{{ $t('CLIENTS.LABELS.COMPANY') }}:</p>
@@ -102,7 +102,7 @@ function onCancel() {
             <FormKit type="text" name="vat" validation="required" />
           </div>
         </div>
-        <div class="grid w-full grid-cols-3 gap-3">
+        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
           <div class="flex w-full flex-col gap-2">
             <p class="font-bold">{{ $t('CLIENTS.LABELS.GENDER') }}:</p>
             <FormKit
@@ -125,7 +125,7 @@ function onCancel() {
             <FormKit type="text" name="lastname" validation="required" />
           </div>
         </div>
-        <div class="grid w-full grid-cols-3 gap-3">
+        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
           <div class="flex w-full flex-col gap-2">
             <p class="font-bold">{{ $t('CLIENTS.LABELS.STREET') }}:</p>
             <FormKit type="text" name="street" validation="required" />
@@ -139,7 +139,7 @@ function onCancel() {
             <FormKit type="text" name="city" validation="required" />
           </div>
         </div>
-        <div class="grid w-full grid-cols-3 gap-3">
+        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
           <div class="flex w-full flex-col gap-2">
             <p class="font-bold">{{ $t('CLIENTS.LABELS.EMAIL') }}:</p>
             <FormKit type="email" name="email" validation="email" />

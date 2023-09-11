@@ -32,51 +32,54 @@ function onDelete() {
 <template>
   <div class="flex w-full flex-col items-center justify-center gap-5">
     <div class="flex w-full flex-col gap-5">
-      <div v-if="client.company" class="grid w-full grid-cols-3">
-        <div class="flex w-full flex-col gap-2">
+      <div
+        v-if="client.company"
+        class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0"
+      >
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.COMPANY') }}:</p>
           <p>{{ client.company }}</p>
         </div>
-        <div class="flex w-full flex-col gap-2">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.VAT') }}:</p>
           <p>{{ client.vat }}</p>
         </div>
       </div>
-      <div class="grid w-full grid-cols-3">
+      <div class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0">
         <div class="flex w-full flex-col gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.GENDER') }}:</p>
           <p>{{ $t(`CLIENTS.GENDER.${client.gender}`) }}</p>
         </div>
-        <div class="flex w-full flex-col gap-2">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.FIRSTNAME') }}:</p>
           <p>{{ client.firstname }}</p>
         </div>
-        <div class="flex w-full flex-col gap-2">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.LASTNAME') }}:</p>
           <p>{{ client.lastname }}</p>
         </div>
       </div>
-      <div class="grid w-full grid-cols-3">
-        <div class="flex w-full flex-col gap-2">
+      <div class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.STREET') }}:</p>
           <p>{{ client.street }}</p>
         </div>
-        <div class="flex w-full flex-col gap-2">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.POSTAL_CODE') }}:</p>
           <p>{{ client.postalCode }}</p>
         </div>
-        <div class="flex w-full flex-col gap-2">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.CITY') }}:</p>
           <p>{{ client.city }}</p>
         </div>
       </div>
       <div v-if="client.email" class="grid w-full grid-cols-3">
-        <div class="flex w-full flex-col gap-2">
+        <div class="flex w-full flex-col sm:gap-2">
           <p class="font-bold">{{ $t('CLIENTS.LABELS.EMAIL') }}:</p>
           <p>{{ client.email }}</p>
         </div>
       </div>
-      <div class="grid w-full grid-cols-3">
+      <div class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0">
         <div class="w-full">
           {{ $t('CLIENTS.LABELS.DOCUMENTS') }}: {{ client.documents?.length }}
         </div>

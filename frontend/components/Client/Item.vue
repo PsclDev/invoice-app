@@ -23,15 +23,15 @@ const formatDate = (date: Date | undefined) => {
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center justify-center px-12">
+  <div class="flex w-full flex-col items-center justify-center px-4 sm:px-12">
     <div
       class="flex w-full justify-around gap-5 pb-3 text-slate-400 dark:text-slate-600"
     >
-      <small>
+      <small class="text-center">
         {{ $t('COMMON.LABELS.CREATED_AT') }}:
         {{ formatDate(client.createdAt) }}
       </small>
-      <small>
+      <small class="text-center">
         {{ $t('COMMON.LABELS.UPDATED_AT') }}:
         {{ formatDate(client.updatedAt) }}
       </small>
