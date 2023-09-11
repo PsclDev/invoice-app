@@ -33,6 +33,8 @@ const getGroupIcon = (type: SettingType) => {
       return 'material-symbols:edit-document-rounded';
     case 'MAIL':
       return 'material-symbols:alternate-email-rounded';
+    case 'GPT':
+      return 'material-symbols:robot-2';
     case 'FILE':
       return 'material-symbols:attach-file-rounded';
   }
