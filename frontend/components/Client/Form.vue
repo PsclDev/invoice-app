@@ -89,22 +89,17 @@ function onCancel() {
       form-class="w-full"
     >
       <div class="flex w-full flex-col gap-5">
-        <div
-          v-if="formMode === FormMode.CREATE || form.company"
-          class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3"
-        >
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.COMPANY') }}:</p>
+        <AppFormGroup v-if="formMode === FormMode.CREATE || form.company">
+          <AppFormInput label="CLIENTS.LABELS.COMPANY">
             <FormKit type="text" name="company" validation="required" />
-          </div>
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.VAT') }}:</p>
+          </AppFormInput>
+          <AppFormInput label="CLIENTS.LABELS.VAT">
             <FormKit type="text" name="vat" validation="required" />
-          </div>
-        </div>
-        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.GENDER') }}:</p>
+          </AppFormInput>
+        </AppFormGroup>
+
+        <AppFormGroup>
+          <AppFormInput label="CLIENTS.LABELS.GENDER">
             <FormKit
               type="select"
               name="gender"
@@ -115,36 +110,32 @@ function onCancel() {
                 DIVERS: $t('CLIENTS.GENDER.DIVERS'),
               }"
             />
-          </div>
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.FIRSTNAME') }}:</p>
+          </AppFormInput>
+          <AppFormInput label="CLIENTS.LABELS.FIRSTNAME">
             <FormKit type="text" name="firstname" validation="required" />
-          </div>
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.LASTNAME') }}:</p>
+          </AppFormInput>
+          <AppFormInput label="CLIENTS.LABELS.LASTNAME">
             <FormKit type="text" name="lastname" validation="required" />
-          </div>
-        </div>
-        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.STREET') }}:</p>
+          </AppFormInput>
+        </AppFormGroup>
+
+        <AppFormGroup>
+          <AppFormInput label="CLIENTS.LABELS.STREET">
             <FormKit type="text" name="street" validation="required" />
-          </div>
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.POSTAL_CODE') }}:</p>
+          </AppFormInput>
+          <AppFormInput label="CLIENTS.LABELS.POSTAL_CODE">
             <FormKit type="text" name="postalCode" validation="required" />
-          </div>
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.CITY') }}:</p>
+          </AppFormInput>
+          <AppFormInput label="CLIENTS.LABELS.CITY">
             <FormKit type="text" name="city" validation="required" />
-          </div>
-        </div>
-        <div class="grid w-full grid-cols-1 gap-2 sm:grid-cols-3">
-          <div class="flex w-full flex-col gap-2">
-            <p class="font-bold">{{ $t('CLIENTS.LABELS.EMAIL') }}:</p>
+          </AppFormInput>
+        </AppFormGroup>
+
+        <AppFormGroup>
+          <AppFormInput label="CLIENTS.LABELS.EMAIL">
             <FormKit type="email" name="email" validation="email" />
-          </div>
-        </div>
+          </AppFormInput>
+        </AppFormGroup>
       </div>
     </FormKit>
     <div class="flex w-full gap-5">

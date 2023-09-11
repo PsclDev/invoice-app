@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ButtonColor, Client, ViewMode } from '~/types';
+const { isCompany } = useClientHelper();
 
 const props = defineProps({
   modelValue: {
@@ -32,58 +33,42 @@ function onDelete() {
 <template>
   <div class="flex w-full flex-col items-center justify-center gap-5">
     <div class="flex w-full flex-col gap-5">
-      <div
-        v-if="client.company"
-        class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0"
-      >
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.COMPANY') }}:</p>
-          <p>{{ client.company }}</p>
-        </div>
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.VAT') }}:</p>
-          <p>{{ client.vat }}</p>
-        </div>
-      </div>
-      <div class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0">
-        <div class="flex w-full flex-col gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.GENDER') }}:</p>
-          <p>{{ $t(`CLIENTS.GENDER.${client.gender}`) }}</p>
-        </div>
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.FIRSTNAME') }}:</p>
-          <p>{{ client.firstname }}</p>
-        </div>
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.LASTNAME') }}:</p>
-          <p>{{ client.lastname }}</p>
-        </div>
-      </div>
-      <div class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0">
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.STREET') }}:</p>
-          <p>{{ client.street }}</p>
-        </div>
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.POSTAL_CODE') }}:</p>
-          <p>{{ client.postalCode }}</p>
-        </div>
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.CITY') }}:</p>
-          <p>{{ client.city }}</p>
-        </div>
-      </div>
-      <div v-if="client.email" class="grid w-full grid-cols-3">
-        <div class="flex w-full flex-col sm:gap-2">
-          <p class="font-bold">{{ $t('CLIENTS.LABELS.EMAIL') }}:</p>
-          <p>{{ client.email }}</p>
-        </div>
-      </div>
-      <div class="grid w-full grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-0">
-        <div class="w-full">
-          {{ $t('CLIENTS.LABELS.DOCUMENTS') }}: {{ client.documents?.length }}
-        </div>
-      </div>
+      <AppGroup v-if="isCompany(client)">
+        <AppViewItem label="CLIENTS.LABELS.COMPANY" :value="client.company" />
+        <AppViewItem label="CLIENTS.LABELS.VAT" :value="client.vat" />
+      </AppGroup>
+
+      <AppGroup>
+        <AppViewItem
+          label="CLIENTS.LABELS.GENDER"
+          :value="$t(`CLIENTS.GENDER.${client.gender}`)"
+        />
+        <AppViewItem
+          label="CLIENTS.LABELS.FIRSTNAME"
+          :value="client.firstname"
+        />
+        <AppViewItem label="CLIENTS.LABELS.LASTNAME" :value="client.lastname" />
+      </AppGroup>
+
+      <AppGroup>
+        <AppViewItem label="CLIENTS.LABELS.STREET" :value="client.street" />
+        <AppViewItem
+          label="CLIENTS.LABELS.POSTAL_CODE"
+          :value="client.postalCode"
+        />
+        <AppViewItem label="CLIENTS.LABELS.CITY" :value="client.city" />
+      </AppGroup>
+
+      <AppGroup v-if="client.email">
+        <AppViewItem label="CLIENTS.LABELS.EMAIL" :value="client.email" />
+      </AppGroup>
+
+      <AppGroup v-if="client.documents && client.documents.length > 0">
+        <AppViewItem
+          label="CLIENTS.LABELS.DOCUMENTS"
+          :value="client.documents.length"
+        />
+      </AppGroup>
     </div>
     <div class="flex w-full gap-5">
       <AppButton
