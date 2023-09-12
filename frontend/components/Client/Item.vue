@@ -8,18 +8,10 @@ const props = defineProps({
   },
 });
 
-const i18n = useI18n();
+const { formatDate } = useCustomDateHelper();
 const { client } = toRefs(props);
 const formRef = ref([]);
 const mode = ref<ViewMode>(ViewMode.VIEW);
-
-const formatDate = (date: Date | undefined) => {
-  if (!date) return;
-
-  const format =
-    i18n.locale.value === 'de' ? 'DD.MM.YYYY HH:mm:ss' : 'YYYY-MM-DD HH:mm:ss';
-  return useDateFormat(date, format).value.replace('"', '');
-};
 </script>
 
 <template>
@@ -29,11 +21,11 @@ const formatDate = (date: Date | undefined) => {
     >
       <small class="text-center">
         {{ $t('COMMON.LABELS.CREATED_AT') }}:
-        {{ formatDate(client.createdAt) }}
+        {{ formatDate(client.createdAt, true) }}
       </small>
       <small class="text-center">
         {{ $t('COMMON.LABELS.UPDATED_AT') }}:
-        {{ formatDate(client.updatedAt) }}
+        {{ formatDate(client.updatedAt, true) }}
       </small>
     </div>
     <ClientView v-if="mode === ViewMode.VIEW" v-model="mode" :client="client" />

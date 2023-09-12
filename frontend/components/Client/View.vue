@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ButtonColor, Client, ViewMode } from '~/types';
-const { isCompany } = useClientHelper();
 
 const props = defineProps({
   modelValue: {
@@ -16,7 +15,9 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue']);
 
 const { modelValue, client } = toRefs(props);
+const { isCompany, getName } = useClientHelper();
 const store = useClientStore();
+const openDeleteModal = ref(false);
 
 function onEdit() {
   emits(
@@ -79,8 +80,16 @@ function onDelete() {
       <AppButton
         label="COMMON.BUTTONS.DELETE"
         :color="ButtonColor.RED"
-        @click="onDelete"
+        @click="() => (openDeleteModal = true)"
       />
     </div>
+
+    <AppConfirmModal
+      v-model="openDeleteModal"
+      title-key="CLIENTS.MODAL.TITLE"
+      :title-props="{ name: getName(client) }"
+      content-key="CLIENTS.MODAL.CONTENT"
+      @confirm="onDelete"
+    />
   </div>
 </template>

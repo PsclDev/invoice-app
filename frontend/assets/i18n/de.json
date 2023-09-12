@@ -36,6 +36,10 @@
       "MALE": "Männlich",
       "FEMALE": "Weiblich",
       "DIVERS": "Divers"
+    },
+    "MODAL": {
+      "TITLE": "'{name}' löschen?",
+      "CONTENT": "Sind Sie sicher, dass Sie den Kunden löschen möchten?"
     }
   },
   "NAVIGATION": {

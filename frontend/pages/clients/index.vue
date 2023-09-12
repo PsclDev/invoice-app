@@ -43,7 +43,7 @@ useHead({
         :title="getName(client)"
         :icon="isCompany(client) ? 'mdi:person-tie' : 'mdi:person'"
       >
-        <ClientItem :client="client"></ClientItem>
+        <ClientItem :client="client" />
       </AppAccordion>
     </div>
   </BasePage>

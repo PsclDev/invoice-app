@@ -89,16 +89,16 @@ function onCancel() {
       form-class="w-full"
     >
       <div class="flex w-full flex-col gap-5">
-        <AppFormGroup v-if="formMode === FormMode.CREATE || form.company">
+        <AppGroup v-if="formMode === FormMode.CREATE || form.company">
           <AppFormInput label="CLIENTS.LABELS.COMPANY">
             <FormKit type="text" name="company" validation="required" />
           </AppFormInput>
           <AppFormInput label="CLIENTS.LABELS.VAT">
             <FormKit type="text" name="vat" validation="required" />
           </AppFormInput>
-        </AppFormGroup>
+        </AppGroup>
 
-        <AppFormGroup>
+        <AppGroup>
           <AppFormInput label="CLIENTS.LABELS.GENDER">
             <FormKit
               type="select"
@@ -117,9 +117,9 @@ function onCancel() {
           <AppFormInput label="CLIENTS.LABELS.LASTNAME">
             <FormKit type="text" name="lastname" validation="required" />
           </AppFormInput>
-        </AppFormGroup>
+        </AppGroup>
 
-        <AppFormGroup>
+        <AppGroup>
           <AppFormInput label="CLIENTS.LABELS.STREET">
             <FormKit type="text" name="street" validation="required" />
           </AppFormInput>
@@ -129,13 +129,13 @@ function onCancel() {
           <AppFormInput label="CLIENTS.LABELS.CITY">
             <FormKit type="text" name="city" validation="required" />
           </AppFormInput>
-        </AppFormGroup>
+        </AppGroup>
 
-        <AppFormGroup>
+        <AppGroup>
           <AppFormInput label="CLIENTS.LABELS.EMAIL">
             <FormKit type="email" name="email" validation="email" />
           </AppFormInput>
-        </AppFormGroup>
+        </AppGroup>
       </div>
     </FormKit>
     <div class="flex w-full gap-5">
