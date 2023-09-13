@@ -44,7 +44,9 @@ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
     :model-value="modelValue"
     @close="emit('update:modelValue', !modelValue)"
   >
-    <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+    <UCard
+      :ui="{ divide: 'divide-y divide-slate-100 dark:divide-neutral-800' }"
+    >
       <template #header> {{ $t(titleKey, titleProps) }} </template>
       {{ $t(contentKey, contentProps) }}
       <template #footer>

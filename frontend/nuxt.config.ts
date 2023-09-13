@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   modules: [
-    '@nuxthq/ui',
+    '@nuxt/ui',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
     'nuxt-icon',
