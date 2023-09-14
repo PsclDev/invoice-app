@@ -125,7 +125,7 @@ export default {
     inner:
       'flex rounded ring-1 ring-slate-400 dark:ring-neutral-700 focus-within:ring-slate-500 dark:focus-within:ring-neutral-500 focus-within:ring-2',
     input:
-      'block w-full h-32 px-3 py-3 border-none text-base text-black dark:text-white focus:shadow-outline',
+      'block w-full px-3 py-3 border-none text-base text-black dark:text-white focus:shadow-outline',
   },
 
   // PRO input styles

@@ -49,7 +49,11 @@ defineExpose({
       <p class="sm:w-1/4 sm:text-right lg:w-1/6">{{ setting.title }}:</p>
       <div class="flex grow items-center gap-5">
         <div class="grow">
-          <FormKit v-model="setting.value" :type="setting.inputType" />
+          <FormKit
+            v-model="setting.value"
+            :type="setting.inputType"
+            rows="10"
+          />
         </div>
         <button
           :class="disabled ? 'opacity-25' : 'text-indigo-500'"
