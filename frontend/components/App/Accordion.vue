@@ -29,15 +29,16 @@ const collapsed = ref(true);
       <div class="flex items-center gap-1 truncate">
         <Icon v-if="icon" :name="icon" />
         {{ title }}
-        <small v-if="id" class="text-xs text-slate-400 dark:text-slate-600"
+        <small v-if="id" class="ml-1 text-xs text-slate-400 dark:text-slate-600"
           >#{{ id }}</small
         >
       </div>
       <div class="grow pr-3 text-end" @click="collapsed = !collapsed">
-        <Icon
-          class="cursor-pointer"
-          :name="collapsed ? 'bi:chevron-down' : 'bi:chevron-up'"
-        />
+        <button
+          class="cursor-pointer text-black hover:text-slate-400 dark:text-slate-600 dark:hover:text-white"
+        >
+          <Icon :name="collapsed ? 'bi:chevron-down' : 'bi:chevron-up'" />
+        </button>
       </div>
     </div>
     <div class="w-full p-2 pb-4" :class="collapsed ? 'hidden' : ''">

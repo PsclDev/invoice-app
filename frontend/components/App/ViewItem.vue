@@ -14,6 +14,6 @@ defineProps({
 <template>
   <div class="flex w-full flex-col sm:gap-2">
     <p class="font-bold">{{ $t(label) }}:</p>
-    <p>{{ value }}</p>
+    <p class="whitespace-pre-line">{{ value }}</p>
   </div>
 </template>
