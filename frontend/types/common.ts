@@ -3,6 +3,7 @@ export enum ButtonColor {
   GREEN = 'green',
   ORANGE = 'orange',
   RED = 'red',
+  GRAY = 'gray',
 }
 
 export enum FormMode {

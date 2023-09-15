@@ -25,6 +25,7 @@ defineEmits(['click']);
         color === ButtonColor.GREEN,
       'bg-amber-600 hover:bg-amber-700': color === ButtonColor.ORANGE,
       'bg-red-600 hover:bg-red-700': color === ButtonColor.RED,
+      'bg-slate-400 hover:bg-slate-500': color === ButtonColor.GRAY,
     }"
     @click="$emit('click')"
   >

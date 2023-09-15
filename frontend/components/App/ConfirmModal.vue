@@ -53,7 +53,7 @@ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
         <div class="flex w-full gap-5">
           <AppButton
             :label="cancelKey"
-            :color="ButtonColor.BLUE"
+            :color="ButtonColor.GRAY"
             @click="emit('cancel')"
           />
           <AppButton
