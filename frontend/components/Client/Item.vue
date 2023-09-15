@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Client, FormMode, ViewMode } from '~/types';
 
-const props = defineProps({
+defineProps({
   client: {
     type: Object as PropType<Client>,
     required: true,
@@ -9,7 +9,6 @@ const props = defineProps({
 });
 
 const { formatDate } = useCustomDateHelper();
-const { client } = toRefs(props);
 const formRef = ref([]);
 const mode = ref<ViewMode>(ViewMode.VIEW);
 </script>

@@ -139,12 +139,12 @@ function onCancel() {
       </div>
     </FormKit>
     <div class="flex w-full gap-5">
-      <AppButton label="COMMON.BUTTONS.SAVE" @click="onSave" />
       <AppButton
         label="COMMON.BUTTONS.CANCEL"
-        :color="ButtonColor.ORANGE"
+        :color="ButtonColor.GRAY"
         @click="onCancel"
       />
+      <AppButton label="COMMON.BUTTONS.SAVE" @click="onSave" />
     </div>
   </div>
 </template>

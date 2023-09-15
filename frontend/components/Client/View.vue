@@ -86,10 +86,11 @@ function onDelete() {
 
     <AppConfirmModal
       v-model="openDeleteModal"
-      title-key="CLIENTS.MODAL.TITLE"
+      title-key="CLIENTS.MODAL.DELETE.TITLE"
       :title-props="{ name: getName(client) }"
-      content-key="CLIENTS.MODAL.CONTENT"
+      content-key="CLIENTS.MODAL.DELETE.CONTENT"
       @confirm="onDelete"
+      @cancel="() => (openDeleteModal = false)"
     />
   </div>
 </template>

@@ -50,12 +50,10 @@ export const useClientStore = defineStore('client', () => {
   async function create(clientId: string, form: ClientForm) {
     try {
       logger.info('clientStore.create');
-      const url = form.company
-        ? `${reqUrl}/company/${clientId}`
-        : `${reqUrl}/${clientId}`;
+      const url = form.company ? `${reqUrl}/company` : reqUrl;
 
       const payload = omitBy(form, isEmpty);
-      const { data, error } = await useFetch<Client>(url, {
+      const { data, error } = await useFetch<Client>(`${url}/${clientId}`, {
         method: 'POST',
         body: JSON.stringify(payload),
       });
@@ -68,7 +66,7 @@ export const useClientStore = defineStore('client', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: `Failed to create new client`,
+        title: `Failed to create new client '${getName(form)}'`,
       });
       logger.error('Failed to create new client', error);
     }
@@ -96,7 +94,7 @@ export const useClientStore = defineStore('client', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: `Failed to update '${form.firstname}' ${form.lastname}`,
+        title: `Failed to update '${getName(form)}'`,
       });
       logger.error('Failed to update client', error);
     }
@@ -120,7 +118,10 @@ export const useClientStore = defineStore('client', () => {
       clients.value = clients.value.filter((x) => x.id !== client.id);
       toast.add({ title: `Deleted Client: '${getName(client)}'` });
     } catch (error) {
-      toast.add({ color: 'red', title: `Failed to delete ''` });
+      toast.add({
+        color: 'red',
+        title: `Failed to delete '${getName(client)}'`,
+      });
       logger.error('Failed to delete client', error);
     }
   }
