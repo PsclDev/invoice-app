@@ -11,14 +11,27 @@ export interface Document {
   invoiceId: string;
   filepath: string;
   clientId: string;
-  dateOfIssue: Date;
+  dateOfIssue: string;
   description: string[];
   subTotal: number;
   tax: number;
   taxRate: number;
   total: number;
   alreadyPaid: number;
-  dueDate: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
+  dueDate: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
+
+export type DocumentForm = Omit<
+  Document,
+  | 'id'
+  | 'clientId'
+  | 'invoiceId'
+  | 'filepath'
+  | 'description'
+  | 'createdAt'
+  | 'updatedAt'
+> & {
+  description: string;
+};

@@ -38,8 +38,40 @@
       "DIVERS": "Divers"
     },
     "MODAL": {
-      "TITLE": "'{name}' löschen?",
-      "CONTENT": "Sind Sie sicher, dass Sie den Kunden löschen möchten?"
+      "INFO": {
+        "TITLE": "Informationen über den Kunden"
+      },
+      "DELETE": {
+        "TITLE": "'{name}' löschen?",
+        "CONTENT": "Sind Sie sicher, dass Sie den Kunden löschen möchten?"
+      }
+    }
+  },
+  "DOCUMENTS": {
+    "TITLE": "Dokumente",
+    "SEARCH_PLACEHOLDER": "Name, Beschreibung, Summe, ...",
+    "NEW": "Neues Dokument anlegen",
+    "LABELS": {
+      "CLIENT": "Kunde",
+      "DATE_OF_ISSUE": "Ausstellungsdatum",
+      "DESCRIPTION": "Beschreibung",
+      "SUBTOTAL": "Zwischensumme",
+      "TAX_RATE": "Steuersatz",
+      "TAX": "Steuern",
+      "ALREADY_PAID": "Bereits bezahlt",
+      "TOTAL": "Gesamt",
+      "DUE_DATE": "Fälligkeitsdatum",
+      "DATE_DIFF": "Tagesdifferenz"
+    },
+    "TYPE": {
+      "INVOICE": "Rechnung",
+      "OFFER": "Angebot"
+    },
+    "MODAL": {
+      "DELETE": {
+        "TITLE": "Wollen Sie '{name}' löschen?",
+        "CONTENT": "Sind Sie sicher, dass Sie das Dokument löschen möchten?"
+      }
     }
   },
   "NAVIGATION": {

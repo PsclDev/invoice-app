@@ -38,8 +38,40 @@
       "DIVERS": "Divers"
     },
     "MODAL": {
-      "TITLE": "Delete client '{name}'",
-      "CONTENT": "Are you sure you want to delete this client?"
+      "INFO": {
+        "TITLE": "Information about the client"
+      },
+      "DELETE": {
+        "TITLE": "Delete client '{name}'",
+        "CONTENT": "Are you sure you want to delete this client?"
+      }
+    }
+  },
+  "DOCUMENTS": {
+    "TITLE": "Documents",
+    "SEARCH_PLACEHOLDER": "Name, Description, Total Price, ...",
+    "NEW": "Create new document",
+    "LABELS": {
+      "CLIENT": "Client",
+      "DATE_OF_ISSUE": "Date of issue",
+      "DESCRIPTION": "Description",
+      "SUBTOTAL": "Subtotal",
+      "TAX_RATE": "Tax rate",
+      "TAX": "Tax",
+      "ALREADY_PAID": "Already paid",
+      "TOTAL": "Total",
+      "DUE_DATE": "Due date",
+      "DATE_DIFF": "Difference in days"
+    },
+    "TYPE": {
+      "INVOICE": "Invoice",
+      "OFFER": "Offer"
+    },
+    "MODAL": {
+      "DELETE": {
+        "TITLE": "Delete document '{name}'",
+        "CONTENT": "Are you sure you want to delete this document?"
+      }
     }
   },
   "NAVIGATION": {
