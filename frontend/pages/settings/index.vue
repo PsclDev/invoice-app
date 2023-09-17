@@ -7,7 +7,7 @@ const colorMode = useColorMode();
 const settingStore = useSettingStore();
 const healthStore = useHealthStore();
 
-settingStore.getSettings();
+settingStore.getAll();
 healthStore.getHealth();
 
 const { currentLanguage, toggleLanguage, toggleColorMode } =

@@ -45,6 +45,12 @@
         "TITLE": "'{name}' löschen?",
         "CONTENT": "Sind Sie sicher, dass Sie den Kunden löschen möchten?"
       }
+    },
+    "STORE": {
+      "GET_ALL_FAILED": "Fehler beim Laden der Kunden",
+      "CREATE_FAILED": "Fehler beim Anlegen des Kunden '{name}' aufgetreten",
+      "UPDATE_FAILED": "Fehler beim Speichern des Kunden '{name}' aufgetreten",
+      "DELETE_FAILED": "Fehler beim Löschen des Kunden '{name}' aufgetreten"
     }
   },
   "DOCUMENTS": {
@@ -72,6 +78,11 @@
         "TITLE": "Wollen Sie '{name}' löschen?",
         "CONTENT": "Sind Sie sicher, dass Sie das Dokument löschen möchten?"
       }
+    },
+    "STORE": {
+      "GET_ALL_FAILED": "Fehler beim Laden der Dokumente",
+      "UPDATE_FAILED": "Fehler beim Speichern des Dokuments '{name}' aufgetreten",
+      "DELETE_FAILED": "Fehler beim Löschen des Dokuments '{name}' aufgetreten"
     }
   },
   "NAVIGATION": {
@@ -88,6 +99,10 @@
       "TITLE": "Es sind ungespeicherte Änderungen vorhanden, was möchtest Sie tun?",
       "DISCARD": "Änderungen verwerfen",
       "SAVE": "Änderungen speichern"
+    },
+    "STORE": {
+      "GET_ALL_FAILED": "Fehler beim Laden der Einstellungen",
+      "UPDATE_FAILED": "Fehler beim Speichern der Einstellung '{name}'"
     }
   },
   "STORE": {

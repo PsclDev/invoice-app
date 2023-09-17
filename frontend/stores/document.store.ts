@@ -1,6 +1,7 @@
 import { Document, DocumentForm, DocumentType } from '@/types';
 
 export const useDocumentStore = defineStore('document', () => {
+  const i18n = useI18n();
   const { getName } = useDocumentHelper();
   const logger = useLogger('documentStore');
   const toast = useToast();
@@ -21,7 +22,10 @@ export const useDocumentStore = defineStore('document', () => {
 
       documents.value = data.value;
     } catch (error) {
-      toast.add({ color: 'red', title: 'Failed to get all documents' });
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.GET_ALL_FAILED'),
+      });
       logger.error('Failed to get all documents', error);
     }
   }
@@ -52,7 +56,7 @@ export const useDocumentStore = defineStore('document', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: `Failed to update '${getName(form)}'`,
+        title: i18n.t('DOCUMENTS.STORE.UPDATE_FAILED', { name: getName(form) }),
       });
       logger.error('Failed to update client', error);
     }
@@ -72,7 +76,10 @@ export const useDocumentStore = defineStore('document', () => {
       documents.value = documents.value.filter((x) => x.id !== doc.id);
       toast.add({ title: `Deleted Document` });
     } catch (error) {
-      toast.add({ color: 'red', title: `Failed to delete '${getName(doc)}'` });
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.CREATE_FAILED', { name: getName(doc) }),
+      });
       logger.error('Failed to delete client', error);
     }
   }

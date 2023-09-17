@@ -1,13 +1,13 @@
 import { Setting } from '@/types';
 
 export const useSettingStore = defineStore('setting', () => {
-  const { t } = useI18n();
+  const i18n = useI18n();
   const logger = useLogger('settingStore');
   const toast = useToast();
   const settings = ref<Setting[]>([]);
   const reqUrl = useApiUrl() + '/setting';
 
-  async function getSettings() {
+  async function getAll() {
     try {
       logger.info('settingStore.getSettings');
       const { data, error } = await useFetch<Setting[]>(reqUrl);
@@ -17,12 +17,15 @@ export const useSettingStore = defineStore('setting', () => {
 
       settings.value = data.value;
     } catch (error) {
-      toast.add({ color: 'red', title: t('STORE.SETTING.GET_FAILED') });
+      toast.add({
+        color: 'red',
+        title: i18n.t('SETTINGS.STORE.GET_ALL_FAILED'),
+      });
       logger.error('failed to get settings', error);
     }
   }
 
-  async function updateSetting(setting: Setting) {
+  async function update(setting: Setting) {
     try {
       logger.info('settingStore.updateSetting');
       const { error } = await useFetch<Setting>(`${reqUrl}/${setting.id}`, {
@@ -40,10 +43,13 @@ export const useSettingStore = defineStore('setting', () => {
         return s;
       });
     } catch (error) {
-      toast.add({ color: 'red', title: t('STORE.SETTING.UPDATE_FAILED') });
+      toast.add({
+        color: 'red',
+        title: i18n.t('SETTINGS.STORE.UPDATE_FAILED', { name: setting.title }),
+      });
       logger.error('failed to update settings', error);
     }
   }
 
-  return { settings, getSettings, updateSetting };
+  return { settings, getAll, update };
 });

@@ -3,6 +3,7 @@ import { isEmpty, omitBy } from 'lodash';
 import { Client, ClientForm, Gender } from '@/types';
 
 export const useClientStore = defineStore('client', () => {
+  const i18n = useI18n();
   const { getName } = useClientHelper();
   const logger = useLogger('clientStore');
   const toast = useToast();
@@ -24,7 +25,10 @@ export const useClientStore = defineStore('client', () => {
 
       clients.value = data.value;
     } catch (error) {
-      toast.add({ color: 'red', title: 'Failed to get all clients' });
+      toast.add({
+        color: 'red',
+        title: i18n.t('CLIENTS.STORE.GET_ALL_FAILED'),
+      });
       logger.error('Failed to get all clients', error);
     }
   }
@@ -66,7 +70,7 @@ export const useClientStore = defineStore('client', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: `Failed to create new client '${getName(form)}'`,
+        title: i18n.t('CLIENTS.STORE.CREATE_FAILED', { name: getName(form) }),
       });
       logger.error('Failed to create new client', error);
     }
@@ -94,7 +98,7 @@ export const useClientStore = defineStore('client', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: `Failed to update '${getName(form)}'`,
+        title: i18n.t('CLIENTS.STORE.UPDATE_FAILED', { name: getName(form) }),
       });
       logger.error('Failed to update client', error);
     }
@@ -120,7 +124,7 @@ export const useClientStore = defineStore('client', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: `Failed to delete '${getName(client)}'`,
+        title: i18n.t('CLIENTS.STORE.DELETE_FAILED', { name: getName(client) }),
       });
       logger.error('Failed to delete client', error);
     }

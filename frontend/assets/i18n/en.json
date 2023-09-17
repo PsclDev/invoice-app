@@ -45,6 +45,12 @@
         "TITLE": "Delete client '{name}'",
         "CONTENT": "Are you sure you want to delete this client?"
       }
+    },
+    "STORE": {
+      "GET_ALL_FAILED": "Failed to get all clients",
+      "CREATE_FAILED": "Failed to create client '{name}'",
+      "UPDATE_FAILED": "Failed to update client '{name}'",
+      "DELETE_FAILED": "Failed to delete client '{name}'"
     }
   },
   "DOCUMENTS": {
@@ -72,6 +78,11 @@
         "TITLE": "Delete document '{name}'",
         "CONTENT": "Are you sure you want to delete this document?"
       }
+    },
+    "STORE": {
+      "GET_ALL_FAILED": "Failed to get all documents",
+      "UPDATE_FAILED": "Failed to update document '{name}'",
+      "DELETE_FAILED": "Failed to delete document '{name}'"
     }
   },
   "NAVIGATION": {
@@ -88,6 +99,10 @@
       "TITLE": "You have unsaved changes, how do you want to proceed?",
       "DISCARD": "Discard all",
       "SAVE": "Save all"
+    },
+    "STORE": {
+      "GET_ALL_FAILED": "Failed to get all settings",
+      "UPDATE_FAILED": "Failed to update setting '{name}'"
     }
   },
   "STORE": {

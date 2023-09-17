@@ -32,7 +32,7 @@ function onDiscard() {
 async function onSave() {
   initialValue.value = setting.value.value;
   disabled.value = true;
-  await store.updateSetting(setting.value);
+  await store.update(setting.value);
 }
 
 defineExpose({
