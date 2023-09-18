@@ -17,10 +17,12 @@ export interface Client {
   street: string;
   postalCode: string;
   city: string;
-  documents?: Document[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  documentIds: string[];
+  createdAt?: string;
+  updatedAt?: string;
 }
+
+export type ClientDto = Omit<Client, 'documentIds'> & { documents: Document[] };
 
 export type ClientForm = Omit<
   Client,

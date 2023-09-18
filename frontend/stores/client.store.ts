@@ -1,6 +1,6 @@
 import { isEmpty, omitBy } from 'lodash';
 
-import { Client, ClientForm, Gender } from '@/types';
+import { Client, ClientDto, ClientForm, Gender } from '@/types';
 
 export const useClientStore = defineStore('client', () => {
   const i18n = useI18n();
@@ -18,12 +18,18 @@ export const useClientStore = defineStore('client', () => {
   async function getAll() {
     try {
       logger.info('clientStore.getAll');
-      const { data, error } = await useFetch<Client[]>(reqUrl);
+      const { data, error } = await useFetch<ClientDto[]>(reqUrl);
       if (!data.value || error.value) {
         throw error.value;
       }
 
-      clients.value = data.value;
+      clients.value = data.value.map((c) => {
+        const { documents, ...client } = c;
+        return {
+          ...client,
+          documentIds: documents.map((d) => d.id),
+        };
+      });
     } catch (error) {
       toast.add({
         color: 'red',
@@ -46,6 +52,7 @@ export const useClientStore = defineStore('client', () => {
       street: '',
       postalCode: '',
       city: '',
+      documentIds: [],
     });
 
     newClientNr.value++;

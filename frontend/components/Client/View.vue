@@ -64,10 +64,10 @@ function onDelete() {
         <AppViewItem label="CLIENTS.LABELS.EMAIL" :value="client.email" />
       </AppGroup>
 
-      <AppGroup v-if="client.documents && client.documents.length > 0">
+      <AppGroup v-if="client.documentIds.length > 0">
         <AppViewItem
           label="CLIENTS.LABELS.DOCUMENTS"
-          :value="client.documents.length"
+          :value="client.documentIds.length"
         />
       </AppGroup>
     </div>
