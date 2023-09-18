@@ -1,8 +1,11 @@
+import { DateTime } from 'luxon';
+
 import { Client, Document, DocumentForm, DocumentType } from '@/types';
 
 export default function useDocumentHelper() {
   const i18n = useI18n();
   const clientHelper = useClientHelper();
+  const dateFormat = 'yyyy-MM-dd';
 
   const isOffer = (doc: Document | DocumentForm) => {
     return doc.type === DocumentType.OFFER;
@@ -26,5 +29,33 @@ export default function useDocumentHelper() {
     return documentType.concat(' #', documentNr) + clientName;
   };
 
-  return { isOffer, isInvoice, getName };
+  const calculateSubtotal = (description: string) => {
+    let sum = 0;
+    const regex = /^(\d+(?:\.\d{1,2})?)€/;
+
+    for (const line of description.split('\n')) {
+      const match = line.match(regex);
+      if (match) {
+        const amount = parseFloat(match[1]);
+        sum += amount;
+      }
+    }
+
+    return sum;
+  };
+
+  const getDueDate = (dateOfIssue: string) => {
+    return DateTime.fromFormat(dateOfIssue, dateFormat)
+      .plus({ days: 8 })
+      .toFormat(dateFormat);
+  };
+
+  return {
+    calculateSubtotal,
+    dateFormat,
+    getDueDate,
+    getName,
+    isOffer,
+    isInvoice,
+  };
 }
