@@ -614,6 +614,21 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.46.0.tgz#3f7802972e8b6fe3f88ed1aabc74ec596c456db6"
   integrity sha512-a8TLtmPi8xzPkCbp/OGFUo5yhRkHM2Ko9kOWP4znJr0WAhWyThaw3PnwX4vOTWOAMsV2uRt32PPDcEz63esSaA==
 
+"@formkit/addons@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@formkit/addons/-/addons-1.0.0.tgz#f37e52e643b35419f69a5ce88772292079309344"
+  integrity sha512-MYOjbhF115POxQVNPN6HTuNJSZp5Q6sA7awNx7F8TNgJpqNlaRxIWrv6gzlP7Dnh2lApZiB+JxiXKStoxhFVyg==
+  dependencies:
+    "@formkit/auto-animate" latest
+    "@formkit/core" "1.0.0"
+    "@formkit/inputs" "1.0.0"
+    "@formkit/utils" "1.0.0"
+
+"@formkit/auto-animate@latest":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@formkit/auto-animate/-/auto-animate-0.8.0.tgz#da55124e665573ef3c5ace1099f1f1702a5cec87"
+  integrity sha512-G8f7489ka0mWyi+1IEZT+xgIwcpWtRMmE2x+IrVoQ+KM1cP6VDj/TbujZjwxdb0P8w8b16/qBfViRmydbYHwMw==
+
 "@formkit/core@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@formkit/core/-/core-1.0.0.tgz#d5d7900e8b6c8efdb746d71ff8e4a2d253323218"
