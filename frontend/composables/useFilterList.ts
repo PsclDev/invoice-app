@@ -1,3 +1,5 @@
+import { isArray } from 'lodash';
+
 export default function useFilterList<T>() {
   const currentFilterTerm = ref<string>('');
   const initialList = ref<T[]>([]) as Ref<T[]>;
@@ -26,18 +28,26 @@ export default function useFilterList<T>() {
   }
 
   function checkForValue(obj: T, term: string): boolean {
-    for (const key in obj) {
-      const val = (obj as any)[key];
-      if (
-        typeof val === 'string' &&
-        val !== '' &&
-        val.toLowerCase().includes(term)
-      ) {
-        return true;
+    return Object.values(obj as object).some((value) => {
+      switch (typeof value) {
+        case 'string':
+        case 'number':
+          // replace dot and comma so search works independent of decimal separator
+          return value
+            .toString()
+            .replace(/[/.,]/g, '')
+            .toLowerCase()
+            .includes(term.replace(/[/.,]/g, ''));
+        case 'object':
+          if (isArray(value)) {
+            return value.some((itm) =>
+              itm.toString().toLowerCase().includes(term),
+            );
+          }
+          break;
       }
-    }
-
-    return false;
+      return false;
+    });
   }
 
   return { filter, filteredList, initialList, setInitialList };
