@@ -21,6 +21,7 @@
     "SEARCH_PLACEHOLDER": "Name, Straße, Stadt, Email, ...",
     "NEW": "Neuen Kunden anlegen",
     "LABELS": {
+      "TYPE": "Typ",
       "COMPANY": "Firmenname",
       "VAT": "VAT",
       "GENDER": "Geschlecht",
@@ -36,6 +37,10 @@
       "MALE": "Männlich",
       "FEMALE": "Weiblich",
       "DIVERS": "Divers"
+    },
+    "TYPE": {
+      "PRIVATE": "Privat",
+      "COMPANY": "Firma"
     },
     "MODAL": {
       "INFO": {

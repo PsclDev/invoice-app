@@ -130,22 +130,24 @@ function onCancel() {
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center justify-center gap-5">
-    <FormKit
-      :id="formId"
-      v-model="form"
-      type="form"
-      :actions="false"
-      form-class="w-full"
-    >
+  <FormKit
+    :id="formId"
+    v-slot="{ state: { valid: formIsValid } }"
+    v-model="form"
+    type="form"
+    :actions="false"
+    form-class="w-full"
+  >
+    <div class="flex w-full flex-col items-center justify-center gap-5">
       <div class="flex w-full flex-col gap-5">
         <AppGroup>
-          <AppFormInput label="DOCUMENTS.LABELS.DATE_OF_ISSUE">
+          <AppFormInput label="DOCUMENTS.LABELS.DATE_OF_ISSUE" :required="true">
             <FormKit type="date" name="dateOfIssue" validation="required" />
           </AppFormInput>
           <AppFormInput
             v-if="document && isInvoice(document)"
             label="DOCUMENTS.LABELS.DUE_DATE"
+            :required="true"
           >
             <FormKit type="date" name="dueDate" validation="required" />
           </AppFormInput>
@@ -166,7 +168,7 @@ function onCancel() {
         </AppGroup>
 
         <div class="grid w-full grid-cols-1 gap-2">
-          <AppFormInput label="DOCUMENTS.LABELS.DESCRIPTION">
+          <AppFormInput label="DOCUMENTS.LABELS.DESCRIPTION" :required="true">
             <FormKit
               type="textarea"
               name="description"
@@ -177,7 +179,7 @@ function onCancel() {
         </div>
 
         <div class="grid w-full gap-2 sm:grid-cols-4">
-          <AppFormInput label="DOCUMENTS.LABELS.SUBTOTAL">
+          <AppFormInput label="DOCUMENTS.LABELS.SUBTOTAL" :required="true">
             <FormKit
               type="number"
               number="float"
@@ -185,7 +187,7 @@ function onCancel() {
               validation="required"
             />
           </AppFormInput>
-          <AppFormInput label="DOCUMENTS.LABELS.TAX_RATE">
+          <AppFormInput label="DOCUMENTS.LABELS.TAX_RATE" :required="true">
             <FormKit
               type="number"
               number="float"
@@ -193,7 +195,7 @@ function onCancel() {
               validation="required"
             />
           </AppFormInput>
-          <AppFormInput label="DOCUMENTS.LABELS.TAX">
+          <AppFormInput label="DOCUMENTS.LABELS.TAX" :required="true">
             <FormKit
               type="number"
               number="float"
@@ -207,14 +209,9 @@ function onCancel() {
             v-if="document && isInvoice(document)"
             label="DOCUMENTS.LABELS.ALREADY_PAID"
           >
-            <FormKit
-              type="number"
-              number="float"
-              name="alreadyPaid"
-              validation="required"
-            />
+            <FormKit type="number" number="float" name="alreadyPaid" />
           </AppFormInput>
-          <AppFormInput label="DOCUMENTS.LABELS.TOTAL">
+          <AppFormInput label="DOCUMENTS.LABELS.TOTAL" :required="true">
             <FormKit
               type="number"
               number="float"
@@ -224,14 +221,18 @@ function onCancel() {
           </AppFormInput>
         </div>
       </div>
-    </FormKit>
-    <div class="flex w-full gap-5">
-      <AppButton
-        label="COMMON.BUTTONS.CANCEL"
-        :color="ButtonColor.GRAY"
-        @click="onCancel"
-      />
-      <AppButton label="COMMON.BUTTONS.SAVE" @click="onSave" />
+      <div class="flex w-full gap-5">
+        <AppButton
+          label="COMMON.BUTTONS.CANCEL"
+          :color="ButtonColor.GRAY"
+          @click="onCancel"
+        />
+        <AppButton
+          label="COMMON.BUTTONS.SAVE"
+          :disabled="!formIsValid"
+          @click="onSave"
+        />
+      </div>
     </div>
-  </div>
+  </FormKit>
 </template>

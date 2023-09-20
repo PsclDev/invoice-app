@@ -101,6 +101,8 @@ export default {
     noFilesIcon: 'w-4 mr-2',
   },
   radio: {
+    fieldset: 'max-w-md border-0 rounded px-3 py-2',
+    options: 'flex justify-around',
     decorator: 'rounded-full',
     decoratorIcon: 'w-5 p-[5px]',
   },

@@ -26,5 +26,5 @@ export type ClientDto = Omit<Client, 'documentIds'> & { documents: Document[] };
 
 export type ClientForm = Omit<
   Client,
-  'id' | 'documents' | 'createdAt' | 'updatedAt'
+  'id' | 'documentIds' | 'createdAt' | 'updatedAt'
 >;

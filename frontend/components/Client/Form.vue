@@ -33,6 +33,7 @@ const store = useClientStore();
 const { modelValue, formMode, clientId } = toRefs(props);
 
 const formId = (Math.random() + 1).toString(36).substring(7);
+const clientType = ref<'private' | 'company'>('private');
 const form = reactive<ClientForm>({
   company: '',
   vat: '',
@@ -80,26 +81,48 @@ function onCancel() {
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center justify-center gap-5">
-    <FormKit
-      :id="formId"
-      v-model="form"
-      type="form"
-      :actions="false"
-      form-class="w-full"
-    >
+  <FormKit
+    :id="formId"
+    v-slot="{ state: { valid: formIsValid } }"
+    v-model="form"
+    type="form"
+    :actions="false"
+    form-class="w-full"
+  >
+    <div class="flex w-full flex-col items-center justify-center gap-5">
       <div class="flex w-full flex-col gap-5">
         <AppGroup v-if="formMode === FormMode.CREATE || form.company">
-          <AppFormInput label="CLIENTS.LABELS.COMPANY">
+          <AppFormInput
+            v-if="formMode === FormMode.CREATE"
+            label="CLIENTS.LABELS.TYPE"
+          >
+            <FormKit
+              v-model="clientType"
+              type="radio"
+              :options="{
+                private: $t('CLIENTS.TYPE.PRIVATE'),
+                company: $t('CLIENTS.TYPE.COMPANY'),
+              }"
+            />
+          </AppFormInput>
+          <AppFormInput
+            v-if="clientType === 'company' || form.company"
+            label="CLIENTS.LABELS.COMPANY"
+            :required="true"
+          >
             <FormKit type="text" name="company" validation="required" />
           </AppFormInput>
-          <AppFormInput label="CLIENTS.LABELS.VAT">
+          <AppFormInput
+            v-if="clientType === 'company' || form.company"
+            label="CLIENTS.LABELS.VAT"
+            :required="true"
+          >
             <FormKit type="text" name="vat" validation="required" />
           </AppFormInput>
         </AppGroup>
 
         <AppGroup>
-          <AppFormInput label="CLIENTS.LABELS.GENDER">
+          <AppFormInput label="CLIENTS.LABELS.GENDER" :required="true">
             <FormKit
               type="select"
               name="gender"
@@ -111,22 +134,22 @@ function onCancel() {
               }"
             />
           </AppFormInput>
-          <AppFormInput label="CLIENTS.LABELS.FIRSTNAME">
+          <AppFormInput label="CLIENTS.LABELS.FIRSTNAME" :required="true">
             <FormKit type="text" name="firstname" validation="required" />
           </AppFormInput>
-          <AppFormInput label="CLIENTS.LABELS.LASTNAME">
+          <AppFormInput label="CLIENTS.LABELS.LASTNAME" :required="true">
             <FormKit type="text" name="lastname" validation="required" />
           </AppFormInput>
         </AppGroup>
 
         <AppGroup>
-          <AppFormInput label="CLIENTS.LABELS.STREET">
+          <AppFormInput label="CLIENTS.LABELS.STREET" :required="true">
             <FormKit type="text" name="street" validation="required" />
           </AppFormInput>
-          <AppFormInput label="CLIENTS.LABELS.POSTAL_CODE">
+          <AppFormInput label="CLIENTS.LABELS.POSTAL_CODE" :required="true">
             <FormKit type="text" name="postalCode" validation="required" />
           </AppFormInput>
-          <AppFormInput label="CLIENTS.LABELS.CITY">
+          <AppFormInput label="CLIENTS.LABELS.CITY" :required="true">
             <FormKit type="text" name="city" validation="required" />
           </AppFormInput>
         </AppGroup>
@@ -137,14 +160,18 @@ function onCancel() {
           </AppFormInput>
         </AppGroup>
       </div>
-    </FormKit>
-    <div class="flex w-full gap-5">
-      <AppButton
-        label="COMMON.BUTTONS.CANCEL"
-        :color="ButtonColor.GRAY"
-        @click="onCancel"
-      />
-      <AppButton label="COMMON.BUTTONS.SAVE" @click="onSave" />
+      <div class="flex w-full gap-5">
+        <AppButton
+          label="COMMON.BUTTONS.CANCEL"
+          :color="ButtonColor.GRAY"
+          @click="onCancel"
+        />
+        <AppButton
+          label="COMMON.BUTTONS.SAVE"
+          :disabled="!formIsValid"
+          @click="onSave"
+        />
+      </div>
     </div>
-  </div>
+  </FormKit>
 </template>
