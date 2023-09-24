@@ -45,7 +45,9 @@ export class HealthController {
     }
 
     return {
-      version: this.configSerivce.appVersion,
+      appVersion: this.configSerivce.app.version,
+      buildSha: this.configSerivce.app.buildSha,
+      buildTime: this.configSerivce.app.buildTime,
     };
   }
 }

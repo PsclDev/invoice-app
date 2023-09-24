@@ -1,6 +1,9 @@
 <script setup>
 import { useStorage } from '@vueuse/core';
 
+const healthStore = useHealthStore();
+healthStore.getHealth();
+
 const i18n = useI18n();
 const curLang = useStorage(LocalStorageKeys.Language, 'en');
 

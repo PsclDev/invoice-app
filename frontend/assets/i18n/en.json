@@ -90,6 +90,10 @@
       "DELETE_FAILED": "Failed to delete document '{name}'"
     }
   },
+  "HEALTH": {
+    "FRONTEND_UPDATE": "App frontend has been updated from '{oldVersion}' to '{newVersion}'",
+    "BACKEND_UPDATE": "App backend has been updated from '{oldVersion}' to '{newVersion}'"
+  },
   "NAVIGATION": {
     "CLIENTS": "Clients",
     "DASHBOARD": "Dashboard",

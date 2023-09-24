@@ -4,10 +4,16 @@ import * as dotenv from 'dotenv';
 const dotenvExpand = require('dotenv-expand');
 import * as Joi from 'joi';
 
+import { appVersion, buildSha, buildTime } from '../../app-version';
+
 dotenvExpand.expand(dotenv.config());
 
 const CONFIG_SCHEMA = Joi.object().keys({
-  appVersion: Joi.string().required(),
+  app: Joi.object().keys({
+    version: Joi.string().required(),
+    buildSha: Joi.string().required(),
+    buildTime: Joi.string().required(),
+  }),
   cacheTTL: Joi.number().integer().required(),
   chromiumNoSandboxMode: Joi.bool().optional(),
   chromiumPath: Joi.string().optional(),
@@ -57,7 +63,11 @@ const CONFIG_SCHEMA = Joi.object().keys({
 @Injectable()
 export class ConfigService {
   nodeEnv = process.env.NODE_ENV || 'prod';
-  appVersion = process.env.npm_package_version || 'unkown';
+  app = {
+    version: appVersion,
+    buildSha,
+    buildTime,
+  };
   cacheTTL = Number(process.env.APP_CACHE_TTL) || 30;
   chromiumPath = process.env.APP_CHROMIUM_PATH;
   chromiumNoSandboxMode =

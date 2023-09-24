@@ -90,6 +90,10 @@
       "DELETE_FAILED": "Fehler beim Löschen des Dokuments '{name}' aufgetreten"
     }
   },
+  "HEALTH": {
+    "FRONTEND_UPDATE": "App frontend wurde von '{oldVersion}' auf '{newVersion}' aktualisiert",
+    "BACKEND_UPDATE": "App backend wurde von '{oldVersion}' auf '{newVersion}' aktualisiert"
+  },
   "NAVIGATION": {
     "CLIENTS": "Kunden",
     "DASHBOARD": "Übersicht",

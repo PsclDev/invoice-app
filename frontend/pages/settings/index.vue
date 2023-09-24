@@ -8,7 +8,6 @@ const settingStore = useSettingStore();
 const healthStore = useHealthStore();
 
 settingStore.getAll();
-healthStore.getHealth();
 
 const { currentLanguage, toggleLanguage, toggleColorMode } =
   useToggleSettings();

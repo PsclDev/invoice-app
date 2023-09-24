@@ -1,10 +1,5 @@
 {
-  "name": "backend",
-  "version": "2.0.0",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "name": "invoice-app-backend",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

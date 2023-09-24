@@ -28,7 +28,7 @@ async function bootstrap() {
   if (config.devMode) {
     const documentBuilder = new DocumentBuilder()
       .setTitle('Invoice-App')
-      .setVersion(config.appVersion)
+      .setVersion(config.app.version)
       .build();
     const document = SwaggerModule.createDocument(app, documentBuilder);
     SwaggerModule.setup('docs', app, document);
@@ -36,6 +36,8 @@ async function bootstrap() {
 
   const port = config.httpPort;
   await app.listen(port);
-  logger.log(`App listening on port: ${port} | version: ${config.appVersion}`);
+  logger.log(
+    `App listening on port: ${port} | version: ${config.app.version}, build: ${config.app.buildSha}, time: ${config.app.buildTime}`,
+  );
 }
 bootstrap();
