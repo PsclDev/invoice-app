@@ -27,7 +27,12 @@ export const useClientStore = defineStore('client', () => {
         const { documents, ...client } = c;
         return {
           ...client,
-          documentIds: documents.map((d) => d.id),
+          documents: documents.map((d) => ({
+            id: d.id,
+            type: d.type,
+            offerNr: d.offerNr,
+            invoiceNr: d.invoiceNr,
+          })),
         };
       });
     } catch (error) {
@@ -52,7 +57,7 @@ export const useClientStore = defineStore('client', () => {
       street: '',
       postalCode: '',
       city: '',
-      documentIds: [],
+      documents: [],
     });
 
     newClientNr.value++;
@@ -64,7 +69,7 @@ export const useClientStore = defineStore('client', () => {
       const url = form.company ? `${reqUrl}/company` : reqUrl;
 
       const payload = omitBy(form, isEmpty);
-      const { data, error } = await useFetch<Client>(`${url}/${clientId}`, {
+      const { data, error } = await useFetch<Client>(url, {
         method: 'POST',
         body: JSON.stringify(payload),
       });

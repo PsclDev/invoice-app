@@ -18,26 +18,13 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue']);
 
 const { modelValue, doc } = toRefs(props);
+const { formatCurrency, formatDescription, formatTaxRate } =
+  useDocumentHelper();
 const documentStore = useDocumentStore();
 const clientStore = useClientStore();
 const client = clientStore.getById(doc.value.clientId);
 const openClientInfoModal = ref(false);
 const openDeleteModal = ref(false);
-
-const descriptionText = computed(() => {
-  return doc.value.description.join('\n');
-});
-
-const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR',
-  }).format(value);
-};
-
-const formatTaxRate = (value: number) => {
-  return `${value}%`;
-};
 
 function onEdit() {
   emits(
@@ -78,7 +65,7 @@ function onDelete() {
       <div class="grid w-full grid-cols-1 gap-2">
         <AppViewItem
           label="DOCUMENTS.LABELS.DESCRIPTION"
-          :value="descriptionText"
+          :value="formatDescription(doc.description)"
         />
       </div>
 

@@ -2,11 +2,13 @@
 import { Client } from 'types';
 
 const store = useClientStore();
+const documentStore = useDocumentStore();
 const { clients } = storeToRefs(store);
 const { isCompany, getName } = useClientHelper();
 const { filter, filteredList, setInitialList } = useFilterList<Client>();
 
 await store.getAll();
+await documentStore.getAll();
 setInitialList(store.clients);
 
 function onAction() {

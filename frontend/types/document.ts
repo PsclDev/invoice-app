@@ -35,3 +35,8 @@ export type DocumentForm = Omit<
 > & {
   description: string;
 };
+
+export type ReducedDocument = Pick<
+  Document,
+  'id' | 'type' | 'offerNr' | 'invoiceNr'
+>;

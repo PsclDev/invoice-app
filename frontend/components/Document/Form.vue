@@ -49,7 +49,7 @@ const form = reactive<DocumentForm>({
 });
 
 const dateDifference = computed(() => {
-  docHelper.dateDifference(form.dateOfIssue, form.dueDate);
+  return docHelper.dateDifference(form.dateOfIssue, form.dueDate);
 });
 
 const document = ref<Document | null>(null);
@@ -72,6 +72,7 @@ if (formMode.value === FormMode.EDIT) {
     dueDate: DateTime.fromISO(document.value.dueDate).toFormat(
       docHelper.dateFormat,
     ),
+    alreadyPaid: document.value.alreadyPaid || 0,
   };
 
   Object.assign(form, unformattedValues, formattedValues);
@@ -143,14 +144,14 @@ function onCancel() {
             <FormKit type="date" name="dateOfIssue" validation="required" />
           </AppFormInput>
           <AppFormInput
-            v-if="document && isInvoice(document)"
+            v-if="document && docHelper.isInvoice(document)"
             label="DOCUMENTS.LABELS.DUE_DATE"
             :required="true"
           >
             <FormKit type="date" name="dueDate" validation="required" />
           </AppFormInput>
           <div
-            v-if="document && isInvoice(document)"
+            v-if="document && docHelper.isInvoice(document)"
             class="flex w-full flex-col justify-center sm:gap-2"
           >
             <p class="font-bold">{{ $t('DOCUMENTS.LABELS.DATE_DIFF') }}:</p>
@@ -204,7 +205,7 @@ function onCancel() {
         </div>
         <div class="grid w-full gap-2 sm:grid-cols-4">
           <AppFormInput
-            v-if="document && isInvoice(document)"
+            v-if="document && docHelper.isInvoice(document)"
             label="DOCUMENTS.LABELS.ALREADY_PAID"
           >
             <FormKit type="number" number="float" name="alreadyPaid" />

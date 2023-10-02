@@ -1,4 +1,4 @@
-import { Document } from './document';
+import { Document, ReducedDocument } from './document';
 
 export enum Gender {
   MALE = 'MALE',
@@ -17,14 +17,14 @@ export interface Client {
   street: string;
   postalCode: string;
   city: string;
-  documentIds: string[];
+  documents: ReducedDocument[];
   createdAt?: string;
   updatedAt?: string;
 }
 
-export type ClientDto = Omit<Client, 'documentIds'> & { documents: Document[] };
+export type ClientDto = Omit<Client, 'documents'> & { documents: Document[] };
 
 export type ClientForm = Omit<
   Client,
-  'id' | 'documentIds' | 'createdAt' | 'updatedAt'
+  'id' | 'documents' | 'createdAt' | 'updatedAt'
 >;

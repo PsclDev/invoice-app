@@ -15,9 +15,17 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue']);
 
 const { modelValue, client } = toRefs(props);
-const { isCompany, getName } = useClientHelper();
+const { isCompany, getName: getClientName } = useClientHelper();
+const { getName: getDocumentName } = useDocumentHelper();
 const store = useClientStore();
+const openDocumentInfoModal = ref(false);
+const documentInfoId = ref('');
 const openDeleteModal = ref(false);
+
+function openDocumentInfo(id: string) {
+  documentInfoId.value = id;
+  openDocumentInfoModal.value = true;
+}
 
 function onEdit() {
   emits(
@@ -64,12 +72,25 @@ function onDelete() {
         <AppViewItem label="CLIENTS.LABELS.EMAIL" :value="client.email" />
       </AppGroup>
 
-      <AppGroup v-if="client.documentIds.length > 0">
-        <AppViewItem
-          label="CLIENTS.LABELS.DOCUMENTS"
-          :value="client.documentIds.length"
-        />
-      </AppGroup>
+      <div v-if="client.documents.length > 0" class="w-full">
+        <div class="flex w-full flex-col sm:gap-2">
+          <p class="font-bold">{{ $t('CLIENTS.LABELS.DOCUMENTS') }}:</p>
+          <div class="flex flex-wrap gap-4">
+            <div
+              v-for="doc in client.documents"
+              :key="doc.id"
+              class="flex items-center gap-2"
+            >
+              <p>{{ getDocumentName(doc) }}</p>
+              <div class="leading-[16px]">
+                <button @click="openDocumentInfo(doc.id)">
+                  <Icon name="formkit:info" size="18" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="flex w-full gap-5">
       <AppButton
@@ -87,10 +108,16 @@ function onDelete() {
     <AppConfirmModal
       v-model="openDeleteModal"
       title-key="CLIENTS.MODAL.DELETE.TITLE"
-      :title-props="{ name: getName(client) }"
+      :title-props="{ name: getClientName(client) }"
       content-key="CLIENTS.MODAL.DELETE.CONTENT"
       @confirm="onDelete"
       @cancel="() => (openDeleteModal = false)"
+    />
+
+    <DocumentInfoModal
+      v-if="openDocumentInfoModal"
+      v-model="openDocumentInfoModal"
+      :document-id="documentInfoId"
     />
   </div>
 </template>

@@ -9,7 +9,6 @@ defineProps({
 });
 
 const { formatDate } = useCustomDateHelper();
-const formRef = ref([]);
 const mode = ref<ViewMode>(ViewMode.VIEW);
 </script>
 
@@ -30,7 +29,6 @@ const mode = ref<ViewMode>(ViewMode.VIEW);
     <DocumentView v-if="mode === ViewMode.VIEW" v-model="mode" :doc="doc" />
     <DocumentForm
       v-if="mode === ViewMode.EDIT"
-      ref="formRef"
       v-model="mode"
       :form-mode="FormMode.EDIT"
       :document-id="doc.id"

@@ -1,21 +1,30 @@
 import { DateTime } from 'luxon';
 
-import { Client, Document, DocumentForm, DocumentType } from '@/types';
+import {
+  Client,
+  Document,
+  DocumentForm,
+  DocumentType,
+  ReducedDocument,
+} from '@/types';
 
 export default function useDocumentHelper() {
   const i18n = useI18n();
   const clientHelper = useClientHelper();
   const dateFormat = 'yyyy-MM-dd';
 
-  const isOffer = (doc: Document | DocumentForm) => {
+  const isOffer = (doc: Document | DocumentForm | ReducedDocument) => {
     return doc.type === DocumentType.OFFER;
   };
 
-  const isInvoice = (doc: Document | DocumentForm) => {
+  const isInvoice = (doc: Document | DocumentForm | ReducedDocument) => {
     return doc.type === DocumentType.INVOICE;
   };
 
-  const getName = (doc: Document | DocumentForm, client?: Client | null) => {
+  const getName = (
+    doc: Document | DocumentForm | ReducedDocument,
+    client?: Client | null,
+  ) => {
     const documentType = `${i18n.t(
       `DOCUMENTS.TYPE.${isOffer(doc) ? 'OFFER' : 'INVOICE'}`,
     )}`;
@@ -57,10 +66,28 @@ export default function useDocumentHelper() {
     return dueDate.diff(dateOfIssue, 'days').days;
   };
 
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR',
+    }).format(value);
+  };
+
+  const formatDescription = (description: string[]) => {
+    return description.join('\n');
+  };
+
+  const formatTaxRate = (value: number) => {
+    return `${value}%`;
+  };
+
   return {
     calculateSubtotal,
     dateFormat,
     dateDifference,
+    formatCurrency,
+    formatDescription,
+    formatTaxRate,
     getDueDate,
     getName,
     isOffer,
