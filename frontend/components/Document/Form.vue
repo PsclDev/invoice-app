@@ -31,29 +31,25 @@ const emits = defineEmits(['update:modelValue']);
 
 const store = useDocumentStore();
 const { modelValue, formMode, documentId } = toRefs(props);
-const { calculateSubtotal, dateFormat, getDueDate, isInvoice } =
-  useDocumentHelper();
+const docHelper = useDocumentHelper();
 
 const formId = (Math.random() + 1).toString(36).substring(7);
 const form = reactive<DocumentForm>({
   type: DocumentType.OFFER,
   offerNr: 0,
   invoiceNr: 0,
-  dateOfIssue: DateTime.now().toFormat(dateFormat),
+  dateOfIssue: DateTime.now().toFormat(docHelper.dateFormat),
   description: '',
   subTotal: 0,
-  tax: 19,
-  taxRate: 0,
+  tax: 0,
+  taxRate: 19,
   total: 0,
   alreadyPaid: 0,
-  dueDate: DateTime.now().plus({ days: 8 }).toFormat(dateFormat),
+  dueDate: DateTime.now().plus({ days: 8 }).toFormat(docHelper.dateFormat),
 });
 
 const dateDifference = computed(() => {
-  const dateOfIssue = DateTime.fromISO(form.dateOfIssue);
-  const dueDate = DateTime.fromISO(form.dueDate);
-
-  return dueDate.diff(dateOfIssue, 'days').days;
+  docHelper.dateDifference(form.dateOfIssue, form.dueDate);
 });
 
 const document = ref<Document | null>(null);
@@ -71,9 +67,11 @@ if (formMode.value === FormMode.EDIT) {
   const formattedValues = {
     description: document.value.description.join('\n'),
     dateOfIssue: DateTime.fromISO(document.value.dateOfIssue).toFormat(
-      dateFormat,
+      docHelper.dateFormat,
     ),
-    dueDate: DateTime.fromISO(document.value.dueDate).toFormat(dateFormat),
+    dueDate: DateTime.fromISO(document.value.dueDate).toFormat(
+      docHelper.dateFormat,
+    ),
   };
 
   Object.assign(form, unformattedValues, formattedValues);
@@ -83,7 +81,7 @@ watch(
   () => form.dateOfIssue,
   (newDateOfIssue, oldDateOfIssue) => {
     if (oldDateOfIssue !== newDateOfIssue) {
-      form.dueDate = getDueDate(newDateOfIssue);
+      form.dueDate = docHelper.getDueDate(newDateOfIssue);
     }
   },
 );
@@ -91,7 +89,7 @@ watch(
 watchDebounced(
   () => form.description,
   () => {
-    const calculated = calculateSubtotal(form.description);
+    const calculated = docHelper.calculateSubtotal(form.description);
     form.subTotal = calculated > 0 ? calculated : form.subTotal;
   },
   { debounce: 450 },
@@ -101,7 +99,7 @@ watchDebounced(
   () => form.subTotal + form.taxRate + form.alreadyPaid,
   () => {
     const tax = form.subTotal * (form.taxRate / 100);
-    const total = Number(form.subTotal) + form.tax - Number(form.alreadyPaid);
+    const total = Number(form.subTotal) + tax - Number(form.alreadyPaid);
 
     Object.assign(form, {
       tax: Number(tax.toFixed(2)),

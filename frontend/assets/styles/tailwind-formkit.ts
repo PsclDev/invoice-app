@@ -32,7 +32,7 @@ export default {
     input:
       'absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none peer',
     inner: '$remove:formkit-disabled:bg-gray-200',
-    label: '$reset text-sm text-gray-700 mt-1 select-none',
+    label: '$reset text-sm text-black dark:text-white mt-1 select-none',
     wrapper: 'flex items-center mb-1',
   },
   'family:button': {

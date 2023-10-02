@@ -35,10 +35,10 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@formkit/addons": "^1.0.0",
-    "@formkit/icons": "^1.0.0",
-    "@formkit/nuxt": "^1.0.0",
-    "@formkit/themes": "^1.0.0",
+    "@formkit/addons": "^1.1.0",
+    "@formkit/icons": "^1.1.0",
+    "@formkit/nuxt": "^1.1.0",
+    "@formkit/themes": "^1.1.0",
     "@pinia/nuxt": "^0.4.11",
     "@vueuse/nuxt": "^10.3.0",
     "lodash": "^4.17.21",

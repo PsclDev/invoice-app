@@ -8,6 +8,34 @@ export const useDocumentStore = defineStore('document', () => {
   const documents = ref<Document[]>([]);
   const reqUrl = useApiUrl() + '/document';
 
+  function getRequestUrl(type: DocumentType) {
+    return type === DocumentType.OFFER
+      ? `${reqUrl}/offer`
+      : `${reqUrl}/invoice`;
+  }
+
+  async function getNewId(type: DocumentType) {
+    try {
+      logger.info('documentStore.getNewId');
+      const url = getRequestUrl(type);
+      const { data, error } = await useFetch<Number>(url + '/nr');
+      if (!data.value || error.value) {
+        throw error.value;
+      }
+
+      return {
+        field: type === DocumentType.OFFER ? 'offerNr' : 'invoiceNr',
+        value: Number(data.value),
+      };
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.NEW_ID_FAILED'),
+      });
+      logger.error('Failed to get new id for document', error);
+    }
+  }
+
   function getById(id: string): Document {
     return documents.value.find((c) => c.id === id)!;
   }
@@ -30,13 +58,45 @@ export const useDocumentStore = defineStore('document', () => {
     }
   }
 
+  async function create(form: DocumentForm, clientId: string) {
+    try {
+      logger.info('documentStore.create');
+      const url = getRequestUrl(form.type);
+      const newId = await getNewId(form.type);
+
+      if (!newId) {
+        throw new Error('Failed to get new id');
+      }
+
+      const payload = {
+        ...form,
+        clientId,
+        [newId.field]: newId.value,
+        description: form.description.split('\n'),
+      };
+      const { data, error } = await useFetch<Document>(url, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+      if (!data.value || error.value) {
+        throw error.value;
+      }
+
+      documents.value.unshift(data.value);
+      return data.value.id;
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.CREATE_FAILED', { name: getName(form) }),
+      });
+      logger.error('Failed to create document', error);
+    }
+  }
+
   async function update(docId: string, form: DocumentForm) {
     try {
       logger.info('documentStore.update');
-      const url =
-        form.type === DocumentType.OFFER
-          ? `${reqUrl}/offer`
-          : `${reqUrl}/invoice`;
+      const url = getRequestUrl(form.type);
 
       const payload = {
         ...form,
@@ -58,13 +118,13 @@ export const useDocumentStore = defineStore('document', () => {
         color: 'red',
         title: i18n.t('DOCUMENTS.STORE.UPDATE_FAILED', { name: getName(form) }),
       });
-      logger.error('Failed to update client', error);
+      logger.error('Failed to update document', error);
     }
   }
 
   async function deleteDocument(doc: Document) {
     try {
-      logger.info('documentStore.deleteClient');
+      logger.info('documentStore.deleteDocument');
 
       const { error } = await useFetch(`${reqUrl}/${doc.id}`, {
         method: 'delete',
@@ -80,9 +140,9 @@ export const useDocumentStore = defineStore('document', () => {
         color: 'red',
         title: i18n.t('DOCUMENTS.STORE.CREATE_FAILED', { name: getName(doc) }),
       });
-      logger.error('Failed to delete client', error);
+      logger.error('Failed to delete document', error);
     }
   }
 
-  return { documents, deleteDocument, getById, getAll, update };
+  return { create, documents, deleteDocument, getById, getAll, update };
 });

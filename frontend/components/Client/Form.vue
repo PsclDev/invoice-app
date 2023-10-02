@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { reset } from '@formkit/core';
 import { omit } from 'lodash';
-import { PropType } from 'nuxt/dist/app/compat/capi';
 
 import {
   ButtonColor,

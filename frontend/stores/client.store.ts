@@ -74,6 +74,7 @@ export const useClientStore = defineStore('client', () => {
 
       clients.value = clients.value.filter((x) => x.id !== clientId);
       clients.value.unshift(data.value);
+      return data.value.id;
     } catch (error) {
       toast.add({
         color: 'red',

@@ -7,6 +7,7 @@
   "COMMON": {
     "BUTTONS": {
       "CANCEL": "Cancel",
+      "CREATE": "Create",
       "DELETE": "Delete",
       "EDIT": "Edit",
       "SAVE": "Save"
@@ -14,6 +15,11 @@
     "LABELS": {
       "CREATED_AT": "Created at",
       "UPDATED_AT": "Updated at"
+    }
+  },
+  "AI": {
+    "STORE": {
+      "OPTIMIZED_FAILED": "Failed to optimize description"
     }
   },
   "CLIENTS": {
@@ -62,6 +68,7 @@
     "TITLE": "Documents",
     "SEARCH_PLACEHOLDER": "Name, Description, Total Price, ...",
     "NEW": "Create new document",
+    "OPTIMIZE_DESCRIPTION": "Optimize description",
     "LABELS": {
       "CLIENT": "Client",
       "DATE_OF_ISSUE": "Date of issue",
@@ -86,6 +93,8 @@
     },
     "STORE": {
       "GET_ALL_FAILED": "Failed to get all documents",
+      "NEW_ID_FAILED": "Failed to get new document id",
+      "CREATE_FAILED": "Failed to create document '{name}'",
       "UPDATE_FAILED": "Failed to update document '{name}'",
       "DELETE_FAILED": "Failed to delete document '{name}'"
     }

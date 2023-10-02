@@ -4,6 +4,7 @@ import { Document } from 'types';
 const store = useDocumentStore();
 const clientStore = useClientStore();
 const { documents } = storeToRefs(store);
+const router = useRouter();
 const { isOffer, getName } = useDocumentHelper();
 const { filter, filteredList, setInitialList } = useFilterList<Document>();
 
@@ -11,7 +12,9 @@ await store.getAll();
 await clientStore.getAll();
 setInitialList(store.documents);
 
-function onAction() {}
+function onAction() {
+  router.push('/documents/new');
+}
 
 function onSearch(searchterm: string) {
   filter(searchterm);

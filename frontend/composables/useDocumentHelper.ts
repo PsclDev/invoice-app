@@ -50,9 +50,17 @@ export default function useDocumentHelper() {
       .toFormat(dateFormat);
   };
 
+  const dateDifference = (dateOfIssueStr: string, dueDateStr: string) => {
+    const dateOfIssue = DateTime.fromISO(dateOfIssueStr);
+    const dueDate = DateTime.fromISO(dueDateStr);
+
+    return dueDate.diff(dateOfIssue, 'days').days;
+  };
+
   return {
     calculateSubtotal,
     dateFormat,
+    dateDifference,
     getDueDate,
     getName,
     isOffer,
