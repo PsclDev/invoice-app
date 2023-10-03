@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useStorage } from '@vueuse/core';
 import { groupBy } from 'lodash';
 import { SettingType } from 'types';
 
@@ -20,6 +21,20 @@ watch(useDarkMode, () => {
 const useGerman = ref(currentLanguage.value === 'de');
 watch(useGerman, () => {
   toggleLanguage();
+});
+
+const devMode = useStorage(LocalStorageKeys.DevMode, '');
+
+function switchDevMode() {
+  if (devMode.value === '') {
+    devMode.value = 'app:*';
+  } else {
+    devMode.value = '';
+  }
+}
+
+const devModeEnabled = computed(() => {
+  return devMode.value !== '';
 });
 
 const groupedSettings = computed(() => {
@@ -143,6 +158,18 @@ useHead({
           <p>App Version: {{ healthStore.frontendVersion }}</p>
           <p>Backend Version: {{ healthStore.backendVersion }}</p>
         </div>
+      </div>
+      <div class="flex justify-center">
+        <button
+          class="border-cannon-pink-500 text-cannon-pink-700 flex items-center gap-2 rounded border bg-transparent px-2 py-1 text-xs"
+          @click="switchDevMode"
+        >
+          {{ devModeEnabled ? 'Disable Dev-Mode' : 'Enable Dev-Mode' }}
+          <Icon
+            :name="devModeEnabled ? 'ic:round-code-off' : 'ic:round-code'"
+            size="24"
+          />
+        </button>
       </div>
     </div>
   </BasePage>
