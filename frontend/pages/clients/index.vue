@@ -4,7 +4,6 @@ import { Client } from 'types';
 const store = useClientStore();
 const documentStore = useDocumentStore();
 const { clients } = storeToRefs(store);
-const { isCompany, getName } = useClientHelper();
 const { filter, filteredList, setInitialList } = useFilterList<Client>();
 
 await store.getAll();
@@ -38,15 +37,11 @@ useHead({
     @search="onSearch"
   >
     <div class="flex w-full flex-col gap-2">
-      <AppAccordion
+      <ClientItem
         v-for="client in filteredList"
-        :id="client.id"
         :key="client.id"
-        :title="getName(client)"
-        :icon="isCompany(client) ? 'mdi:person-tie' : 'mdi:person'"
-      >
-        <ClientItem :client="client" />
-      </AppAccordion>
+        :client="client"
+      />
     </div>
   </BasePage>
 </template>

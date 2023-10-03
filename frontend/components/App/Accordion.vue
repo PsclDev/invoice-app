@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Action } from 'types';
+
 defineProps({
   icon: {
     type: String,
@@ -13,6 +15,11 @@ defineProps({
     type: String,
     required: false,
     default: undefined,
+  },
+  actions: {
+    type: Array as PropType<Action[]>,
+    required: false,
+    default: () => [],
   },
 });
 
@@ -33,9 +40,20 @@ const collapsed = ref(true);
           >#{{ id }}</small
         >
       </div>
-      <div class="grow pr-3 text-end" @click="collapsed = !collapsed">
+
+      <div class="pr-3 text-end">
         <button
-          class="cursor-pointer text-black hover:text-slate-400 dark:text-slate-600 dark:hover:text-white"
+          v-for="action in actions"
+          :key="action.icon"
+          class="hover:text-spring-green-600 dark:hover:text-spring-green-600 cursor-pointer px-2 text-black dark:text-white"
+          @click="action.func"
+        >
+          <Icon :name="action.icon" />
+        </button>
+
+        <button
+          class="cursor-pointer pl-5 text-black hover:text-slate-400 dark:text-slate-600 dark:hover:text-white"
+          @click="collapsed = !collapsed"
         >
           <Icon :name="collapsed ? 'bi:chevron-down' : 'bi:chevron-up'" />
         </button>

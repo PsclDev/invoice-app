@@ -15,3 +15,8 @@ export enum ViewMode {
   EDIT = 'edit',
   VIEW = 'view',
 }
+
+export interface Action {
+  icon: string;
+  func: Function;
+}
