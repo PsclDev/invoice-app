@@ -10,6 +10,7 @@ import {
 } from '~/types';
 
 const router = useRouter();
+const route = useRoute();
 const clientStore = useClientStore();
 const documentStore = useDocumentStore();
 const { clients } = storeToRefs(clientStore);
@@ -27,11 +28,15 @@ const clientList = ref(
 );
 
 const selectedClient = ref(clientList.value[0]);
-watch(selectedClient, () => {
-  client.value = clientStore.getById(selectedClient.value.value);
-});
-
 const client = ref<Client>({} as Client);
+
+const clientId = route.query.clientId as string;
+if (clientId) {
+  selectedClient.value = clientList.value.find(
+    (client) => client.value === clientId,
+  )!;
+  client.value = clientStore.getById(selectedClient.value.value);
+}
 
 const clientForm = ref<ClientForm>({
   company: '',
@@ -71,6 +76,10 @@ async function createDocument() {
 
   router.push('/documents');
 }
+
+watch(selectedClient, () => {
+  client.value = clientStore.getById(selectedClient.value.value);
+});
 
 useHead({
   title: 'Create new Document',

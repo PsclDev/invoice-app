@@ -93,6 +93,33 @@ export const useDocumentStore = defineStore('document', () => {
     }
   }
 
+  async function convert(doc: Document) {
+    try {
+      logger.info('documentStore.convert');
+      const url = getRequestUrl(DocumentType.OFFER);
+
+      const { data, error } = await useFetch<Document>(
+        `${url}/${doc.id}/convert`,
+        {
+          method: 'POST',
+        },
+      );
+      if (!data.value || error.value) {
+        throw error.value;
+      }
+
+      const index = documents.value.findIndex((x) => x.id === doc.id);
+      documents.value[index] = { ...doc, invoiceId: data.value.id };
+      documents.value.unshift(data.value);
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.CONVERT_FAILED', { name: getName(doc) }),
+      });
+      logger.error('Failed to convert document', error);
+    }
+  }
+
   async function update(docId: string, form: DocumentForm) {
     try {
       logger.info('documentStore.update');
@@ -138,11 +165,67 @@ export const useDocumentStore = defineStore('document', () => {
     } catch (error) {
       toast.add({
         color: 'red',
-        title: i18n.t('DOCUMENTS.STORE.CREATE_FAILED', { name: getName(doc) }),
+        title: i18n.t('DOCUMENTS.STORE.DELETE_FAILED', { name: getName(doc) }),
       });
       logger.error('Failed to delete document', error);
     }
   }
 
-  return { create, documents, deleteDocument, getById, getAll, update };
+  function printDocument(docId: string) {
+    logger.info('documentStore.printDocument');
+    const router = useRouter();
+    router.push(`/document/${docId}`);
+  }
+
+  async function sendDocument(docId: string) {
+    try {
+      logger.info('documentStore.sendDocument');
+
+      const { error } = await useFetch(`${reqUrl}/mail/${docId}`, {
+        method: 'POST',
+      });
+      if (error.value) {
+        throw error.value;
+      }
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.SEND_FAILED'),
+      });
+      logger.error('Failed to send document', error);
+    }
+  }
+
+  async function sendDocumentDelayed(docId: string) {
+    try {
+      logger.info('documentStore.sendDocumentDelayed');
+
+      const { error } = await useFetch(`${reqUrl}/mail/${docId}`, {
+        method: 'POST',
+        body: JSON.stringify({ delayDelivery: true }),
+      });
+      if (error.value) {
+        throw error.value;
+      }
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.SEND_FAILED'),
+      });
+      logger.error('Failed to send document delayed', error);
+    }
+  }
+
+  return {
+    create,
+    convert,
+    documents,
+    deleteDocument,
+    getById,
+    getAll,
+    printDocument,
+    sendDocument,
+    sendDocumentDelayed,
+    update,
+  };
 });

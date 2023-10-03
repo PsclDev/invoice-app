@@ -89,6 +89,13 @@
       "INFO": {
         "TITLE": "Informationen über das Dokument"
       },
+      "SEND": {
+        "TITLE": "Send Document '{name}'",
+        "CONTENT": "How should the document be send?",
+        "PRINT": "Print",
+        "MAIL": "Email",
+        "DELAYED_MAIL": "Delayed Email"
+      },
       "DELETE": {
         "TITLE": "Wollen Sie '{name}' löschen?",
         "CONTENT": "Sind Sie sicher, dass Sie das Dokument löschen möchten?"
@@ -98,8 +105,10 @@
       "GET_ALL_FAILED": "Fehler beim Laden der Dokumente",
       "NEW_ID_FAILED": "Fehler beim Abfragen der nächsten ID für das Dokument",
       "CREATE_FAILED": "Fehler beim erstellen des Dokuments '{name}'",
+      "CONVERT_FAILED": "Fehler beim konvertieren von '{name}' zu einer Rechnung",
       "UPDATE_FAILED": "Fehler beim Speichern des Dokuments '{name}' aufgetreten",
-      "DELETE_FAILED": "Fehler beim Löschen des Dokuments '{name}' aufgetreten"
+      "DELETE_FAILED": "Fehler beim Löschen des Dokuments '{name}' aufgetreten",
+      "SEND_FAILED": "Fehler beim versenden des Dokuments aufgetreten"
     }
   },
   "HEALTH": {

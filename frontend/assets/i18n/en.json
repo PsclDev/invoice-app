@@ -89,6 +89,13 @@
       "INFO": {
         "TITLE": "Information about the document"
       },
+      "SEND": {
+        "TITLE": "Send Document '{name}'",
+        "CONTENT": "How should the document be send?",
+        "PRINT": "Print",
+        "MAIL": "Email",
+        "DELAYED_MAIL": "Delayed Email"
+      },
       "DELETE": {
         "TITLE": "Delete document '{name}'",
         "CONTENT": "Are you sure you want to delete this document?"
@@ -98,8 +105,10 @@
       "GET_ALL_FAILED": "Failed to get all documents",
       "NEW_ID_FAILED": "Failed to get new document id",
       "CREATE_FAILED": "Failed to create document '{name}'",
+      "CONVERT_FAILED": "Failed to convert '{name}' to an Invoice",
       "UPDATE_FAILED": "Failed to update document '{name}'",
-      "DELETE_FAILED": "Failed to delete document '{name}'"
+      "DELETE_FAILED": "Failed to delete document '{name}'",
+      "SEND_FAILED": "Failed to send document"
     }
   },
   "HEALTH": {

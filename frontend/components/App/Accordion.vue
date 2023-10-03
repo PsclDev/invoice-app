@@ -33,7 +33,10 @@ const collapsed = ref(true);
     <div
       class="flex h-10 w-full cursor-default items-center justify-between p-2 text-lg"
     >
-      <div class="flex items-center gap-1 truncate">
+      <div
+        class="flex items-center gap-1 truncate md:w-4/5"
+        :class="actions.length > 1 ? 'w-7/12' : 'w-2/3'"
+      >
         <Icon v-if="icon" :name="icon" />
         {{ title }}
         <small v-if="id" class="ml-1 text-xs text-slate-400 dark:text-slate-600"
