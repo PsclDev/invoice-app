@@ -99,7 +99,10 @@ export const useClientStore = defineStore('client', () => {
       const payload = omitBy(form, isEmpty);
       const { error } = await useFetch<Client>(url, {
         method: 'PATCH',
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...payload,
+          email: form.email !== '' ? form.email : null,
+        }),
       });
       if (error.value) {
         throw error.value;
