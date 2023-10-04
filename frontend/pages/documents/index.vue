@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Document } from 'types';
 
+const { t } = useI18n();
 const store = useDocumentStore();
 const clientStore = useClientStore();
 const { documents } = storeToRefs(store);
@@ -24,7 +25,7 @@ watch(documents, () => {
 });
 
 useHead({
-  title: 'Documents',
+  title: t('DOCUMENTS.TITLE'),
 });
 </script>
 

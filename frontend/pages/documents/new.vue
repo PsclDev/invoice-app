@@ -9,6 +9,7 @@ import {
   Gender,
 } from '~/types';
 
+const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const clientStore = useClientStore();
@@ -82,12 +83,12 @@ watch(selectedClient, () => {
 });
 
 useHead({
-  title: 'Create new Document',
+  title: t('DOCUMENTS.NEW_TITLE'),
 });
 </script>
 
 <template>
-  <BasePage title="DOCUMENTS.TITLE">
+  <BasePage title="DOCUMENTS.NEW_TITLE">
     <UCard>
       <div class="flex flex-col gap-5">
         <USelectMenu

@@ -66,6 +66,7 @@
   },
   "DOCUMENTS": {
     "TITLE": "Documents",
+    "NEW_TITLE": "New Document",
     "SEARCH_PLACEHOLDER": "Name, Description, Total Price, ...",
     "NEW": "Create new document",
     "OPTIMIZE_DESCRIPTION": "Optimize description",
