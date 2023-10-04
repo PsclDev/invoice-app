@@ -49,16 +49,19 @@ const store = useDocumentStore();
         <div class="flex w-full gap-5">
           <AppButton
             label="DOCUMENTS.MODAL.SEND.PRINT"
+            icon="material-symbols:print"
             :color="ButtonColor.BLUE"
             @click="store.printDocument(documentId)"
           />
           <AppButton
             label="DOCUMENTS.MODAL.SEND.MAIL"
+            icon="material-symbols:send"
             :color="ButtonColor.BLUE"
             @click="store.sendDocument(documentId)"
           />
           <AppButton
             label="DOCUMENTS.MODAL.SEND.DELAYED_MAIL"
+            icon="material-symbols:schedule-send"
             :color="ButtonColor.ORANGE"
             @click="store.sendDocumentDelayed(documentId)"
           />

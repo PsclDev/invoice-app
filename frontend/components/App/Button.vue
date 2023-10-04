@@ -6,6 +6,11 @@ defineProps({
     type: String,
     required: true,
   },
+  icon: {
+    type: String,
+    required: false,
+    default: '',
+  },
   color: {
     type: String as PropType<ButtonColor>,
     required: false,
@@ -36,6 +41,9 @@ defineEmits(['click']);
     }"
     @click="$emit('click')"
   >
-    {{ $t(label) }}
+    <span :class="{ 'hidden sm:block': icon !== '' }">{{ $t(label) }}</span>
+    <div :class="{ 'sm:hidden': icon !== '', hidden: icon === '' }">
+      <Icon :name="icon" size="32" />
+    </div>
   </button>
 </template>
