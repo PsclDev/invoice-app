@@ -32,8 +32,9 @@ const emits = defineEmits(['update:modelValue']);
 const store = useDocumentStore();
 const { modelValue, formMode, documentId } = toRefs(props);
 const docHelper = useDocumentHelper();
+const randomValue = useRandomValue();
 
-const formId = (Math.random() + 1).toString(36).substring(7);
+const formId = randomValue.Id();
 const form = reactive<DocumentForm>({
   type: DocumentType.OFFER,
   offerNr: 0,

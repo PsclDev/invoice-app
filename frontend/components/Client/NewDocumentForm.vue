@@ -10,8 +10,9 @@ const props = defineProps({
 
 const emits = defineEmits(['update:modelValue']);
 const { modelValue } = toRefs(props);
+const randomValue = useRandomValue();
 
-const formId = (Math.random() + 1).toString(36).substring(7);
+const formId = randomValue.Id();
 const clientType = ref<'private' | 'company'>('private');
 const form = ref({ ...modelValue.value });
 

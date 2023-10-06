@@ -13,8 +13,8 @@ const props = defineProps({
 const { documentId } = toRefs(props);
 const store = useDocumentStore();
 const document = store.getById(documentId.value);
-const { formatCurrency, formatDescription, formatTaxRate, isInvoice } =
-  useDocumentHelper();
+const { formatDescription, formatTaxRate, isInvoice } = useDocumentHelper();
+const { formatToEur } = useCurrencyHelper();
 const { formatDate } = useCustomDateHelper();
 
 const emit = defineEmits(['update:modelValue']);
@@ -61,7 +61,7 @@ const emit = defineEmits(['update:modelValue']);
           <div class="grid w-full gap-2 sm:grid-cols-5">
             <AppViewItem
               label="DOCUMENTS.LABELS.SUBTOTAL"
-              :value="formatCurrency(document.subTotal)"
+              :value="formatToEur(document.subTotal)"
             />
             <AppViewItem
               label="DOCUMENTS.LABELS.TAX_RATE"
@@ -69,17 +69,17 @@ const emit = defineEmits(['update:modelValue']);
             />
             <AppViewItem
               label="DOCUMENTS.LABELS.TAX"
-              :value="formatCurrency(document.tax)"
+              :value="formatToEur(document.tax)"
             />
             <AppViewItem
               v-if="isInvoice(document)"
               label="DOCUMENTS.LABELS.ALREADY_PAID"
-              :value="formatCurrency(document.alreadyPaid)"
+              :value="formatToEur(document.alreadyPaid)"
             />
 
             <AppViewItem
               label="DOCUMENTS.LABELS.TOTAL"
-              :value="formatCurrency(document.total)"
+              :value="formatToEur(document.total)"
             />
           </div>
         </div>

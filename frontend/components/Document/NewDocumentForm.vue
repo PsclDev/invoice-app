@@ -14,8 +14,9 @@ const aiStore = useAiStore();
 const emits = defineEmits(['update:modelValue']);
 const { modelValue } = toRefs(props);
 const docHelper = useDocumentHelper();
+const randomValue = useRandomValue();
 
-const formId = (Math.random() + 1).toString(36).substring(7);
+const formId = randomValue.Id();
 const form = ref({ ...modelValue.value });
 
 async function optimizeDescription() {

@@ -29,9 +29,10 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue']);
 
 const store = useClientStore();
+const randomValue = useRandomValue();
 const { modelValue, formMode, clientId } = toRefs(props);
 
-const formId = (Math.random() + 1).toString(36).substring(7);
+const formId = randomValue.Id();
 const clientType = ref<'private' | 'company'>('private');
 const form = reactive<ClientForm>({
   company: '',
