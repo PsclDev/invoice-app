@@ -18,8 +18,8 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue']);
 
 const { modelValue, doc } = toRefs(props);
-const { formatCurrency, formatDescription, formatTaxRate } =
-  useDocumentHelper();
+const { formatDescription, formatTaxRate } = useDocumentHelper();
+const { formatToEur } = useCurrencyHelper();
 const documentStore = useDocumentStore();
 const clientStore = useClientStore();
 const client = clientStore.getById(doc.value.clientId);
@@ -72,7 +72,7 @@ function onDelete() {
       <div class="grid w-full gap-2 sm:grid-cols-5">
         <AppViewItem
           label="DOCUMENTS.LABELS.SUBTOTAL"
-          :value="formatCurrency(doc.subTotal)"
+          :value="formatToEur(doc.subTotal)"
         />
         <AppViewItem
           label="DOCUMENTS.LABELS.TAX_RATE"
@@ -80,17 +80,17 @@ function onDelete() {
         />
         <AppViewItem
           label="DOCUMENTS.LABELS.TAX"
-          :value="formatCurrency(doc.tax)"
+          :value="formatToEur(doc.tax)"
         />
         <AppViewItem
           v-if="isInvoice(doc)"
           label="DOCUMENTS.LABELS.ALREADY_PAID"
-          :value="formatCurrency(doc.alreadyPaid)"
+          :value="formatToEur(doc.alreadyPaid)"
         />
 
         <AppViewItem
           label="DOCUMENTS.LABELS.TOTAL"
-          :value="formatCurrency(doc.total)"
+          :value="formatToEur(doc.total)"
         />
       </div>
     </div>

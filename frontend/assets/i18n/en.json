@@ -64,6 +64,56 @@
       "DELETE_FAILED": "Failed to delete client '{name}'"
     }
   },
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "STATS": {
+      "FINANCE": {
+        "TITLE": "Finance",
+        "REVENUES": "Revenues",
+        "TAXES": "Taxes",
+        "TOTAL_REVENUES": "Total Revenues"
+      },
+      "CLIENT": {
+        "TITLE": "Clients",
+        "ALL": "All",
+        "PRIVATE": "Private",
+        "COMPANY": "Company"
+      },
+      "DOCUMENT": {
+        "TITLE": "Documents",
+        "ALL": "All",
+        "OFFER": "Offer",
+        "INVOICES": "Invoices"
+      }
+    },
+    "TABS": {
+      "YEARLY": "Yearly",
+      "QUARTERLY": "Quarterly",
+      "MONTHLY": "Monthly"
+    },
+    "LABELS": {
+      "QUARTERS": {
+        "1": "Quarter 1",
+        "2": "Quarter 2",
+        "3": "Quarter 3",
+        "4": "Quarter 4"
+      },
+      "MONTHS": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      }
+    }
+  },
   "DOCUMENTS": {
     "TITLE": "Documents",
     "NEW_TITLE": "New Document",

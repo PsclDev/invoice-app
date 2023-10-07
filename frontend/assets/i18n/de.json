@@ -64,6 +64,56 @@
       "DELETE_FAILED": "Fehler beim Löschen des Kunden '{name}' aufgetreten"
     }
   },
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "STATS": {
+      "FINANCE": {
+        "TITLE": "Finanzen",
+        "REVENUES": "Umsatz",
+        "TAXES": "Steuern",
+        "TOTAL_REVENUES": "Gesamtumsatz"
+      },
+      "CLIENT": {
+        "TITLE": "Kunden",
+        "ALL": "Alle",
+        "PRIVATE": "Privat",
+        "COMPANY": "Firmen"
+      },
+      "DOCUMENT": {
+        "TITLE": "Dokumente",
+        "ALL": "Alle",
+        "OFFER": "Angebote",
+        "INVOICES": "Rechnungen"
+      }
+    },
+    "TABS": {
+      "YEARLY": "Jährlich",
+      "QUARTERLY": "Quartalsweise",
+      "MONTHLY": "Monatlich"
+    },
+    "LABELS": {
+      "QUARTERS": {
+        "1": "Quartal 1",
+        "2": "Quartal 2",
+        "3": "Quartal 3",
+        "4": "Quartal 4"
+      },
+      "MONTHS": {
+        "1": "Januar",
+        "2": "Februar",
+        "3": "März",
+        "4": "April",
+        "5": "Mai",
+        "6": "Juni",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "Dezember"
+      }
+    }
+  },
   "DOCUMENTS": {
     "TITLE": "Dokumente",
     "NEW_TITLE": "Neues Dokument",

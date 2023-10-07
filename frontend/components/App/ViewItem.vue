@@ -5,7 +5,7 @@ defineProps({
     required: true,
   },
   value: {
-    type: [String, Number],
+    type: String,
     required: true,
   },
 });

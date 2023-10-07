@@ -66,13 +66,6 @@ export default function useDocumentHelper() {
     return dueDate.diff(dateOfIssue, 'days').days;
   };
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('de-DE', {
-      style: 'currency',
-      currency: 'EUR',
-    }).format(value);
-  };
-
   const formatDescription = (description: string[]) => {
     return description.join('\n');
   };
@@ -85,7 +78,6 @@ export default function useDocumentHelper() {
     calculateSubtotal,
     dateFormat,
     dateDifference,
-    formatCurrency,
     formatDescription,
     formatTaxRate,
     getDueDate,
