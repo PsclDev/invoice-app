@@ -1,7 +1,10 @@
+import { DateTime } from 'luxon';
+
 import { DocumentYearStats } from '~/types';
 
 export default function useChartData(data: DocumentYearStats[]) {
   const { t } = useI18n();
+  const { formatToEur } = useCurrencyHelper();
   const mainTabs = ['YEARLY', 'QUARTERLY', 'MONTHLY'];
   const yearTabs = data.map((item) => item.year.toString());
 
@@ -78,8 +81,55 @@ export default function useChartData(data: DocumentYearStats[]) {
     }
   };
 
+  const invoiceToolTip = (
+    tooltipItem: any,
+    mainTab: string,
+    yearTab: string,
+  ) => {
+    const findData = () => {
+      const yearData = data.find((item) => item.year === Number(yearTab));
+
+      switch (mainTab) {
+        case 'YEARLY':
+          return yearData;
+        case 'QUARTERLY':
+          return yearData?.quarters.find(
+            (item) => item.quarter === Number(tooltipItem.label.split(' ')[1]),
+          );
+        case 'MONTHLY':
+          return yearData?.months.find(
+            (item) =>
+              item.month ===
+              DateTime.fromFormat(tooltipItem.label, 'MMMM').month,
+          );
+        default:
+          return null;
+      }
+    };
+
+    const relevantData = findData();
+
+    if (relevantData) {
+      return [
+        '',
+        `${t('DASHBOARD.STATS.FINANCE.REVENUES')}: ${formatToEur(
+          relevantData.revenues || 0,
+        )}`,
+        `${t('DASHBOARD.STATS.FINANCE.TAXES')}: ${formatToEur(
+          relevantData.taxes || 0,
+        )}`,
+        `${t('DASHBOARD.STATS.FINANCE.TOTAL_REVENUES')}: ${formatToEur(
+          relevantData.totalRevenues || 0,
+        )}`,
+      ];
+    } else {
+      return [];
+    }
+  };
+
   return {
     transform,
+    invoiceToolTip,
     mainTabs,
     yearTabs,
   };

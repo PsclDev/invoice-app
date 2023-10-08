@@ -9,7 +9,7 @@ function formatToString(value: number): string {
 }
 await store.getStats();
 
-const { transform, mainTabs, yearTabs } = useChartData(
+const { transform, invoiceToolTip, mainTabs, yearTabs } = useChartData(
   statistics.value.documents.years,
 );
 
@@ -20,14 +20,27 @@ const chartData = computed(() => {
 });
 
 const chartOptions = computed(() => {
-  return activeTab.value === 'MONTHLY'
-    ? {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
+  const baseOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+      },
+      tooltip: {
+        callbacks: {
+          label: (item: any) => {
+            const info = `${item.dataset.label}: ${item.formattedValue}`;
+            return item.datasetIndex === 1
+              ? info
+              : [info, ...invoiceToolTip(item, activeTab.value, yearTab.value)];
           },
         },
+      },
+    },
+  };
+  return activeTab.value === 'MONTHLY'
+    ? {
+        ...baseOptions,
         scales: {
           x: {
             stacked: true,
@@ -38,12 +51,7 @@ const chartOptions = computed(() => {
         },
       }
     : {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-          },
-        },
+        ...baseOptions,
         scales: {
           x: {
             stacked: false,
