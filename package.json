@@ -17,10 +17,6 @@
     "precommit:frontend": "cd frontend && yarn precommit",
     "precommit:backend": "cd backend && yarn precommit",
     "precommit": "npm-run-all precommit:*",
-    "shell": "npm run shell:build && docker-compose -f docker-compose.db.shell.yml run --rm -u 1000 --name invoice-app --service-ports invoice-app bash || true && echo Stopping environment... && docker-compose -f docker-compose.db.shell.yml down",
-    "shell:build": "docker-compose -f docker-compose.db.shell.yml build",
-    "shell:join": "docker exec -it invoice-app bash",
-    "shell:stop": "docker-compose -f docker-compose.db.shell.yml down",
     "test": "npx concurrently -n frontend,backend \"cd frontend/ && yarn test\" \"cd backend/ && yarn test\""
   },
   "devDependencies": {

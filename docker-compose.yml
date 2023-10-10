@@ -1,11 +1,46 @@
-version: '3.9'
-services:
-  frontend:
-    image: ghcr.io/pscldev/invoice-app/frontend:latest
-    ports:
-      - 3000:3000
+version: '3'
 
+services:
   backend:
     image: ghcr.io/pscldev/invoice-app/backend:latest
+    environment:
+      NODE_ENV: prod
+      APP_CACHE_TTL: 3600
+      APP_CHROMIUM_PATH: /usr/bin/chromium-browser
+      APP_CHROMIUM_NO_SANDBOX_MODE: false
+      APP_DISABLE_SEEDING: false
+      APP_FRONTEND_URL: http://frontend:3000
+      APP_IGNORE_HTTPS_ERRORS: false
+      APP_PORT: 3010
+      APP_PRINT_CONFIGURATION: true
+      APP_PDF_BACKUP_EXPORT: dist/_out
+      APP_DB_HOST: 
+      APP_DB_PORT: 
+      APP_DB_USER: 
+      APP_DB_PASS:
+      APP_DB_NAME: 
+      APP_GPT_ENABLED: 
+      APP_GPT_API_KEY: 
+      APP_GPT_ORG_ID: 
+      APP_GPT_TEMPEARATURE:
+      APP_MAIL_LOGGING: 
+      APP_MAIL_HOST: 
+      APP_MAIL_USER: 
+      APP_MAIL_PASS: 
+      APP_MAIL_FROM:
     ports:
       - 3010:3010
+    restart: always
+  
+  frontend:
+    image: ghcr.io/pscldev/invoice-app/frontend:latest
+    environment:
+      NODE_ENV: prod
+      API_URL: http://backend:3010
+      API_VERSION: v1
+    ports:
+      - 3000:3000
+    restart: always
+    depends_on:
+      - backend
+

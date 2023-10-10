@@ -6,7 +6,6 @@
   - [Requirements](#requirements)
   - [Getting Started](#getting-started)
   - [Responsiveness](#responsiveness)
-  - [Dependabot](#dependabot-integration)
   - [Postman](#postman)
   - [Git / Pre-Commit hook](#git)
   - [Continuous Integration](#ci)
@@ -20,7 +19,8 @@ You get simple statistics monthly and yearly based on.
 ## Features
 - Manage private and company clients
 - Manage offers and invoices
-- Send them by mail or email
+- Generate description with the help of openai
+- Send them by mail, email or delayed email
 - Convert offers to invoices
 - Get statistics about your business
 - Light and dark mode
@@ -28,7 +28,13 @@ You get simple statistics monthly and yearly based on.
 - Dockerized for easy deployment
 
 ## Tech Stack
-The frontend is based on nuxtjs 2. Backend is written with nestjs and postgres database.
+The project relies on Typescript for code quality and uses Commitlint and Husky to ensure consistent commit message formatting and automate quality checks.
+
+The frontend, based on Nuxt 3, uses tailwindcss for streamlined styling and Formkit for efficient form management. Chartjs is employed for data visualization.
+
+In the backend, NestJs serves as the foundation, and TypeORM simplifies database operations. Employ Puppeteer for headless browser pdf generation and Jest for testing.
+
+The database of choice is Postgres, providing a robust data storage solution for our application.
 
 ## Requirements
 The listed versions are not strictly needed, but tested with.
@@ -37,25 +43,17 @@ The listed versions are not strictly needed, but tested with.
 - `Yarn v1` or `Npm v8.5`
 - `Python 3` is needed for the sqlite3 npm package, which is only used for unit-testing.
 - `Docker v20`
-- `Docker-Compose 2.6`
+- `Docker-Compose 3I`
 
 ## Getting Started
 If you are using `npm` just replace the `yarn` keyword with `npm run`
 
-You can also run the project in a dockershell. If you want that just run the following two commands first:
-
-- *Docker only*
-  -  **`yarn shell:build`** or **`npm run shell:build`**
-  - **`yarn shell`** or **`npm run shell`**
-
-<br>
-
 - **`yarn` or `npm i`** *to install the project dependencies*
 - **`yarn prepare`** *to install husky*
 - **`yarn ia`** *to install the frontend and backend depenencies*
-- **`yarn dev`** *run the front and backend*
 - Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
 - If you wanna create migrations with typeorm, you need to setup a `ormconfig.json` file, there is also a example for it `/backend/ormconfig-example.json`
+- **`yarn dev`** *run the front and backend*
 
 *`Note to .env: If any env value contains a dollar sign ($) you have to encode that with a backslash (\$)`*
 
@@ -65,13 +63,9 @@ You can also run the project in a dockershell. If you want that just run the fol
 | frontend | `3000` | `/*` |
 | backend  | `3010` | `/v1/*` |
 | swagger docs  | `3010` | `/docs` |
-| postgres *(docker shell only)*  | `5432` |  |
 
 ## Responsiveness
-It is optimised for desktop and mobile but should work also on the tablet without issues.
-
-## Dependabot Integration
-The app is checked on a daily bases by the dependabot.
+It is optimised for desktop, tablet and mobile.
 
 ## Postman
 If you are importing the postman collection you just need to edit the Folder Varible `base_url` and `v1`. 
