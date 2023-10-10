@@ -7,6 +7,34 @@
 	},
 	"item": [
 		{
+			"name": "Ai",
+			"item": [
+				{
+					"name": "Generate Description",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input\": \"Räumung Haus und Garten, Abbau von Möbeln 3 Stunden, 50€. Entsorgungsfahrt 3x je 10€. Entsorgungsgebühr Holz 24€\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_ai}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_ai}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Document",
 			"item": [
 				{
@@ -334,6 +362,33 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_document}}/mail/{{invoice_id}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_document}}"
+							],
+							"path": [
+								"mail",
+								"{{invoice_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delayed Mail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"delayDelivery\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}{{version}}{{route_document}}/mail/{{invoice_id}}",
 							"host": [
@@ -844,6 +899,11 @@
 		{
 			"key": "version",
 			"value": "/v1",
+			"type": "string"
+		},
+		{
+			"key": "route_ai",
+			"value": "/ai",
 			"type": "string"
 		},
 		{
