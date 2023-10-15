@@ -1,3 +1,5 @@
+import 'openai/shims/node';
+
 import { ConfigService } from '@config';
 import { GptKey, SettingService, SettingType } from '@modules/setting';
 import { Injectable, Logger } from '@nestjs/common';
