@@ -1,5 +1,6 @@
 {
   "name": "invoice-app-frontend",
+  "license": "MIT",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

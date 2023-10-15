@@ -1,5 +1,6 @@
 {
   "name": "invoice-app-backend",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
