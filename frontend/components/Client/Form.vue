@@ -48,7 +48,7 @@ const form = reactive<ClientForm>({
 
 const client = ref<Client | null>(null);
 if (formMode.value === FormMode.EDIT) {
-  client.value = store.getById(clientId.value);
+  client.value = await store.getById(clientId.value);
   const formValues = omit(client.value, [
     'id',
     'createdAt',

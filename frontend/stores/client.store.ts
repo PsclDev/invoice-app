@@ -11,8 +11,43 @@ export const useClientStore = defineStore('client', () => {
   const clients = ref<Client[]>([]);
   const reqUrl = useApiUrl() + '/client';
 
-  function getById(id: string): Client {
-    return clients.value.find((c) => c.id === id)!;
+  function mapClient(clientDto: ClientDto): Client {
+    const { documents, ...client } = clientDto;
+    return {
+      ...client,
+      documents: documents.map((d) => ({
+        id: d.id,
+        type: d.type,
+        offerNr: d.offerNr,
+        invoiceNr: d.invoiceNr,
+      })),
+    };
+  }
+
+  async function getById(id: string) {
+    try {
+      logger.info('clientStore.getById');
+      let client = clients.value.find((c) => c.id === id);
+      if (client) {
+        return client;
+      }
+
+      const { data, error } = await useFetch<ClientDto>(`${reqUrl}/${id}`);
+      if (!data.value || error.value) {
+        throw error.value;
+      }
+
+      client = mapClient(data.value);
+      clients.value.push(client);
+      return client;
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('CLIENTS.STORE.GET_BY_ID_FAILED'),
+      });
+      logger.error(`Failed to get client by id ${id}`, error);
+      return {} as Client;
+    }
   }
 
   async function getAll() {
@@ -23,18 +58,7 @@ export const useClientStore = defineStore('client', () => {
         throw error.value;
       }
 
-      clients.value = data.value.map((c) => {
-        const { documents, ...client } = c;
-        return {
-          ...client,
-          documents: documents.map((d) => ({
-            id: d.id,
-            type: d.type,
-            offerNr: d.offerNr,
-            invoiceNr: d.invoiceNr,
-          })),
-        };
-      });
+      clients.value = data.value.map((c) => mapClient(c));
     } catch (error) {
       toast.add({
         color: 'red',
@@ -108,7 +132,7 @@ export const useClientStore = defineStore('client', () => {
         throw error.value;
       }
 
-      const currentClient = getById(clientId);
+      const currentClient = await getById(clientId);
       const index = clients.value.findIndex((x) => x.id === clientId);
       clients.value[index] = Object.assign(currentClient, form);
     } catch (error) {

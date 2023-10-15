@@ -55,7 +55,7 @@ const dateDifference = computed(() => {
 
 const document = ref<Document | null>(null);
 if (formMode.value === FormMode.EDIT) {
-  document.value = store.getById(documentId.value);
+  document.value = await store.getById(documentId.value);
   const unformattedValues = omit(document.value, [
     'id',
     'description',

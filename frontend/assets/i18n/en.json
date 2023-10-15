@@ -58,6 +58,7 @@
       }
     },
     "STORE": {
+      "GET_BY_ID_FAILED": "Failed to get the requested client",
       "GET_ALL_FAILED": "Failed to get all clients",
       "CREATE_FAILED": "Failed to create client '{name}'",
       "UPDATE_FAILED": "Failed to update client '{name}'",
@@ -153,6 +154,7 @@
       }
     },
     "STORE": {
+      "GET_BY_ID_FAILED": "Failed to get the requested document",
       "GET_ALL_FAILED": "Failed to get all documents",
       "NEW_ID_FAILED": "Failed to get new document id",
       "CREATE_FAILED": "Failed to create document '{name}'",

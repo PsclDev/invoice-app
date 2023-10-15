@@ -58,6 +58,7 @@
       }
     },
     "STORE": {
+      "GET_BY_ID_FAILED": "Fehler beim Laden des Kunden",
       "GET_ALL_FAILED": "Fehler beim Laden der Kunden",
       "CREATE_FAILED": "Fehler beim Anlegen des Kunden '{name}' aufgetreten",
       "UPDATE_FAILED": "Fehler beim Speichern des Kunden '{name}' aufgetreten",
@@ -153,6 +154,7 @@
       }
     },
     "STORE": {
+      "GET_BY_ID_FAILED": "Felher beim Laden des Dokuments",
       "GET_ALL_FAILED": "Fehler beim Laden der Dokumente",
       "NEW_ID_FAILED": "Fehler beim Abfragen der nächsten ID für das Dokument",
       "CREATE_FAILED": "Fehler beim erstellen des Dokuments '{name}'",

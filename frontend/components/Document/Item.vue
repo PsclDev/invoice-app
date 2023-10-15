@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Action, Document, FormMode, ViewMode } from '~/types';
+import { Action, Client, Document, FormMode, ViewMode } from '~/types';
 
 const props = defineProps({
   doc: {
@@ -15,7 +15,8 @@ const { isOffer, getName } = useDocumentHelper();
 const { formatDate } = useCustomDateHelper();
 const openDocumentSendModal = ref(false);
 const mode = ref<ViewMode>(ViewMode.VIEW);
-const client = ref(clientStore.getById(doc.value.clientId));
+const client = ref({} as Client);
+client.value = await clientStore.getById(doc.value.clientId);
 
 const convertDocument = async () => {
   await store.convert(doc.value);

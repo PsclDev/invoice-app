@@ -22,7 +22,7 @@ const { formatDescription, formatTaxRate } = useDocumentHelper();
 const { formatToEur } = useCurrencyHelper();
 const documentStore = useDocumentStore();
 const clientStore = useClientStore();
-const client = clientStore.getById(doc.value.clientId);
+const client = await clientStore.getById(doc.value.clientId);
 const openClientInfoModal = ref(false);
 const openDeleteModal = ref(false);
 

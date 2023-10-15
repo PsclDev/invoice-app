@@ -12,7 +12,7 @@ const props = defineProps({
 
 const { documentId } = toRefs(props);
 const store = useDocumentStore();
-const document = store.getById(documentId.value);
+const document = await store.getById(documentId.value);
 const { formatDescription, formatTaxRate, isInvoice } = useDocumentHelper();
 const { formatToEur } = useCurrencyHelper();
 const { formatDate } = useCustomDateHelper();

@@ -36,8 +36,29 @@ export const useDocumentStore = defineStore('document', () => {
     }
   }
 
-  function getById(id: string): Document {
-    return documents.value.find((c) => c.id === id)!;
+  async function getById(id: string) {
+    try {
+      logger.info('documentStore.getById');
+      const doc = documents.value.find((c) => c.id === id)!;
+      if (doc) {
+        return doc;
+      }
+
+      const { data, error } = await useFetch<Document>(`${reqUrl}/${id}`);
+      if (!data.value || error.value) {
+        throw error.value;
+      }
+
+      documents.value.push(data.value);
+      return data.value;
+    } catch (error) {
+      toast.add({
+        color: 'red',
+        title: i18n.t('DOCUMENTS.STORE.GET_BY_ID_FAILED'),
+      });
+      logger.error(`Failed to get document by id ${id}`, error);
+      return {} as Document;
+    }
   }
 
   async function getAll() {
@@ -137,7 +158,7 @@ export const useDocumentStore = defineStore('document', () => {
         throw error.value;
       }
 
-      const currentDocument = getById(docId);
+      const currentDocument = await getById(docId);
       const index = documents.value.findIndex((x) => x.id === docId);
       documents.value[index] = Object.assign(currentDocument, payload);
     } catch (error) {

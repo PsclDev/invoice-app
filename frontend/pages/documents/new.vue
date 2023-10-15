@@ -36,7 +36,7 @@ if (clientId) {
   selectedClient.value = clientList.value.find(
     (client) => client.value === clientId,
   )!;
-  client.value = clientStore.getById(selectedClient.value.value);
+  client.value = await clientStore.getById(selectedClient.value.value);
 }
 
 const clientForm = ref<ClientForm>({
@@ -78,8 +78,8 @@ async function createDocument() {
   router.push('/documents');
 }
 
-watch(selectedClient, () => {
-  client.value = clientStore.getById(selectedClient.value.value);
+watch(selectedClient, async () => {
+  client.value = await clientStore.getById(selectedClient.value.value);
 });
 
 useHead({
