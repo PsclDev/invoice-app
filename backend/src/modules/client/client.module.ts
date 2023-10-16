@@ -1,5 +1,6 @@
 import { CustomCacheService } from '@modules/common';
-import { CacheModule, Module } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheKeys } from '@utils';
 import { ProvideCacheKey } from '@utils';

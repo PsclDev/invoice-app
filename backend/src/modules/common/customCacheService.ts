@@ -1,5 +1,6 @@
 import { ConfigService } from '@config';
-import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
 @Injectable()
@@ -24,9 +25,7 @@ export class CustomCacheService<T> {
   }
 
   async setDataToCache(data: T[]): Promise<void> {
-    await this.cacheManager.set(this.key, data, {
-      ttl: this.configService.cacheTTL,
-    });
+    await this.cacheManager.set(this.key, data, this.configService.cacheTTL);
   }
 
   async addNewDataToCache(data: T): Promise<void> {

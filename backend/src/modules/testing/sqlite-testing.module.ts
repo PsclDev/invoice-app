@@ -3,7 +3,7 @@ import { Client, CompanyClient } from '@modules/client';
 import { CustomCacheService } from '@modules/common';
 import { Document, Invoice, Offer, QueueItem } from '@modules/document';
 import { Setting } from '@modules/setting';
-import { CacheModule } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 export const SqliteTestingImports = () => [
