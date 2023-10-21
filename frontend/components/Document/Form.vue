@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reset } from '@formkit/core';
-import { omit } from 'lodash';
+import loadash from 'lodash';
 import { DateTime } from 'luxon';
 
 import {
@@ -56,7 +56,7 @@ const dateDifference = computed(() => {
 const document = ref<Document | null>(null);
 if (formMode.value === FormMode.EDIT) {
   document.value = await store.getById(documentId.value);
-  const unformattedValues = omit(document.value, [
+  const unformattedValues = loadash.omit(document.value, [
     'id',
     'description',
     'dateOfIssue',

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { debounce } from 'lodash';
+import loadash from 'lodash';
 
 import { Setting } from '~/types';
 
@@ -18,7 +18,7 @@ const disabled = ref(true);
 
 watch(
   setting.value,
-  debounce(() => {
+  loadash.debounce(() => {
     disabled.value = initialValue.value === setting.value.value;
     emits('unsavedChanges', !disabled.value);
   }, 300),

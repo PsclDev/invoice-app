@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reset } from '@formkit/core';
-import { omit } from 'lodash';
+import loadash from 'lodash';
 
 import {
   ButtonColor,
@@ -49,7 +49,7 @@ const form = reactive<ClientForm>({
 const client = ref<Client | null>(null);
 if (formMode.value === FormMode.EDIT) {
   client.value = await store.getById(clientId.value);
-  const formValues = omit(client.value, [
+  const formValues = loadash.omit(client.value, [
     'id',
     'createdAt',
     'updatedAt',

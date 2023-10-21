@@ -1,4 +1,4 @@
-import { isArray } from 'lodash';
+import loadash from 'lodash';
 
 export default function useFilterList<T>() {
   const currentFilterTerm = ref<string>('');
@@ -39,7 +39,7 @@ export default function useFilterList<T>() {
             .toLowerCase()
             .includes(term.replace(/[/.,]/g, ''));
         case 'object':
-          if (isArray(value)) {
+          if (loadash.isArray(value)) {
             return value.some((itm) =>
               itm.toString().toLowerCase().includes(term),
             );

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
-import { groupBy } from 'lodash';
+import loadash from 'lodash';
 
 import { SettingType } from '~/types';
 
@@ -39,7 +39,7 @@ const devModeEnabled = computed(() => {
 });
 
 const groupedSettings = computed(() => {
-  return groupBy(settingStore.settings, 'type');
+  return loadash.groupBy(settingStore.settings, 'type');
 });
 
 const getGroupIcon = (type: SettingType) => {
@@ -162,7 +162,7 @@ useHead({
       </div>
       <div class="flex justify-center">
         <button
-          class="border-cannon-pink-500 text-cannon-pink-700 flex items-center gap-2 rounded border bg-transparent px-2 py-1 text-xs"
+          class="flex items-center gap-2 rounded border border-cannon-pink-500 bg-transparent px-2 py-1 text-xs text-cannon-pink-700"
           @click="switchDevMode"
         >
           {{ devModeEnabled ? 'Disable Dev-Mode' : 'Enable Dev-Mode' }}

@@ -1,4 +1,4 @@
-import { isEmpty, omitBy } from 'lodash';
+import loadash from 'lodash';
 
 import { Client, ClientDto, ClientForm, Gender } from '@/types';
 
@@ -92,7 +92,7 @@ export const useClientStore = defineStore('client', () => {
       logger.info('clientStore.create');
       const url = form.company ? `${reqUrl}/company` : reqUrl;
 
-      const payload = omitBy(form, isEmpty);
+      const payload = loadash.omitBy(form, loadash.isEmpty);
       const { data, error } = await useFetch<Client>(url, {
         method: 'POST',
         body: JSON.stringify(payload),

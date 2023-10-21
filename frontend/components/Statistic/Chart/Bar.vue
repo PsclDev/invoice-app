@@ -1,5 +1,5 @@
 <script setup>
-import { debounce } from 'lodash';
+import loadash from 'lodash';
 import { Bar } from 'vue-chartjs';
 
 defineProps({
@@ -15,7 +15,7 @@ defineProps({
 
 const key = ref(0);
 
-const handleResize = debounce(() => {
+const handleResize = loadash.debounce(() => {
   key.value += 1;
 }, 750);
 

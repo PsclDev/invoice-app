@@ -142,7 +142,7 @@ watchDebounced(
         <div v-if="form.description.length > 0" class="w-48">
           <button
             type="button"
-            class="border-cannon-pink-500 text-cannon-pink-700 rounded border bg-transparent px-2 py-1 text-xs"
+            class="rounded border border-cannon-pink-500 bg-transparent px-2 py-1 text-xs text-cannon-pink-700"
             @click="optimizeDescription"
           >
             {{ $t('DOCUMENTS.OPTIMIZE_DESCRIPTION') }}

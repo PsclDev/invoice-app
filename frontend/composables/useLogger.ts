@@ -1,26 +1,27 @@
+/* eslint-disable no-console */
 import debugMod from 'debug';
 
 export default function useLogger(namespace: string) {
-  const logger_debug = debugMod(`app:${namespace}`);
-  const logger_info = debugMod(`app:${namespace}`);
-  const logger_warn = debugMod(`app:${namespace}`);
-  const logger_error = debugMod(`app:${namespace}`);
+  const loggerDebug = debugMod(`app:${namespace}`);
+  const loggerInfo = debugMod(`app:${namespace}`);
+  const loggerWarn = debugMod(`app:${namespace}`);
+  const loggerError = debugMod(`app:${namespace}`);
 
-  logger_debug.log = console.debug.bind(console);
-  logger_info.log = console.info.bind(console);
-  logger_warn.log = console.warn.bind(console);
-  logger_error.log = console.error.bind(console);
+  loggerDebug.log = console.debug.bind(console);
+  loggerInfo.log = console.info.bind(console);
+  loggerWarn.log = console.warn.bind(console);
+  loggerError.log = console.error.bind(console);
 
   const trace = (...args: unknown[]): void => {
-    logger_debug(args);
+    loggerDebug(args);
   };
 
   const debug = (...args: unknown[]): void => {
-    logger_debug.apply(null, ['DEBUG', ...args]);
+    loggerDebug('DEBUG', ...args);
   };
 
   const info = (...args: unknown[]): void => {
-    logger_info.apply(null, ['INFO', ...args]);
+    loggerInfo('INFO', ...args);
   };
 
   const log = (...args: unknown[]): void => {
@@ -28,11 +29,11 @@ export default function useLogger(namespace: string) {
   };
 
   const warn = (...args: unknown[]): void => {
-    logger_warn.apply(null, ['WARN', ...args]);
+    loggerWarn('WARN', ...args);
   };
 
   const error = (...args: unknown[]): void => {
-    logger_error.apply(null, ['ERROR', ...args]);
+    loggerError('ERROR', ...args);
   };
 
   return { trace, debug, info, log, warn, error };

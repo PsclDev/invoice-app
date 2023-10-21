@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { debounce } from 'lodash';
+import loadash from 'lodash';
 
 defineProps({
   title: {
@@ -29,7 +29,7 @@ const searchtermValid = ref(true);
 
 watch(
   searchterm,
-  debounce(() => {
+  loadash.debounce(() => {
     searchtermValid.value =
       searchterm.value.length >= 3 || searchterm.value.length === 0;
     emits('search', searchterm.value);
