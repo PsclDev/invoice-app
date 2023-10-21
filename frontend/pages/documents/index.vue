@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Document } from 'types';
+import { Document } from '~/types';
 
 const { t } = useI18n();
 const store = useDocumentStore();

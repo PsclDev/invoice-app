@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core';
 import { groupBy } from 'lodash';
-import { SettingType } from 'types';
+
+import { SettingType } from '~/types';
 
 const { t } = useI18n();
 const colorMode = useColorMode();

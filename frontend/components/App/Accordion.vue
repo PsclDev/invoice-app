@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Action } from 'types';
+import { Action } from '~/types';
 
 defineProps({
   icon: {

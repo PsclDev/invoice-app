@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { debounce } from 'lodash';
-import { Setting } from 'types';
+
+import { Setting } from '~/types';
 
 const props = defineProps({
   setting: {

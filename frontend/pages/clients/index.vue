@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Client } from 'types';
+import { Client } from '~/types';
 
 const { t } = useI18n();
 const store = useClientStore();
