@@ -2,6 +2,7 @@
 import { useStorage } from '@vueuse/core';
 import loadash from 'lodash';
 
+import SettingsItem from '~/components/Settings/Item.vue';
 import { SettingType } from '~/types';
 
 const { t } = useI18n();
@@ -56,7 +57,7 @@ const getGroupIcon = (type: SettingType) => {
 };
 
 const showUnsavedAlert = ref(false);
-const settingsItemsRefs = ref([]);
+const settingsItemsRefs = ref<(typeof SettingsItem)[]>([]);
 const unsavedChanges = ref<Map<string, boolean>>(new Map());
 
 const unsavedChangesListener = (settingId: string, changes: boolean) => {
