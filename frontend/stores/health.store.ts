@@ -6,6 +6,8 @@ export const useHealthStore = defineStore('health', () => {
   const toast = useToast();
   const frontendVersion = useLocalStorage('app-frontend-version', '1.0.0');
   const backendVersion = useLocalStorage('app-backend-version', '1.0.0');
+  const backendAvailable = ref(false);
+  const ShowingBackendUnavailableToast = ref(false);
   const reqUrl = useBaseApiUrl() + '/health';
 
   async function getHealth() {
@@ -19,6 +21,9 @@ export const useHealthStore = defineStore('health', () => {
       if (!data.value || error.value) {
         throw error.value;
       }
+      backendAvailable.value = true;
+      ShowingBackendUnavailableToast.value = false;
+      toast.remove('backend-unavailable');
 
       logger.info(
         `Current frontend version: ${appVersion}, build: ${buildSha}, time: ${buildTime}`,
@@ -50,9 +55,18 @@ export const useHealthStore = defineStore('health', () => {
       }
     } catch (error) {
       logger.error(error);
-      backendVersion.value = 'unavailable';
+      backendAvailable.value = false;
+      if (!ShowingBackendUnavailableToast.value) {
+        ShowingBackendUnavailableToast.value = true;
+        toast.add({
+          id: 'backend-unavailable',
+          color: 'red',
+          title: i18n.t('HEALTH.BACKEND_UNAVAILABLE'),
+          timeout: 0,
+        });
+      }
     }
   }
 
-  return { frontendVersion, backendVersion, getHealth };
+  return { backendAvailable, backendVersion, frontendVersion, getHealth };
 });

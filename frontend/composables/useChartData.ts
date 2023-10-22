@@ -6,7 +6,7 @@ export default function useChartData(data: DocumentYearStats[]) {
   const { t } = useI18n();
   const { formatToEur } = useCurrencyHelper();
   const mainTabs = ['YEARLY', 'QUARTERLY', 'MONTHLY'];
-  const yearTabs = data.map((item) => item.year.toString());
+  const yearTabs = data ? data.map((item) => item.year.toString()) : [];
 
   const transform = (mainTab: string, yearTab: string) => {
     const invoiceOptions = {

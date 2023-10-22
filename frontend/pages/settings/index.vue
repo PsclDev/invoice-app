@@ -136,7 +136,7 @@ useHead({
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-3">
+      <div v-if="healthStore.backendAvailable" class="flex flex-col gap-3">
         <AppAccordion
           v-for="settingGroup in groupedSettings"
           :key="settingGroup[0].type"
@@ -154,15 +154,20 @@ useHead({
           </div>
         </AppAccordion>
       </div>
+      <div v-else class="mt-24 flex justify-center text-slate-400">
+        {{ t('COMMON.LABELS.NO_DATA') }}
+      </div>
       <div class="flex justify-center">
         <div class="flex gap-5">
           <p>App Version: {{ healthStore.frontendVersion }}</p>
-          <p>Backend Version: {{ healthStore.backendVersion }}</p>
+          <p v-if="healthStore.backendAvailable">
+            Backend Version: {{ healthStore.backendVersion }}
+          </p>
         </div>
       </div>
       <div class="flex justify-center">
         <button
-          class="flex items-center gap-2 rounded border border-cannon-pink-500 bg-transparent px-2 py-1 text-xs text-cannon-pink-700"
+          class="border-cannon-pink-500 text-cannon-pink-700 flex items-center gap-2 rounded border bg-transparent px-2 py-1 text-xs"
           @click="switchDevMode"
         >
           {{ devModeEnabled ? 'Disable Dev-Mode' : 'Enable Dev-Mode' }}

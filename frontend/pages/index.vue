@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const store = useStatisticStore();
+const healthStore = useHealthStore();
 const { statistics } = storeToRefs(store);
 const { formatToEur } = useCurrencyHelper();
 
@@ -10,7 +11,7 @@ function formatToString(value: number): string {
 await store.getStats();
 
 const { transform, invoiceToolTip, mainTabs, yearTabs } = useChartData(
-  statistics.value.documents.years,
+  statistics.value.documents?.years,
 );
 
 const activeTab = ref('');
@@ -70,7 +71,7 @@ useHead({
 
 <template>
   <BasePage title="DASHBOARD.TITLE">
-    <div class="flex flex-col gap-16">
+    <div v-if="healthStore.backendAvailable" class="flex flex-col gap-16">
       <div class="flex flex-col gap-12">
         <StatisticGroup title="DASHBOARD.STATS.FINANCE.TITLE">
           <StatisticItem
@@ -135,6 +136,9 @@ useHead({
         />
         <StatisticChartBar :data="chartData" :options="chartOptions" />
       </div>
+    </div>
+    <div v-else class="mt-24 flex justify-center text-slate-400">
+      {{ t('COMMON.LABELS.NO_DATA') }}
     </div>
   </BasePage>
 </template>

@@ -48,7 +48,7 @@ const collapsed = ref(true);
         <button
           v-for="action in actions"
           :key="action.icon"
-          class="cursor-pointer px-2 text-black hover:text-spring-green-600 dark:text-white"
+          class="hover:text-spring-green-600 cursor-pointer px-2 text-black dark:text-white"
           @click="action.func"
         >
           <Icon :name="action.icon" />

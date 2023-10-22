@@ -38,8 +38,11 @@ useHead({
     @action="onAction"
     @search="onSearch"
   >
-    <div class="flex w-full flex-col gap-2">
+    <div v-if="filteredList.length > 0" class="flex w-full flex-col gap-2">
       <DocumentItem v-for="doc in filteredList" :key="doc.id" :doc="doc" />
+    </div>
+    <div v-else class="mt-24 flex justify-center text-slate-400">
+      {{ t('COMMON.LABELS.NO_DATA') }}
     </div>
   </BasePage>
 </template>

@@ -13,6 +13,7 @@
       "SAVE": "Speichern"
     },
     "LABELS": {
+      "NO_DATA": "Es liegen keine Daten zum anzeigen vor",
       "CREATED_AT": "Erstellt am",
       "UPDATED_AT": "Bearbeitet am"
     }
@@ -186,6 +187,11 @@
     "STORE": {
       "GET_ALL_FAILED": "Fehler beim Laden der Einstellungen",
       "UPDATE_FAILED": "Fehler beim Speichern der Einstellung '{name}'"
+    }
+  },
+  "STATISTICS": {
+    "STORE": {
+      "GET_FAILED": "Fehler beim laden der Statistiken"
     }
   },
   "STORE": {
