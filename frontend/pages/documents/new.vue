@@ -82,6 +82,11 @@ watch(selectedClient, async () => {
   client.value = await clientStore.getById(selectedClient.value.value);
 });
 
+onBeforeRouteLeave((_, __, next) => {
+  clientStore.deleteNewClients();
+  next(true);
+});
+
 useHead({
   title: t('DOCUMENTS.NEW_TITLE'),
 });

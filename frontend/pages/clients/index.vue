@@ -23,6 +23,11 @@ watch(clients, () => {
   setInitialList(clients.value);
 });
 
+onBeforeRouteLeave((_, __, next) => {
+  store.deleteNewClients();
+  next(true);
+});
+
 useHead({
   title: t('CLIENTS.TITLE'),
 });

@@ -120,7 +120,7 @@ export const useClientStore = defineStore('client', () => {
         ? `${reqUrl}/company/${clientId}`
         : `${reqUrl}/${clientId}`;
 
-      const payload = omitBy(form, isEmpty);
+      const payload = loadash.omitBy(form, loadash.isEmpty);
       const { error } = await useFetch<Client>(url, {
         method: 'PATCH',
         body: JSON.stringify({
@@ -170,5 +170,19 @@ export const useClientStore = defineStore('client', () => {
     }
   }
 
-  return { clients, create, deleteClient, getById, getAll, newClient, update };
+  function deleteNewClients() {
+    logger.info('clientStore.deleteNewClients');
+    clients.value = clients.value.filter((x) => !x.id.startsWith('new-'));
+  }
+
+  return {
+    clients,
+    create,
+    deleteClient,
+    deleteNewClients,
+    getById,
+    getAll,
+    newClient,
+    update,
+  };
 });
