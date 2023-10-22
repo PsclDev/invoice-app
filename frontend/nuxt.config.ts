@@ -35,6 +35,10 @@ export default defineNuxtConfig({
         { rel: 'mask-icon', href: '~/public/safari-pinned-tab.svg' },
       ],
     },
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in',
+    },
   },
   imports: {
     dirs: ['stores'],

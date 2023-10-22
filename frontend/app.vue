@@ -28,4 +28,14 @@ body,
 #__nuxt {
   @apply min-h-screen p-0 m-0 bg-slate-100 dark:bg-neutral-950 text-black dark:text-white;
 }
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.15s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
 </style>
