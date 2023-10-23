@@ -100,32 +100,81 @@ E.g. `Hello {{fullname}}` will be transformed to the `client.firstname + client.
 if you wanna use any other value from the client, document or settings just put in the name of the field.
 
 ## Screenshots
-### Desktop
-| Dark | Light |
-| ---- | ----- |
-| ![](https://invoice-app.pscl.dev/statistics_view_dark.png) | ![](https://invoice-app.pscl.dev/statistics_view_light.png) |
-| ![](https://invoice-app.pscl.dev/client_view_dark.png) | ![](https://invoice-app.pscl.dev/client_view_light.png) |
-| ![](https://invoice-app.pscl.dev/client_edit_dark.png) | ![](https://invoice-app.pscl.dev/client_edit_light.png) |
-| ![](https://invoice-app.pscl.dev/document_view_dark.png) | ![](https://invoice-app.pscl.dev/document_view_light.png) |
-| ![](https://invoice-app.pscl.dev/document_edit_dark.png) | ![](https://invoice-app.pscl.dev/document_edit_light.png) |
-| ![](https://invoice-app.pscl.dev/document_send_dark.png) | ![](https://invoice-app.pscl.dev/document_send_light.png) |
-| ![](https://invoice-app.pscl.dev/document_create_dark_1.png) | ![](https://invoice-app.pscl.dev/document_create_light_1.png) |
-| ![](https://invoice-app.pscl.dev/document_create_dark_2.png) | ![](https://invoice-app.pscl.dev/document_create_light_2.png) |
-| ![](https://invoice-app.pscl.dev/settings_view_dark.png) | ![](https://invoice-app.pscl.dev/settings_view_light.png) |
-### Mobile
-| Dark | Light |
-| ---- | ----- |
-| ![](https://invoice-app.pscl.dev/statistics_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/statistics_view_light_mobile.png) |
-| ![](https://invoice-app.pscl.dev/client_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/client_view_light_mobile.png) |
-| ![](https://invoice-app.pscl.dev/client_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/client_edit_light_mobile.png) |
-| ![](https://invoice-app.pscl.dev/document_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_view_light_mobile.png) |
-| ![](https://invoice-app.pscl.dev/document_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_edit_light_mobile.png) |
-| ![](https://invoice-app.pscl.dev/document_send_dark_mobile.png) | ![](https://invoice-app.pscl.dev/document_send_light_mobile.png) |
-| ![](https://invoice-app.pscl.dev/document_create_dark_1_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_1_mobile.png) |
-| ![](https://invoice-app.pscl.dev/document_create_dark_2_mobile.png) | ![](https://invoice-app.pscl.dev/document_create_light_2_mobile.png) |
-| ![](https://invoice-app.pscl.dev/settings_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/settings_view_light_mobile.png) |
+<details>
+  <summary>Desktop</summary>
 
-### Pdf
+| Dark | Light |
+| ---- | ----- |
+| ![](https://invoice-app.pscl.dev/v2/statistics_view_dark.png) | ![](https://invoice-app.pscl.dev/v2/statistics_view_light.png) |
+| ![](https://invoice-app.pscl.dev/v2/client_view_dark.png) | ![](https://invoice-app.pscl.dev/v2/client_view_light.png) |
+| ![](https://invoice-app.pscl.dev/v2/client_edit_dark.png) | ![](https://invoice-app.pscl.dev/v2/client_edit_light.png) |
+| ![](https://invoice-app.pscl.dev/v2/document_view_dark.png) | ![](https://invoice-app.pscl.dev/v2/document_view_light.png) |
+| ![](https://invoice-app.pscl.dev/v2/document_edit_dark.png) | ![](https://invoice-app.pscl.dev/v2/document_edit_light.png) |
+| ![](https://invoice-app.pscl.dev/v2/document_create_dark.png) | ![](https://invoice-app.pscl.dev/v2/document_create_light.png) |
+| ![](https://invoice-app.pscl.dev/v2/settings_view_dark.png) | ![](https://invoice-app.pscl.dev/v2/settings_view_light.png) |
+</details>
+
+<details>
+  <summary>Mobile</summary>
+
+| Dark | Light |
+| ---- | ----- |
+| ![](https://invoice-app.pscl.dev/v2/statistics_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/statistics_view_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v2/client_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/client_view_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v2/client_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/client_edit_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v2/document_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/document_view_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v2/document_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/document_edit_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v2/document_create_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/document_create_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v2/settings_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v2/settings_view_light_mobile.png) |
+</details>
+
+<details>
+  <summary>PDF</summary>
+
 | Offer | Invoice |
 | ---- | ----- |
-| ![](https://invoice-app.pscl.dev/offer_example.png) | ![](https://invoice-app.pscl.dev/invoice_example.png) |
+| ![](https://invoice-app.pscl.dev/v2/offer_example.png) | ![](https://invoice-app.pscl.dev/v2/invoice_example.png) |
+
+</details>
+
+### Old Version 1
+<details>
+  <summary>Desktop</summary>
+
+| Dark | Light |
+| ---- | ----- |
+| ![](https://invoice-app.pscl.dev/v1/statistics_view_dark.png) | ![](https://invoice-app.pscl.dev/v1/statistics_view_light.png) |
+| ![](https://invoice-app.pscl.dev/v1/client_view_dark.png) | ![](https://invoice-app.pscl.dev/v1/client_view_light.png) |
+| ![](https://invoice-app.pscl.dev/v1/client_edit_dark.png) | ![](https://invoice-app.pscl.dev/v1/client_edit_light.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_view_dark.png) | ![](https://invoice-app.pscl.dev/v1/document_view_light.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_edit_dark.png) | ![](https://invoice-app.pscl.dev/v1/document_edit_light.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_send_dark.png) | ![](https://invoice-app.pscl.dev/v1/document_send_light.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_create_dark_1.png) | ![](https://invoice-app.pscl.dev/v1/document_create_light_1.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_create_dark_2.png) | ![](https://invoice-app.pscl.dev/v1/document_create_light_2.png) |
+| ![](https://invoice-app.pscl.dev/v1/settings_view_dark.png) | ![](https://invoice-app.pscl.dev/v1/settings_view_light.png) |
+</details>
+
+<details>
+  <summary>Mobile</summary>
+
+| Dark | Light |
+| ---- | ----- |
+| ![](https://invoice-app.pscl.dev/v1/statistics_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/statistics_view_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/client_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/client_view_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/client_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/client_edit_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/document_view_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_edit_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/document_edit_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_send_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/document_send_light_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_create_dark_1_mobile.png) | ![](https://invoice-app.pscl.dev/v1/document_create_light_1_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/document_create_dark_2_mobile.png) | ![](https://invoice-app.pscl.dev/v1/document_create_light_2_mobile.png) |
+| ![](https://invoice-app.pscl.dev/v1/settings_view_dark_mobile.png) | ![](https://invoice-app.pscl.dev/v1/settings_view_light_mobile.png) |
+</details>
+
+<details>
+  <summary>PDF</summary>
+
+| Offer | Invoice |
+| ---- | ----- |
+| ![](https://invoice-app.pscl.dev/v1/offer_example.png) | ![](https://invoice-app.pscl.dev/v1/invoice_example.png) |
+
+</details>
