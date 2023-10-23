@@ -1,4 +1,4 @@
-FROM node:18-alpine AS development
+FROM node:20-alpine AS development
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -31,7 +31,7 @@ COPY . .
 RUN yarn prebuild
 RUN yarn build
 
-FROM node:18-alpine As production
+FROM node:20-alpine As production
 
 ARG NODE_ENV=production
 
