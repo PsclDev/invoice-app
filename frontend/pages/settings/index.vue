@@ -168,7 +168,7 @@ useHead({
       </div>
       <div class="flex justify-center">
         <button
-          class="border-cannon-pink-500 text-cannon-pink-700 flex items-center gap-2 rounded border bg-transparent px-2 py-1 text-xs"
+          class="flex items-center gap-2 rounded border border-cannon-pink-500 bg-transparent px-2 py-1 text-xs text-cannon-pink-700"
           @click="switchDevMode"
         >
           {{ devModeEnabled ? 'Disable Dev-Mode' : 'Enable Dev-Mode' }}
