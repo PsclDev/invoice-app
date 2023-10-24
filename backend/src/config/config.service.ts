@@ -68,7 +68,7 @@ export class ConfigService {
     buildSha,
     buildTime,
   };
-  cacheTTL = Number(process.env.APP_CACHE_TTL) || 30;
+  cacheTTL = (Number(process.env.APP_CACHE_TTL) || 30) * 60 * 1000;
   chromiumPath = process.env.APP_CHROMIUM_PATH;
   chromiumNoSandboxMode =
     bool(process.env.APP_CHROMIUM_NO_SANDBOX_MODE) || false;

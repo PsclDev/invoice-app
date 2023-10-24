@@ -49,9 +49,8 @@ export class ClientService {
   }
 
   async findById(id: string): Promise<Client> {
-    const cachedClient = await this.customCacheService.getItemFromCachedData(
-      id,
-    );
+    const cachedClient =
+      await this.customCacheService.getItemFromCachedData(id);
     if (cachedClient) {
       this.logger.log(`Getting client '${id}' from cache`);
       return cachedClient;

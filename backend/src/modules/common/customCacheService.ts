@@ -37,12 +37,12 @@ export class CustomCacheService<T> {
 
   async updateExistingDataInCache(id: string, updatedData: T): Promise<void> {
     const cachedData = await this.getCachedData();
-    if (!cachedData) {
-      return this.addNewDataToCache(updatedData);
-    }
+    const dataIdx = cachedData?.findIndex((i: any) => i.id === id);
 
-    const dataIdx = cachedData.findIndex((i: any) => i.id === id);
-    if (dataIdx === -1) return;
+    if (!cachedData || dataIdx === -1) {
+      console.log('addNewDataToCache');
+      return await this.addNewDataToCache(updatedData);
+    }
 
     cachedData[dataIdx] = updatedData;
     await this.setDataToCache(cachedData);
@@ -53,6 +53,6 @@ export class CustomCacheService<T> {
     if (!cachedData) return;
 
     cachedData = cachedData.filter((i: any) => i.id !== id);
-    this.setDataToCache(cachedData);
+    await this.setDataToCache(cachedData);
   }
 }

@@ -36,7 +36,6 @@ export class DocumentService {
 
     const documents = await this.documentRepository.find({
       order: {
-        dateOfIssue: 'DESC',
         createdAt: 'DESC',
       },
     });
