@@ -37,11 +37,12 @@ jobs:
       - name: Install dependencies 📦
         run: cd frontend && yarn
 
+      - name: Run linter 👀
+        run: cd frontend && yarn lint
+
       - name: Build 🏗
         run: cd frontend && yarn build
   
-      - name: Run linter 👀
-        run: cd frontend && yarn lint
 
   lint-and-test-backend:
     runs-on: ubuntu-latest
@@ -75,6 +76,9 @@ jobs:
 
       - name: Run linter 👀
         run: cd backend && yarn lint
+
+      - name: Build 🏗
+        run: cd backend && yarn build
 
       - name: Run tests 🧪
         run: cd backend && yarn test
