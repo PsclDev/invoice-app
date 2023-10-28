@@ -2,9 +2,9 @@ import {
   deletableSettingId,
   initSeeder,
   nonDeletableSettingId,
+  PostgresTestingImports,
+  PostgresTestingProviders,
   settingSeed,
-  SqliteTestingImports,
-  SqliteTestingProviders,
 } from '@modules/testing';
 import {
   ForbiddenException,
@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheKeys, ProvideCacheKey } from '@utils';
+import { getConnection } from 'typeorm';
 
 import { SettingController } from './setting.controller';
 import { Setting } from './setting.entity';
@@ -25,11 +26,11 @@ describe('SettingController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...SqliteTestingImports()],
+      imports: [...PostgresTestingImports()],
       controllers: [SettingController],
       providers: [
         ProvideCacheKey(CacheKeys.NONE),
-        ...SqliteTestingProviders(),
+        ...PostgresTestingProviders(),
         SettingService,
       ],
     }).compile();
@@ -37,6 +38,11 @@ describe('SettingController', () => {
     settingController = module.get<SettingController>(SettingController);
     await initSeeder();
     await settingSeed();
+  });
+
+  afterAll(async () => {
+    const connection = await getConnection();
+    connection.close();
   });
 
   it('should create a pdf setting', async () => {

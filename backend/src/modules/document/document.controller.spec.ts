@@ -5,13 +5,14 @@ import {
   initSeeder,
   invoiceId,
   offerId,
+  PostgresTestingImports,
+  PostgresTestingProviders,
   privateClientId,
-  SqliteTestingImports,
-  SqliteTestingProviders,
 } from '@modules/testing';
 import { HttpException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheKeys, ProvideCacheKey } from '@utils';
+import { getConnection } from 'typeorm';
 
 import { ClientModule, MailModule, SettingModule } from '..';
 import { DocumentController } from './document.controller';
@@ -29,7 +30,7 @@ describe('DocumentController', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        ...SqliteTestingImports(),
+        ...PostgresTestingImports(),
         ClientModule,
         MailModule,
         SettingModule,
@@ -41,7 +42,7 @@ describe('DocumentController', () => {
         FileService,
         OfferService,
         InvoiceService,
-        ...SqliteTestingProviders(),
+        ...PostgresTestingProviders(),
       ],
     }).compile();
 
@@ -49,6 +50,11 @@ describe('DocumentController', () => {
     await initSeeder();
     await clientSeed();
     await documentSeed();
+  });
+
+  afterAll(async () => {
+    const connection = await getConnection();
+    connection.close();
   });
 
   it('should get a new offer number', async () => {

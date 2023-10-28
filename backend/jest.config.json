@@ -13,5 +13,6 @@
   "collectCoverageFrom": ["**/*.(t|j)s", "!**/*.module.(t|j)s"],
   "coverageDirectory": "../coverage",
   "testEnvironment": "node",
-  "modulePathIgnorePatterns": ["migrations"]
+  "modulePathIgnorePatterns": ["migrations"],
+  "maxWorkers": 1
 }

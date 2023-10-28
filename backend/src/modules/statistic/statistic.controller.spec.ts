@@ -2,11 +2,12 @@ import {
   clientSeed,
   documentSeed,
   initSeeder,
-  SqliteTestingImports,
-  SqliteTestingProviders,
+  PostgresTestingImports,
+  PostgresTestingProviders,
 } from '@modules/testing';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheKeys, ProvideCacheKey } from '@utils';
+import { getConnection } from 'typeorm';
 
 import { StatisticController } from './statistic.controller';
 import { StatisticsDto } from './statistic.dto';
@@ -18,11 +19,11 @@ describe('StatisticController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...SqliteTestingImports()],
+      imports: [...PostgresTestingImports()],
       controllers: [StatisticController],
       providers: [
         ProvideCacheKey(CacheKeys.STATISTIC),
-        ...SqliteTestingProviders(),
+        ...PostgresTestingProviders(),
         StatisticService,
       ],
     }).compile();
@@ -33,6 +34,11 @@ describe('StatisticController', () => {
     await documentSeed();
 
     stats = await statisticController.getStats();
+  });
+
+  afterAll(async () => {
+    const connection = await getConnection();
+    connection.close();
   });
 
   it('should get client stats', async () => {

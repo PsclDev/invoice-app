@@ -2,13 +2,14 @@ import {
   clientSeed,
   companyClientId,
   initSeeder,
+  PostgresTestingImports,
+  PostgresTestingProviders,
   privateClientId,
-  SqliteTestingImports,
-  SqliteTestingProviders,
 } from '@modules/testing';
 import { HttpException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheKeys, ProvideCacheKey } from '@utils';
+import { getConnection } from 'typeorm';
 
 import { ClientController } from './client.controller';
 import { Gender } from './client.dto';
@@ -21,18 +22,23 @@ describe('ClientController', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [...SqliteTestingImports()],
+      imports: [...PostgresTestingImports()],
       controllers: [ClientController],
       providers: [
         ProvideCacheKey(CacheKeys.CLIENT),
         ClientService,
-        ...SqliteTestingProviders(),
+        ...PostgresTestingProviders(),
       ],
     }).compile();
 
     clientController = module.get<ClientController>(ClientController);
     await initSeeder();
     await clientSeed();
+  });
+
+  afterAll(async () => {
+    const connection = await getConnection();
+    connection.close();
   });
 
   it('should create a private client', async () => {

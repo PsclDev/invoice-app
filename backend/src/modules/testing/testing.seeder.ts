@@ -9,9 +9,11 @@ import {
 } from '@modules/setting';
 import { EntityManager, getConnection } from 'typeorm';
 
-export const initSeeder = () => {
-  const connection = getConnection();
-  entityManager = connection.createEntityManager();
+export const initSeeder = async () => {
+  const connection = await getConnection();
+  await connection.dropDatabase();
+  await connection.runMigrations();
+  entityManager = await connection.createEntityManager();
 };
 
 let entityManager: EntityManager;

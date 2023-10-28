@@ -14,7 +14,7 @@
     "lint": "yarn lint:js && yarn lint:prettier",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
     "precommit": "lint-staged",
-    "test": "jest",
+    "test": "NODE_ENV=testing jest --runInBand",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
@@ -76,7 +76,6 @@
     "lint-staged": "15.0.1",
     "prettier": "3.0.3",
     "source-map-support": "0.5.21",
-    "sqlite3": "^5.1.6",
     "supertest": "6.3.3",
     "ts-jest": "29.1.1",
     "ts-loader": "9.5.0",
@@ -84,5 +83,5 @@
     "tsconfig-paths": "4.2.0",
     "typescript": "5.2.2"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@4.0.1"
 }

@@ -23,10 +23,6 @@ const CONFIG_SCHEMA = Joi.object().keys({
     user: Joi.string().required(),
     pass: Joi.string().required(),
     name: Joi.string().required(),
-    entitiesPath: Joi.string().optional(),
-    synchronize: Joi.bool().optional(),
-    migrationsRun: Joi.bool().optional(),
-    migrationsPath: Joi.string().optional(),
   }),
   devMode: Joi.bool().required(),
   disableSeeding: Joi.bool().optional(),
@@ -62,7 +58,7 @@ const CONFIG_SCHEMA = Joi.object().keys({
 
 @Injectable()
 export class ConfigService {
-  nodeEnv = process.env.NODE_ENV || 'prod';
+  nodeEnv = process.env.NODE_ENV || 'production';
   app = {
     version: appVersion,
     buildSha,
@@ -72,17 +68,24 @@ export class ConfigService {
   chromiumPath = process.env.APP_CHROMIUM_PATH;
   chromiumNoSandboxMode =
     bool(process.env.APP_CHROMIUM_NO_SANDBOX_MODE) || false;
-  database = {
-    host: process.env.APP_DB_HOST,
-    port: Number(process.env.APP_DB_PORT) || 5432,
-    user: process.env.APP_DB_USER,
-    pass: process.env.APP_DB_PASS,
-    name: process.env.APP_DB_NAME,
-    entitiesPath: process.env.APP_MIGRATIONS_PATH || 'dist/**/*.entity.js',
-    synchronize: bool(process.env.APP_DB_SYNCHRONIZE) || false,
-    migrationsRun: bool(process.env.APP_RUN_MIGRATIONS) || true,
-    migrationsPath: process.env.APP_MIGRATIONS_PATH || 'dist/migrations/*.js',
-  };
+  database = switchEnv(
+    {
+      testing: {
+        host: process.env.APP_TEST_DB_HOST,
+        port: Number(process.env.APP_TEST_DB_PORT) || 5432,
+        user: process.env.APP_TEST_DB_USER,
+        pass: process.env.APP_TEST_DB_PASS,
+        name: process.env.APP_TEST_DB_NAME,
+      },
+    },
+    {
+      host: process.env.APP_DB_HOST,
+      port: Number(process.env.APP_DB_PORT) || 5432,
+      user: process.env.APP_DB_USER,
+      pass: process.env.APP_DB_PASS,
+      name: process.env.APP_DB_NAME,
+    },
+  );
   devMode = this.nodeEnv === 'dev' || this.nodeEnv === 'development';
   disableSeeding = bool(process.env.APP_DISABLE_SEEDING) || false;
   frontendUrl = process.env.APP_FRONTEND_URL;
@@ -112,4 +115,13 @@ function bool(input: string): boolean {
 
 if (!Boolean(process.env.APP_IS_RUNNING_IN_PIPELINE)) {
   Joi.assert(new ConfigService(), CONFIG_SCHEMA, 'Invalid Configuration');
+}
+
+function switchEnv<T>(cases: { [key: string]: T }, defaultVal: T): T {
+  const env = process.env.NODE_ENV || 'production';
+  if (Object.prototype.hasOwnProperty.call(cases, env)) {
+    return cases[env];
+  }
+
+  return defaultVal;
 }

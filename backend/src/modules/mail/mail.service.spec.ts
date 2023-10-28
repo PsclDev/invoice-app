@@ -2,12 +2,13 @@ import {
   exampleDataSet,
   initSeeder,
   mailSeed,
-  SqliteTestingImports,
-  SqliteTestingProviders,
+  PostgresTestingImports,
+  PostgresTestingProviders,
 } from '@modules/testing';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { CacheKeys, formatDocumentNumber, ProvideCacheKey } from '@utils';
+import { getConnection } from 'typeorm';
 
 import { SettingModule } from '..';
 import { MailService } from './mail.service';
@@ -19,7 +20,7 @@ describe('MailService', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        ...SqliteTestingImports(),
+        ...PostgresTestingImports(),
         SettingModule,
         MailerModule.forRoot({
           transport: {
@@ -41,7 +42,7 @@ describe('MailService', () => {
       ],
       providers: [
         ProvideCacheKey(CacheKeys.NONE),
-        ...SqliteTestingProviders(),
+        ...PostgresTestingProviders(),
         MailService,
       ],
     }).compile();
@@ -51,6 +52,11 @@ describe('MailService', () => {
     await mailSeed();
 
     exampleData = exampleDataSet();
+  });
+
+  afterAll(async () => {
+    const connection = await getConnection();
+    connection.close();
   });
 
   it('should get invoice subject', async () => {

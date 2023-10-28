@@ -40,7 +40,6 @@ export class CustomCacheService<T> {
     const dataIdx = cachedData?.findIndex((i: any) => i.id === id);
 
     if (!cachedData || dataIdx === -1) {
-      console.log('addNewDataToCache');
       return await this.addNewDataToCache(updatedData);
     }
 
