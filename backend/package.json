@@ -2,7 +2,6 @@
   "name": "invoice-app-backend",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "nest start",
@@ -47,6 +46,7 @@
     "openai": "4.12.1",
     "pg": "8.11.3",
     "puppeteer": "21.3.8",
+    "qrcode": "^1.5.3",
     "reflect-metadata": "0.1.13",
     "rimraf": "5.0.5",
     "rxjs": "7.8.1",
@@ -65,6 +65,7 @@
     "@types/node": "20.8.6",
     "@types/node-fetch": "2.6.6",
     "@types/nodemailer": "6.4.11",
+    "@types/qrcode": "^1.5.5",
     "@types/supertest": "2.0.14",
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",

@@ -13,6 +13,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { capitalizeString } from '@utils';
 import { Response } from 'express';
+import { Readable } from 'stream';
 
 import {
   CreateInvoiceDto,
@@ -116,5 +117,16 @@ export class DocumentController {
   ): Promise<boolean> {
     this.logger.log(`Mail document with id: ${id}, with options: ${body}`);
     return await this.docService.mail(id, body);
+  }
+
+  @Get('/generate-girocode/:id')
+  async generateQrGiroCode(@Param('id') id: string, @Res() res: Response) {
+    this.logger.log(`Generate qr code for giropay, document id: ${id}`);
+    const qrCodeBuffer = await this.docService.generateQRCodeForGiropay(id);
+    const fileStream = Readable.from(qrCodeBuffer);
+    res.set({
+      'Content-Type': 'image/png',
+    });
+    fileStream.pipe(res);
   }
 }

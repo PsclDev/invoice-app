@@ -49,6 +49,11 @@ function convertTemplate(key: string) {
   });
 }
 
+const qrCodeLink = computed(() => {
+  const reqUrl = useApiUrl() + '/document';
+  return `${reqUrl}/generate-girocode/${documentId.value}`;
+});
+
 definePageMeta({
   layout: 'print',
 });
@@ -129,8 +134,8 @@ definePageMeta({
           </div>
         </div>
       </div>
-      <div class="ml-[2.5cm] mt-[0.846cm] w-[16.5cm]">
-        <div class="min-h-[13cm]">
+      <div class="ml-[2.5cm] mt-[0.650cm] w-[16.5cm]">
+        <div class="min-h-[11.5cm]">
           <table class="table">
             <thead :class="isInvoice ? 'bg-spring-green-500' : 'bg-slate-400'">
               <tr>
@@ -150,7 +155,7 @@ definePageMeta({
           </table>
         </div>
         <div class="mb-[1cm] flex justify-between">
-          <div class="max-h-[3.5cm] w-6/12">
+          <div class="w-6/12">
             <div>
               <div v-if="isInvoice">Vielen Dank für Ihr Vertrauen!</div>
               <div v-else>Vorab bedanken wir uns bei Ihren Vertrauen!</div>
@@ -175,6 +180,14 @@ definePageMeta({
                   R#{{ `${String(document.invoiceNr).padStart(4, '0')}` }}
                 </div>
               </div>
+              <div class="flex h-28 flex-col items-center">
+                <p>
+                  <span class="font-bold text-[#010066]">GIRO</span
+                  ><span class="font-bold text-[#FE0009]">CODE</span>
+                </p>
+                <img class="h-24 w-24" :src="qrCodeLink" alt="QR Code" />
+                <p class="text-xs">Für bequemes Bezahlen mit der Banking-App</p>
+              </div>
             </div>
           </div>
           <div class="flex justify-end">
@@ -185,7 +198,7 @@ definePageMeta({
               </div>
 
               <div class="flex justify-between">
-                <div>Steuern ({{ document.taxRate }}%):</div>
+                <div>Steuern ({{ document.taxRate }}% USt.):</div>
                 <div>{{ document.tax.toFixed(2) }}€</div>
               </div>
               <div
@@ -207,7 +220,7 @@ definePageMeta({
         </div>
         <div
           v-if="isInvoice"
-          class="flex h-[1cm] items-end justify-center text-[10pt] text-gray-300"
+          class="flex h-[0.75cm] items-end justify-center text-[8pt] text-gray-300"
         >
           <div>
             Für Privatpersonen besteht eine Aufbewahrungspflicht von 2 Jahren

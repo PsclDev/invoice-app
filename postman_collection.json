@@ -340,6 +340,24 @@
 					"response": []
 				},
 				{
+					"name": "Generate QR Girocode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{version}}{{route_document}}/generate-girocode/{{invoice_id}}",
+							"host": [
+								"{{base_url}}{{version}}{{route_document}}"
+							],
+							"path": [
+								"generate-girocode",
+								"{{invoice_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Print",
 					"request": {
 						"method": "GET",
@@ -894,7 +912,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://dev.home:3010"
+			"value": "http://mac.home:3010"
 		},
 		{
 			"key": "version",

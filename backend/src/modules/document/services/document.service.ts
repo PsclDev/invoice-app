@@ -2,14 +2,17 @@ import { ConfigService } from '@config';
 import { Client, ClientService } from '@modules/client';
 import { CustomCacheService } from '@modules/common';
 import { MailService } from '@modules/mail';
+import { PdfKey, SettingService, SettingType } from '@modules/setting';
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { updateEntity } from '@utils';
 import * as puppeteer from 'puppeteer';
+import * as qrcode from 'qrcode';
 import { Repository } from 'typeorm';
 
 import { DocumentMailOptionsDto } from '../document.dto';
-import { Document } from '../document.entity';
+import { Document, Invoice } from '../document.entity';
+import { DocumentType } from '../document.types';
 import { FileService } from './file.service';
 
 @Injectable()
@@ -24,6 +27,7 @@ export class DocumentService {
     private readonly mailService: MailService,
     @InjectRepository(Document)
     private documentRepository: Repository<Document>,
+    private settingsService: SettingService,
   ) {}
 
   async findAll(): Promise<Document[]> {
@@ -154,5 +158,28 @@ export class DocumentService {
     }
 
     return { doc };
+  }
+
+  async generateQRCodeForGiropay(id: string): Promise<Buffer> {
+    const doc = await this.findById(id);
+    if (doc.type === DocumentType.OFFER) {
+      throw new Error('Cannot generate QR code for offer');
+    }
+
+    const nameSetting = await this.settingsService.findByTypeAndKey(
+      SettingType.PDF,
+      PdfKey.PAYMENT_NAME,
+    );
+    const ibanSetting = await this.settingsService.findByTypeAndKey(
+      SettingType.PDF,
+      PdfKey.PAYMENT_IBAN,
+    );
+    const invoice = doc as Invoice;
+    const girocode = `BCD\n002\n2\nSCT\n\n${nameSetting.value}\n${
+      ibanSetting.value
+    }\nEUR${invoice.total.toFixed(2)}\n\n\nRechnung R-${String(
+      invoice.invoiceNr,
+    ).padStart(4, '0')}`;
+    return await qrcode.toBuffer(girocode);
   }
 }
