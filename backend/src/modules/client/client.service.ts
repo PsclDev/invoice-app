@@ -64,10 +64,14 @@ export class ClientService {
     return client;
   }
 
-  async bulkInsert(clients: CreateClientDto[]): Promise<void> {
+  async bulkInsert(clients: CreateClientDto[]): Promise<string[]> {
+    const clientIds: string[] = [];
     for (let idx = 0; idx < clients.length; idx++) {
-      await this.createClient(clients[idx]);
+      const client = await this.createClient(clients[idx]);
+      clientIds.push(client.id);
     }
+
+    return clientIds;
   }
 
   async createClient(
@@ -113,10 +117,14 @@ export class ClientService {
 
   async bulkInsertCompanies(
     companies: CreateCompanyClientDto[],
-  ): Promise<void> {
+  ): Promise<string[]> {
+    const clientIds: string[] = [];
     for (let idx = 0; idx < companies.length; idx++) {
-      await this.createCompanyClient(companies[idx]);
+      const client = await this.createCompanyClient(companies[idx]);
+      clientIds.push(client.id);
     }
+
+    return clientIds;
   }
 
   async createCompanyClient(

@@ -38,8 +38,8 @@ import { AppController } from './app.controller';
         username: config.database.user,
         password: config.database.pass,
         database: config.database.name,
-        entities: ['dist/**/*.entity.js'],
-        migrations: ['dist/migrations/*.js'],
+        entities: ['dist/src/**/*.entity.js'],
+        migrations: ['dist/src/migrations/*.js'],
         cli: {
           migrationsDir: 'src/migrations',
         },

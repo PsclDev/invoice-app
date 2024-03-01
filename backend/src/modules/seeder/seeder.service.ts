@@ -6,7 +6,12 @@ import {
   CreateCompanyClientDto,
   Gender,
 } from '@modules/client';
-import { DocumentService } from '@modules/document';
+import {
+  CreateInvoiceDto,
+  CreateOfferDto,
+  InvoiceService,
+  OfferService,
+} from '@modules/document';
 import {
   CreateSettingDto,
   FileKey,
@@ -17,6 +22,7 @@ import {
   SettingType,
 } from '@modules/setting';
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { getConnection } from 'typeorm';
 
 @Injectable()
 export class SeederService implements OnApplicationBootstrap {
@@ -25,13 +31,18 @@ export class SeederService implements OnApplicationBootstrap {
   constructor(
     private readonly configService: ConfigService,
     private readonly clientService: ClientService,
-    private readonly documentService: DocumentService,
     private readonly settingService: SettingService,
+    private readonly offerService: OfferService,
+    private readonly invoiceService: InvoiceService,
   ) {}
 
   async onApplicationBootstrap() {
+    const connection = await getConnection();
+    await connection.runMigrations();
+    connection.migrations.forEach((migration) => {
+      this.logger.log(`Migrated: ${migration.name}`);
+    });
     await this.baseData();
-
     if (this.configService.devMode && !this.configService.disableSeeding)
       await this.devData();
     else this.logger.log('Disbaled development seeding');
@@ -191,17 +202,28 @@ export class SeederService implements OnApplicationBootstrap {
 
   private async devData() {
     const existingClients = await this.clientService.findAll();
+
+    const generateDocumentDescription = () => {
+      const description: string[] = [];
+      description.push(`Object address: ${faker.location.streetAddress()}`);
+      description.push('');
+      for (let idx = 0; idx < Math.floor(Math.random() * 6) + 1; idx++) {
+        description.push(faker.lorem.sentence({ min: 3, max: 6 }));
+      }
+      return description;
+    };
+
     if (existingClients.length === 0) {
       const clients: CreateClientDto[] = [];
       for (let idx = 0; idx < 10; idx++) {
         clients.push({
-          gender: Gender[faker.name.sexType().toUpperCase()],
-          firstname: faker.name.firstName(),
-          lastname: faker.name.lastName(),
+          gender: Gender[faker.person.sexType().toUpperCase()],
+          firstname: faker.person.firstName(),
+          lastname: faker.person.lastName(),
           email: faker.internet.email(),
-          street: faker.address.streetAddress(),
-          postalCode: faker.address.zipCode('#####'),
-          city: faker.address.city(),
+          street: faker.location.streetAddress(),
+          postalCode: faker.location.zipCode('#####'),
+          city: faker.location.city(),
         });
       }
 
@@ -209,19 +231,74 @@ export class SeederService implements OnApplicationBootstrap {
       for (let idx = 0; idx < 5; idx++) {
         companies.push({
           company: faker.company.name(),
-          vat: `DE-${faker.random.numeric(9)}`,
-          gender: Gender[faker.name.sexType().toUpperCase()],
-          firstname: faker.name.firstName(),
-          lastname: faker.name.lastName(),
+          vat: `DE-${faker.string.numeric(9)}`,
+          gender: Gender[faker.person.sexType().toUpperCase()],
+          firstname: faker.person.firstName(),
+          lastname: faker.person.lastName(),
           email: faker.internet.email(),
-          street: faker.address.streetAddress(),
-          postalCode: faker.address.zipCode('#####'),
-          city: faker.address.city(),
+          street: faker.location.streetAddress(),
+          postalCode: faker.location.zipCode('#####'),
+          city: faker.location.city(),
         });
       }
 
-      await this.clientService.bulkInsert(clients);
-      await this.clientService.bulkInsertCompanies(companies);
+      const privateClients = await this.clientService.bulkInsert(clients);
+      const companyClients = await this.clientService.bulkInsertCompanies(
+        companies,
+      );
+      const shuffleClients = [...privateClients, ...companyClients].sort(
+        () => Math.random() - 0.5,
+      );
+
+      let offerNr = 1,
+        invoiceNr = 1;
+      const offers: CreateOfferDto[] = [];
+      const invoices: CreateInvoiceDto[] = [];
+      for (let idx = 0; idx < shuffleClients.length; idx++) {
+        for (let i = 0; i < Math.floor(Math.random() * 3) + 1; i++) {
+          const isOffer = Math.random() > 0.5;
+          const dateOfIssue = new Date();
+          const subTotal = Number(faker.finance.amount(100, 5000, 2));
+
+          if (isOffer) {
+            offers.push({
+              clientId: shuffleClients[idx],
+              offerNr,
+              dateOfIssue,
+              description: generateDocumentDescription(),
+              subTotal,
+              tax: subTotal * 0.19,
+              taxRate: 19,
+              total: subTotal * 1.19,
+            });
+            offerNr++;
+          } else {
+            const alreadyPaid = Number(faker.finance.amount(0, subTotal, 2));
+            invoices.push({
+              clientId: shuffleClients[idx],
+              invoiceNr,
+              dateOfIssue,
+              dueDate: new Date(
+                dateOfIssue.getTime() + 8 * 24 * 60 * 60 * 1000,
+              ),
+              description: generateDocumentDescription(),
+              subTotal,
+              tax: subTotal * 0.19,
+              taxRate: 19,
+              alreadyPaid,
+              total: subTotal * 1.19 - alreadyPaid,
+            });
+            invoiceNr++;
+          }
+        }
+      }
+
+      for (let idx = 0; idx < offers.length; idx++) {
+        await this.offerService.createOffer(offers[idx]);
+      }
+      for (let idx = 0; idx < invoices.length; idx++) {
+        await this.invoiceService.createInvoice(invoices[idx]);
+      }
     }
   }
 }
