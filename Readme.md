@@ -43,7 +43,6 @@ The listed versions are not strictly needed, but tested with.
 
 - `Node v20`
 - `Npm v9`
-- `Python 3` is needed for the sqlite3 npm package
 - `Docker v20`
 - `Docker-Compose 3I`
 

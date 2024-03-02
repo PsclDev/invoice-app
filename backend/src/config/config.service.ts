@@ -71,11 +71,11 @@ export class ConfigService {
   database = switchEnv(
     {
       testing: {
-        host: process.env.APP_TEST_DB_HOST,
+        host: process.env.APP_TEST_DB_HOST || 'localhost',
         port: Number(process.env.APP_TEST_DB_PORT) || 5432,
-        user: process.env.APP_TEST_DB_USER,
-        pass: process.env.APP_TEST_DB_PASS,
-        name: process.env.APP_TEST_DB_NAME,
+        user: process.env.APP_TEST_DB_USER || 'postgres',
+        pass: process.env.APP_TEST_DB_PASS || 'postgres',
+        name: process.env.APP_TEST_DB_NAME || 'postgres',
       },
     },
     {
