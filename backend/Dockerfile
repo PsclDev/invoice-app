@@ -21,15 +21,15 @@ RUN apk add --no-cache --virtual .gyp \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
+COPY .npmrc .
 COPY package.json .
-COPY yarn.lock .
+COPY package-lock.json .
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 
-RUN yarn prebuild
-RUN yarn build
+RUN npm run build
 
 FROM node:20-alpine As production
 
@@ -37,7 +37,8 @@ ARG NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY .npmrc .
+COPY package*.json .
 
 RUN apk update && apk add --no-cache nmap && \
     echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
@@ -57,8 +58,8 @@ RUN apk add --no-cache --virtual .gyp \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-RUN yarn install --production
+RUN npm ci --omit=dev
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["yarn", "start:prod"]
+CMD ["npm", "run", "start:prod"]

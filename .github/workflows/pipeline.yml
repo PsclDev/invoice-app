@@ -19,29 +19,15 @@ jobs:
         with:
           node-version: 20
           check-latest: true
-  
-      - name: Get yarn cache directory path 🛠
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache node_modules 📦
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        id: yarn-cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-frontend-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-frontend-yarn-
 
       - name: Install dependencies 📦
-        run: cd frontend && yarn
+        run: cd frontend && npm i
 
       - name: Run linter 👀
-        run: cd frontend && yarn lint
+        run: cd frontend && npm run lint
 
       - name: Build 🏗
-        run: cd frontend && yarn build
+        run: cd frontend && npm run build
   
 
   lint-and-test-backend:
@@ -57,31 +43,14 @@ jobs:
           node-version: 20
           check-latest: true
 
-      - name: Get yarn cache directory path 🛠
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache node_modules 📦
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        id: yarn-cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-backend-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-backend-yarn-
-
       - name: Install dependencies 📦
-        run: cd backend && yarn
+        run: cd backend && npm i
 
       - name: Run linter 👀
-        run: cd backend && yarn lint
-
-      - name: Build 🏗
-        run: cd backend && yarn build
+        run: cd backend && npm run lint
 
       - name: Run tests 🧪
-        run: cd backend && yarn test
+        run: cd backend && npm run test
 
 
   build-packages:

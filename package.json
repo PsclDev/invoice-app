@@ -8,16 +8,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "concurrently -n frontend,backend \"yarn dev:frontend\" \"yarn:dev:backend\"",
-    "dev:frontend": "cd frontend && yarn dev",
-    "dev:backend": "cd backend && yarn start:dev",
-    "ia": "npx concurrently -n frontend,backend \"yarn\" \"cd frontend && yarn\" \"cd backend && yarn\"",
-    "lint": "npx concurrently -n frontend,backend \"cd frontend/ && yarn lint\" \"cd backend/ && yarn lint\"",
+    "dev": "concurrently -n frontend,backend \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run start:dev",
+    "ia": "npx concurrently -n frontend,backend \"npm i\" \"cd frontend && npm i\" \"cd backend && npm i\"",
+    "lint": "npx concurrently -n frontend,backend \"cd frontend/ && npm run lint\" \"cd backend/ && npm run lint\"",
     "prepare": "husky install",
     "precommit": "npm-run-all precommit:*",
-    "precommit:frontend": "cd frontend && yarn precommit",
-    "precommit:backend": "cd backend && yarn precommit",
-    "test": "npx concurrently -n frontend,backend \"cd frontend/ && yarn test\" \"cd backend/ && yarn test\""
+    "precommit:frontend": "cd frontend && npm run precommit",
+    "precommit:backend": "cd backend && npm run precommit",
+    "test": "npx concurrently -n frontend,backend \"cd frontend/ && npm run test\" \"cd backend/ && npm run test\""
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",

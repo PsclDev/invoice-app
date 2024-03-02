@@ -10,8 +10,8 @@
     "start:prod": "node dist/main",
     "lint:js": "eslint \"{src,apps,libs,test}/**/*.ts\" .",
     "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "lintfix": "prettier --write --list-different . && npm run lint:js --fix",
     "precommit": "lint-staged",
     "test": "NODE_ENV=testing jest --runInBand",
     "test:watch": "jest --watch",
@@ -83,6 +83,5 @@
     "ts-node": "10.9.1",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.2.2"
-  },
-  "packageManager": "yarn@4.0.1"
+  }
 }

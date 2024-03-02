@@ -7,8 +7,8 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".ts,.vue\" .",
     "lint:prettier": "prettier --check .",
-    "lint": "yarn lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "lintfix": "prettier --write --list-different . && npm run lint:js --fix",
     "precommit": "lint-staged",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

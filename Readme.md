@@ -20,6 +20,8 @@ You get simple statistics monthly and yearly based on.
 - Manage private and company clients
 - Manage offers and invoices
 - Generate description with the help of openai
+- Automatic price calculation based on description items
+- EPC-QR-Code on invoices (QR Girocode to scan with your banking app)
 - Send them by mail, email or delayed email
 - Convert offers to invoices
 - Get statistics about your business
@@ -39,21 +41,19 @@ The database of choice is Postgres, providing a robust data storage solution for
 ## Requirements
 The listed versions are not strictly needed, but tested with.
 
-- `Node v16`
-- `Yarn v1` or `Npm v8.5`
-- `Python 3` is needed for the sqlite3 npm package, which is only used for unit-testing.
+- `Node v20`
+- `Npm v9`
+- `Python 3` is needed for the sqlite3 npm package
 - `Docker v20`
 - `Docker-Compose 3I`
 
 ## Getting Started
-If you are using `npm` just replace the `yarn` keyword with `npm run`
-
-- **`yarn` or `npm i`** *to install the project dependencies*
-- **`yarn prepare`** *to install husky*
-- **`yarn ia`** *to install the frontend and backend depenencies*
+- **`npm i`** *to install the project dependencies*
+- **`npm run prepare`** *to install husky*
+- **`npm run ia`** *to install the frontend and backend depenencies*
 - Set the required Envs based on the `.env-example` inside the `/frontend` and `/backend` directory
 - If you wanna create migrations with typeorm, you need to setup a `ormconfig.json` file, there is also a example for it `/backend/ormconfig-example.json`
-- **`yarn dev`** *run the front and backend*
+- **`npm run dev`** *run the front and backend*
 
 *`Note to .env: If any env value contains a dollar sign ($) you have to encode that with a backslash (\$)`*
 
