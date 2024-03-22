@@ -82,7 +82,7 @@ definePageMeta({
             <span
               class="block border-b-[0.5mm] border-solid pb-[0.5mm]"
               :class="
-                isInvoice ? 'border-b-spring-green-500' : 'border-b-slate-400'
+                isInvoice ? 'border-b-spring-green-500' : 'border-b-[#C8C892]'
               "
               >{{ sender }}</span
             >
@@ -105,7 +105,7 @@ definePageMeta({
         <div class="mt-[-0.5cm] h-[4cm] min-w-[6.5cm]">
           <div
             class="text-[24pt] font-bold"
-            :class="isInvoice ? 'text-spring-green-500' : 'text-slate-600'"
+            :class="isInvoice ? 'text-spring-green-500' : 'text-[#b3b381]'"
           >
             {{ isInvoice ? 'Rechnung' : 'Angebot' }}
           </div>
@@ -137,7 +137,7 @@ definePageMeta({
       <div class="ml-[2.5cm] mt-[0.650cm] w-[16.5cm]">
         <div class="min-h-[11.5cm]">
           <table class="table">
-            <thead :class="isInvoice ? 'bg-spring-green-500' : 'bg-slate-400'">
+            <thead :class="isInvoice ? 'bg-spring-green-500' : 'bg-[#C8C892]'">
               <tr>
                 <th class="text-[13pt]">Beschreibung</th>
               </tr>
@@ -145,7 +145,7 @@ definePageMeta({
             <tbody
               class="border-b border-solid"
               :class="
-                isInvoice ? 'border-b-spring-green-500' : 'border-b-slate-400'
+                isInvoice ? 'border-b-spring-green-500' : 'border-b-[#C8C892]'
               "
             >
               <tr v-for="(text, index) of document.description" :key="index">
@@ -158,7 +158,10 @@ definePageMeta({
           <div class="w-6/12">
             <div>
               <div v-if="isInvoice">Vielen Dank für Ihr Vertrauen!</div>
-              <div v-else>Vorab bedanken wir uns bei Ihren Vertrauen!</div>
+              <template v-else>
+                <div>Dieses Angebot gilt 2 Wochen.</div>
+                <div>Vorab bedanken wir uns bei Ihren Vertrauen!</div>
+              </template>
             </div>
             <div v-if="isInvoice" class="mt-3 w-[7.5cm]">
               <div>Zahlungsinformationen</div>
@@ -185,7 +188,7 @@ definePageMeta({
                   <span class="font-bold text-[#010066]">GIRO</span
                   ><span class="font-bold text-[#FE0009]">CODE</span>
                 </p>
-                <img class="h-24 w-24" :src="qrCodeLink" alt="QR Code" />
+                <img class="size-24" :src="qrCodeLink" alt="QR Code" />
                 <p class="text-xs">Für bequemes Bezahlen mit der Banking-App</p>
               </div>
             </div>
@@ -210,7 +213,7 @@ definePageMeta({
               </div>
               <div
                 class="mt-3 flex justify-between p-2.5 text-[13.5pt] font-bold"
-                :class="isInvoice ? 'bg-spring-green-500' : 'bg-slate-400'"
+                :class="isInvoice ? 'bg-spring-green-500' : 'bg-[#C8C892]'"
               >
                 <div>Gesamtbetrag:</div>
                 <div>{{ document.total.toFixed(2) }}€</div>
