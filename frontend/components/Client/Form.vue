@@ -2,15 +2,6 @@
 import { reset } from '@formkit/core';
 import loadash from 'lodash';
 
-import {
-  ButtonColor,
-  Client,
-  ClientForm,
-  FormMode,
-  Gender,
-  ViewMode,
-} from '~/types';
-
 const props = defineProps({
   modelValue: {
     type: String as PropType<ViewMode>,
@@ -175,3 +166,4 @@ function onCancel() {
     </div>
   </FormKit>
 </template>
+~/models

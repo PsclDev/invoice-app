@@ -1,7 +1,5 @@
 import loadash from 'lodash';
 
-import { Client, ClientDto, ClientForm, Gender } from '@/types';
-
 export const useClientStore = defineStore('client', () => {
   const i18n = useI18n();
   const { getName } = useClientHelper();

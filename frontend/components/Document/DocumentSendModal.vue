@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ButtonColor } from '~/types';
-
 const props = defineProps({
   modelValue: {
     type: Boolean,
@@ -70,3 +68,4 @@ const store = useDocumentStore();
     </UCard>
   </UModal>
 </template>
+~/models

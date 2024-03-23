@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { DateTime } from 'luxon';
 
-import {
-  Client,
-  ClientForm,
-  DocumentForm,
-  DocumentType,
-  Gender,
-} from '~/types';
-
 const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
@@ -129,3 +121,4 @@ useHead({
     </UCard>
   </BasePage>
 </template>
+~/models

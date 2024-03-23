@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Client } from '~/types';
-
 defineProps({
   modelValue: {
     type: Boolean,
@@ -76,3 +74,4 @@ const emit = defineEmits(['update:modelValue']);
     </UCard>
   </UModal>
 </template>
+~/models

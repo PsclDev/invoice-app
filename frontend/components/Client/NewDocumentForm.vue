@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ClientForm } from '~/types';
-
 const props = defineProps({
   modelValue: {
     type: Object as PropType<ClientForm>,
@@ -98,3 +96,4 @@ watch(form, () => {
     </div>
   </FormKit>
 </template>
+~/models

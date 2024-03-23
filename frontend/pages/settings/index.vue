@@ -3,7 +3,6 @@ import { useStorage } from '@vueuse/core';
 import loadash from 'lodash';
 
 import SettingsItem from '~/components/Settings/Item.vue';
-import { SettingType } from '~/types';
 
 const { t } = useI18n();
 const colorMode = useColorMode();
@@ -168,7 +167,7 @@ useHead({
       </div>
       <div class="flex justify-center">
         <button
-          class="flex items-center gap-2 rounded border border-cannon-pink-500 bg-transparent px-2 py-1 text-xs text-cannon-pink-700"
+          class="border-cannon-pink-500 text-cannon-pink-700 flex items-center gap-2 rounded border bg-transparent px-2 py-1 text-xs"
           @click="switchDevMode"
         >
           {{ devModeEnabled ? 'Disable Dev-Mode' : 'Enable Dev-Mode' }}
@@ -181,3 +180,4 @@ useHead({
     </div>
   </BasePage>
 </template>
+~/models

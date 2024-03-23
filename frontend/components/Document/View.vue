@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ButtonColor, Document, ViewMode } from '~/types';
 const { formatDate } = useCustomDateHelper();
 const { isInvoice, getName: getDocumentName } = useDocumentHelper();
 const { getName: getClientName } = useClientHelper();
@@ -119,3 +118,4 @@ function onDelete() {
     <ClientInfoModal v-model="openClientInfoModal" :client="client" />
   </div>
 </template>
+~/models

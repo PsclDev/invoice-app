@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Action, Client, Document, FormMode, ViewMode } from '~/types';
-
 const props = defineProps({
   doc: {
     type: Object as PropType<Document>,
@@ -86,3 +84,4 @@ const offerActions = ref<Action[]>([
     />
   </AppAccordion>
 </template>
+~/models

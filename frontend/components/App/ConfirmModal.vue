@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ButtonColor } from '~/types';
-
 defineProps({
   modelValue: {
     type: Boolean,
@@ -66,3 +64,4 @@ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
     </UCard>
   </UModal>
 </template>
+~/models

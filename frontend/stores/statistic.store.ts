@@ -1,5 +1,3 @@
-import { Statistics } from '~/types';
-
 export const useStatisticStore = defineStore('statistic', () => {
   const logger = useLogger('statisticStore');
   const i18n = useI18n();

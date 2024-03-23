@@ -3,15 +3,6 @@ import { reset } from '@formkit/core';
 import loadash from 'lodash';
 import { DateTime } from 'luxon';
 
-import {
-  ButtonColor,
-  Document,
-  DocumentForm,
-  DocumentType,
-  FormMode,
-  ViewMode,
-} from '~/types';
-
 const props = defineProps({
   modelValue: {
     type: String as PropType<ViewMode>,
@@ -236,3 +227,4 @@ function onCancel() {
     </div>
   </FormKit>
 </template>
+~/models

@@ -1,13 +1,5 @@
 import { DateTime } from 'luxon';
 
-import {
-  Client,
-  Document,
-  DocumentForm,
-  DocumentType,
-  ReducedDocument,
-} from '@/types';
-
 export default function useDocumentHelper() {
   const i18n = useI18n();
   const clientHelper = useClientHelper();

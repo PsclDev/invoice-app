@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Action, Client, FormMode, ViewMode } from '~/types';
-
 const props = defineProps({
   client: {
     type: Object as PropType<Client>,
@@ -69,3 +67,4 @@ const actions: Action[] = [
     </div>
   </AppAccordion>
 </template>
+~/models

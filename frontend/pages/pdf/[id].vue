@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import Mustache from 'mustache';
 
-import { PdfKey, SettingType } from '~/types';
-
 const router = useRouter();
 const route = useRoute();
 const documentStore = useDocumentStore();
@@ -285,3 +283,4 @@ table tbody tr:last-of-type {
   border-bottom: 0;
 }
 </style>
+~/models

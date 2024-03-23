@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { DateTime } from 'luxon';
 
-import { DocumentForm, DocumentType } from '~/types';
-
 const props = defineProps({
   modelValue: {
     type: Object as PropType<DocumentForm>,
@@ -142,7 +140,7 @@ watchDebounced(
         <div v-if="form.description.length > 0" class="w-48">
           <button
             type="button"
-            class="rounded border border-cannon-pink-500 bg-transparent px-2 py-1 text-xs text-cannon-pink-700"
+            class="border-cannon-pink-500 text-cannon-pink-700 rounded border bg-transparent px-2 py-1 text-xs"
             @click="optimizeDescription"
           >
             {{ $t('DOCUMENTS.OPTIMIZE_DESCRIPTION') }}
@@ -195,3 +193,4 @@ watchDebounced(
     </div>
   </FormKit>
 </template>
+~/models

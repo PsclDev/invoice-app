@@ -1,5 +1,3 @@
-import { Document, DocumentForm, DocumentType } from '@/types';
-
 export const useDocumentStore = defineStore('document', () => {
   const i18n = useI18n();
   const { getName } = useDocumentHelper();

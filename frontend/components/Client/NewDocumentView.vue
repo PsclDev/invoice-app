@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Client } from '~/types';
-
 const props = defineProps({
   client: {
     type: Object as PropType<Client>,
@@ -47,3 +45,4 @@ const { isCompany } = useClientHelper();
     </div>
   </div>
 </template>
+~/models

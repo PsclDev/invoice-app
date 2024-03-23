@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
-    dirs: ['stores'],
+    dirs: ['stores', 'models'],
   },
   runtimeConfig: {
     public: {

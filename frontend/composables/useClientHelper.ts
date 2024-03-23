@@ -1,5 +1,3 @@
-import { Client, ClientForm } from '~/types';
-
 export default function useClientHelper() {
   const isCompany = (client: Client | ClientForm) => {
     return !!client.company;

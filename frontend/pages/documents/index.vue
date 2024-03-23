@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Document } from '~/types';
-
 const { t } = useI18n();
 const store = useDocumentStore();
 const clientStore = useClientStore();
@@ -46,3 +44,4 @@ useHead({
     </div>
   </BasePage>
 </template>
+~/models

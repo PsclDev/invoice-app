@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ButtonColor } from '~/types';
-
 defineProps({
   label: {
     type: String,
@@ -47,3 +45,4 @@ defineEmits(['click']);
     </div>
   </button>
 </template>
+~/models

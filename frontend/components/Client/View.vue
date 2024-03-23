@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ButtonColor, Client, ViewMode } from '~/types';
-
 const props = defineProps({
   modelValue: {
     type: String as PropType<ViewMode>,
@@ -121,3 +119,4 @@ function onDelete() {
     />
   </div>
 </template>
+~/models

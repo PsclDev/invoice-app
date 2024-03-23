@@ -1,7 +1,5 @@
 import { DateTime } from 'luxon';
 
-import { DocumentYearStats } from '~/types';
-
 export default function useChartData(data: DocumentYearStats[]) {
   const { t } = useI18n();
   const { formatToEur } = useCurrencyHelper();

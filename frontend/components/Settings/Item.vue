@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import loadash from 'lodash';
 
-import { Setting } from '~/types';
-
 const props = defineProps({
   setting: {
     type: Object as PropType<Setting>,
@@ -66,3 +64,4 @@ defineExpose({
     </div>
   </div>
 </template>
+~/models

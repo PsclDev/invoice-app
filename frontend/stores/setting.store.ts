@@ -1,5 +1,3 @@
-import { Setting } from '@/types';
-
 export const useSettingStore = defineStore('setting', () => {
   const i18n = useI18n();
   const logger = useLogger('settingStore');
