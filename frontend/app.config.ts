@@ -12,7 +12,7 @@ export default defineAppConfig({
       },
     },
     notifications: {
-      position: 'top-0 right-0',
+      position: 'top-0 bottom-auto',
     },
     notification: {
       background: 'bg-slate-200 dark:bg-neutral-900',
