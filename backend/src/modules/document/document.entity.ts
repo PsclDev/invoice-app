@@ -68,16 +68,16 @@ export class Offer extends Document implements OfferDto {
   @RelationId((offer: Offer) => offer.invoice)
   invoiceId: string;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   subTotal: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   tax: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   taxRate: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   total: number;
 }
 
@@ -93,22 +93,22 @@ export class Invoice extends Document implements InvoiceDto {
   @Column({ unique: true })
   invoiceNr: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   subTotal: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   tax: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   taxRate: number;
 
-  @Column('numeric', {
+  @Column('decimal', {
     nullable: true,
     transformer: new ColumnNumericTransformer(),
   })
   alreadyPaid: number;
 
-  @Column('numeric', { transformer: new ColumnNumericTransformer() })
+  @Column('decimal', { transformer: new ColumnNumericTransformer() })
   total: number;
 
   @Column()
